@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div>
+    Admin Dashboard Layout
     <router-view />
   </div>
 </template>
@@ -8,5 +9,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class App extends Vue {}
+export default class AdminDashboardLayout extends Vue {}
 </script>

@@ -1,12 +1,10 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <div>Client Login</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class App extends Vue {}
+export default class ClientLogin extends Vue {}
 </script>
