@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <h1>Welcome to lifenyou</h1>
     <router-link to="/admin/login">Admin Login</router-link>
     <router-link to="/client/login">Client Login</router-link>
@@ -12,5 +12,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Home extends Vue {}
+export default class MainLayout extends Vue {}
 </script>
