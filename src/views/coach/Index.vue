@@ -1,6 +1,6 @@
 <template>
   <div>
-    Coach Layout
+    <!-- Coach Layout -->
     <router-view />
   </div>
 </template>
