@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import MainLayout from "@/views/MainLayout.vue";
-
 //Admin pages
 
 import AdminLayout from "@/views/admin/Index.vue";
@@ -13,12 +12,14 @@ import AdminDashboardLayout from "@/views/admin/MainLayout/Dashboard/Index.vue";
 import ClientLayout from "@/views/client/Index.vue";
 
 import ClientLogin from "@/views/client/Login/Index.vue";
+import ClientRegistration from "@/views/client/Registration/Index.vue";
 import ClientMainLayout from "@/views/client/MainLayout/Index.vue";
 import ClientDashboardLayout from "@/views/client/MainLayout/Dashboard/Index.vue";
 
 import CoachLayout from "@/views/coach/Index.vue";
 
 import CoachLogin from "@/views/coach/Login/Index.vue";
+import CoachRegistration from "@/views/coach/Registration/Index.vue";
 import CoachMainLayout from "@/views/coach/MainLayout/Index.vue";
 import CoachDashboardLayout from "@/views/coach/MainLayout/Dashboard/Index.vue";
 
@@ -65,6 +66,11 @@ const routes: Array<RouteConfig> = [
         component: ClientLogin,
       },
       {
+        path: "registration",
+        name: "Client Registration",
+        component: ClientRegistration,
+      },
+      {
         path: "home",
         name: "Client Main Layout",
         component: ClientMainLayout,
@@ -87,6 +93,11 @@ const routes: Array<RouteConfig> = [
         path: "login",
         name: "Coach Login",
         component: CoachLogin,
+      },
+      {
+        path: "registration",
+        name: "Coach Registration",
+        component: CoachRegistration,
       },
       {
         path: "home",

@@ -2,11 +2,11 @@
   <v-row>
     <v-col>
       <v-form>
-        <v-row>
-          <v-col class="pt-6" cols="12" md="3">
-            <v-label class="black--text">Username</v-label>
+        <v-row align="center" justify="center">
+          <v-col cols="12" md="3">
+            <v-label>Username</v-label>
           </v-col>
-          <v-col cols="12" md="7" offset-md="1">
+          <v-col cols="12" md="7">
             <v-text-field
               class="white"
               rounded
@@ -15,11 +15,11 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col class="pt-6" cols="12" md="3">
+        <v-row align="center" justify="center">
+          <v-col cols="12" md="3">
             <v-label>Password</v-label>
           </v-col>
-          <v-col cols="12" md="7" offset-md="1">
+          <v-col cols="12" md="7">
             <v-text-field
               class="white"
               rounded

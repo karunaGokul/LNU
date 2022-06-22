@@ -35,7 +35,8 @@
         </v-row>
         <v-row class="d-flex justify-center mt-16 mb-n16">
           <h4>No account?</h4>
-          <a href="">Register here</a>
+         <router-link to="/register" class="text-decoration-none"
+            >Register here</router-link>
         </v-row>
       </v-container>
     </v-col>

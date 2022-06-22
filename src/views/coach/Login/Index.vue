@@ -23,7 +23,7 @@
               elevation="2"
               outlined
               height="250"
-              color="#E1F5FE"
+              color="indigo lighten-5"
               class="mx-10 pl-7 rounded-lg"
             >
               <v-card-title class="py-3 d-flex justify-center"
@@ -34,7 +34,8 @@
         </v-row>
         <v-row class="d-flex justify-center mt-16 mb-n16">
           <h4>No account?</h4>
-          <a href="">Register here</a>
+           <router-link to="/register" class="text-decoration-none"
+            >Register here</router-link>
         </v-row>
       </v-container>
     </v-col>

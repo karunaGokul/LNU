@@ -36,15 +36,18 @@
 
         <v-row class="d-flex justify-center mt-10">
           <h4>If you are an admin,</h4>
-          <a href="">Click here</a>
+          <router-link to="/admin/login" class="text-decoration-none"
+            >Click here</router-link>
         </v-row>
         <v-row class="d-flex justify-center mt-n6">
           <h4>If you are a coach,</h4>
-          <a href="">Click here</a>
+          <router-link to="/coach/login" class="text-decoration-none"
+            >Click here</router-link>
         </v-row>
         <v-row class="d-flex justify-center mt-16 mb-n6">
           <h4>No account?</h4>
-          <a href="">Register here</a>
+           <router-link to="/client/registration" class="text-decoration-none"
+            >Register here</router-link>
         </v-row>
       </v-container>
     </v-col>
