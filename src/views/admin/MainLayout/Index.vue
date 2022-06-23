@@ -1,6 +1,6 @@
 <template>
   <div>
-    Admin Main Layout
+    <!-- Admin Main Layout -->
     <router-view />
   </div>
 </template>

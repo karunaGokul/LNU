@@ -6,7 +6,9 @@
       </v-row>
 
       <v-row justify="center">
-        <v-col cols="12" md="4" offset-md="4"> helo </v-col>
+        <v-col cols="12" md="4" offset-md="4">
+          <v-img src="@/assets/coachRegistration.jpg" width="75px"></v-img>
+        </v-col>
       </v-row>
 
       <v-container fluid fill-height class="d-flex justify-center mt-10">
@@ -71,7 +73,7 @@
           </v-row>
         </v-form>
 
-        <p>
+        <p class="text-center mx-16">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum ea vel
           corporis nulla molestiae fugiat pariatur aspernatur eum, dolore
           repellat cum, consequatur quo blanditiis assumenda deserunt temporibus

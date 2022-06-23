@@ -15,9 +15,9 @@
       </v-img>
     </v-col>
     <v-col>
-      <v-container fill-height fluid class="d-flex justify-center">
+      <v-container fill-height fluid class="pa-8">
         <!-- <h2>Feel stuck? We are here to help you!</h2> -->
-        <v-row>
+        <v-row align="center" justify="center" style="min-height: 300px;">
           <v-col>
             <v-card
               elevation="2"
@@ -34,7 +34,7 @@
         </v-row>
         <v-row class="d-flex justify-center mt-16 mb-n16">
           <h4>No account?</h4>
-           <router-link to="/register" class="text-decoration-none"
+           <router-link to="/coach/registration" class="text-decoration-none"
             >Register here</router-link>
         </v-row>
       </v-container>
