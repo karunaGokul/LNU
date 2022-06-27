@@ -16,26 +16,37 @@
     </v-col>
     <v-col>
       <v-container fill-height fluid>
-        <v-row align="center" justify="center" style="min-height: 400px;">
+        <v-row align="center" justify="center" style="min-height: 400px">
           <v-col>
             <v-card
               elevation="2"
               outlined
-              height="250"
-              color="#C8E6C9"
-              class="mx-10 pl-7 rounded-lg"
+              height="260"
+              class="mx-10 pl-7 rounded-lg light-green lighten-4"
             >
               <v-card-title class="py-3 d-flex justify-center"
                 >Admin</v-card-title
               >
-              <login-input />
+              <v-form>
+                <text-input />
+                <password-input />
+                <div class="d-flex justify-center">
+                  <v-btn
+                    depressed
+                    rounded
+                    class="white--text text-capitalize light-green darken-1"
+                    >Login</v-btn
+                  >
+                </div>
+              </v-form>
             </v-card>
           </v-col>
         </v-row>
         <v-row class="d-flex justify-center mt-16 mb-n16">
           <h4>No account?</h4>
-         <router-link to="" class="text-decoration-none"
-            >Register here</router-link>
+          <router-link to="" class="text-decoration-none"
+            >Register here</router-link
+          >
         </v-row>
       </v-container>
     </v-col>
@@ -44,10 +55,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import LoginInput from "@/components/controls/LoginInput.vue";
+import TextInput from "@/components/controls/TextInput.vue";
+import PasswordInput from "@/components/controls/PasswordInput.vue";
 
 @Component({
-  components: { LoginInput },
+  components: { TextInput, PasswordInput },
 })
 export default class AdminLogin extends Vue {}
 </script>

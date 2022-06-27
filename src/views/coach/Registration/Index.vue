@@ -85,8 +85,7 @@
         <v-btn
           depressed
           rounded
-          color="indigo darken-1"
-          class="white--text text-capitalize mt-5 ml-16"
+          class="white--text text-capitalize mt-5 ml-16 indigo darken-1"
           >Submit</v-btn
         >
       </v-container>

@@ -22,14 +22,24 @@
             <v-card
               elevation="2"
               outlined
-              height="250"
-              color="#FFE0B2"
-              class="mx-10 pl-7 rounded-lg"
+              height="260"
+              class="mx-10 pl-7 rounded-lg orange lighten-5"
             >
               <v-card-title class="py-3 d-flex justify-center"
                 >Client</v-card-title
               >
-              <login-input />
+              <v-form>
+                <text-input />
+                <password-input />
+                <div class="d-flex justify-center">
+                  <v-btn
+                    depressed
+                    rounded
+                    class="white--text text-capitalize orange lighten-1"
+                    >Login</v-btn
+                  >
+                </div>
+              </v-form>
             </v-card>
           </v-col>
         </v-row>
@@ -37,17 +47,20 @@
         <v-row class="d-flex justify-center mt-10">
           <h4>If you are an admin,</h4>
           <router-link to="/admin/login" class="text-decoration-none"
-            >Click here</router-link>
+            >Click here</router-link
+          >
         </v-row>
         <v-row class="d-flex justify-center mt-n6">
           <h4>If you are a coach,</h4>
           <router-link to="/coach/login" class="text-decoration-none"
-            >Click here</router-link>
+            >Click here</router-link
+          >
         </v-row>
         <v-row class="d-flex justify-center mt-16 mb-n6">
           <h4>No account?</h4>
-           <router-link to="/client/registration" class="text-decoration-none"
-            >Register here</router-link>
+          <router-link to="/client/registration" class="text-decoration-none"
+            >Register here</router-link
+          >
         </v-row>
       </v-container>
     </v-col>
@@ -56,10 +69,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import LoginInput from "@/components/controls/LoginInput.vue";
+import TextInput from "@/components/controls/TextInput.vue";
+import PasswordInput from "@/components/controls/PasswordInput.vue";
 
 @Component({
-  components: { LoginInput },
+  components: { TextInput, PasswordInput },
 })
 export default class ClientLogin extends Vue {}
 </script>

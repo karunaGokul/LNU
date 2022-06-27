@@ -1,22 +1,22 @@
 <template>
   <div>
     <v-container>
-      <v-row class="my-3">
+      <v-row class="">
         <h2>Life N You</h2>
       </v-row>
       <v-row>
         <v-img src="@/assets/registration.png"></v-img>
       </v-row>
       <v-row justify="space-between" class="mt-10">
-        <v-card outline tile width="350">
+        <v-card outline tile width="350" elevation="0">
           <v-row justify="center" class="my-5">
-            <v-btn fab>
+            <v-btn fab depressed outlined>
               <v-icon x-large>mdi-account-group</v-icon>
             </v-btn>
           </v-row>
           <v-row justify="center">
             <v-card-actions>
-              <v-btn class="success text-capitalize" to="/client/login"> Login</v-btn></v-card-actions
+              <v-btn class="success text-capitalize" to="/client/login">Client</v-btn></v-card-actions
             >
           </v-row>
           <v-row>
@@ -30,15 +30,15 @@
             </v-card-text>
           </v-row>
         </v-card>
-        <v-card outline tile width="350">
+        <v-card outline tile width="350" elevation="0">
           <v-row justify="center" class="my-5">
-            <v-btn fab>
+            <v-btn fab depressed outlined>
               <v-icon x-large>mdi-account-settings</v-icon>
             </v-btn>
           </v-row>
           <v-row justify="center">
             <v-card-actions>
-              <v-btn class="success text-capitalize" to="/coach/login"> Login</v-btn></v-card-actions
+              <v-btn class="success text-capitalize" to="/coach/login">Coach</v-btn></v-card-actions
             >
           </v-row>
           <v-row>
@@ -52,15 +52,15 @@
             </v-card-text>
           </v-row>
         </v-card>
-        <v-card outline tile width="350">
+        <v-card outline tile width="350" elevation="0">
           <v-row justify="center" class="my-5">
-            <v-btn fab>
+            <v-btn fab depressed outlined>
               <v-icon x-large>mdi-account-tie</v-icon>
             </v-btn>
           </v-row>
           <v-row justify="center">
             <v-card-actions>
-              <v-btn class="success text-capitalize" to="/admin/login"> Login</v-btn></v-card-actions
+              <v-btn class="success text-capitalize" to="/admin/login">Admin</v-btn></v-card-actions
             >
           </v-row>
           <v-row>
