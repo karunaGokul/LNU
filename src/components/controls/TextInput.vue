@@ -1,6 +1,6 @@
 <template>
-  <v-row>
-    <v-col cols="12" md="4" class="mt-3">
+  <v-row class="mb-n8">
+    <v-col cols="12" md="4" class="mt-5">
       <v-label>Username</v-label>
     </v-col>
     <v-col cols="12" md="7">
@@ -8,8 +8,6 @@
         background-color="white"
         placeholder="Enter Username"
         rounded
-        outlined
-        dense
       ></v-text-field>
     </v-col>
   </v-row>

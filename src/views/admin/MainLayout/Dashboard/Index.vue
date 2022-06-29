@@ -1,59 +1,134 @@
 <template>
   <div>
-    <!-- Admin Dashboard Layout -->
     <v-row>
       <v-col cols="12" md="3">
         <side-bar />
       </v-col>
       <v-col>
-        <v-container fluid fill-height align="center" justify="center">
-          <v-row>
-            <v-col cols="12" md="4" >
-              <v-btn class="light-green darken-1">New Appointments</v-btn>
+        <v-container fluid fill-height class="ml-8">
+          <v-row class="mt-8">
+            <v-col cols="12" md="3">
+              <v-btn depressed dark class="light-green darken-1 text-capitalize"
+                >New Appointments</v-btn
+              >
             </v-col>
-            <v-col cols="12" md="3" class="ml-n5">
-              <v-select label="Coach Available" background-color="light-green darken-1" dense outlined></v-select>
+            <v-col cols="12" md="3" class="">
+              <v-select
+                label="Coach Available"
+                background-color="light-green darken-1"
+                dense
+                dark
+                outlined
+              ></v-select>
             </v-col>
-            <v-col cols="12" md="2">
-              <v-btn class="light-green darken-1">Date</v-btn>
+            <v-col cols="12" md="2" class="ml-8">
+              <v-btn
+                depressed
+                dark
+                width="100px"
+                class="light-green darken-1 text-capitalize"
+                >Date</v-btn
+              >
             </v-col>
-            <v-col cols="12" md="2">
-              <v-btn class="light-green darken-1">Time</v-btn>
+            <v-col cols="12" md="">
+              <v-btn
+                depressed
+                dark
+                width="100px"
+                class="light-green darken-1 text-capitalize"
+                >Time</v-btn
+              >
             </v-col>
           </v-row>
-           <v-row>
-            <v-col cols="12" md="4" >
-              <v-btn>New Appointments</v-btn>
+          <v-row class="mt-n6">
+            <v-col cols="12" md="3">
+              <v-btn class="text-capitalize light-green--text"
+                >New Appointments</v-btn
+              >
             </v-col>
-            <v-col cols="12" md="3" class="ml-n5">
+            <v-col cols="12" md="3" class="">
+              <v-select
+                label="Coach Available"
+                class="light-green--text"
+                dense
+                outlined
+              ></v-select>
+            </v-col>
+            <v-col cols="12" md="2" class="ml-8">
+              <v-btn width="100px" class="text-capitalize light-green--text"
+                >Date</v-btn
+              >
+            </v-col>
+            <v-col cols="12" md="">
+              <v-btn width="100px" class="text-capitalize light-green--text"
+                >Time</v-btn
+              >
+            </v-col>
+          </v-row>
+          <v-row class="mt-n6">
+            <v-col cols="12" md="3">
+              <v-btn depressed dark class="light-green darken-1 text-capitalize"
+                >New Appointments</v-btn
+              >
+            </v-col>
+            <v-col cols="12" md="3" class="">
+              <v-select
+                label="Coach Available"
+                background-color="light-green darken-1"
+                dense
+                dark
+                outlined
+              ></v-select>
+            </v-col>
+            <v-col cols="12" md="2" class="ml-8">
+              <v-btn
+                depressed
+                dark
+                width="100px"
+                class="light-green darken-1 text-capitalize"
+                >Date</v-btn
+              >
+            </v-col>
+            <v-col cols="12" md="">
+              <v-btn
+                depressed
+                dark
+                width="100px"
+                class="light-green darken-1 text-capitalize"
+                >Time</v-btn
+              >
+            </v-col>
+          </v-row>
+          <v-row class="mt-n6">
+            <v-col cols="12" md="3">
+              <v-btn class="text-capitalize light-green--text"
+                >New Appointments</v-btn
+              >
+            </v-col>
+            <v-col cols="12" md="3" class="">
               <v-select label="Coach Available" dense outlined></v-select>
             </v-col>
-            <v-col cols="12" md="2">
-              <v-btn>Date</v-btn>
+            <v-col cols="12" md="2" class="ml-8">
+              <v-btn width="100px" class="text-capitalize light-green--text"
+                >Date</v-btn
+              >
             </v-col>
-            <v-col cols="12" md="2">
-              <v-btn>Time</v-btn>
-            </v-col>
-          </v-row>
-           <v-row>
-            <v-col cols="12" md="4" >
-              <v-btn>New Appointments</v-btn>
-            </v-col>
-            <v-col cols="12" md="3" class="ml-n5">
-              <v-select label="Coach Available" dense outlined></v-select>
-            </v-col>
-            <v-col cols="12" md="2">
-              <v-btn>Date</v-btn>
-            </v-col>
-            <v-col cols="12" md="2">
-              <v-btn>Time</v-btn>
+            <v-col cols="12" md="">
+              <v-btn width="100px" class="text-capitalize light-green--text"
+                >Time</v-btn
+              >
             </v-col>
           </v-row>
-          <v-row>
-            <v-col cols="12" md="2" offset-md="9">
-               <v-btn class="light-green darken-1">Assign</v-btn>
+          <v-row class="mt-n6">
+            <v-col cols="12" md="2" offset-md="8">
+              <v-btn
+                rounded
+                dark
+                width="100px"
+                class="light-green darken-1 text-capitalize ml-8"
+                >Assign</v-btn
+              >
             </v-col>
-           
           </v-row>
         </v-container>
       </v-col>

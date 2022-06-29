@@ -1,7 +1,7 @@
 <template>
-  <v-row no-gutters style="height: 100%">
+  <v-row no-gutters>
     <v-col cols="12" md="6">
-      <v-img src="@/assets/clientLogin.png" height="100%">
+      <v-img src="@/assets/clientLogin.png">
         <v-container fill-height fluid class="white--text">
           <v-row class="pl-10">
             <h4 class="text-h4">Life N You</h4>
@@ -22,12 +22,21 @@
             <v-card
               elevation="2"
               outlined
-              height="260"
-              class="mx-10 pl-7 rounded-lg orange lighten-5"
+              width="450"
+              class="ml-16 pl-7 my-n16 rounded-lg orange lighten-5"
             >
-              <v-card-title class="py-3 d-flex justify-center"
-                >Client</v-card-title
-              >
+              <v-row class="mb-n8">
+                <v-col cols="12" md="4" offset-md="4">
+                  <v-card-title class="text-h5">Client</v-card-title>
+                </v-col>
+                <v-col>
+                  <v-icon color="orange lighten-1" class="mt-5 ml-16"
+                    >mdi-check-circle</v-icon
+                  >
+                </v-col>
+                <!-- <v-spacer></v-spacer> -->
+              </v-row>
+
               <v-form>
                 <text-input />
                 <password-input />
@@ -35,8 +44,8 @@
                   <v-btn
                     depressed
                     rounded
-                    class="white--text text-capitalize orange lighten-1"
-                    >Login</v-btn
+                    class="white--text text-capitalize orange lighten-1 ml-n8 mb-2"
+                    >submit</v-btn
                   >
                 </div>
               </v-form>
@@ -44,19 +53,19 @@
           </v-col>
         </v-row>
 
-        <v-row class="d-flex justify-center mt-10">
+        <v-row class="d-flex justify-center mb-n14">
           <h4>If you are an admin,</h4>
           <router-link to="/admin/login" class="text-decoration-none"
             >Click here</router-link
           >
         </v-row>
-        <v-row class="d-flex justify-center mt-n6">
+        <v-row class="d-flex justify-center mt-n16">
           <h4>If you are a coach,</h4>
           <router-link to="/coach/login" class="text-decoration-none"
             >Click here</router-link
           >
         </v-row>
-        <v-row class="d-flex justify-center mt-16 mb-n6">
+        <v-row class="d-flex justify-center ">
           <h4>No account?</h4>
           <router-link to="/client/registration" class="text-decoration-none"
             >Register here</router-link
