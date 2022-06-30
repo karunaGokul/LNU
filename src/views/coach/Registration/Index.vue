@@ -1,14 +1,15 @@
 <template>
-  <v-row class="indigo lighten-5">
+  <v-row>
     <v-col style="height: 100%">
-      <v-row class="mt-10">
-        <v-col class="ml-10"> <h4 class="text-h3">Life N You</h4> </v-col>
+      <v-row class="mt-8 mb-6">
+        <v-col class="ml-16"> <h4 class="text-h5">Life N You</h4> </v-col>
       </v-row>
 
       <v-row justify="center">
-        <v-col cols="12" md="4" offset-md="4">
-          <v-img src="@/assets/coachRegistration.jpg" width="75px"></v-img>
-        </v-col>
+        <!-- <v-col cols="12" md="4" offset-md="4"> -->
+        <v-icon x-large>mdi-account</v-icon>
+        <!-- <v-img src="@/assets/coachRegistration.jpg" width="75px"></v-img> -->
+        <!-- </v-col> -->
       </v-row>
 
       <v-container fluid fill-height class="d-flex justify-center mt-10">
@@ -71,9 +72,29 @@
               ></v-text-field>
             </v-col>
           </v-row>
-        </v-form>
 
-        <p class="text-center mx-16">
+          <v-row>
+            <v-col cols="12" md="9">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Similique molestiae animi<br />
+              adipisci quia consectetur tenetur reiciendis iste id expedita
+              voluptatum recusandae,<br />
+              autem asperiores dicta impedit quam quisquam deleniti ipsa quae!
+              <br />
+            </v-col>
+
+            <v-col class="d-flex align-self">
+              <v-spacer></v-spacer>
+              <v-btn
+                depressed
+                rounded
+                width="100"
+                class="white--text text-capitalize mt-5  indigo darken-1"
+                >save</v-btn
+              >
+            </v-col>
+          </v-row>
+          <!-- <p class="text-center mx-16">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum ea vel
           corporis nulla molestiae fugiat pariatur aspernatur eum, dolore
           repellat cum, consequatur quo blanditiis assumenda deserunt temporibus
@@ -81,13 +102,8 @@
           adipisicing elit. Maxime porro ab consequatur iure repellendus id
           ullam impedit veritatis. Beatae itaque nihil aliquid quas soluta!
           Repudiandae facere asperiores blanditiis autem aut?
-        </p>
-        <v-btn
-          depressed
-          rounded
-          class="white--text text-capitalize mt-5 ml-16 indigo darken-1"
-          >Submit</v-btn
-        >
+        </p> -->
+        </v-form>
       </v-container>
     </v-col>
   </v-row>

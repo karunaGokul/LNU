@@ -16,7 +16,7 @@
         </v-col>
       </v-row>
       <v-container fluid fill-height class="d-flex justify-center mt-n16">
-        <v-row justify="center"> <h4>Registration Form</h4></v-row>
+        <v-row justify="center" class="mb-n8"> <h2>Registration Form</h2></v-row>
         <v-form class="my-n16">
           <v-row>
             <v-col cols="12" md="4">
@@ -54,7 +54,7 @@
                 filled
                 rounded
                 dense
-                label="Enter counsellingtype"
+                placeholder="Enter CounsellingType"
               ></v-select>
             </v-col>
             <v-col cols="12" md="4">
@@ -66,12 +66,14 @@
                 placeholder="Enter Payements"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" md="4" >
+            <v-col cols="12" md="4" class="d-flex align-self">
+              <v-spacer></v-spacer>
               <v-btn
                 depressed
                 rounded
+                width="100"
                 color="#FFA726"
-                class="white--text text-capitalize mt-5 ml-16"
+                class="white--text text-capitalize mt-5"
                 >Submit</v-btn
               >
             </v-col>

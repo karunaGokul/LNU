@@ -16,16 +16,15 @@
     </v-col>
     <v-col>
       <v-container fill-height fluid class="pa-8">
-        <!-- <h2>Feel stuck? We are here to help you!</h2> -->
-        <v-row align="center" justify="center" style="min-height: 300px">
+        <v-row>
           <v-col>
             <v-card
               elevation="2"
               outlined
-              height="260"
-              class="mx-10 pl-7 rounded-lg indigo lighten-5"
+              width="450"
+              class="ml-16 pl-7 rounded-lg indigo lighten-5"
             >
-              <v-card-title class="py-3 d-flex justify-center"
+              <v-card-title class="py-3 ml-n10 text-h5 d-flex justify-center"
                 >Coach</v-card-title
               >
               <v-form>
@@ -35,7 +34,8 @@
                   <v-btn
                     depressed
                     rounded
-                    class="white--text text-capitalize indigo darken-1"
+                    width="100"
+                    class="white--text text-capitalize indigo darken-1 ml-n4 mb-2"
                     >Login</v-btn
                   >
                 </div>

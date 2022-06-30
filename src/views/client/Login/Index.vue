@@ -44,8 +44,9 @@
                   <v-btn
                     depressed
                     rounded
-                    class="white--text text-capitalize orange lighten-1 ml-n8 mb-2"
-                    >submit</v-btn
+                    width="100"
+                    class="white--text text-capitalize orange lighten-1 ml-n4 mb-2"
+                    >login</v-btn
                   >
                 </div>
               </v-form>

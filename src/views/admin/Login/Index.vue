@@ -1,7 +1,7 @@
 <template>
-  <v-row no-gutters style="height: 100%">
+  <v-row no-gutters>
     <v-col cols="12" md="6">
-      <v-img src="@/assets/adminLogin.png" height="100%">
+      <v-img src="@/assets/adminLogin.png">
         <v-container fill-height fluid class="white--text mt-n16">
           <v-row class="pl-10">
             <h4 class="text-h4">Life N You</h4>
@@ -15,16 +15,16 @@
       </v-img>
     </v-col>
     <v-col>
-      <v-container fill-height fluid>
-        <v-row align="center" justify="center" style="min-height: 400px">
+      <v-container fill-height fluid class="ml-4">
+        <v-row>
           <v-col>
             <v-card
               elevation="2"
               outlined
-              height="260"
-              class="mx-10 pl-7 rounded-lg light-green lighten-4"
+              width="450"
+              class="ml-16 pl-7 rounded-lg light-green lighten-4"
             >
-              <v-card-title class="py-3 d-flex justify-center"
+              <v-card-title class="py-3 ml-n10 text-h5 d-flex justify-center"
                 >Admin</v-card-title
               >
               <v-form>
@@ -34,7 +34,8 @@
                   <v-btn
                     depressed
                     rounded
-                    class="white--text text-capitalize light-green darken-1"
+                    width="100"
+                    class="white--text text-capitalize light-green darken-1 ml-n4 mb-2"
                     >Login</v-btn
                   >
                 </div>
