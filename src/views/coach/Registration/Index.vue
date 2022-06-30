@@ -1,5 +1,13 @@
 <template>
-  <v-row>
+  <v-row
+    style="
+      background: linear-gradient(
+        180deg,
+        rgb(73, 92, 184) -60.28%,
+        rgb(255, 255, 255) 26.8%
+      );
+    "
+  >
     <v-col style="height: 100%">
       <v-row class="mt-8 mb-6">
         <v-col class="ml-16"> <h4 class="text-h5">Life N You</h4> </v-col>
@@ -89,20 +97,12 @@
                 depressed
                 rounded
                 width="100"
-                class="white--text text-capitalize mt-5  indigo darken-1"
+                color="rgb(73, 92, 184)"
+                class="white--text text-capitalize mt-5"
                 >save</v-btn
               >
             </v-col>
           </v-row>
-          <!-- <p class="text-center mx-16">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum ea vel
-          corporis nulla molestiae fugiat pariatur aspernatur eum, dolore
-          repellat cum, consequatur quo blanditiis assumenda deserunt temporibus
-          possimus, recusandae aliquid! Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Maxime porro ab consequatur iure repellendus id
-          ullam impedit veritatis. Beatae itaque nihil aliquid quas soluta!
-          Repudiandae facere asperiores blanditiis autem aut?
-        </p> -->
         </v-form>
       </v-container>
     </v-col>

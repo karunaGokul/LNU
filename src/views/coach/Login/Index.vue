@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters style="height: 100%">
+  <v-row no-gutters style="background: linear-gradient(180deg, rgb(73, 92, 184) -60.28%, rgb(255, 255, 255) 26.8%)">
     <v-col cols="12" md="6">
       <v-img src="@/assets/coachLogin.png" height="100%">
         <v-container fill-height fluid class="white--text mt-n16">
@@ -23,6 +23,7 @@
               outlined
               width="450"
               class="ml-16 pl-7 rounded-lg indigo lighten-5"
+              style="background: linear-gradient(180deg, rgb(186, 198, 255) -78.57%, rgba(255, 255, 255));"
             >
               <v-card-title class="py-3 ml-n10 text-h5 d-flex justify-center"
                 >Coach</v-card-title
@@ -35,7 +36,8 @@
                     depressed
                     rounded
                     width="100"
-                    class="white--text text-capitalize indigo darken-1 ml-n4 mb-2"
+                    color="#495CB8"
+                    class="white--text text-capitalize ml-n4 mb-2"
                     >Login</v-btn
                   >
                 </div>

@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters>
+  <v-row no-gutters style="background: linear-gradient(180deg, rgb(252, 167, 68) -60.28%, rgb(255, 255, 255) 26.8%)">
     <v-col cols="12" md="6">
       <v-img src="@/assets/clientLogin.png">
         <v-container fill-height fluid class="white--text">
@@ -23,14 +23,15 @@
               elevation="2"
               outlined
               width="450"
-              class="ml-16 pl-7 my-n16 rounded-lg orange lighten-5"
+              color="#F8E6C4"
+              class="ml-16 pl-7 my-n16 rounded-lg"
             >
               <v-row class="mb-n8">
                 <v-col cols="12" md="4" offset-md="4">
                   <v-card-title class="text-h5">Client</v-card-title>
                 </v-col>
                 <v-col>
-                  <v-icon color="orange lighten-1" class="mt-5 ml-16"
+                  <v-icon color="#FCB258" class="mt-5 ml-16"
                     >mdi-check-circle</v-icon
                   >
                 </v-col>
@@ -45,7 +46,8 @@
                     depressed
                     rounded
                     width="100"
-                    class="white--text text-capitalize orange lighten-1 ml-n4 mb-2"
+                    color="#FCB258"
+                    class="white--text text-capitalize ml-n4 mb-2"
                     >login</v-btn
                   >
                 </div>
@@ -66,7 +68,7 @@
             >Click here</router-link
           >
         </v-row>
-        <v-row class="d-flex justify-center ">
+        <v-row class="d-flex justify-center">
           <h4>No account?</h4>
           <router-link to="/client/registration" class="text-decoration-none"
             >Register here</router-link
