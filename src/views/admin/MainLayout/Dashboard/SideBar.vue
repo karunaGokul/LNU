@@ -1,6 +1,6 @@
 <template>
   <v-card height="100%" width="256" align="end">
-    <v-navigation-drawer class="light-green darken-1 pr-5">
+    <v-navigation-drawer dark color="#78B849" class="pr-5">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6 my-8">
@@ -31,6 +31,7 @@ import { Component, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class AdminSideBar extends Vue {
+  
   public items: any = [
     { title: "Dashboard", icon: "mdi-view-dashboard" },
     { title: "Coaches", icon: "mdi-account-tie-outline" },

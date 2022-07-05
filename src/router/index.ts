@@ -8,6 +8,7 @@ import AdminLayout from "@/views/admin/Index.vue";
 import AdminLogin from "@/views/admin/Login/Index.vue";
 import AdminMainLayout from "@/views/admin/MainLayout/Index.vue";
 import AdminDashboardLayout from "@/views/admin/MainLayout/Dashboard/Index.vue";
+// import AppointmentsLayout from "@/views/admin/MainLayout/Dashboard/Appointments.vue";
 
 import ClientLayout from "@/views/client/Index.vue";
 
@@ -51,6 +52,11 @@ const routes: Array<RouteConfig> = [
             name: "Admin Dashboard",
             component: AdminDashboardLayout,
           },
+          // {
+          //   path: "appointments",
+          //   name: "Appointments",
+          //   component: AppointmentsLayout,
+          // },
         ],
       },
     ],

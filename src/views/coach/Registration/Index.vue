@@ -1,12 +1,7 @@
 <template>
   <v-row
     style="
-      background: linear-gradient(
-        180deg,
-        rgb(73, 92, 184) -60.28%,
-        rgb(255, 255, 255) 26.8%
-      );
-    "
+      background: linear-gradient(180deg, rgb(73, 92, 184) -60.28%, rgb(255, 255, 255) 26.8%)"
   >
     <v-col style="height: 100%">
       <v-row class="mt-8 mb-6">
