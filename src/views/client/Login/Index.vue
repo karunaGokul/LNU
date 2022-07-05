@@ -1,5 +1,8 @@
 <template>
-  <v-row no-gutters style="background: linear-gradient(180deg, rgb(252, 167, 68) -60.28%, rgb(255, 255, 255) 26.8%)">
+  <v-row
+    no-gutters
+    style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
+  >
     <v-col cols="12" md="6">
       <v-img src="@/assets/clientLogin.png">
         <v-container fill-height fluid class="white--text">
@@ -16,7 +19,60 @@
     </v-col>
     <v-col>
       <v-container fill-height fluid class="d-flex justify-center">
-        <h2>Feel stuck? We are here to help you!</h2>
+        <div>
+          <h2>Feel stuck? We are here to help you!</h2>
+          <v-card
+            elevation="2"
+            outlined
+            width="450"
+            color="#F8E6C4"
+            class="rounded-lg pl-6 pb-4 mb-8"
+          >
+            <v-row class="mb-n8">
+              <v-col cols="12" md="4" offset-md="4">
+                <v-card-title class="text-h5">Client</v-card-title>
+              </v-col>
+              <v-col>
+                <v-icon color="#FCB258" class="mt-5 ml-16"
+                  >mdi-check-circle</v-icon
+                >
+              </v-col>
+            </v-row>
+            <v-form>
+              <text-input />
+              <password-input />
+              <div class="d-flex justify-center ml-n4">
+                <v-btn
+                  depressed
+                  rounded
+                  color="background-orange"
+                  class="white--text text-capitalize"
+                  @click="login"
+                  >Login</v-btn
+                >
+              </div>
+            </v-form>
+          </v-card>
+          <div class="d-flex justify-center">
+          If you are an admin,
+          <router-link to="/admin/login" class="text-decoration-none"
+            >Click here</router-link
+          ></div>
+          <div class="d-flex justify-center">
+            If you are a coach,
+            <router-link to="/coach/login" class="text-decoration-none"
+              >Click here</router-link
+            >
+          </div>
+          <div class="d-flex justify-center mt-16">
+          No account?
+          <router-link to="/client/registration" class="text-decoration-none"
+            >Register here</router-link
+          >
+          </div>
+        </div>
+
+        <!-- <h2>Feel stuck? We are here to help you!</h2>
         <v-row>
           <v-col>
             <v-card
@@ -35,7 +91,6 @@
                     >mdi-check-circle</v-icon
                   >
                 </v-col>
-                <!-- <v-spacer></v-spacer> -->
               </v-row>
 
               <v-form>
@@ -72,7 +127,7 @@
           <router-link to="/client/registration" class="text-decoration-none"
             >Register here</router-link
           >
-        </v-row>
+        </v-row> -->
       </v-container>
     </v-col>
   </v-row>
@@ -87,11 +142,8 @@ import PasswordInput from "@/components/controls/PasswordInput.vue";
   components: { TextInput, PasswordInput },
 })
 export default class Login extends Vue {
-  
   public login() {
     this.$router.push("home/dashboard");
   }
 }
 </script>
-
-
