@@ -38,6 +38,11 @@ const coachRoutes: Array<RouteConfig> = [
             component: () =>
               import("@/views/coach/MainLayout/Dashboard/Index.vue"),
           },
+          // {
+          //   path: "appointments",
+          //   name: "Appointments",
+          //   component: AppointmentsLayout,
+          // },
         ],
       },
     ],

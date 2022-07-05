@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters style="height: 100%">
+  <v-row no-gutters style="background: linear-gradient(180deg, rgb(73, 92, 184) -60.28%, rgb(255, 255, 255) 26.8%)">
     <v-col cols="12" md="6">
       <v-img src="@/assets/coachLogin.png" height="100%">
         <v-container fill-height fluid class="white--text mt-n16">
@@ -16,16 +16,16 @@
     </v-col>
     <v-col>
       <v-container fill-height fluid class="pa-8">
-        <!-- <h2>Feel stuck? We are here to help you!</h2> -->
-        <v-row align="center" justify="center" style="min-height: 300px">
+        <v-row>
           <v-col>
             <v-card
               elevation="2"
               outlined
-              height="260"
-              class="mx-10 pl-7 rounded-lg indigo lighten-5"
+              width="450"
+              class="ml-16 pl-7 rounded-lg indigo lighten-5"
+              style="background: linear-gradient(180deg, rgb(186, 198, 255) -78.57%, rgba(255, 255, 255));"
             >
-              <v-card-title class="py-3 d-flex justify-center"
+              <v-card-title class="py-3 ml-n10 text-h5 d-flex justify-center"
                 >Coach</v-card-title
               >
               <v-form>
