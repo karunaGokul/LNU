@@ -36,6 +36,7 @@
                     depressed
                     rounded
                     class="white--text text-capitalize indigo darken-1"
+                    @click="login"
                     >Login</v-btn
                   >
                 </div>
@@ -62,5 +63,9 @@ import PasswordInput from "@/components/controls/PasswordInput.vue";
 @Component({
   components: { TextInput, PasswordInput },
 })
-export default class CoachLogin extends Vue {}
+export default class Login extends Vue {
+  login() {
+    this.$router.push('home/dashboard');
+  }
+}
 </script>

@@ -1,119 +1,123 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import MainLayout from "@/views/MainLayout.vue";
-//Admin pages
-
-import AdminLayout from "@/views/admin/Index.vue";
-
-import AdminLogin from "@/views/admin/Login/Index.vue";
-import AdminMainLayout from "@/views/admin/MainLayout/Index.vue";
-import AdminDashboardLayout from "@/views/admin/MainLayout/Dashboard/Index.vue";
-
-import ClientLayout from "@/views/client/Index.vue";
-
-import ClientLogin from "@/views/client/Login/Index.vue";
-import ClientRegistration from "@/views/client/Registration/Index.vue";
-import ClientMainLayout from "@/views/client/MainLayout/Index.vue";
-import ClientDashboardLayout from "@/views/client/MainLayout/Dashboard/Index.vue";
-
-import CoachLayout from "@/views/coach/Index.vue";
-
-import CoachLogin from "@/views/coach/Login/Index.vue";
-import CoachRegistration from "@/views/coach/Registration/Index.vue";
-import CoachMainLayout from "@/views/coach/MainLayout/Index.vue";
-import CoachDashboardLayout from "@/views/coach/MainLayout/Dashboard/Index.vue";
 
 Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
+let routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Main Layout",
     component: MainLayout,
   },
-  {
-    path: "/admin",
-    name: "Admin",
-    component: AdminLayout,
-    children: [
-      {
-        path: "login",
-        name: "Admin Login",
-        component: AdminLogin,
-      },
-      {
-        path: "home",
-        name: "Admin Main Layout",
-        component: AdminMainLayout,
-        children: [
-          {
-            path: "dashboard",
-            name: "Admin Dashboard",
-            component: AdminDashboardLayout,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    path: "/client",
-    name: "Client",
-    component: ClientLayout,
-    children: [
-      {
-        path: "login",
-        name: "Client Login",
-        component: ClientLogin,
-      },
-      {
-        path: "registration",
-        name: "Client Registration",
-        component: ClientRegistration,
-      },
-      {
-        path: "home",
-        name: "Client Main Layout",
-        component: ClientMainLayout,
-        children: [
-          {
-            path: "dashboard",
-            name: "Client Dashboard",
-            component: ClientDashboardLayout,
-          },
-        ],
-      },
-    ],
-  },
+];
+const coachRoutes: Array<RouteConfig> = [
   {
     path: "/coach",
     name: "Coach",
-    component: CoachLayout,
+    component: () => import("@/views/coach/Index.vue"),
     children: [
       {
         path: "login",
         name: "Coach Login",
-        component: CoachLogin,
+        component: () => import("@/views/coach/Login/Index.vue"),
       },
       {
         path: "registration",
         name: "Coach Registration",
-        component: CoachRegistration,
+        component: () => import("@/views/coach/Registration/Index.vue"),
       },
       {
         path: "home",
         name: "Coach Main Layout",
-        component: CoachMainLayout,
+        component: () => import("@/views/coach/MainLayout/Index.vue"),
         children: [
           {
             path: "dashboard",
             name: "Coach Dashboard",
-            component: CoachDashboardLayout,
+            component: () =>
+              import("@/views/coach/MainLayout/Dashboard/Index.vue"),
           },
         ],
       },
     ],
   },
 ];
+
+const adminRoutes: Array<RouteConfig> = [
+  {
+    path: "/admin",
+    name: "Admin",
+    component: () => import("@/views/admin/Index.vue"),
+    children: [
+      {
+        path: "login",
+        name: "Admin Login",
+        component: () => import("@/views/admin/Login/Index.vue"),
+      },
+      {
+        path: "home",
+        name: "Admin Main Layout",
+        component: () => import("@/views/admin/MainLayout/Index.vue"),
+        children: [
+          {
+            path: "dashboard",
+            name: "Admin Dashboard",
+            component: () =>
+              import("@/views/admin/MainLayout/Dashboard/Index.vue"),
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const clientRoutes: Array<RouteConfig> = [
+  {
+    path: "/client",
+    name: "Client",
+    component: () => import("@/views/client/Index.vue"),
+    children: [
+      {
+        path: "login",
+        name: "Client Login",
+        component: () => import("@/views/client/Login/Index.vue"),
+      },
+      {
+        path: "registration",
+        name: "Client Registration",
+        component: () => import("@/views/client/Registration/Index.vue"),
+      },
+      {
+        path: "home",
+        name: "Client Main Layout",
+        component: () => import("@/views/client/MainLayout/Index.vue"),
+        children: [
+          {
+            path: "dashboard",
+            name: "Client Dashboard",
+            component: () => import("@/views/client/MainLayout/Dashboard/Index.vue"),
+          },
+          {
+            path: "profile",
+            name: "Client Profile",
+            component: () => import("@/views/client/MainLayout/Profile.vue"),
+          },
+          {
+            path: "appointments",
+            name: "Appointments",
+            component: () =>
+              import("@/views/client/MainLayout/Appointments/Index.vue"),
+          },
+        ],
+      },
+    ],
+  },
+];
+
+routes = routes.concat(adminRoutes);
+routes = routes.concat(coachRoutes);
+routes = routes.concat(clientRoutes);
 
 const router = new VueRouter({
   mode: "history",
@@ -122,15 +126,3 @@ const router = new VueRouter({
 });
 
 export default router;
-/*
-  {
-        path: 'login',
-        name: 'Client Login',
-        component: ClientLogin
-      },
-      {
-        path: 'coach-login',
-        name: 'Coach Login',
-        component: CoachLogin
-      },
-*/

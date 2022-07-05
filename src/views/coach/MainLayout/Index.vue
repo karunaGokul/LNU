@@ -9,5 +9,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class CoachMainLayout extends Vue {}
+export default class MainLayout extends Vue {}
 </script>

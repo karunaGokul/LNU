@@ -1,7 +1,6 @@
 <template>
   <div>
     Client Dashboard Layout
-    <router-view />
   </div>
 </template>
 
@@ -9,5 +8,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class ClientDashboardLayout extends Vue {}
+export default class DashboardLayout extends Vue {}
 </script>

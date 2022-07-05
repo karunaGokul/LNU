@@ -88,5 +88,5 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   components: {},
 })
-export default class ClientRegistration extends Vue {}
+export default class Registration extends Vue {}
 </script>
