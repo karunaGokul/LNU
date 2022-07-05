@@ -4,7 +4,7 @@
     style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
   >
     <v-col cols="12" md="6">
-      <v-img src="@/assets/clientLogin.png">
+      <v-img src="@/assets/clientLogin.png" height="100vh">
         <v-container fill-height fluid class="white--text">
           <v-row class="pl-10">
             <h4 class="text-h4">Life N You</h4>
