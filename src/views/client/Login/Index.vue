@@ -4,7 +4,7 @@
     style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
   >
     <v-col cols="12" md="6">
-      <v-img src="@/assets/clientLogin.png" height="100vh">
+      <v-img src="@/assets/clientLogin.jpeg" height="100vh" class="rounded-xl rounded-l-0">
         <v-container fill-height fluid class="white--text">
           <v-row class="pl-10">
             <h4 class="text-h4">Life N You</h4>
@@ -19,13 +19,13 @@
     </v-col>
     <v-col>
       <v-container fill-height fluid class="d-flex justify-center">
-        <h2 class="mt-10">Feel stuck? We are here to help you!</h2>
+        <h2 class="mt-10 mb-n6">Feel stuck? We are here to help you!</h2>
         <div>
           <v-card
-            elevation="2"
+            elevation="3"
             outlined
             width="450"
-            color="#F8E6C4"
+            color=""
             class="rounded-lg pb-4 mb-8"
           >
             <v-row>
@@ -39,29 +39,8 @@
               </v-col>
             </v-row>
             <v-form class="px-8" ref="form" autocomplete="off" @submit="login">
-              <!-- <text-input />
-              <password-input /> -->
-              <v-text-field
-                label="Username"
-                background-color="white"
-                rounded
-                outlined
-                dense
-                :rules="emailRules"
-                required
-              ></v-text-field>
-              <v-text-field
-                label="Password"
-                background-color="white"
-                :rules="passwordRules"
-                :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="() => (value = !value)"
-                :type="value ? 'password' : 'text'"
-                required
-                outlined
-                rounded
-                dense
-              ></v-text-field>
+              <text-input />
+              <password-input />
               <div class="d-flex justify-center">
                 <v-btn
                   depressed
