@@ -1,14 +1,14 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import MainLayout from "@/views/MainLayout.vue";
 
 Vue.use(VueRouter);
 
 let routes: Array<RouteConfig> = [
   {
     path: "/",
-    name: "Main Layout",
-    component: MainLayout,
+    redirect: {
+      name: "Client",
+    }
   },
 ];
 const coachRoutes: Array<RouteConfig> = [
@@ -19,30 +19,25 @@ const coachRoutes: Array<RouteConfig> = [
     children: [
       {
         path: "login",
-        name: "Coach Login",
+        name: "Login",
         component: () => import("@/views/coach/Login/Index.vue"),
       },
       {
         path: "registration",
-        name: "Coach Registration",
+        name: "Registration",
         component: () => import("@/views/coach/Registration/Index.vue"),
       },
       {
         path: "home",
-        name: "Coach Main Layout",
+        name: "Main Layout",
         component: () => import("@/views/coach/MainLayout/Index.vue"),
         children: [
           {
             path: "dashboard",
-            name: "Coach Dashboard",
+            name: "Dashboard",
             component: () =>
               import("@/views/coach/MainLayout/Dashboard/Index.vue"),
-          },
-          // {
-          //   path: "appointments",
-          //   name: "Appointments",
-          //   component: AppointmentsLayout,
-          // },
+          }
         ],
       },
     ],
@@ -57,17 +52,17 @@ const adminRoutes: Array<RouteConfig> = [
     children: [
       {
         path: "login",
-        name: "Admin Login",
+        name: "Login",
         component: () => import("@/views/admin/Login/Index.vue"),
       },
       {
         path: "home",
-        name: "Admin Main Layout",
+        name: "Main Layout",
         component: () => import("@/views/admin/MainLayout/Index.vue"),
         children: [
           {
             path: "dashboard",
-            name: "Admin Dashboard",
+            name: "Dashboard",
             component: () =>
               import("@/views/admin/MainLayout/Dashboard/Index.vue"),
           },
@@ -82,30 +77,33 @@ const clientRoutes: Array<RouteConfig> = [
     path: "/client",
     name: "Client",
     component: () => import("@/views/client/Index.vue"),
+    redirect: {
+      name: 'Login'
+    },
     children: [
       {
         path: "login",
-        name: "Client Login",
+        name: "Login",
         component: () => import("@/views/client/Login/Index.vue"),
       },
       {
         path: "registration",
-        name: "Client Registration",
+        name: "Registration",
         component: () => import("@/views/client/Registration/Index.vue"),
       },
       {
         path: "home",
-        name: "Client Main Layout",
+        name: "Main Layout",
         component: () => import("@/views/client/MainLayout/Index.vue"),
         children: [
           {
             path: "dashboard",
-            name: "Client Dashboard",
+            name: "Dashboard",
             component: () => import("@/views/client/MainLayout/Dashboard/Index.vue"),
           },
           {
             path: "profile",
-            name: "Client Profile",
+            name: "Profile",
             component: () => import("@/views/client/MainLayout/Profile.vue"),
           },
           {
