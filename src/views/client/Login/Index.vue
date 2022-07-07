@@ -15,7 +15,12 @@
           </v-row>
           <v-row>
             <v-col md="6" offset-md="6">
-              <h4 class="text-h4">Bring Out The Magic In You</h4>
+              <h4
+                class="text-h4"
+                style="font-family: Questario Icon !important"
+              >
+                Bring Out The Magic In You
+              </h4>
             </v-col>
           </v-row>
         </v-container>

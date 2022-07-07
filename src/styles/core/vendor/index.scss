@@ -1,5 +1,8 @@
 $fa-font-path:         "core/vendor/fontawesome/webfonts" !default;
+$fa-questario-icon-path: "core/vendor/questariobrush/webfonts"  !default;
 
 @import "fontawesome/scss/fontawesome";
 @import "fontawesome/scss/regular";
 @import "fontawesome/scss/solid";
+
+@import "questariobrush/scss/regular";
