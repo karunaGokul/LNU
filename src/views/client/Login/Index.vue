@@ -10,12 +10,12 @@
         class="rounded-xl rounded-l-0"
       >
         <v-container fill-height fluid class="white--text">
-          <v-row class="pl-10">
+          <v-row class="pl-10 align-self-start mt-6">
             <h4 class="text-h4">Life N You</h4>
           </v-row>
-          <v-row>
-            <v-col md="6" offset-md="6">
-              <h4 class="text-h4">Bring Out The Magic In You</h4>
+          <v-row class="align-self-end mb-6">
+            <v-col offset-md="4">
+              <h4 class="text-h5">Bring Out The Magic In You</h4>
             </v-col>
           </v-row>
         </v-container>
