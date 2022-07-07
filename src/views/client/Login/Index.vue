@@ -10,7 +10,7 @@
         class="rounded-xl rounded-l-0"
       >
         <v-container fill-height fluid class="white--text">
-          <v-row class="pl-10">
+          <v-row class="pl-10 align-self-start mt-6">
             <h4 class="text-h4">Life N You</h4>
           </v-row>
           <v-row>

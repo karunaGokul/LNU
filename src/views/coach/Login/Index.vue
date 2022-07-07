@@ -1,50 +1,84 @@
 <template>
-  <v-row no-gutters style="background: linear-gradient(180deg, rgb(73, 92, 184) -60.28%, rgb(255, 255, 255) 26.8%)">
+  <v-row
+    no-gutters
+    style="background: linear-gradient(180deg, #495cb8 -60.28%, #ffffff 26.8%)"
+  >
     <v-col cols="12" md="6">
-      <v-img src="@/assets/coachLogin.png" height="100%">
+      <v-img
+        src="@/assets/coachLogin.jpg"
+        height="100vh"
+        class="rounded-xl rounded-l-0"
+      >
         <v-container fill-height fluid class="white--text mt-n16">
           <v-row class="pl-10">
             <h4 class="text-h4">Life N You</h4>
           </v-row>
-          <v-row>
-            <v-col md="6" offset-md="6">
-              <h4 class="text-h4">We help you build a better life</h4>
+          <v-row class="align-self-end">
+            <v-col offset-md="4">
+              <h4 class="text-h5">We help you build a better life</h4>
             </v-col>
           </v-row>
         </v-container>
       </v-img>
     </v-col>
     <v-col>
-      <v-container fill-height fluid class="pa-8">
-        <v-row>
-          <v-col>
-            <v-card
-              elevation="2"
-              outlined
-              width="450"
-              class="ml-16 pl-7 rounded-lg indigo lighten-5"
-              style="background: linear-gradient(180deg, rgb(186, 198, 255) -78.57%, rgba(255, 255, 255));"
-            >
-              <v-card-title class="py-3 ml-n10 text-h5 d-flex justify-center"
-                >Coach</v-card-title
-              >
-              <v-form>
-                <text-input />
-                <password-input />
-                <div class="d-flex justify-center">
-                  <v-btn
-                    depressed
-                    rounded
-                    class="white--text text-capitalize indigo darken-1"
-                    @click="login"
-                    >Login</v-btn
-                  >
-                </div>
-              </v-form>
-            </v-card>
-          </v-col>
-        </v-row>
-        <v-row class="d-flex justify-center mt-16 mb-n16">
+      <v-container fill-height fluid class="d-flex justify-center">
+        <div class="mt-8">
+          <v-card
+            elevation="3"
+            outlined
+            width="450"
+            class="rounded-lg pb-4 mb-8"
+          >
+            <v-row>
+              <v-col cols="12" md="4" offset-md="4">
+                <v-card-title class="text-h5 font-weight-bold ml-4"
+                  >Coach</v-card-title
+                >
+              </v-col>
+            </v-row>
+            <v-form class="px-8" ref="form" autocomplete="off" @submit="login">
+              <v-text-field
+                label="Username"
+                color="#495cb8"
+                v-model="request.username"
+                append-icon="mdi-account"
+                :error-messages="
+                  $v.request.username | errorMessages('Username')
+                "
+                filled
+                type="text"
+                required
+                @input="$v.request.username.$touch()"
+                @blur="$v.request.username.$touch()"
+              ></v-text-field>
+              <v-text-field
+                label="Password"
+                color="#495cb8"
+                v-model="request.password"
+                :type="showPassword ? 'text' : 'password'"
+                :error-messages="
+                  $v.request.password | errorMessages('Password')
+                "
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="showPassword = !showPassword"
+                filled
+                @input="$v.request.password.$touch()"
+                @blur="$v.request.password.$touch()"
+              ></v-text-field>
+              <div class="d-flex justify-center align-center">
+                <v-btn
+                  color="#495cb8"
+                  class="white--text text-capitalize"
+                  @click.prevent="login"
+                  type="submit"
+                  >Login</v-btn
+                >
+              </div>
+            </v-form>
+          </v-card>
+        </div>
+        <v-row class="d-flex justify-center mt-16 mb-n10">
           <h4>No account?</h4>
           <router-link to="/coach/registration" class="text-decoration-none"
             >Register here</router-link
@@ -57,15 +91,27 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import TextInput from "@/components/controls/TextInput.vue";
-import PasswordInput from "@/components/controls/PasswordInput.vue";
+import { required } from "vuelidate/lib/validators";
+
+import { LoginModel } from "@/model";
 
 @Component({
-  components: { TextInput, PasswordInput },
+  validations: {
+    request: {
+      username: { required },
+      password: { required },
+    },
+  },
 })
 export default class Login extends Vue {
-  login() {
-    this.$router.push('home/dashboard');
+  public request: LoginModel = new LoginModel();
+
+  public showPassword: boolean = false;
+
+  public login() {
+    this.$v.$touch();
+    console.log(this.request);
+    //this.$router.push("home/dashboard");
   }
 }
 </script>
