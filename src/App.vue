@@ -1,5 +1,5 @@
 <template>
-<v-app>
+  <v-app>
     <v-main>
       <router-view />
     </v-main>
@@ -10,5 +10,14 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class App extends Vue {}
+export default class App extends Vue {
+  created() {
+    this.createFilters();
+  }
+  createFilters() {
+    Vue.filter("errorMessages", (value: any, name: string) => {
+      return this.$vuehelper.val.messages(value, name);
+    });
+  }
+}
 </script>

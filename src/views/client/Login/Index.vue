@@ -4,7 +4,11 @@
     style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
   >
     <v-col cols="12" md="6">
-      <v-img src="@/assets/clientLogin.jpeg" height="100vh" class="rounded-xl rounded-l-0">
+      <v-img
+        src="@/assets/clientLogin.jpeg"
+        height="100vh"
+        class="rounded-xl rounded-l-0"
+      >
         <v-container fill-height fluid class="white--text">
           <v-row class="pl-10">
             <h4 class="text-h4">Life N You</h4>
@@ -17,7 +21,7 @@
         </v-container>
       </v-img>
     </v-col>
-    <v-col>
+    <v-col cols="12" md="6">
       <v-container fill-height fluid class="d-flex justify-center">
         <h2 class="mt-10 mb-n6">Feel stuck? We are here to help you!</h2>
         <div>
@@ -25,12 +29,13 @@
             elevation="3"
             outlined
             width="450"
-            color=""
             class="rounded-lg pb-4 mb-8"
           >
             <v-row>
               <v-col cols="12" md="4" offset-md="4">
-                <v-card-title class="text-h5 ml-4">Client</v-card-title>
+                <v-card-title class="text-h5 font-weight-bold ml-4"
+                  >Client</v-card-title
+                >
               </v-col>
               <v-col>
                 <v-icon color="#FCB258" class="mt-5 ml-16"
@@ -39,35 +44,58 @@
               </v-col>
             </v-row>
             <v-form class="px-8" ref="form" autocomplete="off" @submit="login">
-              <text-input />
-              <password-input />
-              <div class="d-flex justify-center">
+              <v-text-field
+                label="Username"
+                color="#FCB258"
+                v-model="request.username"
+                append-icon="mdi-account"
+                :error-messages="
+                  $v.request.username | errorMessages('Username')
+                "
+                filled
+                type="text"
+                required
+                @input="$v.request.username.$touch()"
+                @blur="$v.request.username.$touch()"
+              ></v-text-field>
+              <v-text-field
+                label="Password"
+                color="#FCB258"
+                v-model="request.password"
+                :type="showPassword ? 'text' : 'password'"
+                :error-messages="
+                  $v.request.password | errorMessages('Password')
+                "
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="showPassword = !showPassword"
+                filled
+                @input="$v.request.password.$touch()"
+                @blur="$v.request.password.$touch()"
+              ></v-text-field>
+              <div class="d-flex justify-center align-center">
                 <v-btn
-                  depressed
-                  rounded
                   color="background-orange"
                   class="white--text text-capitalize"
                   @click.prevent="login"
-                  :loading="loading"
                   type="submit"
                   >Login</v-btn
                 >
               </div>
             </v-form>
           </v-card>
-          <div class="d-flex justify-center">
+          <div class="text-center mb-4">
             If you are an admin,
             <router-link to="/admin/login" class="text-decoration-none"
               >Click here</router-link
             >
           </div>
-          <div class="d-flex justify-center">
+          <div class="text-center mb-4">
             If you are a coach,
             <router-link to="/coach/login" class="text-decoration-none"
               >Click here</router-link
             >
           </div>
-          <div class="d-flex justify-center mt-16">
+          <div class="text-center mt-16">
             No account?
             <router-link to="/client/registration" class="text-decoration-none"
               >Register here</router-link
@@ -138,25 +166,28 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import TextInput from "@/components/controls/TextInput.vue";
-import PasswordInput from "@/components/controls/PasswordInput.vue";
+
+import { required } from "vuelidate/lib/validators";
+
+import { LoginModel } from "@/model";
 
 @Component({
-  components: { TextInput, PasswordInput },
+  validations: {
+    request: {
+      username: { required },
+      password: { required },
+    },
+  },
 })
 export default class Login extends Vue {
-  public loading: boolean = false;
-  public value: boolean = true;
+  public request: LoginModel = new LoginModel();
 
-  public emailRules: any = [
-    (v: any) => !!v || "E-mail is required",
-    (v: any) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-  ];
-
-  public passwordRules: any = [(v: any) => !!v || "Password is required"];
+  public showPassword: boolean = false;
 
   public login() {
-    this.$router.push("home/dashboard");
+    this.$v.$touch();
+    console.log(this.request);
+    //this.$router.push("home/dashboard");
   }
 }
 </script>
