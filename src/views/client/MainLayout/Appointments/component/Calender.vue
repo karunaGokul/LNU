@@ -50,7 +50,29 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <span v-html="selectedEvent.details"></span>
+              <!-- <span v-html="selectedEvent.details"></span> -->
+              <div class="text-center" v-if="activeAppointments">
+                <v-btn class="text-capitalize" color="primary" dark
+                  >reshedule appointment</v-btn
+                ><br />
+                <v-btn class="text-capitalize mt-2" color="red" dark
+                  >cancel appointment</v-btn
+                >
+              </div>
+              <div v-else>
+                <h4>Rating</h4>
+                <v-divider  class="my-3"></v-divider>
+                <v-rating
+                  background-color="#FCB258"
+                  color="#FCB258"
+                  half-increments
+                  hover
+                  value="3"
+                  length="5"
+                  large
+                  >mdi-star</v-rating
+                >
+              </div>
             </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
@@ -64,10 +86,12 @@
   </v-row>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
 export default class Calendar extends Vue {
+  @Prop() activeAppointments: boolean;
+
   public focus: string = "";
   public type: string = "month";
   /*public typeToLabel: any = {
