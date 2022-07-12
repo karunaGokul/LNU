@@ -51,13 +51,13 @@
             </v-toolbar>
             <v-card-text>
               <!-- <span v-html="selectedEvent.details"></span> -->
-              <div class="text-center" v-if="activeAppointments">
+              <div v-if="activeAppointments">
+                <h4>Appointments</h4>
+                <v-divider class="my-3"></v-divider>
                 <v-btn class="text-capitalize" color="primary" dark
-                  >reshedule appointment</v-btn
-                ><br />
-                <v-btn class="text-capitalize mt-2" color="red" dark
-                  >cancel appointment</v-btn
-                >
+                  >reshedule</v-btn>
+                <v-btn class="text-capitalize ml-3" color="red" dark
+                  >cancel</v-btn>
               </div>
               <div v-else>
                 <h4>Rating</h4>
