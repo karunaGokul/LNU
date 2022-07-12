@@ -84,7 +84,7 @@
                 >
               </v-col>
             </v-row>
-            <v-form class="px-8" ref="form" autocomplete="off" @submit="login">
+            <v-form class="px-8" ref="form" autocomplete="off" >
               <v-text-field
                 label="Username"
                 color="#FCB258"
@@ -206,11 +206,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Inject } from "vue-property-decorator";
 
 import { required } from "vuelidate/lib/validators";
 
-import { LoginModel } from "@/model";
+import { LoginModel,LoginResponseModel } from "@/model";
+
+import { IAuthenticationService } from '@/service';
 
 @Component({
   validations: {
@@ -221,14 +223,25 @@ import { LoginModel } from "@/model";
   },
 })
 export default class Login extends Vue {
+  @Inject("authService") authService: IAuthenticationService;
   public request: LoginModel = new LoginModel();
 
   public showPassword: boolean = false;
 
+  // public login() {
+  //   this.$v.$touch();
+  //   console.log(this.request);
+  //   this.$router.push("home/dashboard");
+  // }
+
   public login() {
-    this.$v.$touch();
     console.log(this.request);
-    this.$router.push("home/dashboard");
+    this.authService
+      .login(this.request)
+      .then((response: Array<LoginResponseModel>) => {
+        console.log(response);
+      });
   }
+
 }
 </script>

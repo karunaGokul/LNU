@@ -134,10 +134,10 @@ export class BaseService<R extends IBaseRequest, T extends IBaseModel> extends S
     }
 
     getItems(request: R, additionalPath?:string): Promise<DataResponse<T>> {
-        if (request._skipPaging) {
-            request.page = undefined;
-            request.pageSize = undefined;
-        }
+        // if (request._skipPaging) {
+        //     request.page = undefined;
+        //     request.pageSize = undefined;
+        // }
 
         let path = '';
         if(additionalPath) path = `${this.path}/${additionalPath}`
