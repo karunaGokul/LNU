@@ -4,7 +4,7 @@
     style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
   >
     <v-col cols="12" md="6">
-      <v-img
+      <!-- <v-img
         src="@/assets/clientLogin.jpeg"
         height="100vh"
         class="rounded-xl rounded-l-0"
@@ -24,11 +24,47 @@
             </v-col>
           </v-row>
         </v-container>
-      </v-img>
+      </v-img> -->
+      <v-container fill-height fluid class="pa-0" style="position: relative">
+        <h4
+          class="text-h4 white--text"
+          style="position: absolute; top: 50px; z-index: 9999999; left: 80px"
+        >
+          Life N You
+        </h4>
+        <v-img
+          src="@/assets/client-login.jpeg"
+          height="100vh"
+          class="rounded-xl rounded-l-0"
+        />
+        <div
+          class="white--text"
+          style="
+            position: absolute;
+            bottom: 50px;
+            z-index: 9999999;
+            right: 80px;
+          "
+        >
+          <h5 class="text-h4 text-center mb-2" style="font-family: Questario Icon !important">Bring Out</h5>
+          <h5 class="text-h4" style="font-family: Questario Icon !important">
+            The Magic In You
+          </h5>
+        </div>
+      </v-container>
     </v-col>
     <v-col cols="12" md="6">
-      <v-container fill-height fluid class="d-flex justify-center">
-        <h2 class="mt-10 mb-n6">Feel stuck? We are here to help you!</h2>
+      <v-container
+        fill-height
+        fluid
+        d-flex
+        justify-center
+        align-center
+        flex-column
+      >
+        <h2 class="mb-10 text-h4 font-weight-bold">
+          Feel stuck? We are here to help you!
+        </h2>
         <div>
           <v-card
             elevation="3"
@@ -192,7 +228,7 @@ export default class Login extends Vue {
   public login() {
     this.$v.$touch();
     console.log(this.request);
-    //this.$router.push("home/dashboard");
+    this.$router.push("home/dashboard");
   }
 }
 </script>
