@@ -1,4 +1,6 @@
-export class LoginModel {
+import { DataRequest } from "./base.model";
+
+export class LoginModel extends DataRequest{
     username: string;
     password: string;
 }

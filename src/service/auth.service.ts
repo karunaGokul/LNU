@@ -1,14 +1,19 @@
 import { ServiceHelper } from "./base.service";
-import { LoginModel, LoginResponseModel } from "@/model";
+import { BaseModel, LoginModel, LoginResponseModel } from "@/model";
+import { IBaseService, BaseService } from './base.service'
+
 
 export interface IAuthenticationService {
   login(request: LoginModel): Promise<Array<LoginResponseModel>>;
 }
 
 export class AuthenticationService
-  extends ServiceHelper
+  extends BaseService<LoginModel, LoginResponseModel>
   implements IAuthenticationService
 {
+  constructor() {
+    super("");
+  }
   public login(request: LoginModel): Promise<Array<LoginResponseModel>> {
     return new Promise((resolve, reject) => {
       let items = new Array<LoginResponseModel>();
@@ -19,4 +24,3 @@ export class AuthenticationService
     });
   }
 }
-
