@@ -1,11 +1,13 @@
 export class ClientRegistrationModel {
-    fullname: string;
-    Contact: string;
+    FirstName: string;
+    LastName: string;
+    PhoneNumber: number;
     Email: string;
     Password: string;
     ConfirmPassword: string;
     CounsellingType: string;
-    Payements: string;
+    Payments: string;
+    Contact?: string;
 }
 
 export class CoachRegistrationModel {
