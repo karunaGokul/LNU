@@ -4,27 +4,6 @@
     style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
   >
     <v-col cols="12" md="6">
-      <!-- <v-img
-        src="@/assets/clientLogin.jpeg"
-        height="100vh"
-        class="rounded-xl rounded-l-0"
-      >
-        <v-container fill-height fluid class="white--text">
-          <v-row class="pl-10 align-self-start mt-6">
-            <h4 class="text-h4">Life N You</h4>
-          </v-row>
-          <v-row>
-            <v-col md="6" offset-md="6">
-              <h4
-                class="text-h4"
-                style="font-family: Questario Icon !important"
-              >
-                Bring Out The Magic In You
-              </h4>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-img> -->
       <v-container fill-height fluid class="pa-0" style="position: relative">
         <h4
           class="text-h4 white--text"

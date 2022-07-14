@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <!--<v-row>
     <v-col>
       <v-row>
         <v-col>
@@ -153,88 +153,140 @@
             </v-col>
           </v-row>
         </v-form>
-        <!-- <v-form class="my-n16">
-          <v-row class="mb-n10">
-            <v-col cols="12" md="4">
-              <v-label>Full Name</v-label>
-              <v-text-field
-                filled
-                rounded
-                dense
-                placeholder="Enter Fullname"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-label>Contact</v-label>
-              <v-text-field
-                filled
-                rounded
-                dense
-                placeholder="Enter Contact"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-label>Email</v-label>
-              <v-text-field
-                filled
-                rounded
-                dense
-                placeholder="Enter Email"
-              ></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row class="mb-n10">
-            <v-col cols="12" md="4">
-              <v-label>Password</v-label>
-              <v-text-field
-                filled
-                rounded
-                dense
-                placeholder="Enter Password"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-label>Confirm Password</v-label>
-              <v-text-field
-                filled
-                rounded
-                dense
-                placeholder="Enter ConfirmPassword"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" md="4">
-              <v-label>Counselling Type</v-label>
-              <v-select
-                filled
-                rounded
-                dense
-                placeholder="Enter CounsellingType"
-              ></v-select>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" md="4">
-              <v-label>Payements</v-label>
-              <v-text-field
-                filled
-                rounded
-                dense
-                placeholder="Enter Payements"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" md="4" offset-md="4" class="d-flex align-self">
-              <v-spacer></v-spacer>
+      </v-container>
+    </v-col>
+  </v-row>-->
+  <v-row
+    no-gutters
+    style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
+  >
+    <v-col lg="6" md="6" sm="12">
+      <v-container fill-height fluid class="pa-0" style="position: relative">
+        <v-img src="@/assets/client-registration.jpg" height="100vh" />
+        <h4
+          class="text-h3 font-weight-bold white--text"
+          style="
+            position: absolute;
+            bottom: 90px;
+            z-index: 9999999;
+            left: 80px;
+            font-family: Questario Icon !important;
+          "
+        >
+          Life N You Welcomes you
+        </h4>
+        <h4
+          class="text-h4 white--text"
+          style="
+            position: absolute;
+            bottom: 30px;
+            z-index: 9999999;
+            right: 160px;
+            font-family: Questario Icon !important;
+          "
+        >
+          Heal Better, Feel Better
+        </h4>
+      </v-container>
+    </v-col>
+    <v-col lg="6" md="6" sm="12">
+      <v-container
+        fill-height
+        fluid
+        d-flex
+        justify-center
+        align-center
+        flex-column
+      >
+        <div>
+          <h2 class="mb-3 px-8 text-h4 text-start font-weight-bold">
+            Create new account
+          </h2>
+          <div class="mb-4 px-8 text-h7 text-start">
+            Already A Member? <a>Log In</a>
+          </div>
+          <v-form class="px-8">
+            <v-row>
+              <v-col>
+                <v-text-field
+                  label="First name"
+                  color="#FCB258"
+                  append-icon="mdi-account"
+                  filled
+                  type="text"
+                ></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  label="Last name"
+                  color="#FCB258"
+                  append-icon="mdi-account"
+                  filled
+                  type="text"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+
+            <v-text-field
+              label="Email Id"
+              color="#FCB258"
+              type="text"
+              filled
+            ></v-text-field>
+            <v-row>
+              <v-col>
+                <v-text-field
+                  label="Password"
+                  color="#FCB258"
+                  type="text"
+                  filled
+                ></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  label="Confrim Password"
+                  color="#FCB258"
+                  type="text"
+                  filled
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-text-field
+              label="Phone number"
+              color="#FCB258"
+              type="text"
+              filled
+            ></v-text-field>
+            <v-row>
+              <v-col>
+                <v-select
+                  :items="items"
+                  label="Counselling Type"
+                  color="#FCB258"
+                  filled
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  label="Payments"
+                  color="#FCB258"
+                  type="text"
+                  filled
+                ></v-text-field>
+              </v-col>
+            </v-row>
+
+            <div class="d-flex justify-center align-center">
               <v-btn
-                depressed
-                rounded
-                width="100"
-                color="#FFA726"
-                class="white--text text-capitalize mt-5"
-                >Submit</v-btn
+                color="background-orange"
+                class="white--text rounded-lg"
+                large
+                type="submit"
+                >Create account</v-btn
               >
-            </v-col>
-          </v-row>
-        </v-form> -->
+            </div>
+          </v-form>
+        </div>
       </v-container>
     </v-col>
   </v-row>
@@ -242,7 +294,6 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-
 import { required, sameAs } from "vuelidate/lib/validators";
 
 import { ClientRegistrationModel } from "@/model";
@@ -262,8 +313,8 @@ import { ClientRegistrationModel } from "@/model";
 })
 export default class ClientRegistration extends Vue {
   public request: ClientRegistrationModel = new ClientRegistrationModel();
-
   public showPassword: boolean = false;
+  public items = ["Foo", "Bar", "Fizz", "Buzz"];
 
   public register() {
     this.$v.$touch();

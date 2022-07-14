@@ -26,7 +26,6 @@
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
-          @click:date="viewDay"
           @change="updateRange"
         ></v-calendar>
         <v-menu
@@ -55,13 +54,19 @@
                 <h4>Appointments</h4>
                 <v-divider class="my-3"></v-divider>
                 <v-btn class="text-capitalize" color="primary" dark
-                  >reshedule</v-btn>
-                <v-btn class="text-capitalize ml-3" color="red" dark
-                  >cancel</v-btn>
+                  >reshedule</v-btn
+                >
+                <v-btn
+                  class="text-capitalize ml-3"
+                  color="red"
+                  dark
+                  @click="selectedOpen = false"
+                  >cancel</v-btn
+                >
               </div>
               <div v-else>
                 <h4>Rating</h4>
-                <v-divider  class="my-3"></v-divider>
+                <v-divider class="my-3"></v-divider>
                 <v-rating
                   background-color="#FCB258"
                   color="#FCB258"
@@ -74,11 +79,6 @@
                 >
               </div>
             </v-card-text>
-            <v-card-actions>
-              <v-btn text color="secondary" @click="selectedOpen = false">
-                Cancel
-              </v-btn>
-            </v-card-actions>
           </v-card>
         </v-menu>
       </v-sheet>
