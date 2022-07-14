@@ -1,11 +1,13 @@
 import { DataRequest } from "./base.model";
 
-export class LoginModel extends DataRequest{
-    username: string;
-    password: string;
+export class LoginRequestModel extends DataRequest{
+    Email: string;
+    Password: string;
 }
 
 export class LoginResponseModel {
-    username: string;
-    password: string;
+    accessToken: string;
+    refreshToken: string;
+    id: string;
+    // expiry?: string;
 }

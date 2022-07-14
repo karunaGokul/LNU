@@ -94,7 +94,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 import { required } from "vuelidate/lib/validators";
 
-import { LoginModel } from "@/model";
+import { LoginRequestModel } from "@/model";
 
 // import TextInput from "@/components/controls/TextInput.vue";
 // import PasswordInput from "@/components/controls/PasswordInput.vue";
@@ -108,7 +108,7 @@ import { LoginModel } from "@/model";
   },
 })
 export default class Index extends Vue {
-  public request: LoginModel = new LoginModel();
+  public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
 

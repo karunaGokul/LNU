@@ -82,31 +82,31 @@
               <v-text-field
                 label="Username"
                 color="#FCB258"
-                v-model="request.username"
+                v-model="request.Email"
                 append-icon="mdi-account"
                 :error-messages="
-                  $v.request.username | errorMessages('Username')
+                  $v.request.Email | errorMessages('Username')
                 "
                 filled
                 type="text"
                 required
-                @input="$v.request.username.$touch()"
-                @blur="$v.request.username.$touch()"
+                @input="$v.request.Email.$touch()"
+                @blur="$v.request.Email.$touch()"
               ></v-text-field>
 
               <v-text-field
                 label="Password"
                 color="#FCB258"
-                v-model="request.password"
+                v-model="request.Password"
                 :type="showPassword ? 'text' : 'password'"
                 :error-messages="
-                  $v.request.password | errorMessages('Password')
+                  $v.request.Password | errorMessages('Password')
                 "
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="showPassword = !showPassword"
                 filled
-                @input="$v.request.password.$touch()"
-                @blur="$v.request.password.$touch()"
+                @input="$v.request.Password.$touch()"
+                @blur="$v.request.Password.$touch()"
               ></v-text-field>
 
               <div class="d-flex justify-center align-center">
@@ -141,6 +141,27 @@
               >Register here</router-link
             >
           </div>
+          <v-snackbar
+                v-model="snackbar"
+                :timeout="2000"
+                color="deep-orange lighten-5 pink--text"
+                right
+                top
+              >
+                <v-icon color="pink">mdi-exclamation-thick </v-icon>
+                {{ snackbarText }}
+
+                <template v-slot:action="{ attrs }">
+                  <v-btn
+                    color="red"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
+                  >
+                    <v-icon> mdi-close-box</v-icon>
+                  </v-btn>
+                </template>
+              </v-snackbar>
         </div>
       </v-container>
     </v-col>
@@ -152,24 +173,26 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 
 import { required } from "vuelidate/lib/validators";
 
-import { LoginModel, LoginResponseModel } from "@/model";
+import { LoginRequestModel, LoginResponseModel } from "@/model";
 
 import { IAuthenticationService } from "@/service";
 
 @Component({
   validations: {
     request: {
-      username: { required },
+      Email: { required },
 
-      password: { required },
+      Password: { required },
     },
   },
 })
 export default class Login extends Vue {
   @Inject("authService") authService: IAuthenticationService;
-  public request: LoginModel = new LoginModel();
+  public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
 
   public login() {
     this.$v.$touch();
@@ -181,6 +204,12 @@ export default class Login extends Vue {
         .then((response: Array<LoginResponseModel>) => {
           console.log(response);
           this.$router.push("home/dashboard");
+        },
+        (err) => {
+          if (err.response.status === 400) {
+            this.snackbarText = err.response.data;
+            this.snackbar = true;
+          }
         });
     }
   }

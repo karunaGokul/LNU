@@ -24,7 +24,7 @@ export interface EntityType<T> {
 export abstract class ServiceHelper { 
     protected baseUrl: string = Settings.ApiUrl;
 
-    protected apiUrl: string = `${this.baseUrl}/${Settings.ApiPath}`;
+    protected apiUrl: string = `${this.baseUrl}`;
 
     protected deserialize<T>(classType: EntityType<T>, source: any): T {
         const raw = plainToClass<T, any>(classType, source);
