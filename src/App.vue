@@ -8,9 +8,10 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { DIContainer } from "./dicontainer";
 
 @Component
-export default class App extends Vue {
+export default class App extends DIContainer{
   created() {
     this.createFilters();
   }

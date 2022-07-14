@@ -1,6 +1,5 @@
-import { ServiceHelper } from "./base.service";
 import { BaseModel, LoginModel, LoginResponseModel } from "@/model";
-import { IBaseService, BaseService } from './base.service'
+import { BaseService } from './base.service'
 
 
 export interface IAuthenticationService {

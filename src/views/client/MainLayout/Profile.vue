@@ -26,13 +26,18 @@
         </div>
       </v-col>
       <v-col cols="8" sm="12" md="7" class="pa-8">
-        <div class="ma-10 pa-5">
+        <v-form class="ma-10 pa-5" @submit="profile">
           <v-text-field
             label="Name"
             type="text"
             color="#FCB258"
             filled
             dense
+            required
+            v-model="request.name"
+            @input="$v.request.name.$touch()"
+            @blur="$v.request.name.$touch()"
+            :error-messages="$v.request.name | errorMessages('Name')"
           ></v-text-field>
           <v-text-field
             label="Contact"
@@ -40,6 +45,11 @@
             color="#FCB258"
             filled
             dense
+            required
+            v-model="request.contact"
+            @input="$v.request.contact.$touch()"
+            @blur="$v.request.contact.$touch()"
+            :error-messages="$v.request.contact | errorMessages('Contact')"
           ></v-text-field>
           <v-text-field
             label="Email"
@@ -47,6 +57,11 @@
             color="#FCB258"
             filled
             dense
+            required
+            v-model="request.email"
+            @input="$v.request.email.$touch()"
+            @blur="$v.request.email.$touch()"
+            :error-messages="$v.request.email | errorMessages('Email')"
           ></v-text-field>
           <v-textarea
             label="Queries"
@@ -54,21 +69,62 @@
             color="#FCB258"
             filled
             dense
+            required
+            v-model="request.queries"
+            @input="$v.request.queries.$touch()"
+            @blur="$v.request.queries.$touch()"
+            :error-messages="$v.request.queries | errorMessages('Queries')"
           ></v-textarea>
           <div class="text-end">
-            <v-btn color="background-orange" class="text-capitalize" rounded>
+            <v-btn
+              color="background-orange"
+              class="text-capitalize"
+              rounded
+              type="submit"
+              @click.prevent="profile"
+            >
               Save
             </v-btn>
           </div>
-        </div>
+        </v-form>
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Inject } from "vue-property-decorator";
 
-@Component
-export default class ClientProfileLayout extends Vue {}
+import { required, email, numeric, maxLength } from "vuelidate/lib/validators";
+
+import { ClientRequestModel, ClientResponseModel } from "@/model";
+
+import { IProfileService } from "@/service";
+
+@Component({
+  validations: {
+    request: {
+      name: { required },
+      contact: { required, numeric, maxLength: maxLength(10) },
+      email: { required, email },
+      queries: { required },
+    },
+  },
+})
+export default class ClientProfileLayout extends Vue {
+  @Inject("profileService") profileService: IProfileService;
+  public request: ClientRequestModel = new ClientRequestModel();
+
+  public profile() {
+    this.$v.$touch();
+    if (!this.$v.$invalid) {
+      console.log(this.request);
+      this.profileService
+        .clientProfile(this.request)
+        .then((response: Array<ClientResponseModel>) => {
+          console.log(response);
+        });
+    }
+  }
+}
 </script>
