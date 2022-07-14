@@ -11,27 +11,39 @@
         >
           Life N You
         </h4>
+
         <v-img
           src="@/assets/client-login.jpeg"
           height="100vh"
           class="rounded-xl rounded-l-0"
         />
+
         <div
           class="white--text"
           style="
             position: absolute;
+
             bottom: 50px;
+
             z-index: 9999999;
+
             right: 80px;
           "
         >
-          <h5 class="text-h4 text-center mb-2" style="font-family: Questario Icon !important">Bring Out</h5>
+          <h5
+            class="text-h4 text-center mb-2"
+            style="font-family: Questario Icon !important"
+          >
+            Bring Out
+          </h5>
+
           <h5 class="text-h4" style="font-family: Questario Icon !important">
             The Magic In You
           </h5>
         </div>
       </v-container>
     </v-col>
+
     <v-col cols="12" md="6">
       <v-container
         fill-height
@@ -44,6 +56,7 @@
         <h2 class="mb-10 text-h4 font-weight-bold">
           Feel stuck? We are here to help you!
         </h2>
+
         <div>
           <v-card
             elevation="3"
@@ -57,41 +70,45 @@
                   >Client</v-card-title
                 >
               </v-col>
+
               <v-col>
                 <v-icon color="#FCB258" class="mt-5 ml-16"
                   >mdi-check-circle</v-icon
                 >
               </v-col>
             </v-row>
-            <v-form class="px-8" ref="form" autocomplete="off" @submit="login">
+
+            <v-form class="px-8" @submit="login">
               <v-text-field
                 label="Username"
                 color="#FCB258"
-                v-model="request.username"
+                v-model="request.Email"
                 append-icon="mdi-account"
                 :error-messages="
-                  $v.request.username | errorMessages('Username')
+                  $v.request.Email | errorMessages('Username')
                 "
                 filled
                 type="text"
                 required
-                @input="$v.request.username.$touch()"
-                @blur="$v.request.username.$touch()"
+                @input="$v.request.Email.$touch()"
+                @blur="$v.request.Email.$touch()"
               ></v-text-field>
+
               <v-text-field
                 label="Password"
                 color="#FCB258"
-                v-model="request.password"
+                v-model="request.Password"
                 :type="showPassword ? 'text' : 'password'"
                 :error-messages="
-                  $v.request.password | errorMessages('Password')
+                  $v.request.Password | errorMessages('Password')
                 "
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="showPassword = !showPassword"
                 filled
-                @input="$v.request.password.$touch()"
-                @blur="$v.request.password.$touch()"
+                @input="$v.request.Password.$touch()"
+                @blur="$v.request.Password.$touch()"
               ></v-text-field>
+
               <div class="d-flex justify-center align-center">
                 <v-btn
                   color="background-orange"
@@ -103,111 +120,98 @@
               </div>
             </v-form>
           </v-card>
+
           <div class="text-center mb-4">
             If you are an admin,
             <router-link to="/admin/login" class="text-decoration-none"
               >Click here</router-link
             >
           </div>
+
           <div class="text-center mb-4">
             If you are a coach,
             <router-link to="/coach/login" class="text-decoration-none"
               >Click here</router-link
             >
           </div>
+
           <div class="text-center mt-16">
             No account?
             <router-link to="/client/registration" class="text-decoration-none"
               >Register here</router-link
             >
           </div>
-        </div>
+          <v-snackbar
+                v-model="snackbar"
+                :timeout="2000"
+                color="deep-orange lighten-5 pink--text"
+                right
+                top
+              >
+                <v-icon color="pink">mdi-exclamation-thick </v-icon>
+                {{ snackbarText }}
 
-        <!-- <h2>Feel stuck? We are here to help you!</h2>
-        <v-row>
-          <v-col>
-            <v-card
-              elevation="2"
-              outlined
-              width="450"
-              color="#F8E6C4"
-              class="ml-16 pl-7 my-n16 rounded-lg"
-            >
-              <v-row class="mb-n8">
-                <v-col cols="12" md="4" offset-md="4">
-                  <v-card-title class="text-h5">Client</v-card-title>
-                </v-col>
-                <v-col>
-                  <v-icon color="#FCB258" class="mt-5 ml-16"
-                    >mdi-check-circle</v-icon
-                  >
-                </v-col>
-              </v-row>
-
-              <v-form>
-                <text-input />
-                <password-input />
-                <div class="d-flex justify-center">
+                <template v-slot:action="{ attrs }">
                   <v-btn
-                    depressed
-                    rounded
-                    class="white--text text-capitalize orange lighten-1"
-                    @click="login"
-                    >Login</v-btn
+                    color="red"
+                    text
+                    v-bind="attrs"
+                    @click="snackbar = false"
                   >
-                </div>
-              </v-form>
-            </v-card>
-          </v-col>
-        </v-row>
-
-        <v-row class="d-flex justify-center mb-n14">
-          <h4>If you are an admin,</h4>
-          <router-link to="/admin/login" class="text-decoration-none"
-            >Click here</router-link
-          >
-        </v-row>
-        <v-row class="d-flex justify-center mt-n16">
-          <h4>If you are a coach,</h4>
-          <router-link to="/coach/login" class="text-decoration-none"
-            >Click here</router-link
-          >
-        </v-row>
-        <v-row class="d-flex justify-center">
-          <h4>No account?</h4>
-          <router-link to="/client/registration" class="text-decoration-none"
-            >Register here</router-link
-          >
-        </v-row> -->
+                    <v-icon> mdi-close-box</v-icon>
+                  </v-btn>
+                </template>
+              </v-snackbar>
+        </div>
       </v-container>
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Inject } from "vue-property-decorator";
 
 import { required } from "vuelidate/lib/validators";
 
-import { LoginModel } from "@/model";
+import { LoginRequestModel, LoginResponseModel } from "@/model";
+
+import { IAuthenticationService } from "@/service";
 
 @Component({
   validations: {
     request: {
-      username: { required },
-      password: { required },
+      Email: { required },
+
+      Password: { required },
     },
   },
 })
 export default class Login extends Vue {
-  public request: LoginModel = new LoginModel();
+  @Inject("authService") authService: IAuthenticationService;
+  public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
 
   public login() {
     this.$v.$touch();
-    console.log(this.request);
-    this.$router.push("home/dashboard");
+    if (!this.$v.$invalid) {
+      console.log(this.request);
+
+      this.authService
+        .login(this.request)
+        .then((response: Array<LoginResponseModel>) => {
+          console.log(response);
+          this.$router.push("home/dashboard");
+        },
+        (err) => {
+          if (err.response.status === 400) {
+            this.snackbarText = err.response.data;
+            this.snackbar = true;
+          }
+        });
+    }
   }
 }
 </script>

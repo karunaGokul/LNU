@@ -153,6 +153,7 @@
             </v-col>
           </v-row>
         </v-form>
+<<<<<<< HEAD
       </v-container>
     </v-col>
   </v-row>-->
@@ -287,6 +288,8 @@
             </div>
           </v-form>
         </div>
+=======
+>>>>>>> c3702a0fa5a94125245d531d4ec9f08dca862de5
       </v-container>
     </v-col>
   </v-row>

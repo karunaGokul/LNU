@@ -93,7 +93,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { required } from "vuelidate/lib/validators";
 
-import { LoginModel } from "@/model";
+import { LoginRequestModel } from "@/model";
 
 @Component({
   validations: {
@@ -104,7 +104,7 @@ import { LoginModel } from "@/model";
   },
 })
 export default class Login extends Vue {
-  public request: LoginModel = new LoginModel();
+  public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
 
