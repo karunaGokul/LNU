@@ -288,9 +288,9 @@
                     $v.request.ConfirmPassword
                       | errorMessages('ConfirmPassword')
                   "
-                  :type="showPassword ? 'text' : 'password'"
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="showPassword = !showPassword"
+                  :type="showConfirmpassword ? 'text' : 'password'"
+                  :append-icon="showConfirmpassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="showConfirmpassword = !showConfirmpassword"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -380,7 +380,7 @@ import { IRegistrationService } from "@/service";
       LastName: { required },
       Email: { required, email },
       Password: { required },
-      ConfirmPassword: { sameAsPassword: sameAs("password") },
+      ConfirmPassword: { sameAsPassword: sameAs("Password") },
       Payments: { required },
       CounsellingType: { required },
       PhoneNumber: { required, numeric, maxLength: maxLength(10) },
@@ -391,13 +391,14 @@ export default class ClientRegistration extends Vue {
   @Inject("registerService") registerService: IRegistrationService;
   public request: ClientRegistrationModel = new ClientRegistrationModel();
   public showPassword: boolean = false;
+  public showConfirmpassword: boolean = false;
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
 
   public register() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
-
+      this.request.Contact = "any";
       this.registerService.register(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
           console.log(response);
