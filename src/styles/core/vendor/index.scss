@@ -1,8 +1,10 @@
 $fa-font-path:         "core/vendor/fontawesome/webfonts" !default;
 $fa-questario-icon-path: "core/vendor/questariobrush/webfonts"  !default;
+$fa-material-icon-path: "core/vendor/material-icons/webfonts"  !default;
 
 @import "fontawesome/scss/fontawesome";
 @import "fontawesome/scss/regular";
 @import "fontawesome/scss/solid";
 
 @import "questariobrush/scss/regular";
+@import "material-icons/scss/regular";

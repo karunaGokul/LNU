@@ -75,6 +75,7 @@
                 <v-icon color="#FCB258" class="mt-5 ml-16"
                   >mdi-check-circle</v-icon
                 >
+                <span class="material-icons-outlined"> person </span>
               </v-col>
             </v-row>
 
@@ -83,10 +84,8 @@
                 label="Username"
                 color="#FCB258"
                 v-model="request.Email"
-                append-icon="mdi-account"
-                :error-messages="
-                  $v.request.Email | errorMessages('Username')
-                "
+                append-icon="person"
+                :error-messages="$v.request.Email | errorMessages('Username')"
                 filled
                 type="text"
                 required
@@ -102,7 +101,7 @@
                 :error-messages="
                   $v.request.Password | errorMessages('Password')
                 "
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :append-icon="showPassword ? 'help' : 'visibility'"
                 @click:append="showPassword = !showPassword"
                 filled
                 @input="$v.request.Password.$touch()"
@@ -142,26 +141,21 @@
             >
           </div>
           <v-snackbar
-                v-model="snackbar"
-                :timeout="2000"
-                color="deep-orange lighten-5 pink--text"
-                right
-                top
-              >
-                <v-icon color="pink">mdi-exclamation-thick </v-icon>
-                {{ snackbarText }}
+            v-model="snackbar"
+            :timeout="2000"
+            color="deep-orange lighten-5 pink--text"
+            right
+            top
+          >
+            <v-icon color="pink">mdi-exclamation-thick </v-icon>
+            {{ snackbarText }}
 
-                <template v-slot:action="{ attrs }">
-                  <v-btn
-                    color="red"
-                    text
-                    v-bind="attrs"
-                    @click="snackbar = false"
-                  >
-                    <v-icon> mdi-close-box</v-icon>
-                  </v-btn>
-                </template>
-              </v-snackbar>
+            <template v-slot:action="{ attrs }">
+              <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+                <v-icon> mdi-close-box</v-icon>
+              </v-btn>
+            </template>
+          </v-snackbar>
         </div>
       </v-container>
     </v-col>
@@ -199,9 +193,8 @@ export default class Login extends Vue {
     if (!this.$v.$invalid) {
       console.log(this.request);
 
-      this.authService
-        .login(this.request)
-        .then((response: Array<LoginResponseModel>) => {
+      this.authService.login(this.request).then(
+        (response: Array<LoginResponseModel>) => {
           console.log(response);
           this.$router.push("home/dashboard");
         },
@@ -210,7 +203,8 @@ export default class Login extends Vue {
             this.snackbarText = err.response.data;
             this.snackbar = true;
           }
-        });
+        }
+      );
     }
   }
 }
