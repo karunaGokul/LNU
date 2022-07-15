@@ -153,7 +153,6 @@
             </v-col>
           </v-row>
         </v-form>
-<<<<<<< HEAD
       </v-container>
     </v-col>
   </v-row>-->
@@ -204,9 +203,12 @@
             Create new account
           </h2>
           <div class="mb-4 px-8 text-h7 text-start">
-            Already A Member? <a>Log In</a>
+            Already A Member?
+            <router-link to="/client/login" class="text-decoration-none"
+              >Log In
+            </router-link>
           </div>
-          <v-form class="px-8">
+          <v-form class="px-8" @submit="register">
             <v-row>
               <v-col>
                 <v-text-field
@@ -214,7 +216,14 @@
                   color="#FCB258"
                   append-icon="mdi-account"
                   filled
-                  type="text"
+                  dense
+                  v-model="request.FirstName"
+                  required
+                  @input="$v.request.FirstName.$touch()"
+                  @blur="$v.request.FirstName.$touch()"
+                  :error-messages="
+                    $v.request.FirstName | errorMessages('FirstName')
+                  "
                 ></v-text-field>
               </v-col>
               <v-col>
@@ -223,7 +232,14 @@
                   color="#FCB258"
                   append-icon="mdi-account"
                   filled
-                  type="text"
+                  dense
+                  v-model="request.LastName"
+                  required
+                  @input="$v.request.LastName.$touch()"
+                  @blur="$v.request.LastName.$touch()"
+                  :error-messages="
+                    $v.request.LastName | errorMessages('LastName')
+                  "
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -231,32 +247,65 @@
             <v-text-field
               label="Email Id"
               color="#FCB258"
-              type="text"
               filled
+              dense
+              v-model="request.Email"
+              required
+              @input="$v.request.Email.$touch()"
+              @blur="$v.request.Email.$touch()"
+              :error-messages="$v.request.Email | errorMessages('Email')"
             ></v-text-field>
             <v-row>
               <v-col>
                 <v-text-field
                   label="Password"
                   color="#FCB258"
-                  type="text"
                   filled
+                  dense
+                  v-model="request.Password"
+                  required
+                  @input="$v.request.Password.$touch()"
+                  @blur="$v.request.Password.$touch()"
+                  :error-messages="
+                    $v.request.Password | errorMessages('Password')
+                  "
+                  :type="showPassword ? 'text' : 'password'"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="showPassword = !showPassword"
                 ></v-text-field>
               </v-col>
               <v-col>
                 <v-text-field
                   label="Confrim Password"
                   color="#FCB258"
-                  type="text"
                   filled
+                  dense
+                  v-model="request.ConfirmPassword"
+                  required
+                  @input="$v.request.ConfirmPassword.$touch()"
+                  @blur="$v.request.ConfirmPassword.$touch()"
+                  :error-messages="
+                    $v.request.ConfirmPassword
+                      | errorMessages('ConfirmPassword')
+                  "
+                  :type="showConfirmpassword ? 'text' : 'password'"
+                  :append-icon="showConfirmpassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="showConfirmpassword = !showConfirmpassword"
                 ></v-text-field>
               </v-col>
             </v-row>
             <v-text-field
               label="Phone number"
               color="#FCB258"
-              type="text"
               filled
+              dense
+              v-model="request.PhoneNumber"
+              required
+              @input="$v.request.PhoneNumber.$touch()"
+              @blur="$v.request.PhoneNumber.$touch()"
+              :error-messages="
+                $v.request.PhoneNumber | errorMessages('PhoneNumber')
+              "
             ></v-text-field>
             <v-row>
               <v-col>
@@ -265,6 +314,15 @@
                   label="Counselling Type"
                   color="#FCB258"
                   filled
+                  dense
+                  v-model="request.CounsellingType"
+                  required
+                  @input="$v.request.CounsellingType.$touch()"
+                  @blur="$v.request.CounsellingType.$touch()"
+                  :error-messages="
+                    $v.request.CounsellingType
+                      | errorMessages('CounsellingType')
+                  "
                 ></v-select>
               </v-col>
               <v-col>
@@ -273,6 +331,14 @@
                   color="#FCB258"
                   type="text"
                   filled
+                  dense
+                  v-model="request.Payments"
+                  required
+                  @input="$v.request.Payments.$touch()"
+                  @blur="$v.request.Payments.$touch()"
+                  :error-messages="
+                    $v.request.Payments | errorMessages('Payments')
+                  "
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -283,6 +349,7 @@
                 class="white--text rounded-lg"
                 large
                 type="submit"
+                @click.prevent="register"
                 >Create account</v-btn
               >
             </div>
@@ -294,32 +361,57 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { required, sameAs } from "vuelidate/lib/validators";
+import { Component, Vue, Inject } from "vue-property-decorator";
+import {
+  required,
+  sameAs,
+  numeric,
+  maxLength,
+  email,
+} from "vuelidate/lib/validators";
 
 import { ClientRegistrationModel } from "@/model";
+import { IRegistrationService } from "@/service";
 
 @Component({
   validations: {
     request: {
-      fullname: { required },
-      contact: { required },
-      email: { required },
-      password: { required },
-      confirmpassword: { required, sameAsPassword: sameAs("password") },
-      counsellingtype: { required },
-      payements: { required },
+      FirstName: { required },
+      LastName: { required },
+      Email: { required, email },
+      Password: { required },
+      ConfirmPassword: { sameAsPassword: sameAs("Password") },
+      Payments: { required },
+      CounsellingType: { required },
+      PhoneNumber: { required, numeric, maxLength: maxLength(10) },
     },
   },
 })
 export default class ClientRegistration extends Vue {
+  @Inject("registerService") registerService: IRegistrationService;
   public request: ClientRegistrationModel = new ClientRegistrationModel();
   public showPassword: boolean = false;
+  public showConfirmpassword: boolean = false;
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
 
   public register() {
     this.$v.$touch();
-    console.log(this.request);
+    if (!this.$v.$invalid) {
+      console.log(this.request);
+      this.request.Contact = "any";
+      this.registerService.register(this.request).then(
+        (response: Array<ClientRegistrationModel>) => {
+          console.log(response);
+          this.$router.push("home/dashboard");
+        },
+        (err) => {
+          if (err.response.status === 400) {
+            // this.snackbarText = err.response.data;
+            // this.snackbar = true;
+          }
+        }
+      );
+    }
   }
 }
 </script>

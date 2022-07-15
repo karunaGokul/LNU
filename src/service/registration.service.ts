@@ -1,21 +1,21 @@
-import { BaseModel, LoginRequestModel, LoginResponseModel } from "@/model";
+import { BaseModel, ClientRegistrationModel } from "@/model";
 import { BaseService } from './base.service'
 
 
-export interface IAuthenticationService {
-  login(request: LoginRequestModel): Promise<Array<LoginResponseModel>>;
+export interface IRegistrationService {
+  register(request: ClientRegistrationModel): Promise<any>;
 }
 
-export class AuthenticationService
-  extends BaseService<LoginRequestModel, LoginResponseModel>
-  implements IAuthenticationService
+export class RegistrationService
+  extends BaseService<any, any>
+  implements IRegistrationService
 {
   constructor() {
     super("");
   }
   
-  public login(request: LoginRequestModel): Promise<Array<LoginResponseModel>> {
-    return this.httpPost("Authenticate", request).then(response => {
+  public register(request: ClientRegistrationModel): Promise<any> {
+    return this.httpPost("Register", request).then(response => {
       return response.data;
   });
   }
