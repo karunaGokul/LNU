@@ -75,13 +75,12 @@
                 <v-icon color="#FCB258" class="mt-5 ml-16"
                   >mdi-check-circle</v-icon
                 >
-                <span class="material-icons-outlined"> person </span>
               </v-col>
             </v-row>
 
             <v-form class="px-8" @submit="login">
               <v-text-field
-                label="Username"
+                label="Username / Email"
                 color="#FCB258"
                 v-model="request.Email"
                 append-icon="person"
@@ -168,20 +167,19 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 import { required } from "vuelidate/lib/validators";
 
 import { LoginRequestModel, LoginResponseModel } from "@/model";
-
 import { IAuthenticationService } from "@/service";
 
 @Component({
   validations: {
     request: {
       Email: { required },
-
       Password: { required },
     },
   },
 })
 export default class Login extends Vue {
   @Inject("authService") authService: IAuthenticationService;
+  
   public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
@@ -195,7 +193,7 @@ export default class Login extends Vue {
 
       this.authService.login(this.request).then(
         (response: Array<LoginResponseModel>) => {
-          console.log(response);
+          this.$store.dispatch("login", response);
           this.$router.push("home/dashboard");
         },
         (err) => {

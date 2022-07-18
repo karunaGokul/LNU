@@ -9,5 +9,5 @@ export class LoginResponseModel {
     accessToken: string;
     refreshToken: string;
     id: string;
-    // expiry?: string;
+    expiry?: string;
 }
