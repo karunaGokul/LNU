@@ -9,7 +9,7 @@
 
       <v-row justify="center">
         <v-icon x-large color="rgb(73, 92, 184, 0.3)" style="font-size: 10rem"
-          >fa fa-user-circle</v-icon
+          >user-circle</v-icon
         >
       </v-row>
 

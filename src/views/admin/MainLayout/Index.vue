@@ -24,7 +24,7 @@
                   exact
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-thin fa-vr-cardboard"></i>
+                    <v-icon>dashboard</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Dashboard</div>
@@ -37,7 +37,7 @@
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-thin fa-calendar-check"></i>
+                    <v-icon> book_online </v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Appointments</div>
@@ -50,7 +50,7 @@
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-thin fa-calendar-check"></i>
+                    <v-icon> book_online </v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Coaches</div>
@@ -63,25 +63,12 @@
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-thin fa-calendar-check"></i>
+                    <v-icon> book_online </v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Clients</div>
                   </div>
                 </router-link>
-                <!-- <router-link
-                  to="/admin/home/appointments"
-                  tag="div"
-                  class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="orange-gradient"
-                >
-                  <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-thin fa-calendar-check"></i>
-                  </div>
-                  <div class="v-list-item__content">
-                    <div class="v-list-item__title">Calendar</div>
-                  </div>
-                </router-link> -->
               </div>
             </v-list>
             <div class="mt-4">

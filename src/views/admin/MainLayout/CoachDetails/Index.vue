@@ -10,7 +10,7 @@
               class="d-flex justify-center mt-7"
               style="font-size: 5rem"
               color="rgb(120, 184, 73)"
-              >fa fa-user-circle</v-icon
+              >user-circle</v-icon
             >
           </v-col>
           <v-col cols="12" md="9">
@@ -39,7 +39,7 @@
               class="d-flex justify-center mt-7"
               style="font-size: 5rem"
               color="rgb(120, 184, 73)"
-              >fa fa-user-circle</v-icon
+              >user-circle</v-icon
             >
           </v-col>
           <v-col cols="12" md="9">
@@ -68,7 +68,7 @@
               class="d-flex justify-center mt-7"
               style="font-size: 5rem"
               color="rgb(120, 184, 73)"
-              >fa fa-user-circle</v-icon
+              >user-circle</v-icon
             >
           </v-col>
           <v-col cols="12" md="9">
