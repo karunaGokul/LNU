@@ -95,7 +95,7 @@
 <script lang="ts">
 import { Component, Vue, Inject } from "vue-property-decorator";
 
-import { required, email,  maxLength, numeric } from "vuelidate/lib/validators";
+import { required, email, maxLength } from "vuelidate/lib/validators";
 
 import { ClientRequestModel, ClientResponseModel } from "@/model";
 
@@ -105,7 +105,7 @@ import { IProfileService } from "@/service";
   validations: {
     request: {
       name: { required },
-      contact: { required, numeric, maxLength: maxLength(10) },
+      contact: { required, maxLength: maxLength(10) },
       email: { required, email },
       queries: { required },
     },

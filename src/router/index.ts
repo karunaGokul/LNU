@@ -100,13 +100,13 @@ const clientRoutes: Array<RouteConfig> = [
         path: "login",
         name: "Client Login",
         component: () => import("@/views/client/Login/Index.vue"),
-        meta: { anonymous: true }
+        meta: { anonymous: true },
       },
       {
         path: "registration",
         name: "Client Registration",
         component: () => import("@/views/client/Registration/Index.vue"),
-        meta: { anonymous: true }
+        meta: { anonymous: true },
       },
       {
         path: "home",
@@ -131,11 +131,12 @@ const clientRoutes: Array<RouteConfig> = [
               import("@/views/client/MainLayout/Appointments/Index.vue"),
           },
           {
-            path: "payment",
-            name: "Client Payment",
+            path: "journal",
+            name: "Client Journal",
             component: () =>
-            import("@/views/client/MainLayout/Payment.vue"),
+              import("@/views/client/MainLayout/MyJournal/index.vue"),
           },
+          
         ],
       },
     ],
