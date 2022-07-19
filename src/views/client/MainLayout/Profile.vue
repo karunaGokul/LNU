@@ -7,7 +7,7 @@
         <h4 class="text-h4 font-weight-bold text-center pa-4">Hey, Client!</h4>
         <div class="text-center pa-4" style="position: relative">
           <v-icon x-large color="#E0E0E0" style="font-size: 16rem">
-            fa fa-user-circle
+            account_circle
           </v-icon>
           <v-btn
             color="background-orange"
@@ -15,12 +15,12 @@
             absolute
             style="right: 130px; bottom: 60px"
           >
-            <v-icon>fa fa-camera</v-icon>
+            <v-icon>photo_camera</v-icon>
           </v-btn>
         </div>
         <div class="text-center pa-4">
           <v-btn color="white" class="text-capitalize rounded-lg">
-            <v-icon left>fa fa-solid fa-info-circle</v-icon>
+            <v-icon left>info</v-icon>
             Payment info
           </v-btn>
         </div>

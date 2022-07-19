@@ -69,9 +69,9 @@
               </v-col>
 
               <v-col>
-                <v-icon color="#FCB258" class="mt-5 ml-16"
-                  >mdi-check-circle</v-icon
-                >
+                <v-icon color="#FCB258" class="mt-5 ml-16">
+                  check_circle
+                </v-icon>
               </v-col>
             </v-row>
 
@@ -97,7 +97,7 @@
                 :error-messages="
                   $v.request.Password | errorMessages('Password')
                 "
-                :append-icon="showPassword ? 'help' : 'visibility'"
+                :append-icon="showPassword ? 'visibility_off' : 'visibility'"
                 @click:append="showPassword = !showPassword"
                 filled
                 @input="$v.request.Password.$touch()"
@@ -159,7 +159,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Inject } from "vue-property-decorator";
+import { Component, Inject } from "vue-property-decorator";
 
 import { required } from "vuelidate/lib/validators";
 

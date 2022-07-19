@@ -24,7 +24,7 @@
                   exact
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-thin fa-vr-cardboard"></i>
+                    <v-icon>dashboard</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Dashboard</div>
@@ -37,7 +37,7 @@
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-solid fa-address-card"></i>
+                    <v-icon>person</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Profile</div>
@@ -50,7 +50,7 @@
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-thin fa-calendar-check"></i>
+                    <v-icon> book_online </v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Appointments</div>
@@ -63,7 +63,7 @@
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-solid fa-money-check-alt"></i>
+                    <v-icon>local_atm</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Payments</div>
@@ -76,7 +76,7 @@
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-duotone fa-swatchbook"></i>
+                    <v-icon>style</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">My Journal</div>
@@ -89,7 +89,7 @@
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
-                    <i class="v-icon fa fa-light fa-newspaper"></i>
+                    <v-icon>mark_email_unread</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Newsletter</div>
@@ -126,11 +126,9 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class MainLayout extends Vue {
-
   public logout() {
     this.$store.dispatch("logout");
-    this.$router.push('/');
+    this.$router.push("/");
   }
-
 }
 </script>
