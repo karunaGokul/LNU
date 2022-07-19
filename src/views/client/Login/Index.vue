@@ -22,11 +22,8 @@
           class="white--text"
           style="
             position: absolute;
-
             bottom: 50px;
-
             z-index: 9999999;
-
             right: 80px;
           "
         >
@@ -117,7 +114,6 @@
                 >
               </div>
             </v-form>
-            <progress-linear ref="loadingSpinner"></progress-linear>
           </v-card>
 
           <div class="text-center mb-4">
@@ -170,12 +166,9 @@ import { required } from "vuelidate/lib/validators";
 import { LoginRequestModel, LoginResponseModel } from "@/model";
 import { IAuthenticationService } from "@/service";
 
-import ProgressLinear from "@/components/controls/ProgressLinear.vue";
+import BaseComponent from "@/components/base/BaseComponent";
 
 @Component({
-  components: {
-    ProgressLinear,
-  },
   validations: {
     request: {
       Email: { required },
@@ -183,7 +176,7 @@ import ProgressLinear from "@/components/controls/ProgressLinear.vue";
     },
   },
 })
-export default class Login extends Vue {
+export default class Login extends BaseComponent {
   @Inject("authService") authService: IAuthenticationService;
 
   public request: LoginRequestModel = new LoginRequestModel();
@@ -191,29 +184,21 @@ export default class Login extends Vue {
   public showPassword: boolean = false;
   public snackbar: boolean = false;
   public snackbarText: string = "";
-  public progressLinear: boolean;
-
-  mounted() {
-    let root: any = this.$root;
-    let loadingSpinner: any = this.$refs.loadingSpinner as ProgressLinear;
-
-    root.$loadingSpinner = loadingSpinner.show;
-  }
 
   public login() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
-      this.progressLinear = true;
+      this.loadingSpinner("show");
       this.authService.login(this.request).then(
         (response: Array<LoginResponseModel>) => {
           this.$store.dispatch("login", response);
-          this.progressLinear = false;
+          this.loadingSpinner("hide");
           this.$router.push("home/dashboard");
         },
         (err) => {
+          this.loadingSpinner("hide");
           if (err.response.status === 400) {
-            this.progressLinear = false;
             this.snackbarText = err.response.data;
             this.snackbar = true;
           }

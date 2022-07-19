@@ -1,4 +1,3 @@
-<script lang="ts">
 import { Vue } from "vue-property-decorator";
 
 export default class BaseComponent extends Vue {
@@ -8,4 +7,3 @@ export default class BaseComponent extends Vue {
     return root.$loadingSpinner(message);
   }
 }
-</script>
