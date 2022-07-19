@@ -315,7 +315,7 @@
                   color="#FCB258"
                   filled
                   dense
-                  v-model="request.CounsellingType"
+                  v-model="counselingType"
                   required
                   @input="$v.request.CounsellingType.$touch()"
                   @blur="$v.request.CounsellingType.$touch()"
@@ -382,7 +382,7 @@ import { IRegistrationService } from "@/service";
       Password: { required },
       ConfirmPassword: { sameAsPassword: sameAs("Password") },
       Payments: { required },
-      CounsellingType: { required },
+      CounsellingType: {  },
       PhoneNumber: { required, numeric, maxLength: maxLength(10) },
     },
   },
@@ -394,11 +394,13 @@ export default class ClientRegistration extends Vue {
   public showConfirmpassword: boolean = false;
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
 
+  public counselingType: string = '';
+
   public register() {
+    this.request.CounsellingType.push(this.counselingType);
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
-      this.request.Contact = "any";
       this.registerService.register(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
           console.log(response);

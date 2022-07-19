@@ -12,16 +12,19 @@ const coachRoutes: Array<RouteConfig> = [
     path: "/coach",
     name: "Coach",
     component: () => import("@/views/coach/Index.vue"),
+    meta: { anonymous: true },
     children: [
       {
         path: "login",
         name: "Coach Login",
         component: () => import("@/views/coach/Login/Index.vue"),
+        meta: { anonymous: true },
       },
       {
         path: "registration",
         name: "Coach Registration",
         component: () => import("@/views/coach/Registration/Index.vue"),
+        meta: { anonymous: true },
       },
       {
         path: "home",
@@ -45,16 +48,19 @@ const adminRoutes: Array<RouteConfig> = [
     path: "/admin",
     name: "Admin",
     component: () => import("@/views/admin/Index.vue"),
+    meta: { anonymous: true },
     children: [
       {
         path: "login",
         name: "Admin Login",
         component: () => import("@/views/admin/Login/Index.vue"),
+        meta: { anonymous: true },
       },
       {
         path: "home",
         name: "Admin Main Layout",
         component: () => import("@/views/admin/MainLayout/Index.vue"),
+        meta: { anonymous: true },
         children: [
           {
             path: "dashboard",

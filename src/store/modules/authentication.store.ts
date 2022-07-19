@@ -44,11 +44,19 @@ const mutations: MutationTree<LoginResponseModel> = {
     state.accessToken = payload.accessToken;
     state.refreshToken = payload.refreshToken;
   },
+  onLogout(state) {
+    localStorage.clear();
+    state.accessToken = '';
+    state.refreshToken = '';
+  }
 };
 const actions: ActionTree<LoginResponseModel, any> = {
   login(context, payload) {
     context.commit("onLogin", payload);
   },
+  logout(context) {
+    context.commit("onLogout");
+  }
 };
 export const AuthenticationModule = {
   state,

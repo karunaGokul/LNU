@@ -33,7 +33,7 @@
                 <router-link
                   to="/client/home/profile"
                   tag="div"
-                  class="my-4 v-list-item v-list-item--link  px-4"
+                  class="my-4 v-list-item v-list-item--link px-4"
                   active-class="orange-gradient"
                 >
                   <div class="v-list-item__icon">
@@ -98,10 +98,19 @@
               </div>
             </v-list>
             <div class="mt-4">
-              <v-btn elevation="0" rounded class="px-6 text-capitalize">Support</v-btn>
+              <v-btn elevation="0" rounded class="px-6 text-capitalize"
+                >Support</v-btn
+              >
             </div>
             <div class="mt-4">
-              <v-btn elevation="0" color="background-orange" rounded class="px-7 text-capitalize">Logout</v-btn>
+              <v-btn
+                elevation="0"
+                color="background-orange"
+                rounded
+                class="px-7 text-capitalize"
+                @click="logout"
+                >Logout</v-btn
+              >
             </div>
           </v-navigation-drawer>
         </v-card>
@@ -117,6 +126,11 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class MainLayout extends Vue {
-  
+
+  public logout() {
+    this.$store.dispatch("logout");
+    this.$router.push('/');
+  }
+
 }
 </script>
