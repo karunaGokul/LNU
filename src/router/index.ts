@@ -136,7 +136,7 @@ const clientRoutes: Array<RouteConfig> = [
             component: () =>
               import("@/views/client/MainLayout/MyJournal/index.vue"),
           },
-          
+         
         ],
       },
     ],

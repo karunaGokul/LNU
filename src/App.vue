@@ -2,6 +2,7 @@
   <v-app>
     <v-main>
       <router-view />
+      <progress-linear ref="loadingSpinner"></progress-linear>
     </v-main>
   </v-app>
 </template>
