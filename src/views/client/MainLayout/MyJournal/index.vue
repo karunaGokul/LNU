@@ -32,19 +32,17 @@
                 style="width: 40px; height: 47px; background: #9dacff"
                 class="mb-2 rounded-pill"
               ></div>
-              <div
+              <v-card
                 class="d-flex justify-center align-center rounded-pill"
                 style="
                   width: 40px;
                   height: 16px;
-                  background: #ffffff;
-                  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-
                   text-align: center;
+                  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
                 "
               >
                 <span>...</span>
-              </div>
+              </v-card>
             </v-col>
             <v-col>
               <div class="circle"></div>
