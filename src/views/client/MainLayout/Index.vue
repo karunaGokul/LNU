@@ -70,7 +70,7 @@
                   </div>
                 </router-link>
                 <router-link
-                  to="/client/home/Journal"
+                  to="/client/home/journal"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
                   active-class="orange-gradient"

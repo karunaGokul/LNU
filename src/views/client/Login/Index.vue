@@ -117,6 +117,7 @@
                 >
               </div>
             </v-form>
+            <progress-linear ref="loadingSpinner"></progress-linear>
           </v-card>
 
           <div class="text-center mb-4">
@@ -169,7 +170,12 @@ import { required } from "vuelidate/lib/validators";
 import { LoginRequestModel, LoginResponseModel } from "@/model";
 import { IAuthenticationService } from "@/service";
 
+import ProgressLinear from "@/components/controls/ProgressLinear.vue";
+
 @Component({
+  components: {
+    ProgressLinear,
+  },
   validations: {
     request: {
       Email: { required },
@@ -179,25 +185,35 @@ import { IAuthenticationService } from "@/service";
 })
 export default class Login extends Vue {
   @Inject("authService") authService: IAuthenticationService;
-  
+
   public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
   public snackbar: boolean = false;
   public snackbarText: string = "";
+  public progressLinear: boolean;
+
+  mounted() {
+    let root: any = this.$root;
+    let loadingSpinner: any = this.$refs.loadingSpinner as ProgressLinear;
+
+    root.$loadingSpinner = loadingSpinner.show;
+  }
 
   public login() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
-
+      this.progressLinear = true;
       this.authService.login(this.request).then(
         (response: Array<LoginResponseModel>) => {
           this.$store.dispatch("login", response);
+          this.progressLinear = false;
           this.$router.push("home/dashboard");
         },
         (err) => {
           if (err.response.status === 400) {
+            this.progressLinear = false;
             this.snackbarText = err.response.data;
             this.snackbar = true;
           }
