@@ -57,7 +57,7 @@
                   </div>
                 </router-link>
                 <router-link
-                  to="/client/home/Payments"
+                  to="/client/home/payment"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
                   active-class="orange-gradient"
@@ -117,15 +117,6 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class MainLayout extends Vue {
-  public navigatePage: string = "Dashboard";
-
-  public sideBar: any = [
-    { title: "Dashboard", icon: "mdi-view-dashboard-outline" },
-    { title: "Profile", icon: "mdi-briefcase-account-outline" },
-    { title: "Appointments", icon: "mdi-badge-account-outline" },
-    { title: "Payments", icon: "mdi-help-box" },
-    { title: "My Journal", icon: "mdi-help-box" },
-    { title: "Newsletter", icon: "mdi-help-box" },
-  ];
+  
 }
 </script>

@@ -21,10 +21,10 @@ export class ProfileService
       let items = new Array<ClientResponseModel>();
 
       items.push({
-        name: "LifeNyou",
-        contact: "1234567890",
-        email: "lifenyou@test.com",
-        queries: "welcome",
+        Name: "LifeNyou",
+        Contact: "1234567890",
+        Email: "lifenyou@test.com",
+        Queries: "welcome",
       });
 
       resolve(items);
