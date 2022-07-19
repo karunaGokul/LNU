@@ -169,7 +169,12 @@ import { required } from "vuelidate/lib/validators";
 import { LoginRequestModel, LoginResponseModel } from "@/model";
 import { IAuthenticationService } from "@/service";
 
+import ProgressLinear from "@/components/controls/ProgressLinear.vue";
+
 @Component({
+  components: {
+    ProgressLinear
+  },
   validations: {
     request: {
       Email: { required },
@@ -185,19 +190,22 @@ export default class Login extends Vue {
   public showPassword: boolean = false;
   public snackbar: boolean = false;
   public snackbarText: string = "";
+  public progressLinear: boolean;
 
   public login() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
-
+      this.progressLinear = true;
       this.authService.login(this.request).then(
         (response: Array<LoginResponseModel>) => {
           this.$store.dispatch("login", response);
+          this.progressLinear = false;
           this.$router.push("home/dashboard");
         },
         (err) => {
           if (err.response.status === 400) {
+            this.progressLinear = false;
             this.snackbarText = err.response.data;
             this.snackbar = true;
           }
