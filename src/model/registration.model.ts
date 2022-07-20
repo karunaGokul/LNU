@@ -7,6 +7,7 @@ export class ClientRegistrationModel {
     ConfirmPassword: string;
     CounsellingType: Array<string> = [];
     Payments: string;
+    Contact: string;
 }
 
 export class CoachRegistrationModel {
