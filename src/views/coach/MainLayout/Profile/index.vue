@@ -23,8 +23,18 @@
       </v-col>
       <v-col class="align-self-center">
         <v-form ref="form" lazy-validation>
-          <v-text-field label="Full Name" required></v-text-field>
-          <v-text-field label="Qualifications" required></v-text-field>
+          <v-text-field
+            label="Full Name"
+            required
+            v-model="request.fullName"
+            @input="$v.request.fullName.$touch()"
+            @blur="$v.request.fullName.$touch()"
+          ></v-text-field>
+          <v-text-field
+            label="Qualifications"
+            required
+            v-model="request.qualifications"
+          ></v-text-field>
           <v-text-field label="Experience (years)" required></v-text-field>
           <v-text-field label="Counselling Type" required></v-text-field>
           <v-text-field label="Upcoming Appointments" required></v-text-field>
@@ -41,8 +51,49 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Inject, Vue } from "vue-property-decorator";
 
-@Component
-export default class Profile extends Vue {}
+import { required } from "vuelidate/lib/validators";
+
+import {
+  CoachRequestModel,
+  CoachResponseModel,
+} from "@/model/CoachProfile.model";
+import BaseComponent from "@/components/base/BaseComponent";
+
+import { ICoachProfileService } from "@/service";
+
+@Component({
+  validations: {
+    request: {
+      fullName: { required },
+      qualifications: { required },
+      experience: { required },
+      counsellingType: { required },
+      upcomingAppointments: { required },
+      payouts: { required },
+    },
+  },
+})
+export default class Profile extends Vue {
+  @Inject("coachProfileService") coachProfileService: ICoachProfileService;
+  public request: CoachRequestModel = new CoachRequestModel();
+
+  public profile() {
+    this.$v.$touch();
+    if (!this.$v.$invalid) {
+      console.log(this.request);
+      this.coachProfileService.coachProfile(this.request).then(
+        (response: Array<CoachResponseModel>) => {
+          console.log(response);
+        }
+        // (err)=>{
+        //   if(err.response.status === 400) {
+
+        //   }
+        // }
+      );
+    }
+  }
+}
 </script>

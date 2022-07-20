@@ -125,9 +125,8 @@ export default class ClientProfileLayout extends BaseComponent {
     if (!this.$v.$invalid) {
       console.log(this.request);
       this.loadingSpinner("show");
-      this.profileService
-        .clientProfile(this.request)
-        .then((response: Array<ClientResponseModel>) => {
+      this.profileService.clientProfile(this.request).then(
+        (response: Array<ClientResponseModel>) => {
           console.log(response);
           this.loadingSpinner("hide");
         },
@@ -138,7 +137,7 @@ export default class ClientProfileLayout extends BaseComponent {
             // this.snackbar = true;
           }
         }
-        );
+      );
     }
   }
 }
