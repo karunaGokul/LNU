@@ -38,10 +38,10 @@
             filled
             dense
             required
-            v-model="request.name"
-            @input="$v.request.name.$touch()"
-            @blur="$v.request.name.$touch()"
-            :error-messages="$v.request.name | errorMessages('Name')"
+            v-model="request.Name"
+            @input="$v.request.Name.$touch()"
+            @blur="$v.request.Name.$touch()"
+            :error-messages="$v.request.Name | errorMessages('Name')"
           ></v-text-field>
           <v-text-field
             label="Contact"
@@ -50,10 +50,10 @@
             filled
             dense
             required
-            v-model="request.contact"
-            @input="$v.request.contact.$touch()"
-            @blur="$v.request.contact.$touch()"
-            :error-messages="$v.request.contact | errorMessages('Contact')"
+            v-model="request.Contact"
+            @input="$v.request.Contact.$touch()"
+            @blur="$v.request.Contact.$touch()"
+            :error-messages="$v.request.Contact | errorMessages('Contact')"
           ></v-text-field>
           <v-text-field
             label="Email"
@@ -62,10 +62,10 @@
             filled
             dense
             required
-            v-model="request.email"
-            @input="$v.request.email.$touch()"
-            @blur="$v.request.email.$touch()"
-            :error-messages="$v.request.email | errorMessages('Email')"
+            v-model="request.Email"
+            @input="$v.request.Email.$touch()"
+            @blur="$v.request.Email.$touch()"
+            :error-messages="$v.request.Email | errorMessages('Email')"
           ></v-text-field>
           <v-textarea
             label="Queries"
@@ -74,10 +74,10 @@
             filled
             dense
             required
-            v-model="request.queries"
-            @input="$v.request.queries.$touch()"
-            @blur="$v.request.queries.$touch()"
-            :error-messages="$v.request.queries | errorMessages('Queries')"
+            v-model="request.Queries"
+            @input="$v.request.Queries.$touch()"
+            @blur="$v.request.Queries.$touch()"
+            :error-messages="$v.request.Queries | errorMessages('Queries')"
           ></v-textarea>
           <div class="text-end">
             <v-btn
@@ -109,10 +109,10 @@ import { IProfileService } from "@/service";
 @Component({
   validations: {
     request: {
-      name: { required },
-      contact: { required, maxLength: maxLength(10) },
-      email: { required, email },
-      queries: { required },
+      Name: { required },
+      Contact: { required, maxLength: maxLength(10) },
+      Email: { required, email },
+      Queries: { required },
     },
   },
 })

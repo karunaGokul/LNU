@@ -214,7 +214,7 @@
                 <v-text-field
                   label="First name"
                   color="#FCB258"
-                  append-icon="mdi-account"
+                  append-icon="person"
                   filled
                   dense
                   v-model="request.FirstName"
@@ -230,7 +230,7 @@
                 <v-text-field
                   label="Last name"
                   color="#FCB258"
-                  append-icon="mdi-account"
+                  append-icon="person"
                   filled
                   dense
                   v-model="request.LastName"
@@ -317,7 +317,7 @@
                   color="#FCB258"
                   filled
                   dense
-                  v-model="counselingType"
+                  v-model="request.CounselingType"
                   required
                   @input="$v.request.CounsellingType.$touch()"
                   @blur="$v.request.CounsellingType.$touch()"
