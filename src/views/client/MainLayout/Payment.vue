@@ -28,11 +28,13 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 import { PaymentRequestModel, PaymentResponseModel } from "@/model";
 
 import { IPaymentService } from "@/service";
+import BaseComponent from "@/components/base/BaseComponent";
 
 @Component
-export default class Payment extends Vue {
+export default class Payment extends BaseComponent {
   @Inject("paymentService") paymentService: IPaymentService;
   public request: PaymentRequestModel = new PaymentRequestModel();
+  public response: PaymentResponseModel = new PaymentResponseModel();
 
   created() {
     this.payment()
@@ -41,11 +43,21 @@ export default class Payment extends Vue {
   public payment() {
     // this.request.ClientId = "id102"
     console.log(this.request)
+     this.loadingSpinner("show");
     this.paymentService
         .payment(this.request)
         .then((response: Array<PaymentResponseModel>) => {
           console.log(response);
-        });
+           this.loadingSpinner("hide");
+        },
+        (err) => {
+          this.loadingSpinner("hide");
+          if (err.response.status === 400) {
+            // this.snackbarText = err.response.data;
+            // this.snackbar = true;
+          }
+        }
+        );
   }
 
   public headers: any = [

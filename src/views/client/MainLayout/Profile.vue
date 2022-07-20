@@ -21,7 +21,11 @@
         <div class="text-center pa-4">
           <v-btn color="white" class="text-capitalize rounded-lg">
             <v-icon left>info</v-icon>
-            Payment info
+            <router-link
+              to="/client/home/payment"
+              class="text-decoration-none black--text"
+              >Payment info</router-link
+            >
           </v-btn>
         </div>
       </v-col>
@@ -98,6 +102,7 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 import { required, email, maxLength } from "vuelidate/lib/validators";
 
 import { ClientRequestModel, ClientResponseModel } from "@/model";
+import BaseComponent from "@/components/base/BaseComponent";
 
 import { IProfileService } from "@/service";
 
@@ -111,7 +116,7 @@ import { IProfileService } from "@/service";
     },
   },
 })
-export default class ClientProfileLayout extends Vue {
+export default class ClientProfileLayout extends BaseComponent {
   @Inject("profileService") profileService: IProfileService;
   public request: ClientRequestModel = new ClientRequestModel();
 
@@ -119,11 +124,21 @@ export default class ClientProfileLayout extends Vue {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
+      this.loadingSpinner("show");
       this.profileService
         .clientProfile(this.request)
         .then((response: Array<ClientResponseModel>) => {
           console.log(response);
-        });
+          this.loadingSpinner("hide");
+        },
+        (err) => {
+          this.loadingSpinner("hide");
+          if (err.response.status === 400) {
+            // this.snackbarText = err.response.data;
+            // this.snackbar = true;
+          }
+        }
+        );
     }
   }
 }

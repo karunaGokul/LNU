@@ -270,7 +270,7 @@
                     $v.request.Password | errorMessages('Password')
                   "
                   :type="showPassword ? 'text' : 'password'"
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :append-icon="showPassword ? 'visibility_off' : 'visibility'"
                   @click:append="showPassword = !showPassword"
                 ></v-text-field>
               </v-col>
@@ -289,7 +289,9 @@
                       | errorMessages('ConfirmPassword')
                   "
                   :type="showConfirmpassword ? 'text' : 'password'"
-                  :append-icon="showConfirmpassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :append-icon="
+                    showConfirmpassword ? 'visibility_off' : 'visibility'
+                  "
                   @click:append="showConfirmpassword = !showConfirmpassword"
                 ></v-text-field>
               </v-col>
@@ -355,6 +357,22 @@
             </div>
           </v-form>
         </div>
+        <v-snackbar
+          v-model="snackbar"
+          :timeout="2000"
+          color="deep-orange lighten-5 pink--text"
+          right
+          top
+        >
+          <v-icon color="pink">mdi-exclamation-thick </v-icon>
+          {{ snackbarText }}
+
+          <template v-slot:action="{ attrs }">
+            <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+              <v-icon> mdi-close-box</v-icon>
+            </v-btn>
+          </template>
+        </v-snackbar>
       </v-container>
     </v-col>
   </v-row>
@@ -373,6 +391,8 @@ import {
 import { ClientRegistrationModel } from "@/model";
 import { IRegistrationService } from "@/service";
 
+import BaseComponent from "@/components/base/BaseComponent";
+
 @Component({
   validations: {
     request: {
@@ -382,34 +402,41 @@ import { IRegistrationService } from "@/service";
       Password: { required },
       ConfirmPassword: { sameAsPassword: sameAs("Password") },
       Payments: { required },
-      CounsellingType: {  },
+      CounsellingType: {},
       PhoneNumber: { required, numeric, maxLength: maxLength(10) },
     },
   },
 })
-export default class ClientRegistration extends Vue {
+export default class ClientRegistration extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
+
   public request: ClientRegistrationModel = new ClientRegistrationModel();
+
   public showPassword: boolean = false;
   public showConfirmpassword: boolean = false;
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
 
-  public counselingType: string = '';
+  public counselingType: string = "";
 
   public register() {
     this.request.CounsellingType.push(this.counselingType);
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
+      this.loadingSpinner("show");
       this.registerService.register(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
           console.log(response);
+          this.loadingSpinner("hide");
           this.$router.push("home/dashboard");
         },
         (err) => {
+          this.loadingSpinner("hide");
           if (err.response.status === 400) {
-            // this.snackbarText = err.response.data;
-            // this.snackbar = true;
+            this.snackbarText = err.response.data;
+            this.snackbar = true;
           }
         }
       );
