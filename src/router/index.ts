@@ -137,6 +137,11 @@ const clientRoutes: Array<RouteConfig> = [
               import("@/views/client/MainLayout/Appointments/Index.vue"),
           },
           {
+            path: "payment",
+            name: "Client Payment",
+            component: () => import("@/views/client/MainLayout/Payment.vue"),
+          },
+          {
             path: "journal",
             name: "Client Journal",
             component: () =>
