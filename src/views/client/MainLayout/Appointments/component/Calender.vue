@@ -3,16 +3,49 @@
     <v-col>
       <v-sheet height="64">
         <v-toolbar flat>
-          <div class="d-flex align-center justify-center" style="width: 100%">
-            <v-btn fab text small color="grey darken-2" @click="prev">
-              <v-icon small> mdi-chevron-left </v-icon>
+          <div class="d-flex align-center justify-space-between" style="width: 100%">
+            <v-btn
+              outlined
+              class="mr-4"
+              color="grey darken-2"
+              @click="setToday"
+            >
+              Today
             </v-btn>
-            <v-toolbar-title v-if="$refs.calendar">
-              {{ $refs.calendar.title }}
-            </v-toolbar-title>
-            <v-btn fab text small color="grey darken-2" @click="next">
-              <v-icon small> mdi-chevron-right </v-icon>
-            </v-btn>
+
+            <div class="d-flex align-center">
+              <v-btn fab text small color="grey darken-2" @click="prev">
+                <v-icon small> chevron_left </v-icon>
+              </v-btn>
+              <v-toolbar-title v-if="$refs.calendar">
+                {{ $refs.calendar.title }}
+              </v-toolbar-title>
+              <v-btn fab text small color="grey darken-2" @click="next">
+                <v-icon small> chevron_right </v-icon>
+              </v-btn>
+            </div>
+            <v-menu bottom right>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
+                  <span>{{ typeToLabel[type] }}</span>
+                  <v-icon right> arrow_drop_down </v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item @click="type = 'day'">
+                  <v-list-item-title>Day</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="type = 'week'">
+                  <v-list-item-title>Week</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="type = 'month'">
+                  <v-list-item-title>Month</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="type = '4day'">
+                  <v-list-item-title>4 days</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </div>
         </v-toolbar>
       </v-sheet>
@@ -37,15 +70,15 @@
           <v-card color="grey lighten-4" min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
+                <v-icon>edit</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
+                <v-icon>favorite</v-icon>
               </v-btn>
               <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
+                <v-icon>more-vert</v-icon>
               </v-btn>
             </v-toolbar>
             <v-card-text>
@@ -94,12 +127,12 @@ export default class Calendar extends Vue {
 
   public focus: string = "";
   public type: string = "month";
-  /*public typeToLabel: any = {
+  public typeToLabel: any = {
     month: "Month",
     week: "Week",
     day: "Day",
     "4day": "4 Days",
-  };*/
+  };
   public selectedEvent: any = {};
   public selectedElement: any = null;
   public selectedOpen: boolean = false;
