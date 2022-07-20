@@ -22,43 +22,13 @@
         </v-row>
       </v-col>
       <v-col class="align-self-center">
-        <v-form ref="form" v-model="valid" lazy-validation>
-          <v-text-field
-            v-model="name"
-            :rules="nameRules"
-            label="Full Name"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="name"
-            :rules="nameRules"
-            label="Qualifications"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="name"
-            :rules="nameRules"
-            label="Experience (years)"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="name"
-            :rules="nameRules"
-            label="Counselling Type"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="name"
-            :rules="nameRules"
-            label="Upcoming Appointments"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="name"
-            :rules="nameRules"
-            label="Payouts"
-            required
-          ></v-text-field>
+        <v-form ref="form" lazy-validation>
+          <v-text-field label="Full Name" required></v-text-field>
+          <v-text-field label="Qualifications" required></v-text-field>
+          <v-text-field label="Experience (years)" required></v-text-field>
+          <v-text-field label="Counselling Type" required></v-text-field>
+          <v-text-field label="Upcoming Appointments" required></v-text-field>
+          <v-text-field label="Payouts" required></v-text-field>
           <div class="d-flex justify-space-between mt-5">
             <v-btn color="#5949B8" class="white--text"> Edit </v-btn>
             <v-btn color="#EBEBEB" class="white--black"> Save </v-btn>
@@ -74,9 +44,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Profile extends Vue {
-  nameRules: [
-      v => !!v || 'Name is required'
-    ]
-}
+export default class Profile extends Vue {}
 </script>
