@@ -10,11 +10,11 @@
           </thead>
           <tbody>
             <tr v-for="item in items" :key="item" class="text-center">
-              <td>{{ item.counsellingType }}</td>
-              <td>{{ item.date }}</td>
-              <td>{{ item.coach }}</td>
-              <td>{{ item.duration }}</td>
-              <td>{{ item.amountPaid }}</td>
+              <td>{{ item.CounsellingType }}</td>
+              <td>{{ item.Date }}</td>
+              <td>{{ item.Coach }}</td>
+              <td>{{ item.Duration }}</td>
+              <td>{{ item.AmountPaid }}</td>
             </tr>
           </tbody>
         </template>
@@ -28,11 +28,13 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 import { PaymentRequestModel, PaymentResponseModel } from "@/model";
 
 import { IPaymentService } from "@/service";
+import BaseComponent from "@/components/base/BaseComponent";
 
 @Component
-export default class Payment extends Vue {
+export default class Payment extends BaseComponent {
   @Inject("paymentService") paymentService: IPaymentService;
   public request: PaymentRequestModel = new PaymentRequestModel();
+  public response: PaymentResponseModel = new PaymentResponseModel();
 
   created() {
     this.payment()
@@ -41,11 +43,21 @@ export default class Payment extends Vue {
   public payment() {
     // this.request.ClientId = "id102"
     console.log(this.request)
+     this.loadingSpinner("show");
     this.paymentService
         .payment(this.request)
         .then((response: Array<PaymentResponseModel>) => {
           console.log(response);
-        });
+           this.loadingSpinner("hide");
+        },
+        (err) => {
+          this.loadingSpinner("hide");
+          if (err.response.status === 400) {
+            // this.snackbarText = err.response.data;
+            // this.snackbar = true;
+          }
+        }
+        );
   }
 
   public headers: any = [
@@ -58,46 +70,46 @@ export default class Payment extends Vue {
 
   public items: any = [
     {
-      counsellingType: "Foo",
-      date: "10.2.22",
-      coach: "alex",
-      duration: "25min",
-      amountPaid: "1200",
+      CounsellingType: "Foo",
+      Date: "10.2.22",
+      Coach: "alex",
+      Duration: "25min",
+      AmountPaid: "1200",
     },
     {
-      counsellingType: "Bar",
-      date: "15.3.22",
-      coach: "jai",
-      duration: "30min",
-      amountPaid: "1500",
+      CounsellingType: "Bar",
+      Date: "15.3.22",
+      Coach: "jai",
+      Duration: "30min",
+      AmountPaid: "1500",
     },
     {
-      counsellingType: "Buzz",
-      date: "11.4.22",
-      coach: "jhon",
-      duration: "15min",
-      amountPaid: "500",
+      CounsellingType: "Buzz",
+      Date: "11.4.22",
+      Coach: "jhon",
+      Duration: "15min",
+      AmountPaid: "500",
     },
     {
-      counsellingType: "Foo",
-      date: "10.2.22",
-      coach: "alex",
-      duration: "25min",
-      amountPaid: "1200",
+      CounsellingType: "Foo",
+      Date: "10.2.22",
+      Coach: "alex",
+      Duration: "25min",
+      AmountPaid: "1200",
     },
     {
-      counsellingType: "Bar",
-      date: "15.3.22",
-      coach: "jai",
-      duration: "30min",
-      amountPaid: "1500",
+      CounsellingType: "Bar",
+      Date: "15.3.22",
+      Coach: "jai",
+      Duration: "30min",
+      AmountPaid: "1500",
     },
     {
-      counsellingType: "Buzz",
-      date: "11.4.22",
-      coach: "jhon",
-      duration: "15min",
-      amountPaid: "500",
+      CounsellingType: "Buzz",
+      Date: "11.4.22",
+      Coach: "jhon",
+      Duration: "15min",
+      AmountPaid: "500",
     },
   ];
 }
