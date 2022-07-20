@@ -5,14 +5,19 @@
     <v-row class="align-start pt-15 mx-15" style="height: 100vh">
       <v-col class="pt-10">
         <h1>Hello Coach, ABC!</h1>
-        <v-row>
-          <v-col>
-            <v-icon size="7rem">account_circle</v-icon>
-          </v-col>
-          <v-col>
-            <h2>ABC</h2>
-            <p>Lorem Ipsum Coach</p>
-            <p>Rating</p>
+        <v-row class="mt-2">
+          <v-col class="d-flex">
+            <div>
+              <v-icon size="7rem" class="mr-3">account_circle</v-icon>
+            </div>
+            <div>
+              <h2>ABC</h2>
+              <p>Lorem Ipsum Coach</p>
+              <p>
+                Rating
+                <span> </span>
+              </p>
+            </div>
           </v-col>
         </v-row>
       </v-col>
@@ -69,5 +74,9 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Profile extends Vue {}
+export default class Profile extends Vue {
+  nameRules: [
+      v => !!v || 'Name is required'
+    ]
+}
 </script>
