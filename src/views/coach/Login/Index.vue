@@ -39,32 +39,32 @@
             </v-row>
             <v-form class="px-8" ref="form" autocomplete="off" @submit="login">
               <v-text-field
-                label="Username"
+                label="Username/Email"
                 color="#495cb8"
-                v-model="request.username"
+                v-model="request.Email"
                 append-icon="mdi-account"
                 :error-messages="
-                  $v.request.username | errorMessages('Username')
+                  $v.request.Email | errorMessages('Username')
                 "
                 filled
                 type="text"
                 required
-                @input="$v.request.username.$touch()"
-                @blur="$v.request.username.$touch()"
+                @input="$v.request.Email.$touch()"
+                @blur="$v.request.Email.$touch()"
               ></v-text-field>
               <v-text-field
                 label="Password"
                 color="#495cb8"
-                v-model="request.password"
+                v-model="request.Password"
                 :type="showPassword ? 'text' : 'password'"
                 :error-messages="
-                  $v.request.password | errorMessages('Password')
+                  $v.request.Password | errorMessages('Password')
                 "
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="showPassword = !showPassword"
                 filled
-                @input="$v.request.password.$touch()"
-                @blur="$v.request.password.$touch()"
+                @input="$v.request.Password.$touch()"
+                @blur="$v.request.Password.$touch()"
               ></v-text-field>
               <div class="d-flex justify-center align-center">
                 <v-btn
@@ -98,8 +98,8 @@ import { LoginRequestModel } from "@/model";
 @Component({
   validations: {
     request: {
-      username: { required },
-      password: { required },
+      Email: { required },
+      Password: { required },
     },
   },
 })

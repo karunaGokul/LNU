@@ -108,7 +108,7 @@
                   value="3"
                   length="5"
                   large
-                  >mdi-star</v-rating
+                  >star</v-rating
                 >
               </div>
             </v-card-text>

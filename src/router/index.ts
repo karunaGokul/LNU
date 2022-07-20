@@ -37,6 +37,12 @@ const coachRoutes: Array<RouteConfig> = [
             component: () =>
               import("@/views/coach/MainLayout/Dashboard/Index.vue"),
           },
+          {
+            path: "profile",
+            name: "Coach Profile",
+            component: () =>
+              import("@/views/coach/MainLayout/Profile/index.vue"),
+          },
         ],
       },
     ],
@@ -137,12 +143,16 @@ const clientRoutes: Array<RouteConfig> = [
               import("@/views/client/MainLayout/Appointments/Index.vue"),
           },
           {
+            path: "payment",
+            name: "Client Payment",
+            component: () => import("@/views/client/MainLayout/Payment.vue"),
+          },
+          {
             path: "journal",
             name: "Client Journal",
             component: () =>
               import("@/views/client/MainLayout/MyJournal/index.vue"),
           },
-         
         ],
       },
     ],
