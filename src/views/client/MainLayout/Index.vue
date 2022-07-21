@@ -57,6 +57,19 @@
                   </div>
                 </router-link>
                 <router-link
+                  to="/client/home/messages"
+                  tag="div"
+                  class="my-4 v-list-item v-list-item--link px-4"
+                  active-class="orange-gradient"
+                >
+                  <div class="v-list-item__icon">
+                    <v-icon> sms </v-icon>
+                  </div>
+                  <div class="v-list-item__content">
+                    <div class="v-list-item__title">Messages</div>
+                  </div>
+                </router-link>
+                <router-link
                   to="/client/home/payment"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
@@ -121,6 +134,7 @@
     </v-row>
   </v-container>
 </template>
+
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 

@@ -6,7 +6,7 @@
       <v-col cols="4" sm="12" md="5">
         <h4 class="text-h4 font-weight-bold text-center pa-4">Hey, Client!</h4>
         <div class="text-center pa-4" style="position: relative">
-          <v-icon x-large color="#E0E0E0" style="font-size: 16rem">
+          <v-icon x-large color="#E0E0E0" style="font-size: 16rem" >
             account_circle
           </v-icon>
           <v-btn
@@ -15,7 +15,7 @@
             absolute
             style="right: 130px; bottom: 60px"
           >
-            <v-icon>photo_camera</v-icon>
+            <v-icon @change="handleimage">photo_camera</v-icon>
           </v-btn>
         </div>
         <div class="text-center pa-4">
@@ -120,12 +120,18 @@ export default class ClientProfileLayout extends BaseComponent {
   @Inject("profileService") profileService: IProfileService;
   public request: ClientRequestModel = new ClientRequestModel();
 
+  public logo: any;
+
+  public handleimage(e: File) {
+    this.logo = e;
+  }
+
   public profile() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
       this.loadingSpinner("show");
-      this.profileService.clientProfile(this.request).then(
+      this.profileService.clientProfile(this.logo,this.request).then(
         (response: Array<ClientResponseModel>) => {
           console.log(response);
           this.loadingSpinner("hide");
