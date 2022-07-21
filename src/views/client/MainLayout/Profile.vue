@@ -6,7 +6,7 @@
       <v-col cols="4" sm="12" md="5">
         <h4 class="text-h4 font-weight-bold text-center pa-4">Hey, Client!</h4>
         <div class="text-center pa-4" style="position: relative">
-          <v-icon x-large color="#E0E0E0" style="font-size: 16rem" @change="handleimage">
+          <v-icon x-large color="#E0E0E0" style="font-size: 16rem" >
             account_circle
           </v-icon>
           <v-btn
@@ -15,7 +15,7 @@
             absolute
             style="right: 130px; bottom: 60px"
           >
-            <v-icon>photo_camera</v-icon>
+            <v-icon @change="handleimage">photo_camera</v-icon>
           </v-btn>
         </div>
         <div class="text-center pa-4">
