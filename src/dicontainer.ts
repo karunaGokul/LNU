@@ -9,6 +9,8 @@ import {
   RegistrationService,
   IPaymentService,
   PaymentService,
+  CoachProfileService,
+  ICoachProfileService,
 } from "@/service";
 
 export class DIContainer extends Vue {
@@ -20,4 +22,6 @@ export class DIContainer extends Vue {
     new RegistrationService();
   @Provide("paymentService") paymentService: IPaymentService =
     new PaymentService();
+  @Provide("coachProfileService") coachProfileService: ICoachProfileService =
+    new CoachProfileService();
 }
