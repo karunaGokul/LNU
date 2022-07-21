@@ -41,7 +41,7 @@ export class ProfileService
     formData.append("Contact", request.Contact);
     formData.append("Email", request.Email);
     formData.append("Queries", request.Queries);
-
+    
     return this.upload(formData, `Profile`);
   }
 }
