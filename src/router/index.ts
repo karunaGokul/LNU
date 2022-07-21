@@ -153,6 +153,11 @@ const clientRoutes: Array<RouteConfig> = [
             component: () =>
               import("@/views/client/MainLayout/MyJournal/index.vue"),
           },
+          {
+            path: "messages",
+            name: "Client Messages",
+            component: () => import("@/views/client/MainLayout/Messages.vue"),
+          },
         ],
       },
     ],
