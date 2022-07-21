@@ -5,6 +5,7 @@ export class ClientRequestModel extends DataRequest {
   Contact: string;
   Email: string;
   Queries: string;
+  Logo: string;
 }
 
 export class ClientResponseModel {
