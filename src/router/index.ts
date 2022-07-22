@@ -134,7 +134,7 @@ const clientRoutes: Array<RouteConfig> = [
           {
             path: "profile",
             name: "Client Profile",
-            component: () => import("@/views/client/MainLayout/Profile.vue"),
+            component: () => import("@/views/client/MainLayout/Profile/Index.vue"),
           },
           {
             path: "appointments",
@@ -145,7 +145,7 @@ const clientRoutes: Array<RouteConfig> = [
           {
             path: "payment",
             name: "Client Payment",
-            component: () => import("@/views/client/MainLayout/Payment.vue"),
+            component: () => import("@/views/client/MainLayout/Payment/Index.vue"),
           },
           {
             path: "journal",
@@ -156,7 +156,12 @@ const clientRoutes: Array<RouteConfig> = [
           {
             path: "messages",
             name: "Client Messages",
-            component: () => import("@/views/client/MainLayout/Messages.vue"),
+            component: () => import("@/views/client/MainLayout/Message/Index.vue"),
+          },
+          {
+            path: "newsletter",
+            name: "Client Newsletter",
+            component: () => import("@/views/client/MainLayout/Newsletter/Index.vue"),
           },
         ],
       },
