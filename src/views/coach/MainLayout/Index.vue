@@ -38,7 +38,7 @@
                   exact
                 >
                   <div class="v-list-item__icon">
-                    <v-icon>calendar_month</v-icon>
+                    <v-icon class="icon">calendar_month</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Calendar</div>
@@ -54,7 +54,7 @@
                   exact
                 >
                   <div class="v-list-item__icon">
-                    <v-icon>chat</v-icon>
+                    <v-icon class="icon"> chat</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Messages</div>
@@ -75,7 +75,6 @@
                   color="#5949b8"
                   rounded
                   class="px-7 text-capitalize white--text"
-                  @click="logout"
                   >Logout</v-btn
                 >
               </div>

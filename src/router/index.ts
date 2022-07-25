@@ -43,6 +43,12 @@ const coachRoutes: Array<RouteConfig> = [
             component: () =>
               import("@/views/coach/MainLayout/Profile/index.vue"),
           },
+          {
+            path: "calendar",
+            name: "Coach calendar",
+            component: () =>
+              import("@/views/coach/MainLayout/Calendar/index.vue"),
+          },
         ],
       },
     ],
@@ -134,7 +140,8 @@ const clientRoutes: Array<RouteConfig> = [
           {
             path: "profile",
             name: "Client Profile",
-            component: () => import("@/views/client/MainLayout/Profile/Index.vue"),
+            component: () =>
+              import("@/views/client/MainLayout/Profile/Index.vue"),
           },
           {
             path: "appointments",
@@ -145,7 +152,8 @@ const clientRoutes: Array<RouteConfig> = [
           {
             path: "payment",
             name: "Client Payment",
-            component: () => import("@/views/client/MainLayout/Payment/Index.vue"),
+            component: () =>
+              import("@/views/client/MainLayout/Payment/Index.vue"),
           },
           {
             path: "journal",
@@ -156,12 +164,14 @@ const clientRoutes: Array<RouteConfig> = [
           {
             path: "messages",
             name: "Client Messages",
-            component: () => import("@/views/client/MainLayout/Message/Index.vue"),
+            component: () =>
+              import("@/views/client/MainLayout/Message/Index.vue"),
           },
           {
             path: "newsletter",
             name: "Client Newsletter",
-            component: () => import("@/views/client/MainLayout/Newsletter/Index.vue"),
+            component: () =>
+              import("@/views/client/MainLayout/Newsletter/Index.vue"),
           },
         ],
       },

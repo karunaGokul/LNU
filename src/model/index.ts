@@ -4,3 +4,4 @@ export * from "./registration.model";
 export * from "./profile.model";
 export * from "./payment.model";
 export * from "./CoachProfile.model";
+export * from "./CoachCalendar.model";

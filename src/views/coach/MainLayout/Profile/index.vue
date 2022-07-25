@@ -130,7 +130,6 @@ import {
   CoachRequestModel,
   CoachResponseModel,
 } from "@/model/CoachProfile.model";
-import BaseComponent from "@/components/base/BaseComponent";
 
 import { ICoachProfileService } from "@/service";
 
