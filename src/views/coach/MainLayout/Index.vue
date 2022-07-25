@@ -74,7 +74,7 @@
                   elevation="0"
                   color="#5949b8"
                   rounded
-                  class="px-7 text-capitalize"
+                  class="px-7 text-capitalize white--text"
                   @click="logout"
                   >Logout</v-btn
                 >
