@@ -25,6 +25,10 @@
         <v-form ref="form" lazy-validation>
           <v-text-field
             label="Full Name"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
             required
             v-model="request.fullName"
             @input="$v.request.fullName.$touch()"
@@ -33,6 +37,10 @@
           ></v-text-field>
           <v-text-field
             label="Qualifications"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
             required
             v-model="request.qualifications"
             @input="$v.request.qualifications.$touch()"
@@ -43,6 +51,10 @@
           ></v-text-field>
           <v-text-field
             label="Experience (years)"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
             required
             v-model="request.experience"
             @input="$v.request.experience.$touch()"
@@ -53,6 +65,10 @@
           ></v-text-field>
           <v-text-field
             label="Counselling Type"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
             required
             v-model="request.counsellingType"
             @input="$v.request.counsellingType.$touch()"
@@ -63,6 +79,10 @@
           ></v-text-field>
           <v-text-field
             label="Upcoming Appointments"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
             required
             v-model="request.upcomingAppointments"
             @input="$v.request.upcomingAppointments.$touch()"
@@ -74,6 +94,10 @@
           ></v-text-field>
           <v-text-field
             label="Payouts"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
             required
             v-model="request.payouts"
             @input="$v.request.payouts.$touch()"
