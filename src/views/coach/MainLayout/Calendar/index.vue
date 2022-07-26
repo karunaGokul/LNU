@@ -18,7 +18,7 @@
       </v-row>
     </v-col>
     <v-col>
-      <v-form class="mt-15">
+      <v-form class="mt-15" @submit.prevent="submit">
         <v-text-field
           label="Appointment Type"
           type="text"
@@ -70,10 +70,18 @@
           :error-messages="$v.request.Queries | errorMessages('Queries')"
         ></v-textarea>
         <div class="d-flex justify-space-between mt-5">
-          <v-btn color="#EBEBEB" class="white--black" @click.prevent="profile">
+          <v-btn
+            color="#EBEBEB"
+            class="white--black text-capitalize"
+            type="button"
+          >
             Reschedule Appointment
           </v-btn>
-          <v-btn color="#5949B8" class="white--text" @click="calendar">
+          <v-btn
+            color="#5949B8"
+            class="white--text text-capitalize"
+            type="submit"
+          >
             Confrim Appointment
           </v-btn>
         </div>
@@ -88,7 +96,7 @@ import { required } from "vuelidate/lib/validators";
 import {
   CalendarRequestModel,
   CalendarResponseModel,
-} from "@/model/CoachCalendar.model";
+} from "@/model/coach-calendar.model";
 
 import { ICoachCalendarService } from "@/service";
 
@@ -103,14 +111,14 @@ import { ICoachCalendarService } from "@/service";
   },
 })
 export default class calender extends Vue {
+  @Inject("coachCalendarService") coachCalendarService: ICoachCalendarService;
+
   public picker = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
     .toISOString()
     .substr(0, 10);
-
-  @Inject("coachCalendarService") coachCalendarService: ICoachCalendarService;
   public request: CalendarRequestModel = new CalendarRequestModel();
 
-  public calendar() {
+  public submit() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
@@ -123,4 +131,3 @@ export default class calender extends Vue {
   }
 }
 </script>
-<style scoped></style>

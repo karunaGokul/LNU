@@ -47,7 +47,7 @@
               </div>
               <div>
                 <router-link
-                  to="/coach/home/messages"
+                  to="/coach/home/message"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
                   active-class="nav-color"
@@ -75,6 +75,7 @@
                   color="#5949b8"
                   rounded
                   class="px-7 text-capitalize white--text"
+                  @click="logout"
                   >Logout</v-btn
                 >
               </div>
@@ -93,7 +94,12 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class MainLayout extends Vue {}
+export default class MainLayout extends Vue {
+  public logout() {
+    this.$store.dispatch("logout");
+    this.$router.push("/");
+  }
+}
 </script>
 
 <style scoped>

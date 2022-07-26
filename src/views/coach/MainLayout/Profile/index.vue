@@ -22,7 +22,7 @@
         </v-row>
       </v-col>
       <v-col class="align-self-center">
-        <v-form ref="form" lazy-validation>
+        <v-form @submit.prevent="profile" lazy-validation>
           <v-text-field
             label="Full Name"
             type="text"
@@ -104,12 +104,11 @@
             @blur="$v.request.payouts.$touch()"
             :error-messages="$v.request.payouts | errorMessages('Payouts')"
           ></v-text-field>
-          <div class="d-flex justify-space-between mt-5">
-            <v-btn color="#5949B8" class="white--text"> Edit </v-btn>
+          <div class="d-flex justify-end mt-5">
             <v-btn
-              color="#EBEBEB"
-              class="white--black"
-              @click.prevent="profile"
+              color="#5949B8"
+              class="white--text text-capitalize"
+              type="submit"
             >
               Save
             </v-btn>
@@ -129,7 +128,7 @@ import { required } from "vuelidate/lib/validators";
 import {
   CoachRequestModel,
   CoachResponseModel,
-} from "@/model/CoachProfile.model";
+} from "@/model/coach-profile.model";
 
 import { ICoachProfileService } from "@/service";
 
