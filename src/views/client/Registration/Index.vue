@@ -208,157 +208,159 @@
               >Log In
             </router-link>
           </div>
-          <v-form class="px-8" @submit="register">
-            <v-row>
-              <v-col>
-                <v-text-field
-                  label="First name"
-                  color="#FCB258"
-                  append-icon="person"
-                  filled
-                  dense
-                  v-model="request.FirstName"
-                  required
-                  @input="$v.request.FirstName.$touch()"
-                  @blur="$v.request.FirstName.$touch()"
-                  :error-messages="
-                    $v.request.FirstName | errorMessages('FirstName')
-                  "
-                ></v-text-field>
-              </v-col>
-              <v-col>
-                <v-text-field
-                  label="Last name"
-                  color="#FCB258"
-                  append-icon="person"
-                  filled
-                  dense
-                  v-model="request.LastName"
-                  required
-                  @input="$v.request.LastName.$touch()"
-                  @blur="$v.request.LastName.$touch()"
-                  :error-messages="
-                    $v.request.LastName | errorMessages('LastName')
-                  "
-                ></v-text-field>
-              </v-col>
-            </v-row>
+          <div style="width: 590px">
+            <v-form class="px-8" @submit="register">
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    label="First name"
+                    color="#FCB258"
+                    append-icon="person"
+                    filled
+                    dense
+                    v-model="request.FirstName"
+                    required
+                    @input="$v.request.FirstName.$touch()"
+                    @blur="$v.request.FirstName.$touch()"
+                    :error-messages="
+                      $v.request.FirstName | errorMessages('FirstName')
+                    "
+                  ></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    label="Last name"
+                    color="#FCB258"
+                    append-icon="person"
+                    filled
+                    dense
+                    v-model="request.LastName"
+                    required
+                    @input="$v.request.LastName.$touch()"
+                    @blur="$v.request.LastName.$touch()"
+                    :error-messages="
+                      $v.request.LastName | errorMessages('LastName')
+                    "
+                  ></v-text-field>
+                </v-col>
+              </v-row>
 
-            <v-text-field
-              label="Email Id"
-              color="#FCB258"
-              append-icon="email"
-              filled
-              dense
-              v-model="request.Email"
-              required
-              @input="$v.request.Email.$touch()"
-              @blur="$v.request.Email.$touch()"
-              :error-messages="$v.request.Email | errorMessages('Email')"
-            ></v-text-field>
-            <v-row>
-              <v-col>
-                <v-text-field
-                  label="Password"
-                  color="#FCB258"
-                  filled
-                  dense
-                  v-model="request.Password"
-                  required
-                  @input="$v.request.Password.$touch()"
-                  @blur="$v.request.Password.$touch()"
-                  :error-messages="
-                    $v.request.Password | errorMessages('Password')
-                  "
-                  :type="showPassword ? 'text' : 'password'"
-                  :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                  @click:append="showPassword = !showPassword"
-                ></v-text-field>
-              </v-col>
-              <v-col>
-                <v-text-field
-                  label="Confrim Password"
-                  color="#FCB258"
-                  filled
-                  dense
-                  v-model="request.ConfirmPassword"
-                  required
-                  @input="$v.request.ConfirmPassword.$touch()"
-                  @blur="$v.request.ConfirmPassword.$touch()"
-                  :error-messages="
-                    $v.request.ConfirmPassword
-                      | errorMessages('ConfirmPassword')
-                  "
-                  :type="showConfirmpassword ? 'text' : 'password'"
-                  :append-icon="
-                    showConfirmpassword ? 'visibility_off' : 'visibility'
-                  "
-                  @click:append="showConfirmpassword = !showConfirmpassword"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-text-field
-              label="Phone number"
-              color="#FCB258"
-              append-icon="call"
-              filled
-              dense
-              v-model="request.PhoneNumber"
-              required
-              @input="$v.request.PhoneNumber.$touch()"
-              @blur="$v.request.PhoneNumber.$touch()"
-              :error-messages="$v.request.PhoneNumber | errorMessages('Phone number')"
-            ></v-text-field>
-            <v-row>
-              <v-col>
-                <v-select
-                  label="Counselling Type"
-                  color="#FCB258"
-                  filled
-                  dense
-                  v-model="request.CounselingType"
-                  :items="counsellingType"
-                  item-text="name"
-                  item-value="id"
-                  required
-                  @input="$v.request.CounsellingType.$touch()"
-                  @blur="$v.request.CounsellingType.$touch()"
-                  :error-messages="
-                    $v.request.CounsellingType
-                      | errorMessages('CounsellingType')
-                  "
-                ></v-select>
-              </v-col>
-              <v-col>
-                <v-text-field
-                  label="Payments"
-                  color="#FCB258"
-                  append-icon="request_quote"
-                  type="text"
-                  filled
-                  dense
-                  v-model="request.Payments"
-                  required
-                  @input="$v.request.Payments.$touch()"
-                  @blur="$v.request.Payments.$touch()"
-                  :error-messages="
-                    $v.request.Payments | errorMessages('Payments')
-                  "
-                ></v-text-field>
-              </v-col>
-            </v-row>
+              <v-text-field
+                label="Email Id"
+                color="#FCB258"
+                append-icon="email"
+                filled
+                dense
+                v-model="request.Email"
+                required
+                @input="$v.request.Email.$touch()"
+                @blur="$v.request.Email.$touch()"
+                :error-messages="$v.request.Email | errorMessages('Email')"
+              ></v-text-field>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    label="Password"
+                    color="#FCB258"
+                    filled
+                    dense
+                    v-model="request.Password"
+                    required
+                    @input="$v.request.Password.$touch()"
+                    @blur="$v.request.Password.$touch()"
+                    :error-messages="
+                      $v.request.Password | errorMessages('Password')
+                    "
+                    :type="showPassword ? 'text' : 'password'"
+                    :append-icon="
+                      showPassword ? 'visibility_off' : 'visibility'
+                    "
+                    @click:append="showPassword = !showPassword"
+                  ></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    label="Confirm Password"
+                    color="#FCB258"
+                    filled
+                    dense
+                    v-model="request.ConfirmPassword"
+                    required
+                    @input="$v.request.ConfirmPassword.$touch()"
+                    @blur="$v.request.ConfirmPassword.$touch()"
+                    :error-messages="
+                      $v.request.ConfirmPassword
+                        | errorMessages('ConfirmPassword')
+                    "
+                    :type="showConfirmpassword ? 'text' : 'password'"
+                    :append-icon="
+                      showConfirmpassword ? 'visibility_off' : 'visibility'
+                    "
+                    @click:append="showConfirmpassword = !showConfirmpassword"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-text-field
+                label="Phone number"
+                color="#FCB258"
+                append-icon="call"
+                filled
+                dense
+                v-model="request.PhoneNumber"
+                required
+                @input="$v.request.PhoneNumber.$touch()"
+                @blur="$v.request.PhoneNumber.$touch()"
+                :error-messages="
+                  $v.request.PhoneNumber | errorMessages('Phone number')
+                "
+              ></v-text-field>
+              <v-row>
+                <v-col lg="6" md="6">
+                  <v-select
+                    label="Counselling Type"
+                    color="#FCB258"
+                    filled
+                    :items="counsellingTypes"
+                    item-text="name"
+                    v-model="request.CounselingType"
+                    item-value="id"
+                    :error-messages="
+                      $v.request.CounsellingType
+                        | errorMessages('CounsellingType')
+                    "
+                  ></v-select>
+                </v-col>
+                <v-col lg="6" md="6">
+                  <v-text-field
+                    label="Payments"
+                    color="#FCB258"
+                    append-icon="request_quote"
+                    type="text"
+                    filled
+                    dense
+                    v-model="request.Payments"
+                    required
+                    @input="$v.request.Payments.$touch()"
+                    @blur="$v.request.Payments.$touch()"
+                    :error-messages="
+                      $v.request.Payments | errorMessages('Payments')
+                    "
+                  ></v-text-field>
+                </v-col>
+              </v-row>
 
-            <div class="text-center">
-              <v-btn
-                color="background-orange"
-                class="white--text rounded font-weight-bold"
-                large
-                type="submit"
-                @click.prevent="register"
-                >Create account</v-btn
-              >
-            </div>
-          </v-form>
+              <div class="text-center">
+                <v-btn
+                  color="background-orange"
+                  class="white--text rounded font-weight-bold"
+                  large
+                  type="submit"
+                  @click.prevent="register"
+                  >Create account</v-btn
+                >
+              </div>
+            </v-form>
+          </div>
         </div>
         <v-snackbar
           v-model="snackbar"
@@ -382,11 +384,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Inject } from "vue-property-decorator";
+import { Component, Inject } from "vue-property-decorator";
 import {
   required,
   sameAs,
   numeric,
+  minLength,
   maxLength,
   email,
 } from "vuelidate/lib/validators";
@@ -404,7 +407,12 @@ import BaseComponent from "@/components/base/BaseComponent";
       Email: { required, email },
       Password: { required },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
-      PhoneNumber: { required, numeric, maxLength: maxLength(10) },
+      PhoneNumber: {
+        required,
+        numeric,
+        minLength: minLength(10),
+        maxLength: maxLength(10),
+      },
       Payments: { required },
       CounsellingType: { required },
     },
@@ -420,7 +428,7 @@ export default class ClientRegistration extends BaseComponent {
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
   public snackbar: boolean = false;
   public snackbarText: string = "";
-  public counsellingType: Array<CounsellingModel> = [];
+  public counsellingTypes: Array<CounsellingModel> = [];
 
   // public counselingType: string = "";
 
@@ -432,7 +440,7 @@ export default class ClientRegistration extends BaseComponent {
     this.registerService
       .getCounsellingType()
       .then((response: Array<CounsellingModel>) => {
-        this.counsellingType = response;
+        this.counsellingTypes = response;
       });
   }
 
