@@ -1,5 +1,5 @@
 import { GetterTree, MutationTree, ActionTree } from "vuex";
-import { LoginResponseModel } from "@/model";
+import { LoginResponseModel, UserModel } from "@/model";
 
 import JwtDecode from "jwt-decode";
 
@@ -15,6 +15,29 @@ const state: LoginResponseModel = {
 const getters: GetterTree<LoginResponseModel, any> = {
   accessToken: (state) => {
     return state.accessToken;
+  },
+
+  userInfo: (state) => {
+    let userInfo: UserModel = null;
+
+    if (state.accessToken) {
+      const tokenParsed: any = JwtDecode(state.accessToken);
+
+      userInfo = new UserModel();
+      userInfo.Id = tokenParsed.Id;
+      userInfo.Role = tokenParsed.Role;
+      
+      console.log(tokenParsed);
+
+      /*userInfo.userName = tokenParsed.preferred_username;
+      userInfo.fullName = tokenParsed.name;
+      userInfo.firstName = tokenParsed.given_name;
+      userInfo.lastName = tokenParsed.family_name;
+      userInfo.emailVerified = tokenParsed.email_verified;
+      userInfo.phoneNumber = tokenParsed.phoneNumber;*/
+    }
+
+    return userInfo;
   },
   isTokenExpired: (state) => {
     let expired = true;
@@ -46,9 +69,9 @@ const mutations: MutationTree<LoginResponseModel> = {
   },
   onLogout(state) {
     localStorage.clear();
-    state.accessToken = '';
-    state.refreshToken = '';
-  }
+    state.accessToken = "";
+    state.refreshToken = "";
+  },
 };
 const actions: ActionTree<LoginResponseModel, any> = {
   login(context, payload) {
@@ -56,7 +79,7 @@ const actions: ActionTree<LoginResponseModel, any> = {
   },
   logout(context) {
     context.commit("onLogout");
-  }
+  },
 };
 export const AuthenticationModule = {
   state,

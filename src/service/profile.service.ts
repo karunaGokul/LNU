@@ -1,47 +1,37 @@
-import { ClientRequestModel, ClientResponseModel } from "@/model";
+import {
+  ClientRequestModel,
+  ClientResponseModel,
+} from "@/model";
 import { BaseService } from "./base.service";
-import { AxiosRequestConfig } from 'axios';
 
 export interface IProfileService {
-  // clientProfile(
-  //   request: ClientRequestModel
-  // ): Promise<Array<ClientResponseModel>>;
-
-  clientProfile(file: File, request: ClientRequestModel): Promise<any>;
+  getProfile(request: ClientRequestModel): Promise<ClientResponseModel>;
+  updateProfile(file: File, request: ClientResponseModel): Promise<any>;
 }
 
 export class ProfileService
-  extends BaseService<ClientRequestModel, ClientResponseModel>
+  extends BaseService<any, ClientResponseModel>
   implements IProfileService
 {
   constructor() {
-    super("");
+    super("profile");
   }
-  // public clientProfile(
-  //   request: ClientRequestModel
-  // ): Promise<Array<ClientResponseModel>> {
-  //   return new Promise((resolve, reject) => {
-  //     let items = new Array<ClientResponseModel>();
 
-  //     items.push({
-  //       Name: "LifeNyou",
-  //       Contact: "1234567890",
-  //       Email: "lifenyou@test.com",
-  //       Queries: "welcome",
-  //     });
+  getProfile(request: ClientRequestModel): Promise<ClientResponseModel> {
+    return this.httpGet("profile/loadprofile", request).then((response) => {
+      return response.data;
+    });
+  }
 
-  //     resolve(items);
-  //   });
-  // }
-
-  clientProfile(file: File, request: ClientRequestModel): Promise<any> {
+  updateProfile(file: File, request: ClientResponseModel): Promise<any> {
     let formData = new FormData();
-    formData.append("Logo", file);
+    formData.append("image", file);
     formData.append("Name", request.Name);
-    formData.append("Contact", request.Contact);
+    formData.append("phoneNumber", request.PhoneNumber);
     formData.append("Email", request.Email);
     formData.append("Queries", request.Queries);
+    formData.append("Id", request.Id);
 
-    return this.upload(formData, `Profile`);
+    return this.upload(formData, `profile/EditProfile`);
   }
 }

@@ -1,16 +1,13 @@
 import { DataRequest } from "./base.model";
 
-export class ClientRequestModel extends DataRequest {
-  Name: string;
-  Contact: string;
-  Email: string;
-  Queries: string;
-  Logo: string;
+export class ClientRequestModel {
+  id: string;
 }
-
 export class ClientResponseModel {
+  Id: string;
   Name: string;
-  Contact: string;
+  PhoneNumber: string;
   Email: string;
   Queries: string;
+  Image: any = null;
 }

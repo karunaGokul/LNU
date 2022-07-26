@@ -32,7 +32,7 @@ export default class App extends DIContainer {
 
     root.$loadingSpinner = loadingSpinner.show;
 
-    // this.tokenInterceptor();
+    this.tokenInterceptor();
 
   }
 

@@ -6,14 +6,28 @@
       <v-col cols="4" sm="12" md="5">
         <h4 class="text-h4 font-weight-bold text-center pa-4">Hey, Client!</h4>
         <div class="text-center pa-4" style="position: relative">
-          <v-icon x-large color="#E0E0E0" style="font-size: 16rem" @change="handleimage">
+          <img
+            :src="viewImage"
+            alt="Profile image"
+            width="120"
+            height="130"
+            v-if="profilePhoto"
+          />
+          <v-icon x-large color="#E0E0E0" style="font-size: 16rem" v-else>
             account_circle
           </v-icon>
+          <input
+            type="file"
+            ref="profileUpload"
+            @change="uploadProfile"
+            class="d-none"
+          />
           <v-btn
             color="background-orange"
             fab
             absolute
             style="right: 130px; bottom: 60px"
+            @click.stop="openProfileUpload()"
           >
             <v-icon>photo_camera</v-icon>
           </v-btn>
@@ -30,7 +44,7 @@
         </div>
       </v-col>
       <v-col cols="8" sm="12" md="7" class="pa-8">
-        <v-form class="ma-10 pa-5" @submit="profile">
+        <v-form class="ma-10 pa-5" @submit.prevent="updateProfile">
           <v-text-field
             label="Name"
             type="text"
@@ -44,16 +58,18 @@
             :error-messages="$v.request.Name | errorMessages('Name')"
           ></v-text-field>
           <v-text-field
-            label="Contact"
+            label="Phone Number"
             type="text"
             color="#FCB258"
             filled
             dense
             required
-            v-model="request.Contact"
-            @input="$v.request.Contact.$touch()"
-            @blur="$v.request.Contact.$touch()"
-            :error-messages="$v.request.Contact | errorMessages('Contact')"
+            v-model="request.PhoneNumber"
+            @input="$v.request.PhoneNumber.$touch()"
+            @blur="$v.request.PhoneNumber.$touch()"
+            :error-messages="
+              $v.request.PhoneNumber | errorMessages('PhoneNumber')
+            "
           ></v-text-field>
           <v-text-field
             label="Email"
@@ -85,7 +101,6 @@
               class="text-capitalize"
               rounded
               type="submit"
-              @click.prevent="profile"
             >
               Save
             </v-btn>
@@ -97,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Inject } from "vue-property-decorator";
+import { Component, Inject } from "vue-property-decorator";
 
 import { required, email, maxLength } from "vuelidate/lib/validators";
 
@@ -110,7 +125,7 @@ import { IProfileService } from "@/service";
   validations: {
     request: {
       Name: { required },
-      Contact: { required, maxLength: maxLength(10) },
+      PhoneNumber: { required, maxLength: maxLength(10) },
       Email: { required, email },
       Queries: { required },
     },
@@ -118,22 +133,59 @@ import { IProfileService } from "@/service";
 })
 export default class ClientProfileLayout extends BaseComponent {
   @Inject("profileService") profileService: IProfileService;
-  public request: ClientRequestModel = new ClientRequestModel();
 
-  public logo: any;
+  public request: ClientResponseModel = new ClientResponseModel();
+  public profilePhoto: any = null;
 
-  public handleimage(e: File) {
-    this.logo = e;
+  mounted() {
+    this.getProfile();
   }
 
-  public profile() {
+  public getProfile() {
+    let profile = new ClientRequestModel();
+    profile.id = this.userInfo.Id;
+    this.profileService
+      .getProfile(profile)
+      .then((response) => {
+        this.request = response;
+
+        if (this.request.Image) {
+          fetch(this.$vuehelper.getImageUrl(this.request.Image))
+            .then((res) => res.blob())
+            .then((blob) => {
+              this.profilePhoto = new File([blob], this.request.Name, {
+                type: "image/png",
+              });
+            });
+        }
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  public openProfileUpload() {
+    let file: any = this.$refs.profileUpload;
+
+    file.click();
+  }
+
+  public uploadProfile(event: any) {
+    let file: File = event.target.files[0];
+    if (!file) return;
+
+    this.profilePhoto = file;
+  }
+
+  public updateProfile() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
+      this.request.Id = this.userInfo.Id;
       console.log(this.request);
       this.loadingSpinner("show");
-      this.profileService.clientProfile(this.logo,this.request).then(
-        (response: Array<ClientResponseModel>) => {
-          console.log(response);
+      this.profileService.updateProfile(this.profilePhoto, this.request).then(
+        (response: ClientResponseModel) => {
           this.loadingSpinner("hide");
         },
         (err) => {
@@ -145,6 +197,16 @@ export default class ClientProfileLayout extends BaseComponent {
         }
       );
     }
+  }
+
+  get viewImage() {
+    return this.profilePhoto
+      ? window.URL.createObjectURL(this.profilePhoto)
+      : null;
+  }
+
+  get userInfo() {
+    return this.$store.getters.userInfo;
   }
 }
 </script>
