@@ -30,15 +30,8 @@
             @click.stop="openProfileUpload()"
           >
           
-            <v-icon @change="handleimage">photo_camera</v-icon>
+            <v-icon>photo_camera</v-icon>
           </v-btn>
-          <!-- <v-file-input
-            hide-input
-            accept="image/png, image/jpeg, image/bmp"
-            prepend-icon="photo_camera"
-            class="d-flex justify-center"
-            @change="handleimage"
-          ></v-file-input> -->
         </div>
         <div class="text-center pa-4">
           <v-btn color="white" class="text-capitalize rounded-lg">
