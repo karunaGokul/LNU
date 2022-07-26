@@ -312,12 +312,14 @@
             <v-row>
               <v-col>
                 <v-select
-                  :items="items"
                   label="Counselling Type"
                   color="#FCB258"
                   filled
                   dense
                   v-model="request.CounselingType"
+                  :items="counsellingType"
+                  item-text="name"
+                  item-value="id"
                   required
                   @input="$v.request.CounsellingType.$touch()"
                   @blur="$v.request.CounsellingType.$touch()"
@@ -388,7 +390,7 @@ import {
   email,
 } from "vuelidate/lib/validators";
 
-import { ClientRegistrationModel } from "@/model";
+import { ClientRegistrationModel, CounsellingModel } from "@/model";
 import { IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
@@ -417,11 +419,24 @@ export default class ClientRegistration extends BaseComponent {
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
   public snackbar: boolean = false;
   public snackbarText: string = "";
+  public counsellingType: Array<CounsellingModel> = [];
 
-  public counselingType: string = "";
+  // public counselingType: string = "";
+
+  created() {
+    this.getCounsellingType();
+  }
+
+  private getCounsellingType() {
+    this.registerService
+      .getCounsellingType()
+      .then((response: Array<CounsellingModel>) => {
+        this.counsellingType = response;
+      });
+  }
 
   public register() {
-    this.request.CounsellingType.push(this.counselingType);
+    // this.request.CounsellingType.push(this.counselingType);
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);

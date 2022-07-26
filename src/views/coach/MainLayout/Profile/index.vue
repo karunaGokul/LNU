@@ -25,23 +25,94 @@
         <v-form ref="form" lazy-validation>
           <v-text-field
             label="Full Name"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
             required
             v-model="request.fullName"
             @input="$v.request.fullName.$touch()"
             @blur="$v.request.fullName.$touch()"
+            :error-messages="$v.request.fullName | errorMessages('Full Name')"
           ></v-text-field>
           <v-text-field
             label="Qualifications"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
             required
             v-model="request.qualifications"
+            @input="$v.request.qualifications.$touch()"
+            @blur="$v.request.qualifications.$touch()"
+            :error-messages="
+              $v.request.qualifications | errorMessages('Qualifications')
+            "
           ></v-text-field>
-          <v-text-field label="Experience (years)" required></v-text-field>
-          <v-text-field label="Counselling Type" required></v-text-field>
-          <v-text-field label="Upcoming Appointments" required></v-text-field>
-          <v-text-field label="Payouts" required></v-text-field>
+          <v-text-field
+            label="Experience (years)"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
+            required
+            v-model="request.experience"
+            @input="$v.request.experience.$touch()"
+            @blur="$v.request.experience.$touch()"
+            :error-messages="
+              $v.request.experience | errorMessages('Experience')
+            "
+          ></v-text-field>
+          <v-text-field
+            label="Counselling Type"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
+            required
+            v-model="request.counsellingType"
+            @input="$v.request.counsellingType.$touch()"
+            @blur="$v.request.counsellingType.$touch()"
+            :error-messages="
+              $v.request.counsellingType | errorMessages('Counselling Type')
+            "
+          ></v-text-field>
+          <v-text-field
+            label="Upcoming Appointments"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
+            required
+            v-model="request.upcomingAppointments"
+            @input="$v.request.upcomingAppointments.$touch()"
+            @blur="$v.request.upcomingAppointments.$touch()"
+            :error-messages="
+              $v.request.upcomingAppointments
+                | errorMessages('Upcoming Appointments')
+            "
+          ></v-text-field>
+          <v-text-field
+            label="Payouts"
+            type="text"
+            color="#5949B8"
+            filled
+            dense
+            required
+            v-model="request.payouts"
+            @input="$v.request.payouts.$touch()"
+            @blur="$v.request.payouts.$touch()"
+            :error-messages="$v.request.payouts | errorMessages('Payouts')"
+          ></v-text-field>
           <div class="d-flex justify-space-between mt-5">
             <v-btn color="#5949B8" class="white--text"> Edit </v-btn>
-            <v-btn color="#EBEBEB" class="white--black"> Save </v-btn>
+            <v-btn
+              color="#EBEBEB"
+              class="white--black"
+              @click.prevent="profile"
+            >
+              Save
+            </v-btn>
           </div>
         </v-form>
       </v-col>
@@ -59,7 +130,6 @@ import {
   CoachRequestModel,
   CoachResponseModel,
 } from "@/model/CoachProfile.model";
-import BaseComponent from "@/components/base/BaseComponent";
 
 import { ICoachProfileService } from "@/service";
 

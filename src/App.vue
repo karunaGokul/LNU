@@ -13,22 +13,21 @@ import { DIContainer } from "./dicontainer";
 
 import axios from "axios";
 
-import ProgressCircular from "@/components/controls/ProgressCircular.vue"
+import ProgressCircular from "@/components/controls/ProgressCircular.vue";
 
 @Component({
-  components:{
-    ProgressCircular
-  }
+  components: {
+    ProgressCircular,
+  },
 })
 export default class App extends DIContainer {
-
   created() {
     this.createFilters();
   }
 
   mounted() {
     let root: any = this.$root;
-    let loadingSpinner:any = this.$refs.loadingSpinner as ProgressCircular;
+    let loadingSpinner: any = this.$refs.loadingSpinner as ProgressCircular;
 
     root.$loadingSpinner = loadingSpinner.show;
 
