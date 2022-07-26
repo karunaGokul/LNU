@@ -247,6 +247,7 @@
             <v-text-field
               label="Email Id"
               color="#FCB258"
+              append-icon="email"
               filled
               dense
               v-model="request.Email"
@@ -299,6 +300,7 @@
             <v-text-field
               label="Phone number"
               color="#FCB258"
+              append-icon="call"
               filled
               dense
               v-model="request.PhoneNumber"
@@ -333,6 +335,7 @@
                 <v-text-field
                   label="Payments"
                   color="#FCB258"
+                  append-icon="request_quote"
                   type="text"
                   filled
                   dense
@@ -347,10 +350,10 @@
               </v-col>
             </v-row>
 
-            <div class="d-flex justify-center align-center">
+            <div class="text-center">
               <v-btn
                 color="background-orange"
-                class="white--text rounded-lg"
+                class="white--text rounded font-weight-bold"
                 large
                 type="submit"
                 @click.prevent="register"
