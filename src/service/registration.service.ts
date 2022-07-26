@@ -1,10 +1,10 @@
-import { BaseModel, ClientRegistrationModel, CounsellingModel } from "@/model";
+import { BaseModel, ClientRegistrationModel, CounselingModel } from "@/model";
 import { BaseService } from './base.service'
 
 
 export interface IRegistrationService {
   register(request: ClientRegistrationModel): Promise<any>;
-  getCounsellingType(): Promise<Array<CounsellingModel>>;
+  getCounselingType(): Promise<Array<CounselingModel>>;
 }
 
 export class RegistrationService
@@ -21,8 +21,8 @@ export class RegistrationService
   });
   }
 
-  public getCounsellingType(): Promise<Array<CounsellingModel>> {
-    return this.httpGet("common/CounsellingTypes", null).then((response) => {
+  public getCounselingType(): Promise<Array<CounselingModel>> {
+    return this.httpGet("common/CounselingTypes", null).then((response) => {
       return response.data;
     });
   }

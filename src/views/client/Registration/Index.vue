@@ -1,161 +1,4 @@
 <template>
-  <!--<v-row>
-    <v-col>
-      <v-row>
-        <v-col>
-          <v-img src="@/assets/registration.png" height="43vh">
-            <v-container fill-height fluid>
-              <v-row>
-                <v-col cols="12" md="6" offset-md="6">
-                  <h4
-                    class="text-h3 font-weight-bold"
-                    style="font-family: Questario Icon !important"
-                  >
-                    Life N You Welcomes you
-                  </h4>
-                  <h4
-                    class="text-h5 d-flex justify-center"
-                    style="font-family: Questario Icon !important"
-                  >
-                    Heal Better, Feel Better
-                  </h4>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-img>
-        </v-col>
-      </v-row>
-      <v-container fluid fill-height class="d-flex justify-center mt-n16">
-        <v-row justify="center" class="mt-1 mb-n6">
-          <h2>Registration Form</h2></v-row
-        >
-        <v-form class="mt-n16 mb-n10">
-          <v-row>
-            <v-col>
-              <v-text-field
-                label="Full Name"
-                color="#FCB258"
-                dense
-                filled
-                required
-                v-model="request.fullname"
-                @input="$v.request.fullname.$touch()"
-                @blur="$v.request.fullname.$touch()"
-                :error-messages="
-                  $v.request.fullname | errorMessages('Fullname')
-                "
-              ></v-text-field>
-            </v-col>
-            <v-col>
-              <v-text-field
-                label="Contact"
-                color="#FCB258"
-                dense
-                filled
-                required
-                v-model="request.contact"
-                @input="$v.request.contact.$touch()"
-                @blur="$v.request.contact.$touch()"
-                :error-messages="$v.request.contact | errorMessages('Contact')"
-              ></v-text-field>
-            </v-col>
-            <v-col>
-              <v-text-field
-                label="Email"
-                color="#FCB258"
-                dense
-                filled
-                required
-                v-model="request.email"
-                @input="$v.request.email.$touch()"
-                @blur="$v.request.email.$touch()"
-                :error-messages="$v.request.email | errorMessages('Email')"
-              ></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row class="mt-n5">
-            <v-col>
-              <v-text-field
-                label="Password"
-                color="#FCB258"
-                dense
-                filled
-                required
-                v-model="request.password"
-                @input="$v.request.password.$touch()"
-                @blur="$v.request.password.$touch()"
-                :error-messages="
-                  $v.request.password | errorMessages('Password')
-                "
-                :type="showPassword ? 'text' : 'password'"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="showPassword = !showPassword"
-              ></v-text-field>
-            </v-col>
-            <v-col>
-              <v-text-field
-                label="Confirm Password"
-                color="#FCB258"
-                dense
-                filled
-                required
-                v-model="request.confirmpassword"
-                @input="$v.request.confirmpassword.$touch()"
-                @blur="$v.request.confirmpassword.$touch()"
-                :error-messages="
-                  $v.request.confirmpassword | errorMessages('ConfirmPassword')
-                "
-                :type="showPassword ? 'text' : 'password'"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="showPassword = !showPassword"
-              ></v-text-field>
-            </v-col>
-            <v-col>
-              <v-select
-                label="Counselling Type"
-                color="#FCB258"
-                dense
-                filled
-                required
-                v-model="request.counsellingtype"
-                @input="$v.request.counsellingtype.$touch()"
-                @blur="$v.request.counsellingtype.$touch()"
-                :error-messages="
-                  $v.request.counsellingtype | errorMessages('Counsellingtype')
-                "
-              ></v-select>
-            </v-col>
-          </v-row>
-          <v-row class="mt-n5">
-            <v-col cols="4" md="4">
-              <v-text-field
-                label="Payements"
-                color="#FCB258"
-                dense
-                filled
-                required
-                v-model="request.payements"
-                @input="$v.request.payements.$touch()"
-                @blur="$v.request.payements.$touch()"
-                :error-messages="
-                  $v.request.payements | errorMessages('Payements')
-                "
-              ></v-text-field>
-            </v-col>
-
-            <v-col cols="4" md="4" offset-md="4" class="d-flex justify-end">
-              <v-btn
-                color="background-orange"
-                class="white--text text-capitalize"
-                @click="register"
-                >Submit</v-btn
-              >
-            </v-col>
-          </v-row>
-        </v-form>
-      </v-container>
-    </v-col>
-  </v-row>-->
   <v-row
     no-gutters
     style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
@@ -320,13 +163,17 @@
                     label="Counselling Type"
                     color="#FCB258"
                     filled
-                    :items="counsellingTypes"
+                    dense
+                    :items="CounselingTypes"
                     item-text="name"
-                    v-model="request.CounselingType"
                     item-value="id"
+                    v-model="request.CounselingType"
+                    @change="$v.request.CounselingType.$touch()"
+                    @blur="$v.request.CounselingType.$touch()"
+                    required
                     :error-messages="
-                      $v.request.CounsellingType
-                        | errorMessages('CounsellingType')
+                      $v.request.CounselingType
+                        | errorMessages('CounselingType')
                     "
                   ></v-select>
                 </v-col>
@@ -392,18 +239,21 @@ import {
   minLength,
   maxLength,
   email,
+  helpers
 } from "vuelidate/lib/validators";
 
-import { ClientRegistrationModel, CounsellingModel } from "@/model";
+import { ClientRegistrationModel, CounselingModel } from "@/model";
 import { IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
+const alphaOnly = helpers.regex('alphaOnly', /^[a-zA-Z]*$/i);
+
 @Component({
   validations: {
     request: {
-      FirstName: { required },
-      LastName: { required },
+      FirstName: { required, alphaOnly },
+      LastName: { required, alphaOnly },
       Email: { required, email },
       Password: { required },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
@@ -413,8 +263,8 @@ import BaseComponent from "@/components/base/BaseComponent";
         minLength: minLength(10),
         maxLength: maxLength(10),
       },
-      Payments: { required },
-      CounsellingType: { required },
+      Payments: { required, numeric },
+      CounselingType: { required },
     },
   },
 })
@@ -425,34 +275,32 @@ export default class ClientRegistration extends BaseComponent {
 
   public showPassword: boolean = false;
   public showConfirmpassword: boolean = false;
-  public items = ["Foo", "Bar", "Fizz", "Buzz"];
   public snackbar: boolean = false;
   public snackbarText: string = "";
-  public counsellingTypes: Array<CounsellingModel> = [];
+  public CounselingTypes: Array<CounselingModel> = [];
 
   // public counselingType: string = "";
 
   created() {
-    this.getCounsellingType();
+    this.getCounselingType();
   }
 
-  private getCounsellingType() {
+  private getCounselingType() {
+    this.loadingSpinner("show");
     this.registerService
-      .getCounsellingType()
-      .then((response: Array<CounsellingModel>) => {
-        this.counsellingTypes = response;
+      .getCounselingType()
+      .then((response: Array<CounselingModel>) => {
+        this.CounselingTypes = response;
+        this.loadingSpinner("hide");
       });
   }
 
   public register() {
-    // this.request.CounsellingType.push(this.counselingType);
     this.$v.$touch();
     if (!this.$v.$invalid) {
-      console.log(this.request);
       this.loadingSpinner("show");
       this.registerService.register(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
-          console.log(response);
           this.loadingSpinner("hide");
           this.$router.push("home/dashboard");
         },
