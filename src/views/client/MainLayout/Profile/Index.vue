@@ -188,6 +188,7 @@ export default class ClientProfileLayout extends BaseComponent {
       this.profileService.updateProfile(this.profilePhoto, this.request).then(
         (response: ClientResponseModel) => {
           this.loadingSpinner("hide");
+          this.getProfile();
         },
         (err) => {
           this.loadingSpinner("hide");
