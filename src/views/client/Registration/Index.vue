@@ -307,9 +307,7 @@
               required
               @input="$v.request.PhoneNumber.$touch()"
               @blur="$v.request.PhoneNumber.$touch()"
-              :error-messages="
-                $v.request.PhoneNumber | errorMessages('PhoneNumber')
-              "
+              :error-messages="$v.request.PhoneNumber | errorMessages('Phone number')"
             ></v-text-field>
             <v-row>
               <v-col>
@@ -405,10 +403,10 @@ import BaseComponent from "@/components/base/BaseComponent";
       LastName: { required },
       Email: { required, email },
       Password: { required },
-      ConfirmPassword: { sameAsPassword: sameAs("Password") },
-      Payments: { required },
-      CounsellingType: {},
+      ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
       PhoneNumber: { required, numeric, maxLength: maxLength(10) },
+      Payments: { required },
+      CounsellingType: { required },
     },
   },
 })
