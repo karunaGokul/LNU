@@ -1,13 +1,9 @@
 <template>
-  <v-row
-    no-gutters
-    style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
-  >
+  <v-row no-gutters class="primary-linear">
     <v-col cols="12" md="6">
-      <v-container fill-height fluid class="pa-0" style="position: relative">
+      <v-container fill-height fluid class="pa-0 position-relative">
         <h4
-          class="text-h4 white--text"
-          style="position: absolute; top: 50px; z-index: 9999999; left: 80px"
+          class="text-h4 white--text position-absolute logo"
         >
           Life N You
         </h4>
@@ -19,13 +15,7 @@
         />
 
         <div
-          class="white--text"
-          style="
-            position: absolute;
-            bottom: 50px;
-            z-index: 9999999;
-            right: 80px;
-          "
+          class="white--text position-absolute description"
         >
           <h5
             class="text-h4 text-center mb-2"
@@ -69,7 +59,7 @@
               </v-col>
 
               <v-col>
-                <v-icon color="#FCB258" class="mt-5 ml-16">
+                <v-icon color="primary" class="mt-5 ml-16">
                   check_circle
                 </v-icon>
               </v-col>
@@ -78,7 +68,7 @@
             <v-form class="px-8" @submit="login">
               <v-text-field
                 label="Username / Email"
-                color="#FCB258"
+                color="primary"
                 v-model="request.Email"
                 append-icon="person"
                 :error-messages="$v.request.Email | errorMessages('Username')"
@@ -91,7 +81,7 @@
 
               <v-text-field
                 label="Password"
-                color="#FCB258"
+                color="primary"
                 v-model="request.Password"
                 :type="showPassword ? 'text' : 'password'"
                 :error-messages="
@@ -106,7 +96,7 @@
 
               <div class="d-flex justify-center align-center">
                 <v-btn
-                  color="background-orange"
+                  color="primary"
                   class="white--text text-capitalize"
                   @click.prevent="login"
                   type="submit"
@@ -118,21 +108,21 @@
 
           <div class="text-center mb-4">
             If you are an admin,
-            <router-link to="/admin/login" class="text-decoration-none"
+            <router-link to="/admin/login" class="text-decoration-none" tag="a"
               >Click here</router-link
             >
           </div>
 
           <div class="text-center mb-4">
             If you are a coach,
-            <router-link to="/coach/login" class="text-decoration-none"
+            <router-link to="/coach/login" class="text-decoration-none" tag="a"
               >Click here</router-link
             >
           </div>
 
           <div class="text-center mt-16">
             No account?
-            <router-link to="/client/registration" class="text-decoration-none"
+            <router-link to="/client/registration" class="text-decoration-none" tag="a"
               >Register here</router-link
             >
           </div>
@@ -188,7 +178,6 @@ export default class Login extends BaseComponent {
   public login() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
-      console.log(this.request);
       this.loadingSpinner("show");
       this.authService.login(this.request).then(
         (response: Array<LoginResponseModel>) => {

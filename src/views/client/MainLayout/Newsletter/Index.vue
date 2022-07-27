@@ -38,7 +38,7 @@
       </v-card>
     </v-row>
 
-    <v-btn color="background-orange" rounded class="px-6 text-capitalize">
+    <v-btn color="primary" rounded class="px-6 text-capitalize">
       Save
     </v-btn>
   </div>

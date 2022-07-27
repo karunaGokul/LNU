@@ -1,0 +1,5 @@
+@each $value in $position {
+  .position-#{$value} {
+    position: $value !important;
+  }
+}

@@ -6,7 +6,7 @@
       </v-col>
       <v-spacer>
         <v-col class="d-flex justify-end">
-          <v-btn class="text-capitalize mr-4 mt-3" color="background-orange">book appointment</v-btn>
+          <v-btn class="text-capitalize mr-4 mt-3" color="primary">book appointment</v-btn>
         </v-col>
       </v-spacer>
     </v-row>

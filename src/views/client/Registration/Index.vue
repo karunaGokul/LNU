@@ -1,32 +1,17 @@
 <template>
-  <v-row
-    no-gutters
-    style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
-  >
+  <v-row  no-gutters class="primary-linear">
     <v-col lg="6" md="6" sm="12">
-      <v-container fill-height fluid class="pa-0" style="position: relative">
+      <v-container fill-height fluid class="pa-0 position-relative">
         <v-img src="@/assets/client-registration.jpg" height="100vh" />
         <h4
-          class="text-h3 font-weight-bold white--text"
-          style="
-            position: absolute;
-            bottom: 90px;
-            z-index: 9999999;
-            left: 80px;
-            font-family: Questario Icon !important;
-          "
+          class="text-h3 font-weight-bold white--text position-absolute title"
+          style="font-family: Questario Icon !important;"
         >
           Life N You Welcomes you
         </h4>
         <h4
-          class="text-h4 white--text"
-          style="
-            position: absolute;
-            bottom: 30px;
-            z-index: 9999999;
-            right: 160px;
-            font-family: Questario Icon !important;
-          "
+          class="text-h4 white--text position-absolute sub-title"
+          style="font-family: Questario Icon !important;"
         >
           Heal Better, Feel Better
         </h4>
@@ -47,7 +32,7 @@
           </h2>
           <div class="mb-4 px-8 text-h7 text-start">
             Already A Member?
-            <router-link to="/client/login" class="text-decoration-none"
+            <router-link to="/client/login" class="text-decoration-none" tag="a"
               >Log In
             </router-link>
           </div>
@@ -57,7 +42,7 @@
                 <v-col>
                   <v-text-field
                     label="First name"
-                    color="#FCB258"
+                    color="primary"
                     append-icon="person"
                     filled
                     dense
@@ -73,7 +58,7 @@
                 <v-col>
                   <v-text-field
                     label="Last name"
-                    color="#FCB258"
+                    color="primary"
                     append-icon="person"
                     filled
                     dense
@@ -90,7 +75,7 @@
 
               <v-text-field
                 label="Email Id"
-                color="#FCB258"
+                color="primary"
                 append-icon="email"
                 filled
                 dense
@@ -104,7 +89,7 @@
                 <v-col>
                   <v-text-field
                     label="Password"
-                    color="#FCB258"
+                    color="primary"
                     filled
                     dense
                     v-model="request.Password"
@@ -124,7 +109,7 @@
                 <v-col>
                   <v-text-field
                     label="Confirm Password"
-                    color="#FCB258"
+                    color="primary"
                     filled
                     dense
                     v-model="request.ConfirmPassword"
@@ -145,7 +130,7 @@
               </v-row>
               <v-text-field
                 label="Phone number"
-                color="#FCB258"
+                color="primary"
                 append-icon="call"
                 filled
                 dense
@@ -161,7 +146,7 @@
                 <v-col lg="6" md="6">
                   <v-select
                     label="Counselling Type"
-                    color="#FCB258"
+                    color="primary"
                     filled
                     dense
                     :items="CounselingTypes"
@@ -180,7 +165,7 @@
                 <v-col lg="6" md="6">
                   <v-text-field
                     label="Payments"
-                    color="#FCB258"
+                    color="primary"
                     append-icon="request_quote"
                     type="text"
                     filled
@@ -198,7 +183,7 @@
 
               <div class="text-center">
                 <v-btn
-                  color="background-orange"
+                  color="primary"
                   class="white--text rounded font-weight-bold"
                   large
                   type="submit"

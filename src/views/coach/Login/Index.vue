@@ -1,8 +1,5 @@
 <template>
-  <v-row
-    no-gutters
-    style="background: linear-gradient(180deg, #495cb8 -60.28%, #ffffff 26.8%)"
-  >
+  <v-row  no-gutters class="primary-linear">
     <v-col cols="12" md="6">
       <v-img
         src="@/assets/coachLogin.jpg"

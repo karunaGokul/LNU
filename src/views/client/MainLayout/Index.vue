@@ -20,7 +20,7 @@
                   to="/client/home/dashboard"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="orange-gradient"
+                  active-class="primary"
                   exact
                 >
                   <div class="v-list-item__icon">
@@ -34,7 +34,7 @@
                   to="/client/home/profile"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="orange-gradient"
+                  active-class="primary"
                 >
                   <div class="v-list-item__icon">
                     <v-icon>person</v-icon>
@@ -47,7 +47,7 @@
                   to="/client/home/appointments"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="orange-gradient"
+                  active-class="primary"
                 >
                   <div class="v-list-item__icon">
                     <v-icon> book_online </v-icon>
@@ -60,7 +60,7 @@
                   to="/client/home/messages"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="orange-gradient"
+                  active-class="primary"
                 >
                   <div class="v-list-item__icon">
                     <v-icon> sms </v-icon>
@@ -73,7 +73,7 @@
                   to="/client/home/payment"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="orange-gradient"
+                  active-class="primary"
                 >
                   <div class="v-list-item__icon">
                     <v-icon>local_atm</v-icon>
@@ -86,7 +86,7 @@
                   to="/client/home/journal"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="orange-gradient"
+                  active-class="primary"
                 >
                   <div class="v-list-item__icon">
                     <v-icon>style</v-icon>
@@ -99,7 +99,7 @@
                   to="/client/home/newsletter"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="orange-gradient"
+                  active-class="primary"
                 >
                   <div class="v-list-item__icon">
                     <v-icon>mark_email_unread</v-icon>
