@@ -13,6 +13,8 @@ import {
   ICoachProfileService,
   ICoachCalendarService,
   CoachCalendarService,
+  IAppointmentService,
+  AppointmentService,
 } from "@/service";
 
 export class DIContainer extends Vue {
@@ -28,4 +30,6 @@ export class DIContainer extends Vue {
     new CoachProfileService();
   @Provide("coachCalendarService") coachCalenderService: ICoachCalendarService =
     new CoachCalendarService();
+    @Provide("appointmentService") appointmentService: IAppointmentService =
+    new AppointmentService();
 }

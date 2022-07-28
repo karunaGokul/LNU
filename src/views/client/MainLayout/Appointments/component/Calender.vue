@@ -3,7 +3,10 @@
     <v-col>
       <v-sheet height="64">
         <v-toolbar flat>
-          <div class="d-flex align-center justify-space-between" style="width: 100%">
+          <div
+            class="d-flex align-center justify-space-between"
+            style="width: 100%"
+          >
             <v-btn
               outlined
               class="mr-4"
@@ -49,10 +52,10 @@
           </div>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="600">
+      <v-sheet height="600" v-if="!bookAppointments">
         <v-calendar
           ref="calendar"
-          v-model="focus"
+          v-model="request.Date"
           color="primary"
           :events="events"
           :event-color="getEventColor"
@@ -97,7 +100,7 @@
                   >cancel</v-btn
                 >
               </div>
-              <div v-else>
+              <div v-else-if="previousAppointments">
                 <h4>Rating</h4>
                 <v-divider class="my-3"></v-divider>
                 <v-rating
@@ -115,18 +118,88 @@
           </v-card>
         </v-menu>
       </v-sheet>
+
+      <div v-else>
+        <v-sheet height="600">
+          <v-calendar ref="calendar" v-model="focus"></v-calendar>
+        </v-sheet>
+
+        <v-row class="mt-4">
+          <v-col cols="6" md="4">
+            <v-select
+              label="Counselling Programme"
+              v-model="request.CounsellingProgramme"
+              outlined
+              dense
+              :items="item"
+            ></v-select>
+          </v-col>
+          <v-col cols="6" md="4">
+            <v-menu
+              ref="menu"
+              v-model="menu2"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="time"
+              transition="scale-transition"
+              offset-y
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  label="Select Time"
+                  prepend-inner-icon="schedule"
+                  v-model="request.Time"
+                  readonly
+                  outlined
+                  dense
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-time-picker
+                v-if="menu2"
+                v-model="request.Time"
+                ampm-in-title
+                @click:minute="$refs.menu.save(request.Time)"
+              ></v-time-picker>
+            </v-menu>
+          </v-col>
+        </v-row>
+
+        <v-btn
+          rounded
+          elevation="0"
+          class="background-orange text-capitalize px-6"
+          @click="bookAppointment"
+          >Save</v-btn
+        >
+      </div>
     </v-col>
   </v-row>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Inject } from "vue-property-decorator";
+
+import { AppointmentRequestModel, AppointmentResponseModel } from "@/model";
+
+import { IAppointmentService } from "@/service";
 
 @Component
 export default class Calendar extends Vue {
+  @Inject("appointmentService") appointmentService: IAppointmentService;
   @Prop() activeAppointments: boolean;
+  @Prop() previousAppointments: boolean;
+  @Prop() bookAppointments: boolean;
+
+  public request: AppointmentRequestModel = new AppointmentRequestModel();
 
   public focus: string = "";
   public type: string = "month";
+  public time: number = null;
+  public menu2: boolean = false;
+  public item: any = ["Foo", "Bar", "Fizz", "Buzz"];
   public typeToLabel: any = {
     month: "Month",
     week: "Week",
@@ -237,6 +310,19 @@ export default class Calendar extends Vue {
 
   private rnd(a: number, b: number) {
     return Math.floor((b - a + 1) * Math.random()) + a;
+  }
+
+  public bookAppointment() {
+    // this.$v.$touch();
+    // if (!this.$v.$invalid) {
+      this.request.Date = this.focus;
+    console.log(this.request);
+    this.appointmentService
+      .bookAppointments(this.request)
+      .then((response: Array<AppointmentResponseModel>) => {
+        console.log(response);
+      });
+    // }
   }
 }
 </script>

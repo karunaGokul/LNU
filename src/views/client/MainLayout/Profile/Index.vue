@@ -23,7 +23,7 @@
             class="d-none"
           />
           <v-btn
-            color="background-orange"
+            color="primary"
             fab
             absolute
             style="right: 130px; bottom: 60px"
@@ -98,7 +98,7 @@
           ></v-textarea>
           <div class="text-end">
             <v-btn
-              color="background-orange"
+              color="primary"
               class="text-capitalize"
               rounded
               type="submit"

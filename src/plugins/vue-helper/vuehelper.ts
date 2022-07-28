@@ -50,29 +50,48 @@ class ValHelper {
   messages(evaluation: ValidationEvaluation, label: string) {
     let error = "";
 
-    console.log(label);
-
     if (evaluation.$dirty && evaluation.$invalid) {
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "required") &&
         !evaluation.required
       )
-        error = `${label} is required`;
+        error = `Field is required`;
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "email") &&
+        !evaluation.email
+      )
+        error = `Please enter a valid email`;
+
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "alphaOnly") &&
+        !evaluation.alphaOnly
+      )
+        error = `Please enter a character`;
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "numeric") &&
         !evaluation.numeric
       )
         error = "Please enter valid number";
       if (
+        Object.prototype.hasOwnProperty.call(evaluation, "minLength") &&
+        !evaluation.minLength
+      ) {
+        let params: any = evaluation.$params;
+        error = `Minimum ${params.minLength.min} characters`;
+      }
+      if (
         Object.prototype.hasOwnProperty.call(evaluation, "maxLength") &&
         !evaluation.maxLength
-      )
-        error = "Please enter valid length";
+      ) {
+        let params: any = evaluation.$params;
+        error = `Maximum ${params.maxLength.max} characters`;
+      }
+
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "sameAsPassword") &&
         !evaluation.sameAsPassword
       )
-        error = `Please enter valid password`;
+        error = `Password does't match`;
     }
 
     //console.log(!evaluation!)

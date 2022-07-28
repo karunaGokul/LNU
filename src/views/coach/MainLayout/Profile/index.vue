@@ -125,10 +125,7 @@ import { Component, Inject, Vue } from "vue-property-decorator";
 
 import { required } from "vuelidate/lib/validators";
 
-import {
-  CoachRequestModel,
-  CoachResponseModel,
-} from "@/model/coach-profile.model";
+import { CoachRequestModel, CoachResponseModel } from "@/model";
 
 import { ICoachProfileService } from "@/service";
 

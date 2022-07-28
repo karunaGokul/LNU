@@ -213,6 +213,12 @@ const router = new VueRouter({
 export default router;
 
 router.beforeEach((to, from, next) => {
+  if (to.path.includes("client"))
+    document.documentElement.setAttribute("data-theme", "client-theme");
+  else if (to.path.includes("coach"))
+    document.documentElement.setAttribute("data-theme", "coach-theme");
+  else document.documentElement.setAttribute("data-theme", "admin-theme");
+
   if (to.matched.some((record) => !record.meta.anonymous)) {
     if (store.getters.isLoggedIn) {
       next();

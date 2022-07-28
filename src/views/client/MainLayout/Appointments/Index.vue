@@ -4,28 +4,39 @@
       <v-col>
         <h2 class="font-weight-bold my-2">Appointments</h2>
       </v-col>
-      <v-spacer>
+      <!-- <v-spacer>
         <v-col class="d-flex justify-end">
-          <v-btn class="text-capitalize mr-4 mt-3" color="background-orange">book appointment</v-btn>
+          <v-btn class="text-capitalize mr-4 mt-3" color="primary">book appointment</v-btn>
         </v-col>
-      </v-spacer>
+      </v-spacer> -->
     </v-row>
 
     <v-tabs v-model="tab">
       <v-tab href="#tab-active-appointments" class="text-capitalize"
         >Active Appointments</v-tab
       >
+      <v-tab href="#tab-book-appointments" class="text-capitalize"
+        >Book Appointments</v-tab
+      >
       <v-tab href="#tab-previous-appointments" class="text-capitalize"
         >Previous Appointments</v-tab
+      >
+      <v-tab href="#tab-pending-appointments" class="text-capitalize"
+        >Pending Appointments</v-tab
       >
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item value="tab-active-appointments">
-        <calendar :activeAppointments = activeAppointments />
+        <calendar :activeAppointments="activeAppointments" />
+      </v-tab-item>
+      <v-tab-item value="tab-book-appointments">
+        <calendar :bookAppointments="bookAppointments" />
       </v-tab-item>
       <v-tab-item value="tab-previous-appointments">
         <v-row class="fill-height">
-          <v-col col="12" md="12" sm="6"> <calendar /></v-col>
+          <v-col col="12" md="12" sm="6">
+            <calendar :previousAppointments="previousAppointments"
+          /></v-col>
           <!-- <v-col col="4" md="4" sm="6">
             <div class="w-50">
               <div class="d-flex align-center">
@@ -105,21 +116,28 @@
           </v-col> -->
         </v-row>
       </v-tab-item>
+      <v-tab-item value="tab-pending-appointments">
+        <PendingAppointments />
+      </v-tab-item>
     </v-tabs-items>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Calendar from "./component/Calender.vue";
+import PendingAppointments from "./component/PendingAppointments.vue";
 
 @Component({
   components: {
     Calendar,
+    PendingAppointments,
   },
 })
 export default class AppointmentsLayout extends Vue {
   public tab: string = "ActiveAppointments";
   public rating: number = 4;
   public activeAppointments: boolean = true;
+  public previousAppointments: boolean = true;
+  public bookAppointments: boolean = true;
 }
 </script>

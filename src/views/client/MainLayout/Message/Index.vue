@@ -7,7 +7,14 @@
           :items="items"
           background-color="orange"
           solo
-        ></v-select>
+          dark
+          style="position: relative"
+        >
+        </v-select>
+        <v-avatar color="red" size="20" absolute
+            style="left: 300px; bottom: 90px">
+          <span class="white--text">2</span>
+        </v-avatar>
       </v-col>
       <v-col cols="12" md="4">
         <v-select
@@ -15,6 +22,7 @@
           :items="items"
           background-color="orange"
           solo
+          dark
         ></v-select>
       </v-col>
     </v-row>
