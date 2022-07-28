@@ -38,6 +38,9 @@ export abstract class ServiceHelper {
 
   protected apiUrl: string = `${this.baseUrl}`;
 
+  private cancelToken = axios.CancelToken;
+  private source: any;
+
   protected deserialize<T>(classType: EntityType<T>, source: any): T {
     const raw = plainToClass<T, any>(classType, source);
 
@@ -75,15 +78,16 @@ export abstract class ServiceHelper {
     }
 
     const path = `${this.apiUrl}/${route}`;
+    this.source = this.cancelToken.source();
     const config: AxiosRequestConfig = {
       params: params,
       paramsSerializer: (params) => {
         return stringify(params, { arrayFormat: "repeat" });
       },
+      cancelToken: this.source.token
     };
 
     if (responseType) config.responseType = responseType;
-
     return axios.get<any>(path, config);
   }
 
@@ -104,6 +108,12 @@ export abstract class ServiceHelper {
 
     return axios.delete(path);
   }
+
+  protected abortRequest() {
+    if (this.source)
+        this.source.cancel("test cancellation");
+    this.source = null;
+}
 }
 
 export class BaseService<

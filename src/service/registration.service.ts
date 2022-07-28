@@ -5,6 +5,7 @@ import { BaseService } from './base.service'
 export interface IRegistrationService {
   register(request: ClientRegistrationModel): Promise<any>;
   getCounselingType(): Promise<Array<CounselingModel>>;
+  abortRequest(): Promise<any>;
 }
 
 export class RegistrationService
@@ -25,5 +26,9 @@ export class RegistrationService
     return this.httpGet("common/CounselingTypes", null).then((response) => {
       return response.data;
     });
+  }
+
+  public abortRequest(): Promise<any> {
+    return this.abortRequest();
   }
 }
