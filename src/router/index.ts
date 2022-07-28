@@ -41,13 +41,19 @@ const coachRoutes: Array<RouteConfig> = [
             path: "profile",
             name: "Coach Profile",
             component: () =>
-              import("@/views/coach/MainLayout/Profile/index.vue"),
+              import("@/views/coach/MainLayout/Profile/Index.vue"),
           },
           {
             path: "calendar",
             name: "Coach calendar",
             component: () =>
-              import("@/views/coach/MainLayout/Calendar/index.vue"),
+              import("@/views/coach/MainLayout/Calendar/Index.vue"),
+          },
+          {
+            path: "message",
+            name: "Coach message",
+            component: () =>
+              import("@/views/coach/MainLayout/Message/Index.vue"),
           },
         ],
       },
@@ -159,7 +165,7 @@ const clientRoutes: Array<RouteConfig> = [
             path: "journal",
             name: "Client Journal",
             component: () =>
-              import("@/views/client/MainLayout/MyJournal/index.vue"),
+              import("@/views/client/MainLayout/MyJournal/Index.vue"),
           },
           {
             path: "messages",
@@ -207,6 +213,12 @@ const router = new VueRouter({
 export default router;
 
 router.beforeEach((to, from, next) => {
+  if (to.path.includes("client"))
+    document.documentElement.setAttribute("data-theme", "client-theme");
+  else if (to.path.includes("coach"))
+    document.documentElement.setAttribute("data-theme", "coach-theme");
+  else document.documentElement.setAttribute("data-theme", "admin-theme");
+
   if (to.matched.some((record) => !record.meta.anonymous)) {
     if (store.getters.isLoggedIn) {
       next();

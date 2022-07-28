@@ -1,7 +1,5 @@
 <template>
-  <v-row
-    style="background: linear-gradient(180deg, #495cb8 -60.28%, #ffffff 26.8%)"
-  >
+  <v-row  no-gutters class="primary-linear">
     <v-col style="height: 100%">
       <v-row class="my-5">
         <v-col class="ml-16"> <h4 class="text-h5">Life N You</h4> </v-col>
@@ -19,7 +17,7 @@
             <v-col cols="12" md="4">
               <v-text-field
                 label="Full Name"
-                color="#495CB8"
+                color="primary"
                 filled
                 dense
                 required
@@ -34,7 +32,7 @@
             <v-col cols="12" md="4">
               <v-text-field
                 label="Experience(Years)"
-                color="#495CB8"
+                color="primary"
                 filled
                 dense
                 required
@@ -49,7 +47,7 @@
             <v-col cols="12" md="4">
               <v-select
                 label="Certification"
-                color="#495CB8"
+                color="primary"
                 filled
                 dense
                 required
@@ -66,7 +64,7 @@
             <v-col cols="12" md="4">
               <v-text-field
                 label="Email"
-                color="#495CB8"
+                color="primary"
                 filled
                 dense
                 required
@@ -79,7 +77,7 @@
             <v-col cols="12" md="4">
               <v-text-field
                 label="Password"
-                color="#495CB8"
+                color="primary"
                 filled
                 dense
                 required
@@ -97,7 +95,7 @@
             <v-col cols="12" md="4">
               <v-text-field
                 label="Confirm Password"
-                color="#495CB8"
+                color="primary"
                 filled
                 dense
                 required
@@ -117,7 +115,7 @@
             <v-col cols="12" md="4">
               <v-text-field
                 label="Contact"
-                color="#495CB8"
+                color="primary"
                 filled
                 dense
                 required
@@ -129,8 +127,8 @@
             </v-col>
             <v-col cols="12" md="4">
               <v-text-field
-                label="Payements"
-                color="#495CB8"
+                label="Payments"
+                color="primary"
                 filled
                 dense
                 required
@@ -159,7 +157,7 @@
               <v-btn
                 depressed
                 width="100"
-                color="#495CB8"
+                color="primary"
                 class="white--text text-capitalize mt-5"
                 @click="register"
                 >save</v-btn

@@ -48,14 +48,93 @@ class DateHelper {
 
 class ValHelper {
   messages(evaluation: ValidationEvaluation, label: string) {
-    let errors: Array<any> = [];
+    let error = "";
 
+    if (evaluation.$dirty && evaluation.$invalid) {
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "required") &&
+        !evaluation.required
+      )
+        error = `Field is required`;
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "email") &&
+        !evaluation.email
+      )
+        error = `Please enter a valid email`;
+
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "alphaOnly") &&
+        !evaluation.alphaOnly
+      )
+        error = `Please enter a character`;
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "numeric") &&
+        !evaluation.numeric
+      )
+        error = "Please enter valid number";
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "minLength") &&
+        !evaluation.minLength
+      ) {
+        let params: any = evaluation.$params;
+        error = `Minimum ${params.minLength.min} characters`;
+      }
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "maxLength") &&
+        !evaluation.maxLength
+      ) {
+        let params: any = evaluation.$params;
+        error = `Maximum ${params.maxLength.max} characters`;
+      }
+
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "sameAsPassword") &&
+        !evaluation.sameAsPassword
+      )
+        error = `Password does't match`;
+    }
+
+    //console.log(!evaluation!)
+    /*                                              
     if (!evaluation!.$dirty || !evaluation!.$invalid) return errors;
 
-    if (!evaluation!.required) errors.push("Required");
+    if (!evaluation!.required) errors.push(`Required`);
+
+    //console.log(!evaluation!.sameAsPassword)
+
+    if(!evaluation!.sameAsPassword) errors.push(`Please enter valid password`);
+
+    if(!evaluation!.numeric) errors.push(`Please enter valid number`);
 
     if (!evaluation!.invalid) errors.push("");
 
-    return errors;
+    console.log(errors)*/
+
+    return error;
+  }
+
+  public static validatorErrorMessage(
+    validatorName: string,
+    propertyName: string,
+    propertyValue?: any
+  ) {
+    const config: any = {
+      required: `${propertyName} is required`,
+      numeric: "Please enter valid number",
+      phone: "Please enter valid number",
+      minLength: `Minimum ${propertyValue.min} characters`,
+      maxLength: `Maximum ${propertyValue.max} characters`,
+      cvvMinLength: "Minimum 3 or 4 characters",
+      cvvMaxLength: "Maximum 3 or 4 characters",
+      phoneLength: `Phone number 10 or 12 charaters`,
+      email: "Please enter a valid email address",
+      domain: `Please enter your business email. Don't have one?`,
+      number: "Please enter one number",
+      special: `Please enter one special character: !@#$%&*`,
+      letter: "Please enter one letter",
+      validateCardNumber: "Please enter a valid credit card number.",
+    };
+
+    return config[validatorName];
   }
 }

@@ -9,7 +9,7 @@
               <th
                 v-for="(header, i) in headers"
                 :key="i"
-                class="background-orange pa-4"
+                class="primary pa-4"
               >
                 {{ header }}
               </th>
