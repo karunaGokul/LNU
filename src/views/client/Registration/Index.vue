@@ -1,17 +1,17 @@
 <template>
-  <v-row  no-gutters class="primary-linear">
+  <v-row no-gutters class="primary-linear">
     <v-col lg="6" md="6" sm="12">
       <v-container fill-height fluid class="pa-0 position-relative">
         <v-img src="@/assets/client-registration.jpg" height="100vh" />
         <h4
           class="text-h3 font-weight-bold white--text position-absolute title"
-          style="font-family: Questario Icon !important;"
+          style="font-family: Questario Icon !important"
         >
           Life N You Welcomes you
         </h4>
         <h4
           class="text-h4 white--text position-absolute sub-title"
-          style="font-family: Questario Icon !important;"
+          style="font-family: Questario Icon !important"
         >
           Heal Better, Feel Better
         </h4>
@@ -128,21 +128,23 @@
                   ></v-text-field>
                 </v-col>
               </v-row>
-              <v-text-field
-                label="Phone number"
-                color="primary"
-                append-icon="call"
-                filled
-                dense
-                v-model="request.PhoneNumber"
-                required
-                @input="$v.request.PhoneNumber.$touch()"
-                @blur="$v.request.PhoneNumber.$touch()"
-                :error-messages="
-                  $v.request.PhoneNumber | errorMessages('Phone number')
-                "
-              ></v-text-field>
               <v-row>
+                <v-col lg="6" md="6">
+                  <v-text-field
+                    label="Phone number"
+                    color="primary"
+                    append-icon="call"
+                    filled
+                    dense
+                    v-model="request.PhoneNumber"
+                    required
+                    @input="$v.request.PhoneNumber.$touch()"
+                    @blur="$v.request.PhoneNumber.$touch()"
+                    :error-messages="
+                      $v.request.PhoneNumber | errorMessages('Phone number')
+                    "
+                  ></v-text-field>
+                </v-col>
                 <v-col lg="6" md="6">
                   <v-select
                     label="Counselling Type"
@@ -162,51 +164,18 @@
                     "
                   ></v-select>
                 </v-col>
-                <v-col lg="6" md="6">
-                  <v-text-field
-                    label="Payments"
-                    color="primary"
-                    append-icon="request_quote"
-                    type="text"
-                    filled
-                    dense
-                    v-model="request.Payments"
-                    required
-                    @input="$v.request.Payments.$touch()"
-                    @blur="$v.request.Payments.$touch()"
-                    :error-messages="
-                      $v.request.Payments | errorMessages('Payments')
-                    "
-                  ></v-text-field>
-                </v-col>
               </v-row>
-
-<<<<<<< HEAD
-            <div class="text-center">
-              <v-btn
-                color="background-orange"
-                class="white--text rounded font-weight-bold text-capitalize"
-                large
-                type="submit"
-                @click.prevent="register"
-                >Create account</v-btn
-              >
-            </div>
-          </v-form>
-=======
               <div class="text-center">
                 <v-btn
                   color="primary"
                   class="white--text rounded font-weight-bold"
                   large
                   type="submit"
-                  @click.prevent="register"
                   >Create account</v-btn
                 >
               </div>
             </v-form>
           </div>
->>>>>>> fbb05188facb55bde74e826cc0b0557ca7a612e7
         </div>
         <v-snackbar
           v-model="snackbar"
@@ -238,7 +207,7 @@ import {
   minLength,
   maxLength,
   email,
-  helpers
+  helpers,
 } from "vuelidate/lib/validators";
 
 import { ClientRegistrationModel, CounselingModel } from "@/model";
@@ -246,7 +215,7 @@ import { IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
-const alphaOnly = helpers.regex('alphaOnly', /^[a-zA-Z]*$/i);
+const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
 
 @Component({
   validations: {
@@ -262,7 +231,6 @@ const alphaOnly = helpers.regex('alphaOnly', /^[a-zA-Z]*$/i);
         minLength: minLength(10),
         maxLength: maxLength(10),
       },
-      Payments: { required, numeric },
       CounselingType: { required },
     },
   },
@@ -277,8 +245,6 @@ export default class ClientRegistration extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
   public CounselingTypes: Array<CounselingModel> = [];
-
-  // public counselingType: string = "";
 
   created() {
     this.getCounselingType();

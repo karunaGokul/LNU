@@ -1,15 +1,6 @@
 <template>
   <div class="pa-4">
-    <v-row>
-      <v-col>
-        <h2 class="font-weight-bold my-2">Appointments</h2>
-      </v-col>
-      <!-- <v-spacer>
-        <v-col class="d-flex justify-end">
-          <v-btn class="text-capitalize mr-4 mt-3" color="primary">book appointment</v-btn>
-        </v-col>
-      </v-spacer> -->
-    </v-row>
+    <h2 class="font-weight-bold my-4">Appointments</h2>
 
     <v-tabs v-model="tab">
       <v-tab href="#tab-active-appointments" class="text-capitalize"
