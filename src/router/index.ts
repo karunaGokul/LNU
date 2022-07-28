@@ -40,13 +40,13 @@ const coachRoutes: Array<RouteConfig> = [
             path: "profile",
             name: "Coach Profile",
             component: () =>
-              import("@/views/coach/MainLayout/Profile/Profile.vue"),
+              import("@/views/coach/MainLayout/Profile/Index.vue"),
           },
           {
             path: "calendar",
             name: "Coach calendar",
             component: () =>
-              import("@/views/coach/MainLayout/Calendar/Calender.vue"),
+              import("@/views/coach/MainLayout/Calendar/Index.vue"),
           },
           {
             path: "message",
@@ -164,7 +164,7 @@ const clientRoutes: Array<RouteConfig> = [
             path: "journal",
             name: "Client Journal",
             component: () =>
-              import("@/views/client/MainLayout/MyJournal/MyJournal.vue"),
+              import("@/views/client/MainLayout/MyJournal/Index.vue"),
           },
           {
             path: "messages",
