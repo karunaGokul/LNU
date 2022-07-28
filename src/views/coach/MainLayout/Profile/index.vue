@@ -129,7 +129,7 @@ import { required } from "vuelidate/lib/validators";
 import {
   CoachRequestModel,
   CoachResponseModel,
-} from "@/model/CoachProfile.model";
+} from "@/model";
 
 import { ICoachProfileService } from "@/service";
 

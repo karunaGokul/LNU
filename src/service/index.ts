@@ -5,3 +5,4 @@ export * from "./registration.service";
 export * from "./payment.service";
 export * from "./CoachProfile.service";
 export * from "./CoachCalendar.service";
+export * from "./appointments.service";

@@ -353,7 +353,7 @@
             <div class="text-center">
               <v-btn
                 color="background-orange"
-                class="white--text rounded font-weight-bold"
+                class="white--text rounded font-weight-bold text-capitalize"
                 large
                 type="submit"
                 @click.prevent="register"

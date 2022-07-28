@@ -4,7 +4,7 @@
 
     <v-row class="my-4 ml-1 mr-4">
       <h4>February</h4>
-      <v-card class="mt-2 rounded-lg" elevation="2" height="100">
+      <v-card class="mt-2 rounded-lg" outlined height="100">
         <v-card-text class="black--text"
           >Lorem, ipsum dolor sit amet consectetur adipisicing elit. In earum
           corporis ipsam. Rem, tempore adipisci! Soluta, aliquid, doloremque,
@@ -16,7 +16,7 @@
 
     <v-row class="my-4 ml-1 mr-4">
       <h4>March</h4>
-      <v-card class="mt-2 rounded-lg" elevation="2" height="100">
+      <v-card class="mt-2 rounded-lg" outlined height="100">
         <v-card-text class="black--text"
           >Lorem, ipsum dolor sit amet consectetur adipisicing elit. In earum
           corporis ipsam. Rem, tempore adipisci! Soluta, aliquid, doloremque,
@@ -28,7 +28,7 @@
 
     <v-row class="my-4 ml-1 mr-4">
       <h4>April</h4>
-      <v-card class="mt-2 rounded-lg" elevation="2" height="100">
+      <v-card class="mt-2 rounded-lg" outlined height="100">
         <v-card-text class="black--text"
           >Lorem, ipsum dolor sit amet consectetur adipisicing elit. In earum
           corporis ipsam. Rem, tempore adipisci! Soluta, aliquid, doloremque,
