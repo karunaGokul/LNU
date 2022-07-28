@@ -37,7 +37,7 @@
             </router-link>
           </div>
           <div>
-            <v-form class="px-8">
+            <v-form class="px-8" @submit.prevent="register">
               <v-row>
                 <v-col>
                   <v-text-field
@@ -183,7 +183,7 @@
                   width="100"
                   color="primary"
                   class="white--text text-capitalize"
-                  @click="register"
+                  type="submit"
                   >save</v-btn
                 >
               </div>
