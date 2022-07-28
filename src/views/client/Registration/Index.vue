@@ -26,156 +26,150 @@
         align-center
         flex-column
       >
-        <div>
-          <h2 class="mb-3 px-8 text-h4 text-start font-weight-bold">
-            Create new account
-          </h2>
-          <div class="mb-4 px-8 text-h7 text-start">
-            Already A Member?
-            <router-link to="/client/login" class="text-decoration-none" tag="a"
-              >Log In
-            </router-link>
-          </div>
-          <div style="width: 590px">
-            <v-form class="px-8" @submit="register">
-              <v-row>
-                <v-col>
-                  <v-text-field
-                    label="First name"
-                    color="primary"
-                    append-icon="person"
-                    filled
-                    dense
-                    v-model="request.FirstName"
-                    required
-                    @input="$v.request.FirstName.$touch()"
-                    @blur="$v.request.FirstName.$touch()"
-                    :error-messages="
-                      $v.request.FirstName | errorMessages('FirstName')
-                    "
-                  ></v-text-field>
-                </v-col>
-                <v-col>
-                  <v-text-field
-                    label="Last name"
-                    color="primary"
-                    append-icon="person"
-                    filled
-                    dense
-                    v-model="request.LastName"
-                    required
-                    @input="$v.request.LastName.$touch()"
-                    @blur="$v.request.LastName.$touch()"
-                    :error-messages="
-                      $v.request.LastName | errorMessages('LastName')
-                    "
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-
-              <v-text-field
-                label="Email Id"
-                color="primary"
-                append-icon="email"
-                filled
-                dense
-                v-model="request.Email"
-                required
-                @input="$v.request.Email.$touch()"
-                @blur="$v.request.Email.$touch()"
-                :error-messages="$v.request.Email | errorMessages('Email')"
-              ></v-text-field>
-              <v-row>
-                <v-col>
-                  <v-text-field
-                    label="Password"
-                    color="primary"
-                    filled
-                    dense
-                    v-model="request.Password"
-                    required
-                    @input="$v.request.Password.$touch()"
-                    @blur="$v.request.Password.$touch()"
-                    :error-messages="
-                      $v.request.Password | errorMessages('Password')
-                    "
-                    :type="showPassword ? 'text' : 'password'"
-                    :append-icon="
-                      showPassword ? 'visibility_off' : 'visibility'
-                    "
-                    @click:append="showPassword = !showPassword"
-                  ></v-text-field>
-                </v-col>
-                <v-col>
-                  <v-text-field
-                    label="Confirm Password"
-                    color="primary"
-                    filled
-                    dense
-                    v-model="request.ConfirmPassword"
-                    required
-                    @input="$v.request.ConfirmPassword.$touch()"
-                    @blur="$v.request.ConfirmPassword.$touch()"
-                    :error-messages="
-                      $v.request.ConfirmPassword
-                        | errorMessages('ConfirmPassword')
-                    "
-                    :type="showConfirmpassword ? 'text' : 'password'"
-                    :append-icon="
-                      showConfirmpassword ? 'visibility_off' : 'visibility'
-                    "
-                    @click:append="showConfirmpassword = !showConfirmpassword"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col lg="6" md="6">
-                  <v-text-field
-                    label="Phone number"
-                    color="primary"
-                    append-icon="call"
-                    filled
-                    dense
-                    v-model="request.PhoneNumber"
-                    required
-                    @input="$v.request.PhoneNumber.$touch()"
-                    @blur="$v.request.PhoneNumber.$touch()"
-                    :error-messages="
-                      $v.request.PhoneNumber | errorMessages('Phone number')
-                    "
-                  ></v-text-field>
-                </v-col>
-                <v-col lg="6" md="6">
-                  <v-select
-                    label="Counselling Type"
-                    color="primary"
-                    filled
-                    dense
-                    :items="CounselingTypes"
-                    item-text="name"
-                    item-value="id"
-                    v-model="request.CounselingType"
-                    @change="$v.request.CounselingType.$touch()"
-                    @blur="$v.request.CounselingType.$touch()"
-                    required
-                    :error-messages="
-                      $v.request.CounselingType
-                        | errorMessages('CounselingType')
-                    "
-                  ></v-select>
-                </v-col>
-              </v-row>
-              <div class="text-center">
-                <v-btn
+        <h2 class="mb-3 px-8 text-h4 text-start font-weight-bold">
+          Create new account
+        </h2>
+        <div class="mb-4 px-8 text-h7 text-start">
+          Already A Member?
+          <router-link to="/client/login" class="text-decoration-none" tag="a"
+            >Log In
+          </router-link>
+        </div>
+        <div style="width: 590px">
+          <v-form class="px-8" @submit="register">
+            <v-row>
+              <v-col>
+                <v-text-field
+                  label="First name"
                   color="primary"
-                  class="white--text rounded font-weight-bold"
-                  large
-                  type="submit"
-                  >Create account</v-btn
-                >
-              </div>
-            </v-form>
-          </div>
+                  append-icon="person"
+                  filled
+                  dense
+                  v-model="request.FirstName"
+                  required
+                  @input="$v.request.FirstName.$touch()"
+                  @blur="$v.request.FirstName.$touch()"
+                  :error-messages="
+                    $v.request.FirstName | errorMessages('FirstName')
+                  "
+                ></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  label="Last name"
+                  color="primary"
+                  append-icon="person"
+                  filled
+                  dense
+                  v-model="request.LastName"
+                  required
+                  @input="$v.request.LastName.$touch()"
+                  @blur="$v.request.LastName.$touch()"
+                  :error-messages="
+                    $v.request.LastName | errorMessages('LastName')
+                  "
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-text-field
+              label="Email Id"
+              color="primary"
+              append-icon="email"
+              filled
+              dense
+              v-model="request.Email"
+              required
+              @input="$v.request.Email.$touch()"
+              @blur="$v.request.Email.$touch()"
+              :error-messages="$v.request.Email | errorMessages('Email')"
+            ></v-text-field>
+            <v-row>
+              <v-col>
+                <v-text-field
+                  label="Password"
+                  color="primary"
+                  filled
+                  dense
+                  v-model="request.Password"
+                  required
+                  @input="$v.request.Password.$touch()"
+                  @blur="$v.request.Password.$touch()"
+                  :error-messages="
+                    $v.request.Password | errorMessages('Password')
+                  "
+                  :type="showPassword ? 'text' : 'password'"
+                  :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                  @click:append="showPassword = !showPassword"
+                ></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  label="Confirm Password"
+                  color="primary"
+                  filled
+                  dense
+                  v-model="request.ConfirmPassword"
+                  required
+                  @input="$v.request.ConfirmPassword.$touch()"
+                  @blur="$v.request.ConfirmPassword.$touch()"
+                  :error-messages="
+                    $v.request.ConfirmPassword
+                      | errorMessages('ConfirmPassword')
+                  "
+                  :type="showConfirmpassword ? 'text' : 'password'"
+                  :append-icon="
+                    showConfirmpassword ? 'visibility_off' : 'visibility'
+                  "
+                  @click:append="showConfirmpassword = !showConfirmpassword"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col lg="6" md="6">
+                <v-text-field
+                  label="Phone number"
+                  color="primary"
+                  append-icon="call"
+                  filled
+                  dense
+                  v-model="request.PhoneNumber"
+                  required
+                  @input="$v.request.PhoneNumber.$touch()"
+                  @blur="$v.request.PhoneNumber.$touch()"
+                  :error-messages="
+                    $v.request.PhoneNumber | errorMessages('Phone number')
+                  "
+                ></v-text-field>
+              </v-col>
+              <v-col lg="6" md="6">
+                <v-select
+                  label="Counselling Type"
+                  color="primary"
+                  filled
+                  dense
+                  :items="CounselingTypes"
+                  item-text="name"
+                  item-value="id"
+                  v-model="request.CounselingType"
+                  @change="$v.request.CounselingType.$touch()"
+                  @blur="$v.request.CounselingType.$touch()"
+                  required
+                  :error-messages="
+                    $v.request.CounselingType | errorMessages('CounselingType')
+                  "
+                ></v-select>
+              </v-col>
+            </v-row>
+            <div class="text-center">
+              <v-btn
+                color="primary"
+                class="white--text rounded font-weight-bold"
+                large
+                type="submit"
+                >Create account</v-btn
+              >
+            </div>
+          </v-form>
         </div>
         <v-snackbar
           v-model="snackbar"
@@ -248,6 +242,14 @@ export default class ClientRegistration extends BaseComponent {
 
   created() {
     this.getCounselingType();
+  }
+
+  unmounted() {
+    this.cancel();
+  }
+
+  private cancel() {
+    this.registerService.abortRequest().then((response: any) => {});
   }
 
   private getCounselingType() {
