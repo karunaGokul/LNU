@@ -1,17 +1,17 @@
 <template>
-  <v-row  no-gutters class="primary-linear">
+  <v-row no-gutters class="primary-linear">
     <v-col lg="6" md="6" sm="12">
       <v-container fill-height fluid class="pa-0 position-relative">
         <v-img src="@/assets/client-registration.jpg" height="100vh" />
         <h4
           class="text-h3 font-weight-bold white--text position-absolute title"
-          style="font-family: Questario Icon !important;"
+          style="font-family: Questario Icon !important"
         >
           Life N You Welcomes you
         </h4>
         <h4
           class="text-h4 white--text position-absolute sub-title"
-          style="font-family: Questario Icon !important;"
+          style="font-family: Questario Icon !important"
         >
           Heal Better, Feel Better
         </h4>
@@ -181,19 +181,6 @@
                 </v-col>
               </v-row>
 
-<<<<<<< HEAD
-            <div class="text-center">
-              <v-btn
-                color="background-orange"
-                class="white--text rounded font-weight-bold text-capitalize"
-                large
-                type="submit"
-                @click.prevent="register"
-                >Create account</v-btn
-              >
-            </div>
-          </v-form>
-=======
               <div class="text-center">
                 <v-btn
                   color="primary"
@@ -206,7 +193,6 @@
               </div>
             </v-form>
           </div>
->>>>>>> fbb05188facb55bde74e826cc0b0557ca7a612e7
         </div>
         <v-snackbar
           v-model="snackbar"
@@ -238,7 +224,7 @@ import {
   minLength,
   maxLength,
   email,
-  helpers
+  helpers,
 } from "vuelidate/lib/validators";
 
 import { ClientRegistrationModel, CounselingModel } from "@/model";
@@ -246,7 +232,7 @@ import { IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
-const alphaOnly = helpers.regex('alphaOnly', /^[a-zA-Z]*$/i);
+const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
 
 @Component({
   validations: {

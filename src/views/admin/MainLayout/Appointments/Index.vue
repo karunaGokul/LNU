@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height class="ml-8">
     <v-row class="mt-5">
-       <h2> Appointments</h2>
+      <h2>Appointments</h2>
     </v-row>
     <v-row>
       <v-col cols="12" md="3">
