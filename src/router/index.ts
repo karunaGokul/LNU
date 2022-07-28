@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
-import axios from "axios";
 import store from "@/store";
 
 Vue.use(VueRouter);
@@ -41,13 +40,13 @@ const coachRoutes: Array<RouteConfig> = [
             path: "profile",
             name: "Coach Profile",
             component: () =>
-              import("@/views/coach/MainLayout/Profile/Index.vue"),
+              import("@/views/coach/MainLayout/Profile/Profile.vue"),
           },
           {
             path: "calendar",
             name: "Coach calendar",
             component: () =>
-              import("@/views/coach/MainLayout/Calendar/Index.vue"),
+              import("@/views/coach/MainLayout/Calendar/Calender.vue"),
           },
           {
             path: "message",

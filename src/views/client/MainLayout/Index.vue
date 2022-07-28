@@ -7,7 +7,7 @@
             <v-list-item class="pa-0">
               <v-list-item-content>
                 <v-list-item-title class="text-h6 font-weight-bold pt-4 pb-4">
-                  Life N You
+                  Life & You
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
