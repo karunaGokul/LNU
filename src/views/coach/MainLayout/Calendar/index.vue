@@ -93,10 +93,7 @@
 import { Component, Vue, Inject } from "vue-property-decorator";
 import { required } from "vuelidate/lib/validators";
 
-import {
-  CalendarRequestModel,
-  CalendarResponseModel,
-} from "@/model/coach-calendar.model";
+import { CalendarRequestModel, CalendarResponseModel } from "@/model";
 
 import { ICoachCalendarService } from "@/service";
 
