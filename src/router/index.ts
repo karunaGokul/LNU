@@ -164,7 +164,7 @@ const clientRoutes: Array<RouteConfig> = [
             path: "journal",
             name: "Client Journal",
             component: () =>
-              import("@/views/client/MainLayout/MyJournal/Index.vue"),
+              import("@/views/client/MainLayout/MyJournal/MyJournal.vue"),
           },
           {
             path: "messages",
