@@ -7,6 +7,9 @@
           label="Solo field"
           solo
           background-color="#5949B8"
+          class="red--text"
+          color="red"
+          dark
         ></v-select>
       </v-col>
       <v-col class="d-flex" cols="12" md="4">
