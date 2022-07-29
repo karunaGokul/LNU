@@ -92,16 +92,22 @@ const adminRoutes: Array<RouteConfig> = [
               import("@/views/admin/MainLayout/Appointments/Index.vue"),
           },
           {
-            path: "coachDetails",
+            path: "Details1",
             name: "CoachDetails",
             component: () =>
               import("@/views/admin/MainLayout/CoachDetails/Index.vue"),
           },
           {
-            path: "clientDetails",
+            path: "Details2",
             name: "ClientDetails",
             component: () =>
               import("@/views/admin/MainLayout/ClientDetails/Index.vue"),
+          },
+          {
+            path: "calendar",
+            name: "Calendar",
+            component: () =>
+              import("@/views/admin/MainLayout/Calendar/Index.vue"),
           },
         ],
       },

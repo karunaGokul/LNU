@@ -1,15 +1,16 @@
 <template>
   <v-row>
-    <v-col class="mr-16">
-      <h1 class="mt-16">Client Details</h1>
-      <v-card class="rounded-xl mt-8" color="rgb(120, 184, 73, 0.2)">
+    <v-col class="mx-10 pb-10">
+      <h1 class="mt-10">Client Details</h1>
+      <v-card elevation="0" outlined class="rounded-xl mt-8" color="rgb(120, 184, 73, 0.2)">
         <v-row>
           <v-col cols="12" md="3">
             <v-icon
               x-large
-              class="d-flex justify-center mt-10"
+              style="font-size: 8rem"
+              class="d-flex justify-center"
               color="rgb(120, 184, 73)"
-              >mdi-account-circle</v-icon
+              >account_circle</v-icon
             >
           </v-col>
           <v-col cols="12" md="9">
@@ -30,14 +31,15 @@
         </v-row>
       </v-card>
 
-      <v-card class="rounded-xl mt-8" color="rgb(120, 184, 73, 0.2)">
+      <v-card elevation="0" outlined class="rounded-xl mt-8" color="rgb(120, 184, 73, 0.2)">
         <v-row>
           <v-col cols="12" md="3">
             <v-icon
               x-large
-              class="d-flex justify-center mt-10"
+              class="d-flex justify-center"
+              style="font-size: 8rem"
               color="rgb(120, 184, 73)"
-              >mdi-account-circle</v-icon
+              >account_circle</v-icon
             >
           </v-col>
           <v-col cols="12" md="9">
@@ -58,14 +60,15 @@
         </v-row>
       </v-card>
 
-      <v-card class="rounded-xl mt-8" color="rgb(120, 184, 73, 0.2)">
+      <v-card elevation="0" outlined class="rounded-xl mt-8" color="rgb(120, 184, 73, 0.2)">
         <v-row>
           <v-col cols="12" md="3">
             <v-icon
               x-large
-              class="d-flex justify-center mt-10"
+              class="d-flex justify-center"
+              style="font-size: 8rem"
               color="rgb(120, 184, 73)"
-              >mdi-account-circle</v-icon
+              >account_circle</v-icon
             >
           </v-col>
           <v-col cols="12" md="9">
