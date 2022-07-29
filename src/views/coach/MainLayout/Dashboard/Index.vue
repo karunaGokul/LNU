@@ -15,6 +15,7 @@
           <v-card
             height="150"
             class="d-flex align-center justify-center rounded-lg"
+            style="box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.15)"
           >
             <v-icon size="80px" color="#5949b8">account_circle</v-icon>
           </v-card>
@@ -23,6 +24,7 @@
           <v-card
             height="150"
             class="d-flex align-center justify-center rounded-lg"
+            style="box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.15)"
           >
             <v-icon size="80px" color="#5949b8">calendar_month</v-icon>
           </v-card>
@@ -31,6 +33,7 @@
           <v-card
             height="150"
             class="d-flex align-center justify-center rounded-lg"
+            style="box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.15)"
           >
             <v-icon size="80px" color="#5949b8">sms</v-icon>
           </v-card>
