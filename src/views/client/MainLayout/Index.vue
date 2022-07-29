@@ -118,7 +118,7 @@
             <div class="mt-4">
               <v-btn
                 elevation="0"
-                color="background-orange"
+                color="primary"
                 rounded
                 class="px-7 text-capitalize"
                 @click="logout"
@@ -129,7 +129,9 @@
         </v-card>
       </v-col>
       <v-col cols="10" sm="10" md="10">
-        <router-view />
+        <div class="primary-linear">
+          <router-view />
+        </div>
       </v-col>
     </v-row>
   </v-container>

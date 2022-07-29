@@ -26,7 +26,6 @@
         align-center
         flex-column
       >
-        <!-- <div> -->
         <h2 class="mb-3 px-8 text-h4 text-start font-weight-bold">
           Create new account
         </h2>
@@ -72,7 +71,6 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-
             <v-text-field
               label="Email Id"
               color="primary"
@@ -126,21 +124,23 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-            <v-text-field
-              label="Phone number"
-              color="primary"
-              append-icon="call"
-              filled
-              dense
-              v-model="request.PhoneNumber"
-              required
-              @input="$v.request.PhoneNumber.$touch()"
-              @blur="$v.request.PhoneNumber.$touch()"
-              :error-messages="
-                $v.request.PhoneNumber | errorMessages('Phone number')
-              "
-            ></v-text-field>
             <v-row>
+              <v-col lg="6" md="6">
+                <v-text-field
+                  label="Phone number"
+                  color="primary"
+                  append-icon="call"
+                  filled
+                  dense
+                  v-model="request.PhoneNumber"
+                  required
+                  @input="$v.request.PhoneNumber.$touch()"
+                  @blur="$v.request.PhoneNumber.$touch()"
+                  :error-messages="
+                    $v.request.PhoneNumber | errorMessages('Phone number')
+                  "
+                ></v-text-field>
+              </v-col>
               <v-col lg="6" md="6">
                 <v-select
                   label="Counselling Type"
@@ -159,32 +159,13 @@
                   "
                 ></v-select>
               </v-col>
-              <v-col lg="6" md="6">
-                <v-text-field
-                  label="Payments"
-                  color="primary"
-                  append-icon="request_quote"
-                  type="text"
-                  filled
-                  dense
-                  v-model="request.Payments"
-                  required
-                  @input="$v.request.Payments.$touch()"
-                  @blur="$v.request.Payments.$touch()"
-                  :error-messages="
-                    $v.request.Payments | errorMessages('Payments')
-                  "
-                ></v-text-field>
-              </v-col>
             </v-row>
-
             <div class="text-center">
               <v-btn
                 color="primary"
-                class="rounded font-weight-bold text-capitalize"
+                class="white--text rounded font-weight-bold"
                 large
                 type="submit"
-                @click.prevent="register"
                 >Create account</v-btn
               >
             </div>
@@ -244,7 +225,6 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
         minLength: minLength(10),
         maxLength: maxLength(10),
       },
-      Payments: { required, numeric },
       CounselingType: { required },
     },
   },
@@ -266,12 +246,10 @@ export default class ClientRegistration extends BaseComponent {
 
   unmounted() {
     this.cancel();
-  } 
+  }
 
-  private cancel(){
-    this.registerService.abortRequest().then((response: any) => {
-      
-    });
+  private cancel() {
+    this.registerService.abortRequest().then((response: any) => {});
   }
 
   private getCounselingType() {

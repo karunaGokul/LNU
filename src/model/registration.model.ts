@@ -6,7 +6,6 @@ export class ClientRegistrationModel {
   Password: string;
   ConfirmPassword: string;
   CounselingType: string;
-  Payments: string;
 }
 
 export class CounselingModel {
