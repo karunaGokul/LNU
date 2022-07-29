@@ -72,7 +72,9 @@
               </div>
             </v-list>
             <div class="mt-4">
-              <v-btn elevation="0" rounded class="px-6 text-capitalize">Support</v-btn>
+              <v-btn elevation="0" rounded class="px-6 text-capitalize"
+                >Support</v-btn
+              >
             </div>
             <div class="mt-4">
               <v-btn

@@ -41,37 +41,52 @@
               <v-row>
                 <v-col>
                   <v-text-field
-                    label="Full Name"
+                    label="First name"
                     color="primary"
                     append-icon="person"
                     filled
                     dense
                     required
-                    v-model="request.fullname"
-                    @input="$v.request.fullname.$touch()"
-                    @blur="$v.request.fullname.$touch()"
+                    v-model="request.firstname"
+                    @input="$v.request.firstname.$touch()"
+                    @blur="$v.request.firstname.$touch()"
                     :error-messages="
-                      $v.request.fullname | errorMessages('Fullname')
+                      $v.request.firstname | errorMessages('Firstname')
                     "
                   ></v-text-field>
                 </v-col>
                 <v-col>
                   <v-text-field
-                    label="Experience(Years)"
-                    append-icon="auto_graph"
+                    label="Last name"
                     color="primary"
+                    append-icon="person"
                     filled
                     dense
                     required
-                    v-model="request.experience"
-                    @input="$v.request.experience.$touch()"
-                    @blur="$v.request.experience.$touch()"
+                    v-model="request.lastname"
+                    @input="$v.request.lastname.$touch()"
+                    @blur="$v.request.lastname.$touch()"
                     :error-messages="
-                      $v.request.experience | errorMessages('Experience')
+                      $v.request.lastname | errorMessages('Lastname')
                     "
                   ></v-text-field>
                 </v-col>
               </v-row>
+
+              <v-text-field
+                label="Username"
+                color="primary"
+                append-icon="person"
+                filled
+                dense
+                required
+                v-model="request.username"
+                @input="$v.request.username.$touch()"
+                @blur="$v.request.username.$touch()"
+                :error-messages="
+                  $v.request.username | errorMessages('Username')
+                "
+              ></v-text-field>
 
               <v-text-field
                 label="Email"
@@ -131,16 +146,18 @@
               </v-row>
 
               <v-text-field
-                label="Contact"
+                label="Phone number"
                 append-icon="call"
                 color="primary"
                 filled
                 dense
                 required
                 v-model="request.contact"
-                @input="$v.request.contact.$touch()"
-                @blur="$v.request.contact.$touch()"
-                :error-messages="$v.request.contact | errorMessages('Contact')"
+                @input="$v.request.phonenumber.$touch()"
+                @blur="$v.request.phonenumber.$touch()"
+                :error-messages="
+                  $v.request.phonenumber | errorMessages('Phone number')
+                "
               ></v-text-field>
 
               <v-row>
@@ -162,6 +179,22 @@
                 </v-col>
                 <v-col>
                   <v-text-field
+                    label="Experience(Years)"
+                    append-icon="auto_graph"
+                    color="primary"
+                    filled
+                    dense
+                    required
+                    v-model="request.experience"
+                    @input="$v.request.experience.$touch()"
+                    @blur="$v.request.experience.$touch()"
+                    :error-messages="
+                      $v.request.experience | errorMessages('Experience')
+                    "
+                  ></v-text-field>
+                </v-col>
+                <!-- <v-col>
+                  <v-text-field
                     label="Payments"
                     color="primary"
                     append-icon="request_quote"
@@ -175,16 +208,15 @@
                       $v.request.payements | errorMessages('Payements')
                     "
                   ></v-text-field>
-                </v-col>
+                </v-col> -->
               </v-row>
               <div class="text-center">
                 <v-btn
                   depressed
-                  width="100"
                   color="primary"
                   class="white--text text-capitalize"
                   type="submit"
-                  >save</v-btn
+                  >Create account</v-btn
                 >
               </div>
             </v-form>
@@ -205,8 +237,10 @@ import { CoachRegistrationModel } from "@/model";
 @Component({
   validations: {
     request: {
-      fullname: { required },
-      contact: { required },
+      firstname: { required },
+      lastname: { required },
+      username: { required },
+      phonenumber: { required },
       email: { required },
       password: { required },
       confirmpassword: { required, sameAsPassword: sameAs("password") },

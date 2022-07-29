@@ -94,8 +94,9 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 import { required } from "vuelidate/lib/validators";
 
 import { CalendarRequestModel, CalendarResponseModel } from "@/model";
-
 import { ICoachCalendarService } from "@/service";
+
+import BaseComponent from "@/components/base/BaseComponent";
 
 @Component({
   validations: {
@@ -107,7 +108,7 @@ import { ICoachCalendarService } from "@/service";
     },
   },
 })
-export default class calender extends Vue {
+export default class calender extends BaseComponent {
   @Inject("coachCalendarService") coachCalendarService: ICoachCalendarService;
 
   public picker = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)

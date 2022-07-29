@@ -14,8 +14,10 @@ export class CounselingModel {
 }
 
 export class CoachRegistrationModel {
-  fullname: string;
-  contact: string;
+  firstname: string;
+  lastname: string;
+  username: string;
+  phonenumber: string;
   email: string;
   password: string;
   confirmpassword: string;
