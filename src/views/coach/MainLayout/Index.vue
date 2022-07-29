@@ -15,14 +15,14 @@
             <v-list dense nav class="pa-0">
               <div>
                 <router-link
-                  to="/coach/home/profile"
+                  to="/coach/home/dashboard"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
                   active-class="nav-color"
                   exact
                 >
                   <div class="v-list-item__icon">
-                    <v-icon class="icon">person</v-icon>
+                    <v-icon class="icon">dashboard</v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Dashboard</div>
