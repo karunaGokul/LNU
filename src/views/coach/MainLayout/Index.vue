@@ -15,6 +15,22 @@
             <v-list dense nav class="pa-0">
               <div>
                 <router-link
+                  to="/coach/home/dashboard"
+                  tag="div"
+                  class="my-4 v-list-item v-list-item--link px-4"
+                  active-class="nav-color"
+                  exact
+                >
+                  <div class="v-list-item__icon">
+                    <v-icon class="icon">dashboard</v-icon>
+                  </div>
+                  <div class="v-list-item__content">
+                    <div class="v-list-item__title">Dashboard</div>
+                  </div>
+                </router-link>
+              </div>
+              <div>
+                <router-link
                   to="/coach/home/profile"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
@@ -111,6 +127,6 @@ export default class MainLayout extends Vue {
   color: white !important;
 }
 .btn {
-  margin-top: 150px;
+  margin-top: 120px;
 }
 </style>

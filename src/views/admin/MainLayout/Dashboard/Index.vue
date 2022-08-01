@@ -1,95 +1,12 @@
 <template>
-  <div class="primary-linear">
-    <v-container fluid class="pa-16">
-      <h1 class="text-h4 text-center font-weight-bold">Welcome Admin!</h1>
-      <v-row class="mt-6">
-        <v-col>
-          <v-card
-            elevation="4"
-            height="150"
-            class="rounded-lg"
-            to="/admin/home/appointments"
-          >
-            <v-icon
-              large
-              style="font-size: 3rem"
-              color="#FCA744"
-              class="d-flex justify-center pt-4 mb-n4"
-              >book_online</v-icon
-            >
-            <v-card-title class="justify-center"
-              >Appointments</v-card-title
-            ></v-card
-          >
-        </v-col>
-        <v-col>
-          <v-card
-            elevation="4"
-            height="150"
-            class="rounded-lg"
-            to="/admin/home/coachDetails"
-          >
-            <v-icon
-              large
-              style="font-size: 3rem"
-              color="#FCA744"
-              class="d-flex justify-center pt-4 mb-n4"
-              >person</v-icon
-            >
-            <v-card-title class="justify-center">Coaches</v-card-title>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card
-            elevation="4"
-            height="150"
-            class="rounded-lg"
-            to="/admin/home/clientDetails"
-          >
-            <v-icon
-              large
-              style="font-size: 3rem"
-              color="#FCA744"
-              class="d-flex justify-center pt-4 mb-n4"
-              >people</v-icon
-            ><v-card-title class="justify-center">Clients </v-card-title>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row class="mt-6">
-        <v-col cols="6" md="4">
-          <v-card
-            elevation="4"
-            height="150"
-            class="rounded-lg"
-            to="/admin/home/calendar"
-          >
-            <v-icon
-              large
-              style="font-size: 3rem"
-              color="#FCA744"
-              class="d-flex justify-center pt-4 mb-n4"
-              >calendar_month</v-icon
-            >
-            <v-card-title class="justify-center">Calendar</v-card-title></v-card
-          >
-        </v-col>
-        <v-col cols="4" md="4" align-self="end" offset-md="4">
-          <v-btn class="text-capitalize"
-            ><v-icon class="pr-2">mark_email_unread</v-icon> Upload Newsletter
-            <v-icon class="pl-1">file_upload</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <div>admin Dashboard</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
-  components: {},
+  components: { },
 })
 export default class AdminDashboardLayout extends Vue {}
 </script>

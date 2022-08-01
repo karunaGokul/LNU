@@ -63,20 +63,22 @@
               $v.request.experience | errorMessages('Experience')
             "
           ></v-text-field>
-          <v-text-field
+          <v-select
             label="Counselling Type"
-            type="text"
             color="#5949B8"
             filled
             dense
-            required
+            :items="CounselingTypes"
+            item-text="name"
+            item-value="id"
             v-model="request.counsellingType"
-            @input="$v.request.counsellingType.$touch()"
+            @change="$v.request.counsellingType.$touch()"
             @blur="$v.request.counsellingType.$touch()"
+            required
             :error-messages="
-              $v.request.counsellingType | errorMessages('Counselling Type')
+              $v.request.counsellingType | errorMessages('Counseling Type')
             "
-          ></v-text-field>
+          ></v-select>
           <v-text-field
             label="Upcoming Appointments"
             type="text"
@@ -122,10 +124,15 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-property-decorator";
-
 import { required } from "vuelidate/lib/validators";
 
-import { CoachRequestModel, CoachResponseModel } from "@/model";
+import BaseComponent from "@/components/base/BaseComponent";
+
+import {
+  CoachRequestModel,
+  CoachResponseModel,
+  CounselingModel,
+} from "@/model";
 
 import { ICoachProfileService } from "@/service";
 
@@ -141,24 +148,33 @@ import { ICoachProfileService } from "@/service";
     },
   },
 })
-export default class Profile extends Vue {
+export default class Profile extends BaseComponent {
   @Inject("coachProfileService") coachProfileService: ICoachProfileService;
   public request: CoachRequestModel = new CoachRequestModel();
+  public CounselingTypes: Array<CounselingModel> = [];
 
+  created() {
+    this.getCounselingType();
+  }
+
+  private getCounselingType() {
+    this.loadingSpinner("show");
+    this.coachProfileService
+      .getCounselingType()
+      .then((response: Array<CounselingModel>) => {
+        this.CounselingTypes = response;
+        this.loadingSpinner("hide");
+      });
+  }
   public profile() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       console.log(this.request);
-      this.coachProfileService.coachProfile(this.request).then(
-        (response: Array<CoachResponseModel>) => {
+      this.coachProfileService
+        .coachProfile(this.request)
+        .then((response: Array<CoachResponseModel>) => {
           console.log(response);
-        }
-        // (err)=>{
-        //   if(err.response.status === 400) {
-
-        //   }
-        // }
-      );
+        });
     }
   }
 }

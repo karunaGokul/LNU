@@ -50,7 +50,7 @@
                   active-class="primary"
                 >
                   <div class="v-list-item__icon">
-                    <v-icon> person </v-icon>
+                    <v-icon> book_online </v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Coaches</div>
@@ -63,29 +63,18 @@
                   active-class="primary"
                 >
                   <div class="v-list-item__icon">
-                    <v-icon> people </v-icon>
+                    <v-icon> book_online </v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Clients</div>
                   </div>
                 </router-link>
-                <router-link
-                  to="/admin/home/calendar"
-                  tag="div"
-                  class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
-                >
-                  <div class="v-list-item__icon">
-                    <v-icon> calendar_month </v-icon>
-                  </div>
-                  <div class="v-list-item__content">
-                    <div class="v-list-item__title">Calendar</div>
-                  </div>
-                </router-link>
               </div>
             </v-list>
-            <div class="mt-16">
-              <v-btn elevation="0" rounded class="px-6 text-capitalize">Support</v-btn>
+            <div class="mt-4">
+              <v-btn elevation="0" rounded class="px-6 text-capitalize"
+                >Support</v-btn
+              >
             </div>
             <div class="mt-4">
               <v-btn
@@ -111,6 +100,15 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class MainLayout extends Vue {
- 
+  public items = [
+    { title: "Dashboard", icon: "mdi-view-dashboard" },
+    { title: "Coaches", icon: "mdi-account-tie-outline" },
+    { title: "Clients", icon: "mdi-account" },
+    { title: "Calendar", icon: "mdi-calendar-month-outline" },
+    { title: "", icon: "" },
+    { title: "", icon: "" },
+    { title: "Support", icon: "mdi-help-box" },
+    { title: "Logout", icon: "mdi-logout" },
+  ];
 }
 </script>

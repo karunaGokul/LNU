@@ -103,12 +103,6 @@ const adminRoutes: Array<RouteConfig> = [
             component: () =>
               import("@/views/admin/MainLayout/ClientDetails/Index.vue"),
           },
-          {
-            path: "calendar",
-            name: "Calendar",
-            component: () =>
-              import("@/views/admin/MainLayout/Calendar/Index.vue"),
-          },
         ],
       },
     ],
