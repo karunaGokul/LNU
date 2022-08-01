@@ -44,7 +44,7 @@
                   </div>
                 </router-link>
                 <router-link
-                  to="/admin/home/Details1"
+                  to="/admin/home/details1"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
                   active-class="primary"
@@ -57,7 +57,7 @@
                   </div>
                 </router-link>
                 <router-link
-                  to="/admin/home/Details2"
+                  to="/admin/home/details2"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
                   active-class="primary"

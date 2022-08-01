@@ -1,7 +1,4 @@
-import {
-  ClientRequestModel,
-  ClientResponseModel,
-} from "@/model";
+import { ClientRequestModel, ClientResponseModel } from "@/model";
 import { BaseService } from "./base.service";
 
 export interface IProfileService {
