@@ -127,6 +127,6 @@ export default class MainLayout extends Vue {
   color: white !important;
 }
 .btn {
-  margin-top: 150px;
+  margin-top: 120px;
 }
 </style>
