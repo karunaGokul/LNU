@@ -1,118 +1,204 @@
 <template>
-  <v-container fluid fill-height class="justify-space-around primary-linear">
+  <v-container class="primary-linear">
     <v-row class="mt-5 ml-4">
       <h2>Appointments</h2>
     </v-row>
-    <!-- <v-simple-table class="mt-4">
-      <template v-slot:default>
-        <thead>
-          <th v-for="(header, i) in headers" :key="i" class="primary pa-4">
-            {{ header }}
-          </th>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in items1" :key="index" class="text-center">
-            <td>{{ item.CounsellingType }}</td>
-            <td>{{ item.Date }}</td>
-            <td>{{ item.Coach }}</td>
-            <td>{{ item.Duration }}</td>
-            <td>{{ item.AmountPaid }}</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table> -->
-    <!-- <v-card elevation="2" class="rounded-lg pb-3"> 
-      <v-card-title>New Appointment</v-card-title>
-      <v-divider></v-divider>
-      <v-row class="px-3 mt-3">
-        <v-col>
-          <h5>Alex</h5>
-          <h5>Child Counselling</h5>
-          <h5>alex@mail.com</h5>
-          <h5>2131415161</h5>
-        </v-col>
-        <v-col>
-          <v-select
-            outlined
-            dense
-            label="Coach Available"
-            :items="items"
-          ></v-select>
-          <v-card-action>
-            <v-btn rounded class="primary text-capitalize">Assign</v-btn>
-          </v-card-action>
-        </v-col>
-      </v-row>
-    </v-card>
-    <v-card elevation="2" class="rounded-lg pb-3"> 
-      <v-card-title>Reschedule Appointment</v-card-title>
-      <v-divider></v-divider>
-      <v-row class="px-3 mt-3">
-        <v-col>
-          <h5>name</h5>
-          <h5>CounsellingType</h5>
-          <h5>email</h5>
-          <h5>contact</h5>
-        </v-col>
-        <v-col>
-          <v-select
-            outlined
-            dense
-            label="Coach Available"
-            :items="items"
-          ></v-select>
-          <v-card-action>
-            <v-btn rounded class="primary text-capitalize">Assign</v-btn>
-          </v-card-action>
-        </v-col>
-      </v-row>
-    </v-card>
-    <v-card elevation="2" class="rounded-lg pb-3"> 
-      <v-card-title>New Appointment</v-card-title>
-      <v-divider></v-divider>
-      <v-row class="px-3 mt-3">
-        <v-col>
-          <h5>name</h5>
-          <h5>CounsellingType</h5>
-          <h5>email</h5>
-          <h5>contact</h5>
-        </v-col>
-        <v-col>
-          <v-select
-            outlined
-            dense
-            label="Coach Available"
-            :items="items"
-          ></v-select>
-          <v-card-action>
-            <v-btn rounded class="primary text-capitalize">Assign</v-btn>
-          </v-card-action>
-        </v-col>
-      </v-row>
-    </v-card>
-    <v-card elevation="2" class="rounded-lg pb-3"> 
-      <v-card-title>Reschedule Appointment</v-card-title>
-      <v-divider></v-divider>
-      <v-row class="px-3 mt-3">
-        <v-col>
-          <h5>name</h5>
-          <h5>CounsellingType</h5>
-          <h5>email</h5>
-          <h5>contact</h5>
-        </v-col>
-        <v-col>
-          <v-select
-            outlined
-            dense
-            label="Coach Available"
-            :items="items"
-          ></v-select>
-          <v-card-action>
-            <v-btn rounded class="primary text-capitalize">Assign</v-btn>
-          </v-card-action>
-        </v-col>
-      </v-row>
-    </v-card> -->
+    <v-row class="mx-2 my-6">
+      <v-col cols="6" md="4">
+        <v-card elevation="2" class="rounded pl-6">
+          <v-row class="pt-3">
+           <v-avatar size="60">
+                <img
+                  src="@/assets/profile.jpg"
+                />
+              </v-avatar>
+            <div class="ml-2">
+              <h3>Alex</h3>
+              <h5>alex@mail.com</h5>
+            </div>
+          </v-row>
+
+          <v-row class="py-2">
+            <h5>Child Counselling</h5>
+          </v-row>
+          <v-row>
+            <h5>2131415161</h5>
+          </v-row>
+          <v-row class="pt-2 ml-n4">
+            <v-col>
+              <v-select dense label="Coach Available" :items="items"></v-select>
+            </v-col>
+            <v-col>
+              <v-card-action>
+                <v-btn rounded class="primary text-capitalize">Consult</v-btn>
+              </v-card-action>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+      <v-col>
+        <v-card elevation="2" class="rounded pl-6">
+          <v-row class="pt-3">
+            <v-avatar size="60">
+                <img
+                  src="@/assets/profile.jpg"
+                />
+              </v-avatar>
+            <div class="ml-2">
+              <h3>Alex</h3>
+              <h5>alex@mail.com</h5>
+            </div>
+          </v-row>
+
+          <v-row class="py-2">
+            <h5>Child Counselling</h5>
+          </v-row>
+          <v-row>
+            <h5>2131415161</h5>
+          </v-row>
+          <v-row class="pt-2 ml-n4">
+            <v-col>
+              <v-select dense label="Coach Available" :items="items"></v-select>
+            </v-col>
+            <v-col>
+              <v-card-action>
+                <v-btn rounded class="primary text-capitalize">Revisit</v-btn>
+              </v-card-action>
+            </v-col>
+          </v-row>
+        </v-card></v-col
+      >
+      <v-col>
+        <v-card elevation="2" class="rounded pl-6">
+          <v-row class="pt-3">
+            <v-avatar size="60">
+                <img
+                  src="@/assets/profile.jpg"
+                />
+              </v-avatar>
+            <div class="ml-2">
+              <h3>Alex</h3>
+              <h5>alex@mail.com</h5>
+            </div>
+          </v-row>
+
+          <v-row class="py-2">
+            <h5>Child Counselling</h5>
+          </v-row>
+          <v-row>
+            <h5>2131415161</h5>
+          </v-row>
+          <v-row class="pt-2 ml-n4">
+            <v-col>
+              <v-select dense label="Coach Available" :items="items"></v-select>
+            </v-col>
+            <v-col>
+              <v-card-action>
+                <v-btn rounded class="primary text-capitalize">Consult</v-btn>
+              </v-card-action>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row class="mx-2">
+      <v-col cols="6" md="4">
+        <v-card elevation="2" class="rounded pl-6">
+          <v-row class="pt-3">
+            <v-avatar size="60">
+                <img
+                  src="@/assets/profile.jpg"
+                />
+              </v-avatar>
+            <div class="ml-2">
+              <h3>Alex</h3>
+              <h5>alex@mail.com</h5>
+            </div>
+          </v-row>
+
+          <v-row class="py-2">
+            <h5>Child Counselling</h5>
+          </v-row>
+          <v-row>
+            <h5>2131415161</h5>
+          </v-row>
+          <v-row class="pt-2 ml-n4">
+            <v-col>
+              <v-select dense label="Coach Available" :items="items"></v-select>
+            </v-col>
+            <v-col>
+              <v-card-action>
+                <v-btn rounded class="primary text-capitalize">Revisit</v-btn>
+              </v-card-action>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+      <v-col>
+        <v-card elevation="2" class="rounded pl-6">
+          <v-row class="pt-3">
+            <v-avatar size="60">
+                <img
+                  src="@/assets/profile.jpg"
+                />
+              </v-avatar>
+            <div class="ml-2">
+              <h3>Alex</h3>
+              <h5>alex@mail.com</h5>
+            </div>
+          </v-row>
+
+          <v-row class="py-2">
+            <h5>Child Counselling</h5>
+          </v-row>
+          <v-row>
+            <h5>2131415161</h5>
+          </v-row>
+          <v-row class="pt-2 ml-n4">
+            <v-col>
+              <v-select dense label="Coach Available" :items="items"></v-select>
+            </v-col>
+            <v-col>
+              <v-card-action>
+                <v-btn rounded class="primary text-capitalize">Revisit</v-btn>
+              </v-card-action>
+            </v-col>
+          </v-row>
+        </v-card></v-col
+      >
+      <v-col>
+        <v-card elevation="2" class="rounded pl-6">
+          <v-row class="pt-3">
+           <v-avatar size="60">
+                <img
+                  src="@/assets/profile.jpg"
+                />
+              </v-avatar>
+            <div class="ml-2">
+              <h3>Alex</h3>
+              <h5>alex@mail.com</h5>
+            </div>
+          </v-row>
+
+          <v-row class="py-2">
+            <h5>Child Counselling</h5>
+          </v-row>
+          <v-row>
+            <h5>2131415161</h5>
+          </v-row>
+          <v-row class="pt-2 ml-n4">
+            <v-col>
+              <v-select dense label="Coach Available" :items="items"></v-select>
+            </v-col>
+            <v-col>
+              <v-card-action>
+                <v-btn rounded class="primary text-capitalize">Consult</v-btn>
+              </v-card-action>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -124,58 +210,5 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class Appointments extends Vue {
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
-
-  public headers: Array<string> = [
-    "Counselling Type",
-    "Date",
-    "Coach",
-    "Duration",
-    "Amount Paid",
-  ];
-
-  public items1: Array<any> = [
-    {
-      CounsellingType: "Foo",
-      Date: "10.2.22",
-      Coach: "alex",
-      Duration: "25 min",
-      AmountPaid: "1200",
-    },
-    {
-      CounsellingType: "Bar",
-      Date: "15.3.22",
-      Coach: "jai",
-      Duration: "30 min",
-      AmountPaid: "1500",
-    },
-    {
-      CounsellingType: "Buzz",
-      Date: "11.4.22",
-      Coach: "jhon",
-      Duration: "15 min",
-      AmountPaid: "500",
-    },
-    {
-      CounsellingType: "Foo",
-      Date: "10.2.22",
-      Coach: "alex",
-      Duration: "25 min",
-      AmountPaid: "1200",
-    },
-    {
-      CounsellingType: "Bar",
-      Date: "15.3.22",
-      Coach: "jai",
-      Duration: "30 min",
-      AmountPaid: "1500",
-    },
-    {
-      CounsellingType: "Buzz",
-      Date: "11.4.22",
-      Coach: "jhon",
-      Duration: "15 min",
-      AmountPaid: "500",
-    },
-  ];
 }
 </script>

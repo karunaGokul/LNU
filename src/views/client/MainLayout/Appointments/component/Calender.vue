@@ -171,7 +171,7 @@
         <v-btn
           rounded
           elevation="0"
-          class="background-orange text-capitalize px-6"
+          class="primary text-capitalize px-6"
           @click="bookAppointment"
           >Save</v-btn
         >
