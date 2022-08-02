@@ -13,29 +13,35 @@
       <v-row class="mx-10">
         <v-col class="mr-5">
           <v-card
+            to="/coach/home/profile"
             height="150"
-            class="d-flex align-center justify-center rounded-lg"
+            class="d-flex flex-column align-center justify-center rounded-lg"
             style="box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.15)"
           >
             <v-icon size="80px" color="#5949b8">account_circle</v-icon>
+            <v-card-title class="pa-0">Profile</v-card-title>
           </v-card>
         </v-col>
         <v-col class="mr-5">
           <v-card
+            to="/coach/home/calendar"
             height="150"
-            class="d-flex align-center justify-center rounded-lg"
+            class="d-flex flex-column align-center justify-center rounded-lg"
             style="box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.15)"
           >
             <v-icon size="80px" color="#5949b8">calendar_month</v-icon>
+            <v-card-title class="pa-0">Calendar</v-card-title>
           </v-card>
         </v-col>
         <v-col class="mr-5">
           <v-card
+            to="/coach/home/message"
             height="150"
-            class="d-flex align-center justify-center rounded-lg"
+            class="d-flex flex-column align-center justify-center rounded-lg"
             style="box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.15)"
           >
             <v-icon size="80px" color="#5949b8">sms</v-icon>
+            <v-card-title class="pa-0">Messages</v-card-title>
           </v-card>
         </v-col>
       </v-row>
