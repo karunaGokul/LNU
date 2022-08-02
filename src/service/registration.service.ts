@@ -3,11 +3,13 @@ import {
   ClientRegistrationModel,
   CounselingModel,
   CertificationModel,
+  CoachRegistrationModel,
 } from "@/model";
 import { BaseService } from "./base.service";
 
 export interface IRegistrationService {
-  register(request: ClientRegistrationModel): Promise<any>;
+  clientRegister(request: ClientRegistrationModel): Promise<any>;
+  coachRegister(request: CoachRegistrationModel): Promise<any>;
   getCounselingType(): Promise<Array<CounselingModel>>;
   getCertificationType(): Promise<Array<CertificationModel>>;
   abortRequest(): Promise<any>;
@@ -21,7 +23,13 @@ export class RegistrationService
     super("");
   }
 
-  public register(request: ClientRegistrationModel): Promise<any> {
+  public clientRegister(request: ClientRegistrationModel): Promise<any> {
+    return this.httpPost("Register", request).then((response) => {
+      return response.data;
+    });
+  }
+
+  public coachRegister(request: CoachRegistrationModel): Promise<any> {
     return this.httpPost("Register", request).then((response) => {
       return response.data;
     });

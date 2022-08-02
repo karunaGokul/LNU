@@ -1,11 +1,9 @@
-export class AppointmentRequestModel {
-    Date: string;
-    Time: string;
-    CounsellingProgramme: string;
+import { CounselingModel } from "./registration.model";
+
+export class BookAppointmentRequestModel {
+    appointmentDate: string;
+    appointmentTime: string;
+    CounselingType: CounselingModel;
 }
-export class AppointmentResponseModel {
-    Date: string;
-    Time: string;
-    CounsellingProgramme: string;
-}
+
 

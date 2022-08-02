@@ -41,52 +41,68 @@
               <v-row>
                 <v-col>
                   <v-text-field
-                    label="First name"
+                    label="First Name"
                     color="primary"
                     append-icon="person"
                     filled
                     dense
                     required
-                    v-model="request.firstname"
-                    @input="$v.request.firstname.$touch()"
-                    @blur="$v.request.firstname.$touch()"
+                    v-model="request.FirstName"
+                    @input="$v.request.FirstName.$touch()"
+                    @blur="$v.request.FirstName.$touch()"
                     :error-messages="
-                      $v.request.firstname | errorMessages('Firstname')
+                      $v.request.FirstName | errorMessages('FirstName')
                     "
                   ></v-text-field>
                 </v-col>
                 <v-col>
                   <v-text-field
-                    label="Last name"
+                    label="Last Name"
                     color="primary"
                     append-icon="person"
                     filled
                     dense
                     required
-                    v-model="request.lastname"
-                    @input="$v.request.lastname.$touch()"
-                    @blur="$v.request.lastname.$touch()"
+                    v-model="request.LastName"
+                    @input="$v.request.LastName.$touch()"
+                    @blur="$v.request.LastName.$touch()"
                     :error-messages="
-                      $v.request.lastname | errorMessages('Lastname')
+                      $v.request.LastName | errorMessages('LastName')
                     "
                   ></v-text-field>
                 </v-col>
               </v-row>
-
-              <v-text-field
-                label="Username"
-                color="primary"
-                append-icon="person"
-                filled
-                dense
-                required
-                v-model="request.username"
-                @input="$v.request.username.$touch()"
-                @blur="$v.request.username.$touch()"
-                :error-messages="
-                  $v.request.username | errorMessages('Username')
-                "
-              ></v-text-field>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    label="User Name"
+                    color="primary"
+                    append-icon="person"
+                    filled
+                    dense
+                    required
+                    v-model="request.UserName"
+                    @input="$v.request.UserName.$touch()"
+                    @blur="$v.request.UserName.$touch()"
+                    :error-messages="
+                      $v.request.UserName | errorMessages('UserName')
+                    "
+                  ></v-text-field>
+                </v-col>
+                <v-col>
+                  <v-text-field
+                    label="Role"
+                    color="primary"
+                    filled
+                    dense
+                    required
+                    v-model="request.Role"
+                    @input="$v.request.Role.$touch()"
+                    @blur="$v.request.Role.$touch()"
+                    :error-messages="$v.request.Role | errorMessages('Role')"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
 
               <v-text-field
                 label="Email"
@@ -95,10 +111,10 @@
                 filled
                 dense
                 required
-                v-model="request.email"
-                @input="$v.request.email.$touch()"
-                @blur="$v.request.email.$touch()"
-                :error-messages="$v.request.email | errorMessages('Email')"
+                v-model="request.Email"
+                @input="$v.request.Email.$touch()"
+                @blur="$v.request.Email.$touch()"
+                :error-messages="$v.request.Email | errorMessages('Email')"
               ></v-text-field>
 
               <v-row>
@@ -109,11 +125,11 @@
                     filled
                     dense
                     required
-                    v-model="request.password"
-                    @input="$v.request.password.$touch()"
-                    @blur="$v.request.password.$touch()"
+                    v-model="request.Password"
+                    @input="$v.request.Password.$touch()"
+                    @blur="$v.request.Password.$touch()"
                     :error-messages="
-                      $v.request.password | errorMessages('Password')
+                      $v.request.Password | errorMessages('Password')
                     "
                     :type="showPassword ? 'text' : 'password'"
                     :append-icon="
@@ -129,11 +145,11 @@
                     filled
                     dense
                     required
-                    v-model="request.confirmpassword"
-                    @input="$v.request.confirmpassword.$touch()"
-                    @blur="$v.request.confirmpassword.$touch()"
+                    v-model="request.ConfirmPassword"
+                    @input="$v.request.ConfirmPassword.$touch()"
+                    @blur="$v.request.ConfirmPassword.$touch()"
                     :error-messages="
-                      $v.request.confirmpassword
+                      $v.request.ConfirmPassword
                         | errorMessages('ConfirmPassword')
                     "
                     :type="showPassword ? 'text' : 'password'"
@@ -152,11 +168,11 @@
                 filled
                 dense
                 required
-                v-model="request.contact"
-                @input="$v.request.phonenumber.$touch()"
-                @blur="$v.request.phonenumber.$touch()"
+                v-model="request.PhoneNumber"
+                @input="$v.request.PhoneNumber.$touch()"
+                @blur="$v.request.PhoneNumber.$touch()"
                 :error-messages="
-                  $v.request.phonenumber | errorMessages('Phone number')
+                  $v.request.PhoneNumber | errorMessages('PhoneNumber')
                 "
               ></v-text-field>
 
@@ -172,11 +188,12 @@
                     item-text="name"
                     item-value="id"
                     required
-                    v-model="request.certification"
-                    @input="$v.request.certification.$touch()"
-                    @blur="$v.request.certification.$touch()"
+                    v-model="request.CertificationId"
+                    @input="$v.request.CertificationId.$touch()"
+                    @blur="$v.request.CertificationId.$touch()"
                     :error-messages="
-                      $v.request.certification | errorMessages('Certification')
+                      $v.request.CertificationId
+                        | errorMessages('Certification')
                     "
                   ></v-select>
                 </v-col>
@@ -188,11 +205,11 @@
                     filled
                     dense
                     required
-                    v-model="request.experience"
-                    @input="$v.request.experience.$touch()"
-                    @blur="$v.request.experience.$touch()"
+                    v-model="request.Experience"
+                    @input="$v.request.Experience.$touch()"
+                    @blur="$v.request.Experience.$touch()"
                     :error-messages="
-                      $v.request.experience | errorMessages('Experience')
+                      $v.request.Experience | errorMessages('Experience')
                     "
                   ></v-text-field>
                 </v-col>
@@ -233,26 +250,41 @@
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-property-decorator";
 
-import { required, sameAs } from "vuelidate/lib/validators";
+import {
+  required,
+  sameAs,
+  numeric,
+  minLength,
+  maxLength,
+  helpers,
+  email,
+} from "vuelidate/lib/validators";
 
 import { CoachRegistrationModel, CertificationModel } from "@/model";
 
 import { IRegistrationService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 
+const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
+
 @Component({
   validations: {
     request: {
-      firstname: { required },
-      lastname: { required },
-      username: { required },
-      phonenumber: { required },
-      email: { required },
-      password: { required },
-      confirmpassword: { required, sameAsPassword: sameAs("password") },
-      certification: { required },
-      experience: { required },
-      payements: { required },
+      FirstName: { required, alphaOnly },
+      LastName: { required, alphaOnly },
+      UserName: { required },
+      PhoneNumber: {
+        required,
+        numeric,
+        minLength: minLength(10),
+        maxLength: maxLength(10),
+      },
+      Email: { required, email },
+      Password: { required },
+      ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
+      CertificationId: { required },
+      Experience: { required },
+      Role: { required },
     },
   },
 })
@@ -271,14 +303,28 @@ export default class CoachRegistration extends BaseComponent {
     this.registerService
       .getCertificationType()
       .then((response: Array<CertificationModel>) => {
-        console.log(response);
         this.certificationType = response;
         this.loadingSpinner("hide");
       });
   }
   public register() {
     this.$v.$touch();
-    console.log(this.request);
+    if (!this.$v.$invalid) {
+      this.loadingSpinner("show");
+      this.registerService.coachRegister(this.request).then(
+        (response: Array<CoachRegistrationModel>) => {
+          this.loadingSpinner("hide");
+          this.$router.push("home/dashboard");
+        },
+        (err) => {
+          this.loadingSpinner("hide");
+          if (err.response.status === 400) {
+            // this.snackbarText = err.response.data;
+            // this.snackbar = true;
+          }
+        }
+      );
+    }
   }
 }
 </script>

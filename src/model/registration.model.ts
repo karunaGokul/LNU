@@ -19,14 +19,14 @@ export class CertificationModel {
 }
 
 export class CoachRegistrationModel {
-  firstname: string;
-  lastname: string;
-  username: string;
-  phonenumber: string;
-  email: string;
-  password: string;
-  confirmpassword: string;
-  certification: string;
-  experience: string;
-  payements: string;
+  FirstName: string;
+  LastName: string;
+  UserName: string;
+  PhoneNumber: string;
+  Email: string;
+  Password: string;
+  ConfirmPassword: string;
+  CertificationId: string;
+  Experience: string;
+  Role: string;
 }

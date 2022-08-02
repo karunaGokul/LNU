@@ -266,7 +266,7 @@ export default class ClientRegistration extends BaseComponent {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       this.loadingSpinner("show");
-      this.registerService.register(this.request).then(
+      this.registerService.clientRegister(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
           this.loadingSpinner("hide");
           this.$router.push("home/dashboard");
