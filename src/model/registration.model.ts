@@ -13,6 +13,11 @@ export class CounselingModel {
   name: string;
 }
 
+export class CertificationModel {
+  id: number;
+  name: string;
+}
+
 export class CoachRegistrationModel {
   firstname: string;
   lastname: string;

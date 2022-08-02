@@ -168,6 +168,9 @@
                     color="primary"
                     filled
                     dense
+                    :items="certificationType"
+                    item-text="name"
+                    item-value="id"
                     required
                     v-model="request.certification"
                     @input="$v.request.certification.$touch()"
@@ -228,11 +231,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Inject, Vue } from "vue-property-decorator";
 
 import { required, sameAs } from "vuelidate/lib/validators";
 
-import { CoachRegistrationModel } from "@/model";
+import { CoachRegistrationModel, CertificationModel } from "@/model";
+
+import { IRegistrationService } from "@/service";
+import BaseComponent from "@/components/base/BaseComponent";
 
 @Component({
   validations: {
@@ -250,11 +256,26 @@ import { CoachRegistrationModel } from "@/model";
     },
   },
 })
-export default class CoachRegistration extends Vue {
+export default class CoachRegistration extends BaseComponent {
+  @Inject("registerService") registerService: IRegistrationService;
   public request: CoachRegistrationModel = new CoachRegistrationModel();
-
+  public certificationType: Array<CertificationModel> = [];
   public showPassword: boolean = false;
 
+  created() {
+    this.getCertificationType();
+  }
+
+  private getCertificationType() {
+    this.loadingSpinner("show");
+    this.registerService
+      .getCertificationType()
+      .then((response: Array<CertificationModel>) => {
+        console.log(response);
+        this.certificationType = response;
+        this.loadingSpinner("hide");
+      });
+  }
   public register() {
     this.$v.$touch();
     console.log(this.request);
