@@ -47,17 +47,17 @@
               </div>
               <div>
                 <router-link
-                  to="/coach/home/calendar"
+                  to="/coach/home/appointments"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
                   active-class="primary"
                   exact
                 >
                   <div class="v-list-item__icon">
-                    <v-icon class="icon">calendar_month</v-icon>
+                    <v-icon class="icon">book_online</v-icon>
                   </div>
                   <div class="v-list-item__content">
-                    <div class="v-list-item__title">Calendar</div>
+                    <div class="v-list-item__title">Appointments</div>
                   </div>
                 </router-link>
               </div>

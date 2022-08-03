@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-4">
+  <div class="pa-4 primary-linear">
     <h2 class="font-weight-bold my-4">Appointments</h2>
 
     <v-tabs v-model="tab">

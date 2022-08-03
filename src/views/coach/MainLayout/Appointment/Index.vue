@@ -1,9 +1,8 @@
 <template>
-  <v-row
-    class="pt-15 px-15 d-flex justify-end"
-    style="background: linear-gradient(180deg, #5949b8 -60.28%, #ffffff 26.8%)"
-  >
-    <v-col style="height: 100%">
+  <div class="pa-4 primary-linear">
+    <h2 class="font-weight-bold my-4">Upcoming Appointments</h2>
+    <calendar />
+    <!-- <v-col style="height: 100%">
       <v-row class="mb-10">
         <h2>Upcoming Appointment</h2>
       </v-row>
@@ -86,46 +85,50 @@
           </v-btn>
         </div>
       </v-form>
-    </v-col>
-  </v-row>
+    </v-col> -->
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Inject } from "vue-property-decorator";
-import { required } from "vuelidate/lib/validators";
+// import { required } from "vuelidate/lib/validators";
 
-import { CalendarRequestModel, CalendarResponseModel } from "@/model";
-import { ICoachCalendarService } from "@/service";
+// import { CalendarRequestModel, CalendarResponseModel } from "@/model";
+// import { ICoachCalendarService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
+import Calendar from "./component/Calendar.vue";
 
 @Component({
-  validations: {
-    request: {
-      AppointmentType: { required },
-      Date: { required },
-      Duration: { required },
-      Queries: { required },
-    },
+  components: {
+    Calendar
   },
+  // validations: {
+  //   request: {
+  //     AppointmentType: { required },
+  //     Date: { required },
+  //     Duration: { required },
+  //     Queries: { required },
+  //   },
+  // },
 })
 export default class calender extends BaseComponent {
-  @Inject("coachCalendarService") coachCalendarService: ICoachCalendarService;
+  // @Inject("coachCalendarService") coachCalendarService: ICoachCalendarService;
 
-  public picker = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-    .toISOString()
-    .substr(0, 10);
-  public request: CalendarRequestModel = new CalendarRequestModel();
+  // public picker = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+  //   .toISOString()
+  //   .substr(0, 10);
+  // public request: CalendarRequestModel = new CalendarRequestModel();
 
-  public submit() {
-    this.$v.$touch();
-    if (!this.$v.$invalid) {
-      console.log(this.request);
-      this.coachCalendarService
-        .coachcalendar(this.request)
-        .then((response: Array<CalendarResponseModel>) => {
-          console.log(response);
-        });
-    }
-  }
+  // public submit() {
+  //   this.$v.$touch();
+  //   if (!this.$v.$invalid) {
+  //     console.log(this.request);
+  //     this.coachCalendarService
+  //       .coachcalendar(this.request)
+  //       .then((response: Array<CalendarResponseModel>) => {
+  //         console.log(response);
+  //       });
+  //   }
+  // }
 }
 </script>

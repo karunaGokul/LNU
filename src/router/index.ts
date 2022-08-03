@@ -43,10 +43,10 @@ const coachRoutes: Array<RouteConfig> = [
               import("@/views/coach/MainLayout/Profile/Index.vue"),
           },
           {
-            path: "calendar",
-            name: "Coach calendar",
+            path: "appointments",
+            name: "Coach Appointment",
             component: () =>
-              import("@/views/coach/MainLayout/Calendar/Index.vue"),
+              import("@/views/coach/MainLayout/Appointment/Index.vue"),
           },
           {
             path: "message",
