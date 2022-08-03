@@ -102,7 +102,9 @@
                   </template>
 
                   <v-card>
-                    <v-card-title class="text-h6"> Reschedule </v-card-title>
+                    <v-card-title class="text-h6">
+                      <v-icon class="pl-n2 pr-1">today</v-icon>Reschedule
+                    </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text class="mb-n6">
                       <v-text-field
