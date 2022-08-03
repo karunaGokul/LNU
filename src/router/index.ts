@@ -54,6 +54,12 @@ const coachRoutes: Array<RouteConfig> = [
             component: () =>
               import("@/views/coach/MainLayout/Message/Index.vue"),
           },
+          {
+            path: "support",
+            name: "coach support",
+            component: () =>
+              import("@/views/coach/MainLayout/Support/Index.vue"),
+          },
         ],
       },
     ],
@@ -102,6 +108,12 @@ const adminRoutes: Array<RouteConfig> = [
             name: "ClientDetails",
             component: () =>
               import("@/views/admin/MainLayout/ClientDetails/Index.vue"),
+          },
+          {
+            path: "support",
+            name: "Admin support",
+            component: () =>
+              import("@/views/admin/MainLayout/Support/Index.vue"),
           },
         ],
       },
@@ -177,6 +189,12 @@ const clientRoutes: Array<RouteConfig> = [
             name: "Client Newsletter",
             component: () =>
               import("@/views/client/MainLayout/Newsletter/Index.vue"),
+          },
+          {
+            path: "support",
+            name: "Client support",
+            component: () =>
+              import("@/views/client/MainLayout/Support/Index.vue"),
           },
         ],
       },

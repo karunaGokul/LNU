@@ -81,7 +81,11 @@
 
             <div class="pa-4 btn">
               <div class="mt-4">
-                <v-btn elevation="0" rounded class="px-6 text-capitalize"
+                <v-btn
+                  to="/coach/home/support"
+                  elevation="0"
+                  rounded
+                  class="px-6 text-capitalize"
                   >Support</v-btn
                 >
               </div>

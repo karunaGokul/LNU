@@ -82,7 +82,7 @@
                     <div class="v-list-item__title">Payments</div>
                   </div>
                 </router-link>
-                <router-link
+                <!-- <router-link
                   to="/client/home/journal"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
@@ -94,7 +94,7 @@
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">My Journal</div>
                   </div>
-                </router-link>
+                </router-link> -->
                 <router-link
                   to="/client/home/newsletter"
                   tag="div"
@@ -111,7 +111,11 @@
               </div>
             </v-list>
             <div class="mt-4">
-              <v-btn elevation="0" rounded class="px-6 text-capitalize"
+              <v-btn
+                to="/client/home/support"
+                elevation="0"
+                rounded
+                class="px-6 text-capitalize"
                 >Support</v-btn
               >
             </div>
