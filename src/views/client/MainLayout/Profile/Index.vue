@@ -133,11 +133,13 @@ export default class ClientProfileLayout extends BaseComponent {
   }
 
   public getProfile() {
+    this.loadingSpinner("show");
     let profile = new ClientRequestModel();
     profile.id = this.userInfo.Id;
     this.profileService
       .getProfile(profile)
       .then((response) => {
+        this.loadingSpinner("hide");
         this.request = response;
 
         if (this.request.Image) {
@@ -151,6 +153,7 @@ export default class ClientProfileLayout extends BaseComponent {
         }
       })
       .catch((err) => {
+        this.loadingSpinner("hide");
         console.log(err);
       });
   }

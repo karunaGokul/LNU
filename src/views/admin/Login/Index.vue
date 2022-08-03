@@ -40,9 +40,7 @@
                 color="#78B849"
                 v-model="request.Email"
                 append-icon="mdi-account"
-                :error-messages="
-                  $v.request.Email | errorMessages('Username')
-                "
+                :error-messages="$v.request.Email | errorMessages('Username')"
                 filled
                 type="text"
                 required
@@ -66,9 +64,12 @@
               <div class="d-flex justify-center align-center">
                 <v-btn
                   color="primary"
+                  depressed
+                  large
                   class="white--text text-capitalize"
                   @click.prevent="login"
                   type="submit"
+                  style="width: 100%"
                   >Login</v-btn
                 >
               </div>

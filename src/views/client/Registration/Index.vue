@@ -178,9 +178,11 @@
             <div class="text-center">
               <v-btn
                 color="primary"
+                depressed
                 class="white--text rounded font-weight-bold"
                 large
                 type="submit"
+                style="width: 100%"
                 >Create account</v-btn
               >
             </div>

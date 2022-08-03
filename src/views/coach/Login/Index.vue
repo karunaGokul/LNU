@@ -66,9 +66,12 @@
               <div class="d-flex justify-center align-center">
                 <v-btn
                   color="primary"
+                  depressed
+                  large
                   class="white--text text-capitalize"
                   @click.prevent="login"
                   type="submit"
+                  style="width: 100%"
                   >Login</v-btn
                 >
               </div>
@@ -76,7 +79,7 @@
           </v-card>
         </div>
         <v-row class="d-flex justify-center mt-16 mb-n10">
-          <h4>No account?</h4>
+          <h4>No account?</h4>&nbsp;
           <router-link to="/coach/registration" class="text-decoration-none"
             >Register here</router-link
           >

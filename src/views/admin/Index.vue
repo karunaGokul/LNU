@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Admin Layout -->
     <router-view />
   </div>
 </template>
@@ -12,7 +11,7 @@ import { Component, Vue } from "vue-property-decorator";
 export default class AdminLayout extends Vue {
 
   created() {
-    this.$vuetify.theme.themes.light.primary = "#20AB8A";
+    this.$vuetify.theme.themes.light.primary = "#78B849";
   }
 }
 </script>
