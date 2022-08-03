@@ -7,3 +7,4 @@ export * from "./coach-profile.model";
 export * from "./user.model";
 export * from "./coach-calendar.model";
 export * from "./appointments.model";
+export * from "./support.model";

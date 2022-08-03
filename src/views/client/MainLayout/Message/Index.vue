@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-8">
+  <!-- <v-container fluid class="pa-8">
     <v-row justify="center" class="mt-8">
       <v-col cols="12" md="4">
         <v-select
@@ -11,8 +11,12 @@
           style="position: relative"
         >
         </v-select>
-        <v-avatar color="red" size="20" absolute
-            style="left: 300px; bottom: 90px">
+        <v-avatar
+          color="red"
+          size="20"
+          absolute
+          style="left: 300px; bottom: 90px"
+        >
           <span class="white--text">2</span>
         </v-avatar>
       </v-col>
@@ -26,7 +30,10 @@
         ></v-select>
       </v-col>
     </v-row>
-  </v-container>
+  </v-container> -->
+  <div>
+    <h1 class="pt-15 text-center">Coming soon</h1>
+  </div>
 </template>
 
 <script lang="ts">

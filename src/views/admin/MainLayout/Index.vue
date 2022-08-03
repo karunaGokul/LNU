@@ -72,7 +72,11 @@
               </div>
             </v-list>
             <div class="mt-4">
-              <v-btn elevation="0" rounded class="px-6 text-capitalize"
+              <v-btn
+                to="/admin/home/support"
+                elevation="0"
+                rounded
+                class="px-6 text-capitalize"
                 >Support</v-btn
               >
             </div>
