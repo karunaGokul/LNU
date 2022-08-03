@@ -121,17 +121,19 @@
 
       <div v-else>
         <v-sheet height="600">
-          <v-calendar ref="calendar" v-model="focus"></v-calendar>
+          <v-calendar ref="calendar" v-model="request.appointmentDate"></v-calendar>
         </v-sheet>
 
         <v-row class="mt-4">
           <v-col cols="6" md="4">
             <v-select
-              label="Counselling Programme"
-              v-model="request.CounsellingProgramme"
+              label="Counselling Type"
+              v-model="request.CounselingType"
               outlined
               dense
-              :items="item"
+              :items="CounselingTypes"
+              item-text="name"
+              return-object
             ></v-select>
           </v-col>
           <v-col cols="6" md="4">
@@ -150,7 +152,7 @@
                 <v-text-field
                   label="Select Time"
                   prepend-inner-icon="schedule"
-                  v-model="request.Time"
+                  v-model="request.appointmentTime"
                   readonly
                   outlined
                   dense
@@ -160,7 +162,7 @@
               </template>
               <v-time-picker
                 v-if="menu2"
-                v-model="request.Time"
+                v-model="request.appointmentTime"
                 ampm-in-title
                 @click:minute="$refs.menu.save(request.Time)"
               ></v-time-picker>
@@ -182,18 +184,26 @@
 <script lang="ts">
 import { Component, Vue, Prop, Inject } from "vue-property-decorator";
 
-import { AppointmentRequestModel, AppointmentResponseModel } from "@/model";
+import {
+  BookAppointmentRequestModel,
+  CounselingModel,
+} from "@/model";
 
-import { IAppointmentService } from "@/service";
+import { IAppointmentService, IRegistrationService } from "@/service";
+
+import BaseComponent from "@/components/base/BaseComponent";
 
 @Component
-export default class Calendar extends Vue {
+export default class Calendar extends BaseComponent {
   @Inject("appointmentService") appointmentService: IAppointmentService;
+  @Inject("registerService") registerService: IRegistrationService;
+
   @Prop() activeAppointments: boolean;
   @Prop() previousAppointments: boolean;
   @Prop() bookAppointments: boolean;
 
-  public request: AppointmentRequestModel = new AppointmentRequestModel();
+  public request: BookAppointmentRequestModel = new BookAppointmentRequestModel();
+  public CounselingTypes: Array<CounselingModel> = [];
 
   public focus: string = "";
   public type: string = "month";
@@ -229,6 +239,13 @@ export default class Calendar extends Vue {
     "Conference",
     "Party",
   ];
+
+  created() {
+    if(this.bookAppointments){
+      this.getCounselingType();
+    }
+    
+  }
 
   mounted() {
     let calendar: any = this.$refs.calendar;
@@ -315,14 +332,24 @@ export default class Calendar extends Vue {
   public bookAppointment() {
     // this.$v.$touch();
     // if (!this.$v.$invalid) {
-      this.request.Date = this.focus;
+    // this.request.appointmentDate = this.focus;
     console.log(this.request);
     this.appointmentService
       .bookAppointments(this.request)
-      .then((response: Array<AppointmentResponseModel>) => {
+      .then((response: any) => {
         console.log(response);
       });
     // }
+  }
+
+  private getCounselingType() {
+    this.loadingSpinner("show");
+    this.registerService
+      .getCounselingType()
+      .then((response: Array<CounselingModel>) => {
+        this.CounselingTypes = response;
+        this.loadingSpinner("hide");
+      });
   }
 }
 </script>

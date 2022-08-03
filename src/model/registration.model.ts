@@ -13,15 +13,20 @@ export class CounselingModel {
   name: string;
 }
 
+export class CertificationModel {
+  id: number;
+  name: string;
+}
+
 export class CoachRegistrationModel {
-  firstname: string;
-  lastname: string;
-  username: string;
-  phonenumber: string;
-  email: string;
-  password: string;
-  confirmpassword: string;
-  certification: string;
-  experience: string;
-  payements: string;
+  FirstName: string;
+  LastName: string;
+  UserName: string;
+  PhoneNumber: string;
+  Email: string;
+  Password: string;
+  ConfirmPassword: string;
+  CertificationId: string;
+  Experience: string;
+  Role: string;
 }
