@@ -19,7 +19,7 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item value="tab-active-appointments">
-        <calendar :activeAppointments="activeAppointments" />
+        <calendar :activeAppointments="activeAppointments" @reschedule="rescheduleAppoinment"/>
       </v-tab-item>
       <v-tab-item value="tab-previous-appointments">
         <v-row class="fill-height">
@@ -33,6 +33,7 @@
       </v-tab-item>
     </v-tabs-items>
     <book-appointment
+      :appointmentType="appointmentType"
       v-if="showBookAppoinment"
       @book="onBookNow"
       @close="onClose"
@@ -62,8 +63,10 @@ export default class AppointmentsLayout extends Vue {
   public bookAppointments: boolean = true;
 
   public showBookAppoinment: boolean = false;
+  public appointmentType: string = '';
 
   public bookNow() {
+    this.appointmentType = 'Book Appointment'
     this.showBookAppoinment = true;
   }
 
@@ -73,6 +76,11 @@ export default class AppointmentsLayout extends Vue {
 
   onClose() {
     this.showBookAppoinment = false;
+  }
+
+  public rescheduleAppoinment() {
+    this.showBookAppoinment = true;
+    this.appointmentType = 'Reschedule Appointment';
   }
 }
 </script>

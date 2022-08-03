@@ -2,7 +2,9 @@
   <div class="text-center">
     <v-dialog v-model="dialog" persistent width="500">
       <v-card>
-        <v-card-title class="text-h5 mb-4"> Book Appointment </v-card-title>
+        <v-card-title class="text-h5 mb-4">
+          {{ appointmentType }}
+        </v-card-title>
 
         <v-card-text>
           <v-form>
@@ -13,7 +15,6 @@
               v-model="request.CounselingType"
               :items="CounselingTypes"
               item-text="name"
-              return-object
             ></v-select>
             <v-menu
               v-model="menu1"
@@ -98,6 +99,8 @@ import BaseComponent from "@/components/base/BaseComponent";
 export default class BookAppointment extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
   @Inject("appointmentService") service: IAppointmentService;
+
+  @Prop() appointmentType: string;
 
   public CounselingTypes: Array<CounselingModel> = [];
 

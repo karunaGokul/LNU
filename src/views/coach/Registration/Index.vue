@@ -213,22 +213,6 @@
                     "
                   ></v-text-field>
                 </v-col>
-                <!-- <v-col>
-                  <v-text-field
-                    label="Payments"
-                    color="primary"
-                    append-icon="request_quote"
-                    filled
-                    dense
-                    required
-                    v-model="request.payements"
-                    @input="$v.request.payements.$touch()"
-                    @blur="$v.request.payements.$touch()"
-                    :error-messages="
-                      $v.request.payements | errorMessages('Payements')
-                    "
-                  ></v-text-field>
-                </v-col> -->
               </v-row>
               <div class="text-center">
                 <v-btn
@@ -236,6 +220,8 @@
                   color="primary"
                   class="white--text text-capitalize"
                   type="submit"
+                  large
+                  style="width: 100%"
                   >Create account</v-btn
                 >
               </div>
