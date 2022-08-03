@@ -1,0 +1,15 @@
+:root {
+    --white-color: #ffffff;
+}
+[data-theme="client-theme"] {
+    --primary-color: #FCB258;
+}
+[data-theme="coach-theme"] {
+    --primary-color: #495CB8;
+}
+[data-theme="admin-theme"] {
+    --primary-color: #20AB8A;
+}
+$primary-color: var(--primary-color);
+$white-color: var(--white-color);
+$position: relative absolute fixed;
