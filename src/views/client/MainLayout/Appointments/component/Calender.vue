@@ -52,7 +52,7 @@
           </div>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="600" v-if="!bookAppointments">
+      <v-sheet height="600">
         <v-calendar
           ref="calendar"
           v-model="request.Date"
@@ -213,7 +213,7 @@
         </v-menu>
       </v-sheet>
 
-      <div v-else>
+      <!-- <div v-else>
         <v-sheet height="600">
           <v-calendar
             ref="calendar"
@@ -274,7 +274,7 @@
           @click="bookAppointment"
           >Save</v-btn
         >
-      </div>
+      </div> -->
     </v-col>
   </v-row>
 </template>

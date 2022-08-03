@@ -64,6 +64,7 @@
           @click:more="viewDay"
           @change="updateRange"
         ></v-calendar>
+        
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
@@ -86,10 +87,10 @@
             </v-toolbar>
             <v-card-text>
               <!-- <span v-html="selectedEvent.details"></span> -->
-              <div>
-                <h4>Upcoming Appointments</h4>
-                <v-divider class="my-3"></v-divider>
-                <v-dialog v-model="dialog" width="500">
+
+              <h4>Upcoming Appointments</h4>
+              <v-divider class="my-3"></v-divider>
+              <!-- <v-dialog v-model="dialog" width="500">
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                       class="text-capitalize"
@@ -193,21 +194,30 @@
                       </v-btn>
                     </v-card-actions>
                   </v-card>
-                </v-dialog>
-
-                <v-btn
-                  class="text-capitalize ml-3"
-                  color="red"
-                  dark
-                  @click="selectedOpen = false"
-                  >cancel</v-btn
-                >
-              </div>
+                </v-dialog> -->
+              <v-btn
+                class="text-capitalize"
+                color="primary"
+                dark
+                @click="appointment"
+                >reschedule</v-btn
+              >
+              <v-btn
+                class="text-capitalize ml-3"
+                color="red"
+                dark
+                @click="selectedOpen = false"
+                >cancel</v-btn
+              >
             </v-card-text>
           </v-card>
+          
         </v-menu>
+        
       </v-sheet>
+   <up-coming-appointment v-if="showAppointment" />
     </v-col>
+    
   </v-row>
 </template>
 <script lang="ts">
@@ -218,8 +228,13 @@ import { BookAppointmentRequestModel, CounselingModel } from "@/model";
 import { IAppointmentService, IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
+import UpComingAppointment from "./UpComingAppointment.vue";
 
-@Component
+@Component({
+  components: {
+    UpComingAppointment,
+  },
+})
 export default class Calendar extends BaseComponent {
   @Inject("appointmentService") appointmentService: IAppointmentService;
   @Inject("registerService") registerService: IRegistrationService;
@@ -230,9 +245,10 @@ export default class Calendar extends BaseComponent {
 
   public focus: string = "";
   public type: string = "month";
-  public time: number = null;
-  public menu1: boolean = false;
-  public menu2: boolean = false;
+  
+  public showAppointment: boolean = false;
+
+  
   public dialog: boolean = false;
   public item: any = ["Foo", "Bar", "Fizz", "Buzz"];
   public typeToLabel: any = {
@@ -246,9 +262,7 @@ export default class Calendar extends BaseComponent {
   public selectedOpen: boolean = false;
   public events: Array<any> = [];
 
-  public date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-    .toISOString()
-    .substr(0, 10);
+  
   public colors: Array<string> = [
     "blue",
     "indigo",
@@ -268,6 +282,10 @@ export default class Calendar extends BaseComponent {
     "Conference",
     "Party",
   ];
+
+  public appointment() {
+    this.showAppointment = true;
+  }
 
   mounted() {
     let calendar: any = this.$refs.calendar;
