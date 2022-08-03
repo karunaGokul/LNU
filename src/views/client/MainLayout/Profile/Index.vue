@@ -10,7 +10,7 @@
           height="130"
           v-if="profilePhoto"
         />
-        <v-icon x-large color="#E0E0E0" style="font-size: 16rem" v-else>
+        <v-icon v-else x-large color="#E0E0E0" style="font-size: 16rem">
           account_circle
         </v-icon>
         <input

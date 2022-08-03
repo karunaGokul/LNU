@@ -75,9 +75,16 @@
           >
         </v-col>
         <v-col cols="4" md="4" align-self="end" offset-md="4">
-          <v-btn class="text-capitalize"
+          <v-btn class="text-capitalize" outlined depressed
             ><v-icon class="pr-2">mark_email_unread</v-icon> Upload Newsletter
-            <v-icon class="pl-1">file_upload</v-icon>
+            <v-file-input
+              prepend-icon="file_upload"
+              hide-input
+              multiple
+              class="mb-4 ml-2"
+              @change="handleimage"
+            >
+            </v-file-input>
           </v-btn>
         </v-col>
       </v-row>
@@ -91,5 +98,10 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   components: {},
 })
-export default class AdminDashboardLayout extends Vue {}
+export default class AdminDashboardLayout extends Vue {
+  public img: string = "";
+  public handleimage(e: File) {
+    this.img = URL.createObjectURL(e);
+  }
+}
 </script>

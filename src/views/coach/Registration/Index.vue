@@ -242,6 +242,22 @@
             </v-form>
           </div>
         </div>
+        <v-snackbar
+          v-model="snackbar"
+          :timeout="2000"
+          color="deep-orange lighten-5 pink--text"
+          right
+          top
+        >
+          <v-icon color="pink">mdi-exclamation-thick </v-icon>
+          {{ snackbarText }}
+
+          <template v-slot:action="{ attrs }">
+            <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+              <v-icon> mdi-close-box</v-icon>
+            </v-btn>
+          </template>
+        </v-snackbar>
       </v-container>
     </v-col>
   </v-row>
@@ -293,6 +309,8 @@ export default class CoachRegistration extends BaseComponent {
   public request: CoachRegistrationModel = new CoachRegistrationModel();
   public certificationType: Array<CertificationModel> = [];
   public showPassword: boolean = false;
+   public snackbar: boolean = false;
+  public snackbarText: string = "";
 
   created() {
     this.getCertificationType();
@@ -319,8 +337,8 @@ export default class CoachRegistration extends BaseComponent {
         (err) => {
           this.loadingSpinner("hide");
           if (err.response.status === 400) {
-            // this.snackbarText = err.response.data;
-            // this.snackbar = true;
+            this.snackbarText = err.response.data;
+            this.snackbar = true;
           }
         }
       );
