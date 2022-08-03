@@ -36,7 +36,7 @@
           </router-link>
         </div>
         <div style="width: 590px">
-          <v-form class="px-8" @submit="register" autocomplete="off">
+          <v-form class="px-8" @submit.prevent="register" autocomplete="off">
             <v-row>
               <v-col>
                 <v-text-field
@@ -233,7 +233,7 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
     request: {
       FirstName: { required, alphaOnly },
       LastName: { required, alphaOnly },
-      Username: { required, alphaOnly },
+      Username: { required },
       Email: { required, email },
       Password: { required },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
@@ -257,22 +257,15 @@ export default class ClientRegistration extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
 
-  unmounted() {
-    this.cancel();
-  }
-
-  private cancel() {
-    //this.registerService.abortRequest().then((response: any) => {});
-  }
-
   public register() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
+      this.request.Role = "Client";
       this.loadingSpinner("show");
       this.registerService.clientRegister(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
           this.loadingSpinner("hide");
-          this.$router.push("home/dashboard");
+          this.$router.push("login");
         },
         (err) => {
           this.loadingSpinner("hide");

@@ -183,7 +183,7 @@ export default class Login extends BaseComponent {
     if (!this.$v.$invalid) {
       this.loadingSpinner("show");
       this.authService.login(this.request).then(
-        (response: Array<LoginResponseModel>) => {
+        (response: LoginResponseModel) => {
           this.$store.dispatch("login", response);
           this.loadingSpinner("hide");
           this.$router.push("home/dashboard");

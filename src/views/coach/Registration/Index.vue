@@ -72,37 +72,20 @@
                   ></v-text-field>
                 </v-col>
               </v-row>
-              <v-row>
-                <v-col>
-                  <v-text-field
-                    label="User Name"
-                    color="primary"
-                    append-icon="person"
-                    filled
-                    dense
-                    required
-                    v-model="request.UserName"
-                    @input="$v.request.UserName.$touch()"
-                    @blur="$v.request.UserName.$touch()"
-                    :error-messages="
-                      $v.request.UserName | errorMessages('UserName')
-                    "
-                  ></v-text-field>
-                </v-col>
-                <v-col>
-                  <v-text-field
-                    label="Role"
-                    color="primary"
-                    filled
-                    dense
-                    required
-                    v-model="request.Role"
-                    @input="$v.request.Role.$touch()"
-                    @blur="$v.request.Role.$touch()"
-                    :error-messages="$v.request.Role | errorMessages('Role')"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
+              <v-text-field
+                label="User Name"
+                color="primary"
+                append-icon="person"
+                filled
+                dense
+                required
+                v-model="request.UserName"
+                @input="$v.request.UserName.$touch()"
+                @blur="$v.request.UserName.$touch()"
+                :error-messages="
+                  $v.request.UserName | errorMessages('UserName')
+                "
+              ></v-text-field>
 
               <v-text-field
                 label="Email"
@@ -285,8 +268,7 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
       Password: { required },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
       CertificationId: { required },
-      Experience: { required },
-      Role: { required },
+      Experience: { required }
     },
   },
 })
@@ -295,7 +277,7 @@ export default class CoachRegistration extends BaseComponent {
   public request: CoachRegistrationModel = new CoachRegistrationModel();
   public certificationType: Array<CertificationModel> = [];
   public showPassword: boolean = false;
-   public snackbar: boolean = false;
+  public snackbar: boolean = false;
   public snackbarText: string = "";
 
   created() {
@@ -315,10 +297,11 @@ export default class CoachRegistration extends BaseComponent {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       this.loadingSpinner("show");
+      this.request.Role = "Coach";
       this.registerService.coachRegister(this.request).then(
         (response: Array<CoachRegistrationModel>) => {
           this.loadingSpinner("hide");
-          this.$router.push("home/dashboard");
+          this.$router.push("login");
         },
         (err) => {
           this.loadingSpinner("hide");

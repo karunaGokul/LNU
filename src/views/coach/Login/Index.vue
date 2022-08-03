@@ -90,10 +90,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Inject } from "vue-property-decorator";
 import { required } from "vuelidate/lib/validators";
 
-import { LoginRequestModel } from "@/model";
+import { IAuthenticationService } from "@/service";
+
+import { LoginRequestModel, LoginResponseModel } from "@/model";
+
+import BaseComponent from "@/components/base/BaseComponent";
 
 @Component({
   validations: {
@@ -103,15 +107,27 @@ import { LoginRequestModel } from "@/model";
     },
   },
 })
-export default class Login extends Vue {
+export default class Login extends BaseComponent {
+  @Inject("authService") authService: IAuthenticationService;
   public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
 
   public login() {
     this.$v.$touch();
-    console.log(this.request);
-    //this.$router.push("home/dashboard");
+    if (!this.$v.$invalid) {
+      this.loadingSpinner("show");
+      this.authService.login(this.request).then(
+        (response: LoginResponseModel) => {
+          this.$store.dispatch("login", response);
+          this.loadingSpinner("hide");
+          this.$router.push("home/dashboard");
+        },
+        (err) => {
+          this.loadingSpinner("hide");
+        }
+      );
+    }
   }
 }
 </script>
