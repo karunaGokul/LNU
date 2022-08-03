@@ -37,7 +37,7 @@
             <v-form class="px-8" ref="form" autocomplete="off" @submit="login">
               <v-text-field
                 label="Username/Email"
-                color="#495cb8"
+                color="primary"
                 v-model="request.Email"
                 append-icon="mdi-account"
                 :error-messages="
@@ -51,7 +51,7 @@
               ></v-text-field>
               <v-text-field
                 label="Password"
-                color="#495cb8"
+                color="primary"
                 v-model="request.Password"
                 :type="showPassword ? 'text' : 'password'"
                 :error-messages="
@@ -65,7 +65,7 @@
               ></v-text-field>
               <div class="d-flex justify-center align-center">
                 <v-btn
-                  color="#495cb8"
+                  color="primary"
                   class="white--text text-capitalize"
                   @click.prevent="login"
                   type="submit"

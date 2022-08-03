@@ -1,18 +1,1 @@
-:root {
-    --white-color: #ffffff;
-}
-[data-theme="client-theme"] {
-    --primary-color: #FCB258;
-}
-[data-theme="coach-theme"] {
-    --primary-color: #495CB8;
-}
-[data-theme="admin-theme"] {
-    --primary-color: #78B849;
-}
 $body-font-family: 'Poppins' !default;
-$primary-color: var(--primary-color);
-$white-color: var(--white-color);
-
-
-@import "./app/app";

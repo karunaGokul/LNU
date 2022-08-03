@@ -36,7 +36,7 @@
           </router-link>
         </div>
         <div style="width: 590px">
-          <v-form class="px-8" @submit="register">
+          <v-form class="px-8" @submit="register" autocomplete="off">
             <v-row>
               <v-col>
                 <v-text-field
@@ -73,6 +73,8 @@
             </v-row>
             <v-text-field
               label="Email Id"
+              type="text"
+              name="email"
               color="primary"
               append-icon="email"
               filled
@@ -82,6 +84,7 @@
               @input="$v.request.Email.$touch()"
               @blur="$v.request.Email.$touch()"
               :error-messages="$v.request.Email | errorMessages('Email')"
+              autocomplete="off"
             ></v-text-field>
             <v-row>
               <v-col>

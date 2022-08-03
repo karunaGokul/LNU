@@ -26,7 +26,7 @@
           </v-row>
           <v-row class="pt-2 ml-n4">
             <v-col>
-              <v-select dense label="Coach Available" :items="items"></v-select>
+              <v-select dense label="Coach Available" :items="items" append-icon="arrow_drop_down"></v-select>
             </v-col>
             <v-col>
               <v-card-action>
@@ -58,7 +58,7 @@
           </v-row>
           <v-row class="pt-2 ml-n4">
             <v-col>
-              <v-select dense label="Coach Available" :items="items"></v-select>
+              <v-select dense label="Coach Available" :items="items" append-icon="arrow_drop_down"></v-select>
             </v-col>
             <v-col>
               <v-card-action>
@@ -90,7 +90,7 @@
           </v-row>
           <v-row class="pt-2 ml-n4">
             <v-col>
-              <v-select dense label="Coach Available" :items="items"></v-select>
+              <v-select dense label="Coach Available" :items="items" append-icon="arrow_drop_down"></v-select>
             </v-col>
             <v-col>
               <v-card-action>
@@ -124,7 +124,7 @@
           </v-row>
           <v-row class="pt-2 ml-n4">
             <v-col>
-              <v-select dense label="Coach Available" :items="items"></v-select>
+              <v-select dense label="Coach Available" :items="items" append-icon="arrow_drop_down"></v-select>
             </v-col>
             <v-col>
               <v-card-action>
@@ -156,7 +156,7 @@
           </v-row>
           <v-row class="pt-2 ml-n4">
             <v-col>
-              <v-select dense label="Coach Available" :items="items"></v-select>
+              <v-select dense label="Coach Available" :items="items" append-icon="arrow_drop_down"></v-select>
             </v-col>
             <v-col>
               <v-card-action>
@@ -188,7 +188,7 @@
           </v-row>
           <v-row class="pt-2 ml-n4">
             <v-col>
-              <v-select dense label="Coach Available" :items="items"></v-select>
+              <v-select dense label="Coach Available" :items="items" append-icon="arrow_drop_down"></v-select>
             </v-col>
             <v-col>
               <v-card-action>

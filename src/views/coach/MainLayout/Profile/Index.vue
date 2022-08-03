@@ -109,7 +109,7 @@
           <div class="d-flex justify-end mt-5">
             <v-btn
               color="#5949B8"
-              class="white--text text-capitalize"
+              class="primary"
               type="submit"
             >
               Save

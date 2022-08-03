@@ -65,7 +65,7 @@
               ></v-text-field>
               <div class="d-flex justify-center align-center">
                 <v-btn
-                  color="#78B849"
+                  color="primary"
                   class="white--text text-capitalize"
                   @click.prevent="login"
                   type="submit"

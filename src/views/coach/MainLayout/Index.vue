@@ -18,7 +18,7 @@
                   to="/coach/home/dashboard"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="nav-color"
+                  active-class="primary"
                   exact
                 >
                   <div class="v-list-item__icon">
@@ -34,7 +34,7 @@
                   to="/coach/home/profile"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="nav-color"
+                  active-class="primary"
                   exact
                 >
                   <div class="v-list-item__icon">
@@ -50,7 +50,7 @@
                   to="/coach/home/calendar"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="nav-color"
+                  active-class="primary"
                   exact
                 >
                   <div class="v-list-item__icon">
@@ -66,7 +66,7 @@
                   to="/coach/home/message"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="nav-color"
+                  active-class="primary"
                   exact
                 >
                   <div class="v-list-item__icon">
@@ -88,7 +88,7 @@
               <div class="mt-4">
                 <v-btn
                   elevation="0"
-                  color="#5949b8"
+                  color="primary"
                   rounded
                   class="px-7 text-capitalize white--text"
                   @click="logout"
@@ -119,11 +119,11 @@ export default class MainLayout extends Vue {
 </script>
 
 <style scoped>
-.nav-color {
+.primary {
   background-color: #5949b8;
   color: white;
 }
-.nav-color .icon {
+.primary .icon {
   color: white !important;
 }
 .btn {
