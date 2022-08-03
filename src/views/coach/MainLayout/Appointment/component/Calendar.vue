@@ -52,7 +52,7 @@
           </div>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="600" v-if="!bookAppointments">
+      <v-sheet height="600">
         <v-calendar
           ref="calendar"
           v-model="request.Date"
@@ -86,8 +86,8 @@
             </v-toolbar>
             <v-card-text>
               <!-- <span v-html="selectedEvent.details"></span> -->
-              <div v-if="activeAppointments">
-                <h4>Appointments</h4>
+              <div>
+                <h4>Upcoming Appointments</h4>
                 <v-divider class="my-3"></v-divider>
                 <v-dialog v-model="dialog" width="500">
                   <template v-slot:activator="{ on, attrs }">
@@ -102,13 +102,17 @@
                   </template>
 
                   <v-card>
-                    <v-card-title class="text-h6"> 
-                     <v-icon class="pl-n2 pr-1">today</v-icon> Reschedule </v-card-title>
+                    <v-card-title class="text-h6">
+                      <v-icon class="pl-n2 pr-1">today</v-icon>Reschedule
+                    </v-card-title>
                     <v-divider></v-divider>
-                    <v-card-text>
-                      <v-input disabled class="mt-4"
-                        >Health Counselling</v-input
-                      >
+                    <v-card-text class="mb-n6">
+                      <v-text-field
+                        outlined
+                        dense
+                        class="mt-4"
+                        label="Appointment Type"
+                      ></v-text-field>
                       <v-menu
                         ref="menu"
                         v-model="menu2"
@@ -122,7 +126,7 @@
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
-                            label="Select Time"
+                            label="Select Duration"
                             prepend-inner-icon="schedule"
                             v-model="request.appointmentTime"
                             readonly
@@ -164,6 +168,11 @@
                           @input="menu1 = false"
                         ></v-date-picker>
                       </v-menu>
+                      <v-textarea
+                        outlined
+                        label="Queries"
+                        value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
+                      ></v-textarea>
                     </v-card-text>
 
                     <v-card-actions>
@@ -194,87 +203,10 @@
                   >cancel</v-btn
                 >
               </div>
-              <div v-else-if="previousAppointments">
-                <h4>Rating</h4>
-                <v-divider class="my-3"></v-divider>
-                <v-rating
-                  background-color="#FCB258"
-                  color="#FCB258"
-                  half-increments
-                  hover
-                  value="3"
-                  length="5"
-                  large
-                  >star</v-rating
-                >
-              </div>
             </v-card-text>
           </v-card>
         </v-menu>
       </v-sheet>
-
-      <div v-else>
-        <v-sheet height="600">
-          <v-calendar
-            ref="calendar"
-            v-model="request.appointmentDate"
-          ></v-calendar>
-        </v-sheet>
-
-        <v-row class="mt-4">
-          <v-col cols="6" md="4">
-            <v-select
-              label="Counselling Type"
-              v-model="request.CounselingType"
-              outlined
-              dense
-              :items="CounselingTypes"
-              item-text="name"
-              return-object
-            ></v-select>
-          </v-col>
-          <v-col cols="6" md="4">
-            <v-menu
-              ref="menu"
-              v-model="menu2"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="time"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  label="Select Time"
-                  prepend-inner-icon="schedule"
-                  v-model="request.appointmentTime"
-                  readonly
-                  outlined
-                  dense
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-time-picker
-                v-if="menu2"
-                v-model="request.appointmentTime"
-                ampm-in-title
-                @click:minute="$refs.menu.save(request.Time)"
-              ></v-time-picker>
-            </v-menu>
-          </v-col>
-        </v-row>
-
-        <v-btn
-          rounded
-          elevation="0"
-          class="primary text-capitalize px-6"
-          @click="bookAppointment"
-          >Save</v-btn
-        >
-      </div>
     </v-col>
   </v-row>
 </template>
@@ -291,10 +223,6 @@ import BaseComponent from "@/components/base/BaseComponent";
 export default class Calendar extends BaseComponent {
   @Inject("appointmentService") appointmentService: IAppointmentService;
   @Inject("registerService") registerService: IRegistrationService;
-
-  @Prop() activeAppointments: boolean;
-  @Prop() previousAppointments: boolean;
-  @Prop() bookAppointments: boolean;
 
   public request: BookAppointmentRequestModel =
     new BookAppointmentRequestModel();
@@ -318,7 +246,9 @@ export default class Calendar extends BaseComponent {
   public selectedOpen: boolean = false;
   public events: Array<any> = [];
 
-  public date = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10);
+  public date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+    .toISOString()
+    .substr(0, 10);
   public colors: Array<string> = [
     "blue",
     "indigo",
@@ -338,12 +268,6 @@ export default class Calendar extends BaseComponent {
     "Conference",
     "Party",
   ];
-
-  created() {
-    if (this.bookAppointments) {
-      this.getCounselingType();
-    }
-  }
 
   mounted() {
     let calendar: any = this.$refs.calendar;

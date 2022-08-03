@@ -6,23 +6,28 @@
         <v-simple-table class="mt-4">
           <template v-slot:default>
             <thead>
-              <th
-                v-for="(header, i) in headers"
-                :key="i"
-                class="primary pa-4"
-              >
-                {{ header }}
-              </th>
+              <tr>
+                <th
+                  v-for="(header, i) in headers"
+                  :key="i"
+                  class="pa-4 text-subtitle-2 font-weight-bold primary--text"
+                >
+                  {{ header }}
+                </th>
+              </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(item, index) in items"
-                :key="index"
-                class="text-center"
-              >
+              <tr v-for="(item, index) in items" :key="index" class="">
                 <td>{{ item.CounsellingType }}</td>
                 <td>{{ item.Date }}</td>
-                <td>{{ item.Coach }}</td>
+                <td>
+                  <!-- <v-avatar size="40">
+                    <img
+                      :src="require('@/assets/profile.jpg' )"
+                      alt="John"
+                    /> </v-avatar> -->
+                    {{ item.Coach }}
+                </td>
                 <td>{{ item.Duration }}</td>
                 <td>{{ item.AmountPaid }}</td>
               </tr>
@@ -80,44 +85,45 @@ export default class Payment extends BaseComponent {
     "Amount Paid",
   ];
 
-  public items: Array<PaymentResponseModel> = [
+  public items: Array<any> = [
     {
-      CounsellingType: "Foo",
+      CounsellingType: "Marriage Counselling",
       Date: "10.2.22",
       Coach: "alex",
+      icon: "@/assets/profile.jpg",
       Duration: "25 min",
       AmountPaid: "1200",
     },
     {
-      CounsellingType: "Bar",
+      CounsellingType: "Child Counselling",
       Date: "15.3.22",
       Coach: "jai",
       Duration: "30 min",
       AmountPaid: "1500",
     },
     {
-      CounsellingType: "Buzz",
+      CounsellingType: "Behavioural Counselling",
       Date: "11.4.22",
       Coach: "jhon",
       Duration: "15 min",
       AmountPaid: "500",
     },
     {
-      CounsellingType: "Foo",
+      CounsellingType: "Mental Health Counselling",
       Date: "10.2.22",
       Coach: "alex",
       Duration: "25 min",
       AmountPaid: "1200",
     },
     {
-      CounsellingType: "Bar",
+      CounsellingType: "Child Counselling",
       Date: "15.3.22",
       Coach: "jai",
       Duration: "30 min",
       AmountPaid: "1500",
     },
     {
-      CounsellingType: "Buzz",
+      CounsellingType: "Career Counselling",
       Date: "11.4.22",
       Coach: "jhon",
       Duration: "15 min",
@@ -127,10 +133,10 @@ export default class Payment extends BaseComponent {
 }
 </script>
 <style>
-tr:nth-of-type(even) {
+/* tr:nth-of-type(even) {
   background-color: #f7a3422e;
 }
 tr:nth-of-type(even):hover {
   background-color: #fca744 !important;
-}
+} */
 </style>

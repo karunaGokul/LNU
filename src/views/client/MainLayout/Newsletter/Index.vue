@@ -1,5 +1,6 @@
 <template>
-  <div class="pa-8">
+  <!-- <div class="pa-8">
+
     <h1>Newsletter</h1>
 
     <v-row class="my-4 ml-1 mr-4">
@@ -41,6 +42,9 @@
     <v-btn color="primary" rounded class="px-6 text-capitalize">
       Save
     </v-btn>
+  </div> -->
+  <div>
+    <h1 class="pt-15 text-center">Coming soon</h1>
   </div>
 </template>
 
