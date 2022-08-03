@@ -1,11 +1,15 @@
-export class ClientRegistrationModel {
+export class RegisterModel {
+  Username: string;
   FirstName: string;
   LastName: string;
   PhoneNumber: number;
   Email: string;
   Password: string;
   ConfirmPassword: string;
+}
+export class ClientRegistrationModel extends RegisterModel {
   CounselingType: string;
+  Role: string;
 }
 
 export class CounselingModel {
@@ -18,14 +22,7 @@ export class CertificationModel {
   name: string;
 }
 
-export class CoachRegistrationModel {
-  FirstName: string;
-  LastName: string;
-  UserName: string;
-  PhoneNumber: string;
-  Email: string;
-  Password: string;
-  ConfirmPassword: string;
+export class CoachRegistrationModel extends RegisterModel {
   CertificationId: string;
   Experience: string;
   Role: string;
