@@ -64,7 +64,6 @@ export default class AppointmentsLayout extends Vue {
   public showBookAppoinment: boolean = false;
 
   public bookNow() {
-    console.log("its called");
     this.showBookAppoinment = true;
   }
 

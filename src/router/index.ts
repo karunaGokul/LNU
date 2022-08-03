@@ -236,6 +236,8 @@ router.beforeEach((to, from, next) => {
     document.documentElement.setAttribute("data-theme", "coach-theme");
   else document.documentElement.setAttribute("data-theme", "admin-theme");
 
+  store.dispatch("counselingProgram");
+
   if (to.matched.some((record) => !record.meta.anonymous)) {
     if (store.getters.isLoggedIn) {
       next();

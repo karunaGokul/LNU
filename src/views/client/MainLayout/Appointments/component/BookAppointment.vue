@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-dialog v-model="dialog" persistent width="500">
       <v-card>
-        <v-card-title class="text-h5"> Book Appointment </v-card-title>
+        <v-card-title class="text-h5 mb-4"> Book Appointment </v-card-title>
 
         <v-card-text>
           <v-form>
@@ -10,6 +10,7 @@
               label="Counselling Type"
               outlined
               dense
+              v-model="request.CounselingType"
               :items="CounselingTypes"
               item-text="name"
               return-object
@@ -24,7 +25,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="date"
+                  v-model="request.AppointmentDate"
                   label="Select Date"
                   prepend-inner-icon="calendar_month"
                   readonly
@@ -35,7 +36,7 @@
                 ></v-text-field>
               </template>
               <v-date-picker
-                v-model="date"
+                v-model="request.AppointmentDate"
                 @input="menu1 = false"
               ></v-date-picker>
             </v-menu>
@@ -48,7 +49,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="time"
+                  v-model="request.AppointmentTime"
                   outlined
                   dense
                   label="Select Time"
@@ -60,11 +61,17 @@
               </template>
               <v-time-picker
                 v-if="menu2"
-                v-model="time"
+                v-model="request.AppointmentTime"
                 full-width
                 @click:minute="$refs.menu.save(time)"
               ></v-time-picker>
             </v-menu>
+
+            <!--<v-checkbox
+              v-model="request.ExistingCoach"
+            >
+              <v-icon>check_box</v-icon>
+            </v-checkbox> -->
           </v-form>
         </v-card-text>
 
@@ -72,8 +79,8 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="book"> Book </v-btn>
-          <v-btn color="primary" text @click="close"> Cancel </v-btn>
+          <v-btn depressed color="primary" @click="book"> Confirm </v-btn>
+          <v-btn depressed @click="close"> Cancel </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -90,6 +97,7 @@ import BaseComponent from "@/components/base/BaseComponent";
 @Component
 export default class BookAppointment extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
+  @Inject("appointmentService") service: IAppointmentService;
 
   public CounselingTypes: Array<CounselingModel> = [];
 
@@ -119,8 +127,17 @@ export default class BookAppointment extends BaseComponent {
   }
 
   public book() {
-    this.dialog = false;
-    this.$emit("book");
+    console.log(this.request);
+    //this.dialog = false;
+    //this.$emit("book");
+    this.service
+      .bookAppointments(this.request)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   public close() {

@@ -162,7 +162,7 @@
                   color="primary"
                   filled
                   dense
-                  :items="CounselingTypes"
+                  :items="counselingProgram"
                   item-text="name"
                   item-value="id"
                   v-model="request.CounselingType"
@@ -254,28 +254,13 @@ export default class ClientRegistration extends BaseComponent {
   public showConfirmpassword: boolean = false;
   public snackbar: boolean = false;
   public snackbarText: string = "";
-  public CounselingTypes: Array<CounselingModel> = [];
-
-  created() {
-    this.getCounselingType();
-  }
 
   unmounted() {
     this.cancel();
   }
 
   private cancel() {
-    this.registerService.abortRequest().then((response: any) => {});
-  }
-
-  private getCounselingType() {
-    this.loadingSpinner("show");
-    this.registerService
-      .getCounselingType()
-      .then((response: Array<CounselingModel>) => {
-        this.CounselingTypes = response;
-        this.loadingSpinner("hide");
-      });
+    //this.registerService.abortRequest().then((response: any) => {});
   }
 
   public register() {
@@ -296,6 +281,10 @@ export default class ClientRegistration extends BaseComponent {
         }
       );
     }
+  }
+
+  get counselingProgram() {
+    return this.$store.getters.counselingProgram;
   }
 }
 </script>
