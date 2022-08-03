@@ -72,6 +72,18 @@
               </v-col>
             </v-row>
             <v-text-field
+              label="Username"
+              color="primary"
+              append-icon="person"
+              filled
+              dense
+              v-model="request.Username"
+              required
+              @input="$v.request.Username.$touch()"
+              @blur="$v.request.Username.$touch()"
+              :error-messages="$v.request.Username | errorMessages('Username')"
+            ></v-text-field>
+            <v-text-field
               label="Email Id"
               type="text"
               name="email"
@@ -219,6 +231,7 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
     request: {
       FirstName: { required, alphaOnly },
       LastName: { required, alphaOnly },
+      Username: { required, alphaOnly },
       Email: { required, email },
       Password: { required },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
