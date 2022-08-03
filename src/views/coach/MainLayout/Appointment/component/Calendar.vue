@@ -64,6 +64,7 @@
           @click:more="viewDay"
           @change="updateRange"
         ></v-calendar>
+        
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
@@ -86,128 +87,33 @@
             </v-toolbar>
             <v-card-text>
               <!-- <span v-html="selectedEvent.details"></span> -->
-              <div>
-                <h4>Upcoming Appointments</h4>
-                <v-divider class="my-3"></v-divider>
-                <v-dialog v-model="dialog" width="500">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      class="text-capitalize"
-                      color="primary"
-                      dark
-                      v-bind="attrs"
-                      v-on="on"
-                      >reschedule</v-btn
-                    >
-                  </template>
 
-                  <v-card>
-                    <v-card-title class="text-h6">
-                      <v-icon class="pl-n2 pr-1">today</v-icon>Reschedule
-                    </v-card-title>
-                    <v-divider></v-divider>
-                    <v-card-text class="mb-n6">
-                      <v-text-field
-                        outlined
-                        dense
-                        class="mt-4"
-                        label="Appointment Type"
-                      ></v-text-field>
-                      <v-menu
-                        ref="menu"
-                        v-model="menu2"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        :return-value.sync="time"
-                        transition="scale-transition"
-                        offset-y
-                        max-width="290px"
-                        min-width="290px"
-                      >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            label="Select Duration"
-                            prepend-inner-icon="schedule"
-                            v-model="request.appointmentTime"
-                            readonly
-                            outlined
-                            dense
-                            v-bind="attrs"
-                            v-on="on"
-                          ></v-text-field>
-                        </template>
-                        <v-time-picker
-                          v-if="menu2"
-                          v-model="request.appointmentTime"
-                          ampm-in-title
-                          @click:minute="$refs.menu.save(request.Time)"
-                        ></v-time-picker>
-                      </v-menu>
-                      <v-menu
-                        v-model="menu1"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
-                      >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            v-model="date"
-                            label="Select Date"
-                            prepend-inner-icon="calendar_month"
-                            readonly
-                            dense
-                            outlined
-                            v-bind="attrs"
-                            v-on="on"
-                          ></v-text-field>
-                        </template>
-                        <v-date-picker
-                          v-model="date"
-                          @input="menu1 = false"
-                        ></v-date-picker>
-                      </v-menu>
-                      <v-textarea
-                        outlined
-                        label="Queries"
-                        value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-                      ></v-textarea>
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                        text
-                        @click="dialog = false"
-                        class="primary text-capitalize"
-                      >
-                        Reschedule
-                      </v-btn>
-                      <v-btn
-                        class="text-capitalize red white--text"
-                        text
-                        @click="dialog = false"
-                      >
-                        Cancel
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-
-                <v-btn
-                  class="text-capitalize ml-3"
-                  color="red"
-                  dark
-                  @click="selectedOpen = false"
-                  >cancel</v-btn
-                >
-              </div>
+              <h4>Upcoming Appointments</h4>
+              <v-divider class="my-3"></v-divider>
+            
+              <v-btn
+                class="text-capitalize"
+                color="primary"
+                dark
+                @click="appointment"
+                >reschedule</v-btn
+              >
+              <v-btn
+                class="text-capitalize ml-3"
+                color="red"
+                dark
+                @click="selectedOpen = false"
+                >cancel</v-btn
+              >
             </v-card-text>
           </v-card>
+          
         </v-menu>
+        
       </v-sheet>
+   <up-coming-appointment v-if="showAppointment" />
     </v-col>
+    
   </v-row>
 </template>
 <script lang="ts">
@@ -218,8 +124,13 @@ import { BookAppointmentRequestModel, CounselingModel } from "@/model";
 import { IAppointmentService, IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
+import UpComingAppointment from "./UpComingAppointment.vue";
 
-@Component
+@Component({
+  components: {
+    UpComingAppointment,
+  },
+})
 export default class Calendar extends BaseComponent {
   @Inject("appointmentService") appointmentService: IAppointmentService;
   @Inject("registerService") registerService: IRegistrationService;
@@ -230,9 +141,10 @@ export default class Calendar extends BaseComponent {
 
   public focus: string = "";
   public type: string = "month";
-  public time: number = null;
-  public menu1: boolean = false;
-  public menu2: boolean = false;
+  
+  public showAppointment: boolean = false;
+
+  
   public dialog: boolean = false;
   public item: any = ["Foo", "Bar", "Fizz", "Buzz"];
   public typeToLabel: any = {
@@ -246,9 +158,7 @@ export default class Calendar extends BaseComponent {
   public selectedOpen: boolean = false;
   public events: Array<any> = [];
 
-  public date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-    .toISOString()
-    .substr(0, 10);
+  
   public colors: Array<string> = [
     "blue",
     "indigo",
@@ -268,6 +178,10 @@ export default class Calendar extends BaseComponent {
     "Conference",
     "Party",
   ];
+
+  public appointment() {
+    this.showAppointment = true;
+  }
 
   mounted() {
     let calendar: any = this.$refs.calendar;

@@ -52,7 +52,7 @@
           </div>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="600" v-if="!bookAppointments">
+      <v-sheet height="600">
         <v-calendar
           ref="calendar"
           color="primary"
@@ -108,6 +108,8 @@
           </v-card>
         </v-menu>
       </v-sheet>
+
+     
     </v-col>
   </v-row>
 </template>
