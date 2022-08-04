@@ -15,6 +15,7 @@
               v-model="request.CounselingType"
               :items="CounselingTypes"
               item-text="name"
+              return-object
             ></v-select>
             <v-menu
               v-model="menu1"
