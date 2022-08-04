@@ -91,6 +91,7 @@
             Book
           </v-btn>
         </v-form>
+        <app-alert v-if="showAlert" :response="response" />
       </v-col>
     </v-row>
   </div>
@@ -102,6 +103,7 @@ import { IAppointmentService } from "@/service";
 import { BookAppointmentRequestModel } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
+import AppAlert from "@/components/layout/AppAlert.vue";
 import { required } from "vuelidate/lib/validators";
 
 @Component({
@@ -111,6 +113,9 @@ import { required } from "vuelidate/lib/validators";
       AppointmentDate: { required },
       AppointmentTime: { required },
     },
+  },
+  components: {
+    AppAlert,
   },
 })
 export default class BookAppointments extends BaseComponent {
@@ -122,6 +127,7 @@ export default class BookAppointments extends BaseComponent {
   public time: number = null;
   public menu2: boolean = false;
   public menu1: boolean = false;
+  public showAlert: boolean = false;
   public date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
     .toISOString()
     .substr(0, 10);
@@ -136,7 +142,9 @@ export default class BookAppointments extends BaseComponent {
       this.service
         .bookAppointments(this.request)
         .then((response) => {
+          this.showAlert = true;
           console.log(response);
+          // this.$router.push("/client/home/appointments");
         })
         .catch((err) => {
           console.log(err);
