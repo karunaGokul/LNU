@@ -15,6 +15,7 @@
               v-model="request.CounselingType"
               :items="CounselingTypes"
               item-text="name"
+              return-object
             ></v-select>
             <v-menu
               v-model="menu1"
@@ -137,6 +138,7 @@ export default class BookAppointment extends BaseComponent {
       .bookAppointments(this.request)
       .then((response) => {
         console.log(response);
+        this.dialog = false;
       })
       .catch((err) => {
         console.log(err);
