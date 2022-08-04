@@ -68,12 +68,6 @@
                 @click:minute="$refs.menu.save(time)"
               ></v-time-picker>
             </v-menu>
-
-            <!--<v-checkbox
-              v-model="request.ExistingCoach"
-            >
-              <v-icon>check_box</v-icon>
-            </v-checkbox> -->
           </v-form>
         </v-card-text>
 
@@ -97,7 +91,7 @@ import { BookAppointmentRequestModel, CounselingModel } from "@/model";
 import BaseComponent from "@/components/base/BaseComponent";
 
 @Component
-export default class BookAppointment extends BaseComponent {
+export default class RescheduleAppointment extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
   @Inject("appointmentService") service: IAppointmentService;
 

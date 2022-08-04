@@ -32,7 +32,7 @@
         <PendingAppointments />
       </v-tab-item>
     </v-tabs-items>
-    <book-appointment
+    <reschedule-appointment
       :appointmentType="appointmentType"
       v-if="showBookAppoinment"
       @book="onBookNow"
@@ -43,14 +43,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import BookAppointment from "./component/BookAppointment.vue";
+import RescheduleAppointment from "./component/RescheduleAppointment.vue";
 
 import Calendar from "./component/Calender.vue";
 import PendingAppointments from "./component/PendingAppointments.vue";
 
 @Component({
   components: {
-    BookAppointment,
+    RescheduleAppointment,
     Calendar,
     PendingAppointments,
   },
@@ -66,8 +66,7 @@ export default class AppointmentsLayout extends Vue {
   public appointmentType: string = '';
 
   public bookNow() {
-    this.appointmentType = 'Book Appointment'
-    this.showBookAppoinment = true;
+    this.$router.push({name: 'Book Appointment', params: {id: "book-appointment"}});
   }
 
   onBookNow() {
