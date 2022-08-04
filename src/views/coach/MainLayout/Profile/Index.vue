@@ -68,7 +68,7 @@
             color="#5949B8"
             filled
             dense
-            :items="CounselingTypes"
+            :items="counselingProgram"
             item-text="name"
             item-value="id"
             v-model="request.counsellingType"
@@ -153,19 +153,10 @@ export default class Profile extends BaseComponent {
   public request: CoachRequestModel = new CoachRequestModel();
   public CounselingTypes: Array<CounselingModel> = [];
 
-  created() {
-    this.getCounselingType();
+  get counselingProgram() {
+    return this.$store.getters.counselingProgram;
   }
-
-  private getCounselingType() {
-    this.loadingSpinner("show");
-    this.coachProfileService
-      .getCounselingType()
-      .then((response: Array<CounselingModel>) => {
-        this.CounselingTypes = response;
-        this.loadingSpinner("hide");
-      });
-  }
+  
   public profile() {
     this.$v.$touch();
     if (!this.$v.$invalid) {

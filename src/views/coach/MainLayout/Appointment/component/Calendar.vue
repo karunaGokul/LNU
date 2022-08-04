@@ -64,7 +64,7 @@
           @click:more="viewDay"
           @change="updateRange"
         ></v-calendar>
-        
+
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
@@ -90,7 +90,7 @@
 
               <h4>Upcoming Appointments</h4>
               <v-divider class="my-3"></v-divider>
-            
+
               <v-btn
                 class="text-capitalize"
                 color="primary"
@@ -107,13 +107,10 @@
               >
             </v-card-text>
           </v-card>
-          
         </v-menu>
-        
       </v-sheet>
-   <up-coming-appointment v-if="showAppointment" />
+      <up-coming-appointment v-if="showAppointment" />
     </v-col>
-    
   </v-row>
 </template>
 <script lang="ts">
@@ -137,7 +134,6 @@ export default class Calendar extends BaseComponent {
 
   public request: BookAppointmentRequestModel =
     new BookAppointmentRequestModel();
-  public CounselingTypes: Array<CounselingModel> = [];
 
   public focus: string = "";
   public type: string = "month";
@@ -271,16 +267,6 @@ export default class Calendar extends BaseComponent {
         console.log(response);
       });
     // }
-  }
-
-  private getCounselingType() {
-    this.loadingSpinner("show");
-    this.registerService
-      .getCounselingType()
-      .then((response: Array<CounselingModel>) => {
-        this.CounselingTypes = response;
-        this.loadingSpinner("hide");
-      });
   }
 }
 </script>

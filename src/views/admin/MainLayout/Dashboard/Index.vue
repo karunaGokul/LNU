@@ -13,7 +13,7 @@
             <v-icon
               large
               style="font-size: 3rem"
-              color="#FCA744"
+              color="primary"
               class="d-flex justify-center pt-4 mb-n4"
               >book_online</v-icon
             >
@@ -32,7 +32,7 @@
             <v-icon
               large
               style="font-size: 3rem"
-              color="#FCA744"
+              color="primary"
               class="d-flex justify-center pt-4 mb-n4"
               >person</v-icon
             >
@@ -49,7 +49,7 @@
             <v-icon
               large
               style="font-size: 3rem"
-              color="#FCA744"
+              color="primary"
               class="d-flex justify-center pt-4 mb-n4"
               >people</v-icon
             ><v-card-title class="justify-center">Clients </v-card-title>
@@ -67,7 +67,7 @@
             <v-icon
               large
               style="font-size: 3rem"
-              color="#FCA744"
+              color="primary"
               class="d-flex justify-center pt-4 mb-n4"
               >calendar_month</v-icon
             >
