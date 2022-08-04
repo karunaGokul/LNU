@@ -138,6 +138,7 @@ export default class BookAppointment extends BaseComponent {
       .bookAppointments(this.request)
       .then((response) => {
         console.log(response);
+        this.dialog = false;
       })
       .catch((err) => {
         console.log(err);

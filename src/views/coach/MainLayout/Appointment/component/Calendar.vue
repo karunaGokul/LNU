@@ -141,24 +141,19 @@ export default class Calendar extends BaseComponent {
 
   public focus: string = "";
   public type: string = "month";
-  
   public showAppointment: boolean = false;
-
-  
   public dialog: boolean = false;
-  public item: any = ["Foo", "Bar", "Fizz", "Buzz"];
+  public selectedEvent: any = {};
+  public selectedElement: any = null;
+  public selectedOpen: boolean = false;
+  public events: Array<any> = [];
+
   public typeToLabel: any = {
     month: "Month",
     week: "Week",
     day: "Day",
     "4day": "4 Days",
   };
-  public selectedEvent: any = {};
-  public selectedElement: any = null;
-  public selectedOpen: boolean = false;
-  public events: Array<any> = [];
-
-  
   public colors: Array<string> = [
     "blue",
     "indigo",
