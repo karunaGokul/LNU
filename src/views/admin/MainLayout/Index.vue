@@ -104,15 +104,6 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class MainLayout extends Vue {
-  public items = [
-    { title: "Dashboard", icon: "mdi-view-dashboard" },
-    { title: "Coaches", icon: "mdi-account-tie-outline" },
-    { title: "Clients", icon: "mdi-account" },
-    { title: "Calendar", icon: "mdi-calendar-month-outline" },
-    { title: "", icon: "" },
-    { title: "", icon: "" },
-    { title: "Support", icon: "mdi-help-box" },
-    { title: "Logout", icon: "mdi-logout" },
-  ];
+  
 }
 </script>

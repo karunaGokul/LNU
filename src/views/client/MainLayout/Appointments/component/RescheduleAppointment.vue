@@ -13,7 +13,7 @@
               outlined
               dense
               v-model="request.CounselingType"
-              :items="CounselingTypes"
+              :items="counselingProgram"
               item-text="name"
               return-object
             ></v-select>
@@ -110,18 +110,8 @@ export default class RescheduleAppointment extends BaseComponent {
     .toISOString()
     .substr(0, 10);
 
-  created() {
-    this.getCounselingType();
-  }
-
-  private getCounselingType() {
-    this.loadingSpinner("show");
-    this.registerService
-      .getCounselingType()
-      .then((response: Array<CounselingModel>) => {
-        this.CounselingTypes = response;
-        this.loadingSpinner("hide");
-      });
+  get counselingProgram() {
+    return this.$store.getters.counselingProgram;
   }
 
   public book() {
