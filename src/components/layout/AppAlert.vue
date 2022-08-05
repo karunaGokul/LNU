@@ -5,8 +5,7 @@
         <v-icon style="font-size: 5rem" color="blue">check_circle</v-icon>
         <v-card-subtitle class="blue--text text-h6"> Success </v-card-subtitle>
         <v-card-text>
-          Appointment Booked Successfully
-          <!-- {{ this.alertMessage }} -->
+          {{ response }}
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -21,10 +20,12 @@ export default class AppAlert extends Vue {
   @Prop() response: string;
 
   public dialog: boolean = true;
-//   public alertMessage: string = "";
 
-//   created() {
-//     this.alertMessage = this.response;
-//   }
+  created() {
+    setTimeout(() => {
+        this.$router.push("/client/home/appointments");
+    },2000)
+  }
+
 }
 </script>

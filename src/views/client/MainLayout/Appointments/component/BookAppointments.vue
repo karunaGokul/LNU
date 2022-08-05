@@ -124,6 +124,8 @@ export default class BookAppointments extends BaseComponent {
   public request: BookAppointmentRequestModel =
     new BookAppointmentRequestModel();
 
+    public response: string = "";
+
   public time: number = null;
   public menu2: boolean = false;
   public menu1: boolean = false;
@@ -143,8 +145,9 @@ export default class BookAppointments extends BaseComponent {
         .bookAppointments(this.request)
         .then((response) => {
           this.showAlert = true;
+          this.response = response;
           console.log(response);
-          // this.$router.push("/client/home/appointments");
+         
         })
         .catch((err) => {
           console.log(err);
