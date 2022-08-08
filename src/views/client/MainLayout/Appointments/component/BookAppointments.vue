@@ -147,7 +147,6 @@ export default class BookAppointments extends BaseComponent {
           this.showAlert = true;
           this.response = response;
           console.log(response);
-         
         })
         .catch((err) => {
           console.log(err);
