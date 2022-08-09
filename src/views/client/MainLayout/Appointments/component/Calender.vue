@@ -108,15 +108,13 @@
           </v-card>
         </v-menu>
       </v-sheet>
-
-     
     </v-col>
   </v-row>
 </template>
 <script lang="ts">
 import { Component, Prop, Inject } from "vue-property-decorator";
 
-import { BookAppointmentRequestModel, CounselingModel } from "@/model";
+import { BookAppointmentRequestModel, CounselingModel, EventsModel } from "@/model";
 
 import { IAppointmentService, IRegistrationService } from "@/service";
 
@@ -127,9 +125,10 @@ export default class Calendar extends BaseComponent {
   @Inject("appointmentService") appointmentService: IAppointmentService;
   @Inject("registerService") registerService: IRegistrationService;
 
+  @Prop() events: Array<EventsModel>;
+  @Prop() tab: string;
+
   @Prop() activeAppointments: boolean;
-  @Prop() previousAppointments: boolean;
-  @Prop() bookAppointments: boolean;
 
   public request: BookAppointmentRequestModel =
     new BookAppointmentRequestModel();
@@ -148,7 +147,7 @@ export default class Calendar extends BaseComponent {
   public selectedEvent: any = {};
   public selectedElement: any = null;
   public selectedOpen: boolean = false;
-  public events: Array<any> = [];
+  //public events: Array<any> = [];
 
   public colors: Array<string> = [
     "blue",
@@ -197,6 +196,7 @@ export default class Calendar extends BaseComponent {
     let calendar: any = this.$refs.calendar;
     calendar.prev();
   }
+
   next() {
     let calendar: any = this.$refs.calendar;
     calendar.next();
@@ -224,7 +224,7 @@ export default class Calendar extends BaseComponent {
   }
 
   updateRange(data: any) {
-    this.events.push({
+    /*this.events.push({
       name: "Behavioural Counseling",
       start: new Date(),
       end: new Date(),
@@ -246,7 +246,7 @@ export default class Calendar extends BaseComponent {
       end: new Date(),
       color: this.colors[this.rnd(0, this.colors.length - 1)],
       timed: true,
-    });
+    });*/
   }
 
   private rnd(a: number, b: number) {

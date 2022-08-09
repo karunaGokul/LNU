@@ -1,17 +1,25 @@
-import { BookAppointmentRequestModel } from "@/model";
-import { BaseService } from "./base.service";
+import { AppoinmentRequestModel, AppointmentResponseModel, BookAppointmentRequestModel } from "@/model";
+import { IBaseService, BaseService } from "./base.service";
 
-export interface IAppointmentService {
+export interface IAppointmentService extends IBaseService<AppoinmentRequestModel, AppointmentResponseModel> {
+  getAppointments(request: AppoinmentRequestModel): Promise<Array<AppointmentResponseModel>>;
   bookAppointments(request: BookAppointmentRequestModel): Promise<any>;
 }
 
 export class AppointmentService
-  extends BaseService<any, any>
+  extends BaseService<AppoinmentRequestModel, AppointmentResponseModel>
   implements IAppointmentService
 {
   constructor() {
     super("");
   }
+
+  public getAppointments(request: AppoinmentRequestModel): Promise<Array<AppointmentResponseModel>> {
+    return this.httpGet('Appointment/GetAllAppointmentsByMonth', request).then((response) => {
+      return response.data;
+    })
+  }
+
   public bookAppointments(request: BookAppointmentRequestModel): Promise<any> {
     return this.httpPost("Appointment/BookAppointment", request).then(
       (response) => {
