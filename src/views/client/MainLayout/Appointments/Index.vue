@@ -2,7 +2,7 @@
   <div class="pa-4">
     <div class="d-flex align-center justify-space-between">
       <h2 class="font-weight-bold my-4">Appointments</h2>
-      <v-btn depressed color="primary" @click="bookNow">
+      <v-btn depressed color="primary" @click="navigateBookAppointment">
         Book Appointment
       </v-btn>
     </div>
@@ -50,9 +50,8 @@
       </v-tab-item>
     </v-tabs-items>
     <reschedule-appointment
-      :appointmentType="appointmentType"
       v-if="showBookAppoinment"
-      @book="onBookNow"
+      @appointmentBooked="onAppointmentBooked"
       @close="onClose"
     />
   </div>
@@ -63,7 +62,6 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 import RescheduleAppointment from "./component/RescheduleAppointment.vue";
 
 import AppointmentCalendar from "./component/AppointmentCalender.vue";
-import Calendar from "./component/Calender.vue";
 import PendingAppointments from "./component/PendingAppointments.vue";
 
 import { IAppointmentService } from "@/service";
@@ -72,7 +70,6 @@ import { AppoinmentRequestModel, EventsModel } from "@/model";
 @Component({
   components: {
     RescheduleAppointment,
-    Calendar,
     AppointmentCalendar,
     PendingAppointments,
   },
@@ -82,12 +79,8 @@ export default class AppointmentsLayout extends Vue {
 
   public tab: string = "ActiveAppointments";
   public rating: number = 4;
-  public activeAppointments: boolean = true;
-  public previousAppointments: boolean = true;
-  public bookAppointments: boolean = true;
 
   public showBookAppoinment: boolean = false;
-  public appointmentType: string = "";
 
   public request: AppoinmentRequestModel = new AppoinmentRequestModel();
 
@@ -137,15 +130,16 @@ export default class AppointmentsLayout extends Vue {
     this.getAppointments(status, date);
   }
 
-  public bookNow() {
+  public navigateBookAppointment() {
     this.$router.push({
       name: "Book Appointment",
       params: { id: "book-appointment" },
     });
   }
 
-  onBookNow() {
+  onAppointmentBooked() {
     this.showBookAppoinment = false;
+    this.getAppointments("Approved");
   }
 
   onClose() {
@@ -154,7 +148,6 @@ export default class AppointmentsLayout extends Vue {
 
   public rescheduleAppoinment() {
     this.showBookAppoinment = true;
-    this.appointmentType = "Reschedule Appointment";
   }
 
   private getDate(date: string, time: string) {
