@@ -55,12 +55,14 @@
       <v-sheet height="600">
         <v-calendar
           ref="calendar"
+          v-model="focus"
           color="primary"
           :events="events"
           :event-color="getEventColor"
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
+          @click:date="viewDay"
           @change="updateRange"
         ></v-calendar>
         <v-menu
@@ -84,7 +86,7 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <div v-if="activeAppointments">
+              <div v-if="tab == 'Approved'">
                 <h4>Appointments</h4>
                 <v-divider class="my-3"></v-divider>
 
@@ -92,7 +94,7 @@
                   class="text-capitalize"
                   color="primary"
                   dark
-                  @click="Reschedule"
+                  @click="reschedule"
                   >Reschedule</v-btn
                 >
 
@@ -108,37 +110,27 @@
           </v-card>
         </v-menu>
       </v-sheet>
-
-     
     </v-col>
   </v-row>
 </template>
 <script lang="ts">
 import { Component, Prop, Inject } from "vue-property-decorator";
 
-import { BookAppointmentRequestModel, CounselingModel } from "@/model";
-
+import { EventsModel } from "@/model";
 import { IAppointmentService, IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
 @Component
-export default class Calendar extends BaseComponent {
+export default class AppointmentCalendar extends BaseComponent {
   @Inject("appointmentService") appointmentService: IAppointmentService;
   @Inject("registerService") registerService: IRegistrationService;
 
-  @Prop() activeAppointments: boolean;
-  @Prop() previousAppointments: boolean;
-  @Prop() bookAppointments: boolean;
-
-  public request: BookAppointmentRequestModel =
-    new BookAppointmentRequestModel();
-  public CounselingTypes: Array<CounselingModel> = [];
+  @Prop() events: Array<EventsModel>;
+  @Prop() tab: string;
 
   public focus: string = "";
   public type: string = "month";
-  public time: number = null;
-  public item: any = ["Foo", "Bar", "Fizz", "Buzz"];
   public typeToLabel: any = {
     month: "Month",
     week: "Week",
@@ -148,8 +140,6 @@ export default class Calendar extends BaseComponent {
   public selectedEvent: any = {};
   public selectedElement: any = null;
   public selectedOpen: boolean = false;
-  public events: Array<any> = [];
-
   public colors: Array<string> = [
     "blue",
     "indigo",
@@ -159,23 +149,13 @@ export default class Calendar extends BaseComponent {
     "orange",
     "grey darken-1",
   ];
-  public names: Array<string> = [
-    "Meeting",
-    "Holiday",
-    "PTO",
-    "Travel",
-    "Event",
-    "Birthday",
-    "Conference",
-    "Party",
-  ];
 
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
   }
 
-  public Reschedule() {
+  public reschedule() {
     this.selectedOpen = false;
     this.$emit("reschedule");
   }
@@ -185,21 +165,24 @@ export default class Calendar extends BaseComponent {
     this.type = "day";
   }
 
-  public getEventColor(event: any) {
+  getEventColor(event: any) {
     return event.color;
   }
 
-  public setToday() {
+  setToday() {
     this.focus = "";
   }
 
   prev() {
     let calendar: any = this.$refs.calendar;
     calendar.prev();
+    this.type = "month";
   }
+
   next() {
     let calendar: any = this.$refs.calendar;
     calendar.next();
+    this.type = "month";
   }
 
   showEvent(data: any) {
@@ -224,33 +207,8 @@ export default class Calendar extends BaseComponent {
   }
 
   updateRange(data: any) {
-    this.events.push({
-      name: "Behavioural Counseling",
-      start: new Date(),
-      end: new Date(),
-      color: this.colors[this.rnd(0, this.colors.length - 1)],
-      timed: true,
-    });
-
-    this.events.push({
-      name: "Behavioural Counseling",
-      start: new Date(),
-      end: new Date(),
-      color: this.colors[this.rnd(0, this.colors.length - 1)],
-      timed: true,
-    });
-
-    this.events.push({
-      name: "Marriage Counseling",
-      start: new Date(),
-      end: new Date(),
-      color: this.colors[this.rnd(0, this.colors.length - 1)],
-      timed: true,
-    });
-  }
-
-  private rnd(a: number, b: number) {
-    return Math.floor((b - a + 1) * Math.random()) + a;
+    if (this.type == "month")
+      this.$emit("updateRange", this.tab, data.start.date);
   }
 }
 </script>

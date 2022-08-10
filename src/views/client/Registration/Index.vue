@@ -163,6 +163,7 @@
                   filled
                   dense
                   :items="counselingProgram"
+                  append-icon="arrow_drop_down"
                   item-text="name"
                   item-value="id"
                   v-model="request.CounselingType"

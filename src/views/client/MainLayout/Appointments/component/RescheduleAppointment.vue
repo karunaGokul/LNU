@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" persistent width="500">
       <v-card>
         <v-card-title class="text-h5 mb-4">
-          {{ appointmentType }}
+          Reschedule Appointment
         </v-card-title>
 
         <v-card-text>
@@ -95,8 +95,6 @@ export default class RescheduleAppointment extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
   @Inject("appointmentService") service: IAppointmentService;
 
-  @Prop() appointmentType: string;
-
   public CounselingTypes: Array<CounselingModel> = [];
 
   public request: BookAppointmentRequestModel =
@@ -110,18 +108,11 @@ export default class RescheduleAppointment extends BaseComponent {
     .toISOString()
     .substr(0, 10);
 
-  get counselingProgram() {
-    return this.$store.getters.counselingProgram;
-  }
-
   public book() {
-    console.log(this.request);
-    //this.dialog = false;
-    //this.$emit("book");
     this.service
       .bookAppointments(this.request)
       .then((response) => {
-        console.log(response);
+        this.$emit("appointmentBooked");
         this.dialog = false;
       })
       .catch((err) => {
@@ -133,5 +124,10 @@ export default class RescheduleAppointment extends BaseComponent {
     this.dialog = false;
     this.$emit("close");
   }
+
+  get counselingProgram() {
+    return this.$store.getters.counselingProgram;
+  }
+
 }
 </script>
