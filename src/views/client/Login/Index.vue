@@ -180,6 +180,7 @@ export default class Login extends BaseComponent {
 
   public login() {
     this.$v.$touch();
+    console.log(this.$v.$invalid);
     if (!this.$v.$invalid) {
       this.loadingSpinner("show");
       this.authService.login(this.request).then(

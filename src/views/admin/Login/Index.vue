@@ -94,9 +94,6 @@ import { required } from "vuelidate/lib/validators";
 
 import { LoginRequestModel } from "@/model";
 
-// import TextInput from "@/components/controls/TextInput.vue";
-// import PasswordInput from "@/components/controls/PasswordInput.vue";
-
 @Component({
   validations: {
     request: {
@@ -113,7 +110,7 @@ export default class Index extends Vue {
   public login() {
     this.$v.$touch();
     console.log(this.request);
-    //this.$router.push("home/dashboard");
+    this.$router.push("home/dashboard");
   }
 }
 </script>

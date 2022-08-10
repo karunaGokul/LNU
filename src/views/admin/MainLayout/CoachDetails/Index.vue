@@ -7,7 +7,7 @@
           elevation="0"
           outlined
           class="mt-8 rounded-lg pa-3"
-          v-for="(row, i) in response"
+          v-for="(item, i) in response"
           :key="i"
         >
       
@@ -15,10 +15,10 @@
             <v-col cols="12" md="3" class="d-flex justify-center align-center">
               <div>
                 <v-avatar size="70">
-                  <img :src="`data:image/png;base64,${row.ProfileImage}`" alt="John" />
+                  <img :src="`data:image/png;base64,${item.ProfileImage}`" alt="John" />
                 </v-avatar>
 
-                <h4>{{ row.Name }}</h4>
+                <h4>{{ item.Name }}</h4>
                 <h5 class="text-center">rating</h5>
               </div>
             </v-col>
@@ -29,7 +29,7 @@
                 </v-col>
                 <v-col>
                   <h4 class="body-1">
-                    {{ row.About }}
+                    {{ item.About }}
                   </h4>
                 </v-col>
               </v-row>
@@ -38,7 +38,7 @@
                   <h4>Experience :</h4>
                 </v-col>
                 <v-col>
-                  <h4 class="body-1">{{ row.Experience }} Years</h4>
+                  <h4 class="body-1">{{ item.Experience }} Years</h4>
                 </v-col>
               </v-row>
               <v-row class="my-n2">
@@ -46,7 +46,7 @@
                   <h4>Counselling Type :</h4>
                 </v-col>
                 <v-col>
-                  <h4 class="body-1">{{ row.CounselingType }}</h4>
+                  <h4 class="body-1">{{ item.CounselingType }}</h4>
                 </v-col>
               </v-row>
               <v-row class="my-n2">
@@ -54,7 +54,7 @@
                   <h4>Certificate :</h4>
                 </v-col>
                 <v-col>
-                  <h4 class="body-1">{{ row.Certificate.join(", ") }}</h4>
+                  <h4 class="body-1">{{ item.Certificate.join(", ") }}</h4>
                 </v-col>
               </v-row>
               <v-row class="my-n2">
@@ -62,7 +62,7 @@
                   <h4>Email :</h4>
                 </v-col>
                 <v-col>
-                  <h4 class="body-1">{{ row.Email }}</h4>
+                  <h4 class="body-1">{{ item.Email }}</h4>
                 </v-col>
               </v-row>
               <v-row class="my-n2">
@@ -70,7 +70,7 @@
                   <h4>Phone :</h4>
                 </v-col>
                 <v-col>
-                  <h4 class="body-1">{{ row.PhoneNumber }}</h4>
+                  <h4 class="body-1">{{ item.PhoneNumber }}</h4>
                 </v-col>
               </v-row>
             </v-col>

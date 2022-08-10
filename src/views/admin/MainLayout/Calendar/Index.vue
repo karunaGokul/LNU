@@ -1,9 +1,9 @@
 <template>
-  <div class="pt-15 px-15">
+  <div class="pt-15 px-15 primary-linear">
     <v-row>
       <v-col>
         <v-date-picker
-          color="#5949B8"
+          color="primary"
           width="350"
           v-model="picker"
           prev-icon="chevron_left"

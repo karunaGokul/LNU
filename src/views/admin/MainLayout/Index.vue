@@ -50,7 +50,7 @@
                   active-class="primary"
                 >
                   <div class="v-list-item__icon">
-                    <v-icon> book_online </v-icon>
+                    <v-icon> person </v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Coaches</div>
@@ -63,10 +63,23 @@
                   active-class="primary"
                 >
                   <div class="v-list-item__icon">
-                    <v-icon> book_online </v-icon>
+                    <v-icon> people </v-icon>
                   </div>
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Clients</div>
+                  </div>
+                </router-link>
+                <router-link
+                  to="/admin/home/calendar"
+                  tag="div"
+                  class="my-4 v-list-item v-list-item--link px-4"
+                  active-class="primary"
+                >
+                  <div class="v-list-item__icon">
+                    <v-icon> calendar_month </v-icon>
+                  </div>
+                  <div class="v-list-item__content">
+                    <div class="v-list-item__title">Calendar</div>
                   </div>
                 </router-link>
               </div>
