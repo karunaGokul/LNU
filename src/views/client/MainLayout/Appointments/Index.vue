@@ -137,7 +137,6 @@ export default class AppointmentsLayout extends Vue {
 
   public updateAppointment(status: string, date: string) {
     this.getAppointments(status, date);
-    console.log(this.date);
   }
 
   public navigateBookAppointment() {
@@ -158,12 +157,15 @@ export default class AppointmentsLayout extends Vue {
   public event(responseEvent: string) {
     this.rescheduleDate = responseEvent;
     this.response.forEach((item) => {
-      let date = this.getDate(item.appointmentDate, item.appointmentEndTime);
-      console.log(date);
-      console.log(this.rescheduleDate.start);
-      if (date == this.rescheduleDate.start) {
-        console.log(date);
+      let date = this.getDate(item.appointmentDate, item.appointmentStartTime);
+      if (date > this.rescheduleDate.start) {
+        console.log("date");
+      } else if(date < this.rescheduleDate.start) {
+        console.log("this.rescheduleDate.start");
+      } else {
+        this.appointmentId = item.id;
       }
+      
     });
   }
   public rescheduleAppoinment() {

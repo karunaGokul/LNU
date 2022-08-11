@@ -110,10 +110,8 @@ export default class RescheduleAppointment extends BaseComponent {
     .toISOString()
     .substr(0, 10);
 
-created() {
- console.log(this.appointmentId); 
-}
   public reschedule() {
+    this.request.AppointmentId = this.appointmentId;
     this.service
       .rescheduleAppointments(this.request)
       .then((response) => {
