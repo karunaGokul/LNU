@@ -47,4 +47,5 @@ export class EventsModel {
   end: Date;
   color: string;
   timed: boolean;
+  id: string;
 }

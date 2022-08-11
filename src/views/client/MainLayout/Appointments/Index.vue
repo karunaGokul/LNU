@@ -22,18 +22,11 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item value="tab-active-appointments">
-        <!-- <calendar
-          :events="events"
-          tab="Active Apppointment"
-          :activeAppointments="activeAppointments"
-          @reschedule="rescheduleAppoinment"
-        /> -->
         <AppointmentCalendar
           :events="events"
-          tab="Approved"
+          tab="Confirmed"
           @updateRange="updateAppointment"
           @reschedule="rescheduleAppoinment"
-          @event="event"
         />
       </v-tab-item>
       <v-tab-item value="tab-previous-appointments">
@@ -127,6 +120,7 @@ export default class AppointmentsLayout extends Vue {
           event.color =
             this.colors[Math.floor(Math.random() * this.colors.length)];
           event.timed = true;
+          event.id = item.id;
           this.events.push(event);
         });
       })
@@ -154,21 +148,9 @@ export default class AppointmentsLayout extends Vue {
   onClose() {
     this.showBookAppoinment = false;
   }
-  public event(responseEvent: string) {
-    this.rescheduleDate = responseEvent;
-    this.response.forEach((item) => {
-      let date = this.getDate(item.appointmentDate, item.appointmentStartTime);
-      if (date > this.rescheduleDate.start) {
-        console.log("date");
-      } else if(date < this.rescheduleDate.start) {
-        console.log("this.rescheduleDate.start");
-      } else {
-        this.appointmentId = item.id;
-      }
-      
-    });
-  }
-  public rescheduleAppoinment() {
+
+  public rescheduleAppoinment(id: string) {
+    this.appointmentId = id;
     this.showBookAppoinment = true;
   }
 

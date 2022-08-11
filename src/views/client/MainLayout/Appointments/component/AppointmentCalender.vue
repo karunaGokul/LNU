@@ -86,7 +86,7 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <div v-if="tab == 'Approved'">
+              <div v-if="tab == 'Confirmed'">
                 <h4>Appointments</h4>
                 <v-divider class="my-3"></v-divider>
 
@@ -154,8 +154,7 @@ export default class AppointmentCalendar extends BaseComponent {
 
   public reschedule() {
     this.selectedOpen = false;
-    this.$emit("reschedule");
-    this.$emit("event",this.selectedEvent);
+    this.$emit("reschedule",this.selectedEvent.id);
   }
 
   public viewDay(data: any) {
