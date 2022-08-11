@@ -75,7 +75,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn depressed color="primary" @click="book"> Confirm </v-btn>
+          <v-btn depressed color="primary" @click="reschedule"> Confirm </v-btn>
           <v-btn depressed @click="close"> Cancel </v-btn>
         </v-card-actions>
       </v-card>
@@ -95,6 +95,8 @@ export default class RescheduleAppointment extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
   @Inject("appointmentService") service: IAppointmentService;
 
+  @Prop() appointmentId: string;
+
   public CounselingTypes: Array<CounselingModel> = [];
 
   public request: BookAppointmentRequestModel =
@@ -108,10 +110,15 @@ export default class RescheduleAppointment extends BaseComponent {
     .toISOString()
     .substr(0, 10);
 
-  public book() {
+created() {
+ console.log(this.appointmentId); 
+}
+  public reschedule() {
     this.service
-      .bookAppointments(this.request)
+      .rescheduleAppointments(this.request)
       .then((response) => {
+        console.log(this.request);
+        console.log(response);
         this.$emit("appointmentBooked");
         this.dialog = false;
       })

@@ -13,8 +13,9 @@
             filled
             dense
             required
-            @input="request.Name.$touch()"
-            @blur="request.Name.$touch()"
+            v-model="request.Name"
+            @input="$v.request.Name.$touch()"
+            @blur="$v.request.Name.$touch()"
             :error-messages="$v.request.Name | errorMessages('Name')"
           ></v-text-field>
           <v-text-field
@@ -25,10 +26,11 @@
             append-icon="email"
             filled
             dense
+            v-model="request.Email"
             required
-            @input="request.Email.$touch()"
-            @blur="request.Email.$touch()"
-            :error-messages="$v.request.Name | errorMessages('Email')"
+            @input="$v.request.Email.$touch()"
+            @blur="$v.request.Email.$touch()"
+            :error-messages="$v.request.Email | errorMessages('Email')"
           ></v-text-field>
           <v-textarea
             filled
@@ -57,13 +59,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { required } from "vuelidate/lib/validators";
+import { email, required } from "vuelidate/lib/validators";
 import { SupportModel } from "@/model";
 @Component({
   validations: {
     request: {
       Name: { required },
-      Email: { required },
+      Email: { required, email },
     },
   },
 })

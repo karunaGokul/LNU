@@ -7,6 +7,7 @@ export class BookAppointmentRequestModel {
   CounselingType: CounselingModel;
   ExistingCoach: boolean;
   Coach: string;
+  AppointmentId?: string;
 }
 export class AppoinmentRequestModel extends DataRequest {
   dateRange: string;

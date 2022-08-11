@@ -7,14 +7,10 @@
       </v-btn>
     </div>
     <v-tabs v-model="tab">
-      <v-tab
-        href="#tab-active-appointments"
-        class="text-capitalize"
+      <v-tab href="#tab-active-appointments" class="text-capitalize"
         >Active Appointments</v-tab
       >
-      <v-tab
-        href="#tab-previous-appointments"
-        class="text-capitalize"
+      <v-tab href="#tab-previous-appointments" class="text-capitalize"
         >Previous Appointments</v-tab
       >
       <v-tab
@@ -36,6 +32,8 @@
           :events="events"
           tab="Approved"
           @updateRange="updateAppointment"
+          @reschedule="rescheduleAppoinment"
+          @event="event"
         />
       </v-tab-item>
       <v-tab-item value="tab-previous-appointments">
@@ -46,13 +44,14 @@
         />
       </v-tab-item>
       <v-tab-item value="tab-pending-appointments">
-        <PendingAppointments />
+        <PendingAppointments :response="response" />
       </v-tab-item>
     </v-tabs-items>
     <reschedule-appointment
       v-if="showBookAppoinment"
       @appointmentBooked="onAppointmentBooked"
       @close="onClose"
+      :appointmentId="appointmentId"
     />
   </div>
 </template>
@@ -65,7 +64,11 @@ import AppointmentCalendar from "./component/AppointmentCalender.vue";
 import PendingAppointments from "./component/PendingAppointments.vue";
 
 import { IAppointmentService } from "@/service";
-import { AppoinmentRequestModel, EventsModel } from "@/model";
+import {
+  AppoinmentRequestModel,
+  EventsModel,
+  AppointmentResponseModel,
+} from "@/model";
 
 @Component({
   components: {
@@ -80,9 +83,14 @@ export default class AppointmentsLayout extends Vue {
   public tab: string = "ActiveAppointments";
   public rating: number = 4;
 
+  public date: string = "";
+
   public showBookAppoinment: boolean = false;
+  public appointmentId: string = "";
+  public rescheduleDate: any;
 
   public request: AppoinmentRequestModel = new AppoinmentRequestModel();
+  public response: Array<AppointmentResponseModel> = [];
 
   public events: Array<EventsModel> = [];
   public colors: Array<string> = [
@@ -103,7 +111,8 @@ export default class AppointmentsLayout extends Vue {
     this.events = [];
     this.service
       .getAppointments(this.request)
-      .then((response) => {
+      .then((response: Array<AppointmentResponseModel>) => {
+        this.response = response;
         response.forEach((item) => {
           let event: EventsModel = new EventsModel();
           event.name = item.counselingType.name;
@@ -128,6 +137,7 @@ export default class AppointmentsLayout extends Vue {
 
   public updateAppointment(status: string, date: string) {
     this.getAppointments(status, date);
+    console.log(this.date);
   }
 
   public navigateBookAppointment() {
@@ -145,7 +155,17 @@ export default class AppointmentsLayout extends Vue {
   onClose() {
     this.showBookAppoinment = false;
   }
-
+  public event(responseEvent: string) {
+    this.rescheduleDate = responseEvent;
+    this.response.forEach((item) => {
+      let date = this.getDate(item.appointmentDate, item.appointmentEndTime);
+      console.log(date);
+      console.log(this.rescheduleDate.start);
+      if (date == this.rescheduleDate.start) {
+        console.log(date);
+      }
+    });
+  }
   public rescheduleAppoinment() {
     this.showBookAppoinment = true;
   }

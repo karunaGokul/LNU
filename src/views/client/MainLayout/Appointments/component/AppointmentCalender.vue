@@ -117,14 +117,11 @@
 import { Component, Prop, Inject } from "vue-property-decorator";
 
 import { EventsModel } from "@/model";
-import { IAppointmentService, IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
 @Component
 export default class AppointmentCalendar extends BaseComponent {
-  @Inject("appointmentService") appointmentService: IAppointmentService;
-  @Inject("registerService") registerService: IRegistrationService;
 
   @Prop() events: Array<EventsModel>;
   @Prop() tab: string;
@@ -158,11 +155,13 @@ export default class AppointmentCalendar extends BaseComponent {
   public reschedule() {
     this.selectedOpen = false;
     this.$emit("reschedule");
+    this.$emit("event",this.selectedEvent);
   }
 
   public viewDay(data: any) {
     this.focus = data.date;
     this.type = "day";
+   
   }
 
   getEventColor(event: any) {

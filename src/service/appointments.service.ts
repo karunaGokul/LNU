@@ -1,9 +1,17 @@
-import { AppoinmentRequestModel, AppointmentResponseModel, BookAppointmentRequestModel } from "@/model";
+import {
+  AppoinmentRequestModel,
+  AppointmentResponseModel,
+  BookAppointmentRequestModel,
+} from "@/model";
 import { IBaseService, BaseService } from "./base.service";
 
-export interface IAppointmentService extends IBaseService<AppoinmentRequestModel, AppointmentResponseModel> {
-  getAppointments(request: AppoinmentRequestModel): Promise<Array<AppointmentResponseModel>>;
+export interface IAppointmentService
+  extends IBaseService<AppoinmentRequestModel, AppointmentResponseModel> {
+  getAppointments(
+    request: AppoinmentRequestModel
+  ): Promise<Array<AppointmentResponseModel>>;
   bookAppointments(request: BookAppointmentRequestModel): Promise<any>;
+  rescheduleAppointments(request: BookAppointmentRequestModel): Promise<any>;
 }
 
 export class AppointmentService
@@ -14,10 +22,14 @@ export class AppointmentService
     super("");
   }
 
-  public getAppointments(request: AppoinmentRequestModel): Promise<Array<AppointmentResponseModel>> {
-    return this.httpGet('Appointment/GetAllAppointmentsByMonth', request).then((response) => {
-      return response.data;
-    })
+  public getAppointments(
+    request: AppoinmentRequestModel
+  ): Promise<Array<AppointmentResponseModel>> {
+    return this.httpGet("Appointment/GetAllAppointmentsByMonth", request).then(
+      (response) => {
+        return response.data;
+      }
+    );
   }
 
   public bookAppointments(request: BookAppointmentRequestModel): Promise<any> {
@@ -26,5 +38,17 @@ export class AppointmentService
         return response.data;
       }
     );
+  }
+
+  public rescheduleAppointments(
+    request: BookAppointmentRequestModel
+  ): Promise<any> {
+    return this.httpPost(
+      "Appointment/RescheduleAppointment?AppointmentId=" +
+        request.AppointmentId,
+      request
+    ).then((response) => {
+      return response.data;
+    });
   }
 }

@@ -65,7 +65,7 @@
               </v-col>
             </v-row>
 
-            <v-form class="px-8" @submit="login">
+            <v-form class="px-8" @submit.prevent="login">
               <v-text-field
                 label="Username / Email"
                 color="primary"
@@ -100,7 +100,6 @@
                   depressed
                   large
                   class="white--text text-capitalize"
-                  @click.prevent="login"
                   type="submit"
                   style="width: 100%"
                   >Login</v-btn
@@ -180,7 +179,6 @@ export default class Login extends BaseComponent {
 
   public login() {
     this.$v.$touch();
-    console.log(this.$v.$invalid);
     if (!this.$v.$invalid) {
       this.loadingSpinner("show");
       this.authService.login(this.request).then(

@@ -15,13 +15,13 @@
             </thead>
             <tbody>
               <tr
-                v-for="(item, index) in items"
+                v-for="(item, index) in response"
                 :key="index"
                 class="text-center"
               >
-                <td>{{ item.Date }}</td>
-                <td>{{ item.Time }}</td>
-                <td>{{ item.CounsellingType }}</td>
+                <td>{{ item.appointmentDate }}</td>
+                <td>{{ item.appointmentStartTime }}</td>
+                <td>{{ item.counselingType.name }}</td>
               </tr>
             </tbody>
           </template>
@@ -32,12 +32,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { AppointmentResponseModel } from "@/model";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({
   components: {},
 })
 export default class PendingAppointments extends Vue {
+  @Prop() response: Array<AppointmentResponseModel>;
+
   public headers: Array<string> = ["Date", "Time", "Counselling Type"];
 
   public items: Array<any> = [
@@ -72,6 +75,10 @@ export default class PendingAppointments extends Vue {
       CounsellingType: "Bar",
     },
   ];
+
+  // created() {
+  //  console.log(this.response); 
+  // }
 }
 </script>
 
