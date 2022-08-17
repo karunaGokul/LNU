@@ -25,7 +25,7 @@
         </v-col>
         <v-col>
           <v-card
-            to="/client/home/message"
+            to="/client/home/messages"
             height="150"
             class="d-flex flex-column align-center justify-center rounded-lg"
           >

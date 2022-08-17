@@ -105,18 +105,32 @@
 <script lang="ts">
 import { Component, Inject } from "vue-property-decorator";
 
-import { required, email, maxLength } from "vuelidate/lib/validators";
+import {
+  required,
+  email,
+  maxLength,
+  numeric,
+  helpers,
+  minLength,
+} from "vuelidate/lib/validators";
 
 import { ClientRequestModel, ClientResponseModel } from "@/model";
 import BaseComponent from "@/components/base/BaseComponent";
 
 import { IProfileService } from "@/service";
 
+const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
+
 @Component({
   validations: {
     request: {
-      Name: { required },
-      PhoneNumber: { required, maxLength: maxLength(10) },
+      Name: { required, alphaOnly },
+      PhoneNumber: {
+        required,
+        maxLength: maxLength(10),
+        minLength: minLength(10),
+        numeric,
+      },
       Email: { required, email },
       Queries: { required },
     },

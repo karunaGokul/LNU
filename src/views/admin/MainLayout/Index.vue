@@ -99,6 +99,7 @@
                 color="primary"
                 rounded
                 class="px-7 text-capitalize"
+                @click="logout"
                 >Logout</v-btn
               >
             </div>
@@ -117,6 +118,9 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class MainLayout extends Vue {
-  
+  public logout() {
+    this.$store.dispatch("logout");
+    this.$router.push("/");
+  }
 }
 </script>
