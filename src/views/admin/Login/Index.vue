@@ -34,12 +34,12 @@
                 >
               </v-col>
             </v-row>
-            <v-form class="px-8" ref="form" autocomplete="off" @submit="login">
+            <v-form class="px-8" autocomplete="off" @submit.prevent="login">
               <v-text-field
                 label="Username/Email"
                 color="#78B849"
                 v-model="request.Email"
-                append-icon="mdi-account"
+                 append-icon="person"
                 :error-messages="$v.request.Email | errorMessages('Username')"
                 filled
                 type="text"
@@ -55,7 +55,7 @@
                 :error-messages="
                   $v.request.Password | errorMessages('Password')
                 "
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :append-icon="showPassword ? 'visibility_off' : 'visibility'"
                 @click:append="showPassword = !showPassword"
                 filled
                 @input="$v.request.Password.$touch()"
@@ -67,7 +67,6 @@
                   depressed
                   large
                   class="white--text text-capitalize"
-                  @click.prevent="login"
                   type="submit"
                   style="width: 100%"
                   >Login</v-btn
@@ -82,17 +81,35 @@
             >Register here</router-link
           >
         </v-row>
+         <v-snackbar
+            v-model="snackbar"
+            :timeout="2000"
+            color="deep-orange lighten-5 pink--text"
+            right
+            top
+          >
+            <v-icon color="pink">mdi-exclamation-thick </v-icon>
+            {{ snackbarText }}
+
+            <template v-slot:action="{ attrs }">
+              <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+                <v-icon> mdi-close-box</v-icon>
+              </v-btn>
+            </template>
+          </v-snackbar>
       </v-container>
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Inject, Vue } from "vue-property-decorator";
 
 import { required } from "vuelidate/lib/validators";
 
-import { LoginRequestModel } from "@/model";
+import { LoginRequestModel, LoginResponseModel } from "@/model";
+import BaseComponent from "@/components/base/BaseComponent";
+import { IAuthenticationService } from "@/service";
 
 @Component({
   validations: {
@@ -102,15 +119,34 @@ import { LoginRequestModel } from "@/model";
     },
   },
 })
-export default class Index extends Vue {
+export default class Login extends BaseComponent {
+  @Inject("authService") authService: IAuthenticationService;
+  
   public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
 
   public login() {
     this.$v.$touch();
-    console.log(this.request);
-    this.$router.push("home/dashboard");
+    if (!this.$v.$invalid) {
+      this.loadingSpinner("show");
+      this.authService.login(this.request).then(
+        (response: LoginResponseModel) => {
+          this.$store.dispatch("login", response);
+          this.loadingSpinner("hide");
+          this.$router.push("home/dashboard");
+        },
+        (err) => {
+          this.loadingSpinner("hide");
+          if (err.response.status === 400) {
+            this.snackbarText = err.response.data;
+            this.snackbar = true;
+          }
+        }
+      );
+    }
   }
 }
 </script>

@@ -1,92 +1,105 @@
 <template>
   <div class="pa-8">
-    <v-container fluid>
-      <v-card>
-        <v-simple-table class="mt-4">
-          <template v-slot:default>
-            <thead>
-              <th
-                v-for="(header, i) in headers"
-                :key="i"
-                class="background-orange pa-4"
-              >
-                {{ header }}
-              </th>
-            </thead>
-            <tbody>
-              <tr
-                v-for="(item, index) in response"
-                :key="index"
-                class="text-center"
-              >
-                <td>{{ item.appointmentDate }}</td>
-                <td>{{ item.appointmentStartTime }}</td>
-                <td>{{ item.counselingType.name }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
-      </v-card>
-    </v-container>
+    <v-card outlined elevation="0">
+      <v-data-table
+        :headers="headers"
+        :items="response"
+        :items-per-page="5"
+        class="elevation-0"
+      >
+        <template v-slot:[`item.Action`]="{  }">
+          <v-btn
+            depressed
+            color="primary"
+            class="text-capitalize mr-3"
+            @click="rescheduleAppointment"
+            >reschedule</v-btn
+          >
+          <v-btn depressed dark color="red" class="text-capitalize"
+            >cancel</v-btn
+          >
+        </template>
+      </v-data-table>
+      <!-- <v-simple-table class="mt-4">
+        <template v-slot:default>
+          <thead>
+            <th v-for="(header, i) in headers" :key="i" class="pa-4">
+              {{ header }}
+            </th>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in response" :key="index">
+              <td>{{ item.appointmentDate }}</td>
+              <td>{{ item.appointmentStartTime }}</td>
+              <td>{{ item.counselingType.name }}</td>
+              <td class="text-center">
+                <v-btn depressed color="primary" class="text-capitalize mr-3" @click="rescheduleAppointment"
+                  >reschedule</v-btn
+                >
+                <v-btn depressed dark color="red" class="text-capitalize"
+                  >cancel</v-btn
+                >
+              </td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table> -->
+      <reschedule-appointment v-if="reschedule" />
+    </v-card>
   </div>
 </template>
 
 <script lang="ts">
 import { AppointmentResponseModel } from "@/model";
 import { Component, Prop, Vue } from "vue-property-decorator";
+import RescheduleAppointment from "./RescheduleAppointment.vue";
 
 @Component({
-  components: {},
+  components: {
+    RescheduleAppointment,
+  },
 })
 export default class PendingAppointments extends Vue {
   @Prop() response: Array<AppointmentResponseModel>;
 
-  public headers: Array<string> = ["Date", "Time", "Counselling Type"];
+  // public headers: Array<string> = [
+  //   "Date",
+  //   "Time",
+  //   "Counselling Programm",
+  //   "Action",
+  // ];
 
-  public items: Array<any> = [
+  public headers: any = [
     {
-      Date: "10.2.22",
-      Time: "11:30",
-      CounsellingType: "Foo",
+      text: "Date",
+      align: "start",
+      value: "appointmentDate",
+      class: "subtitle-1 font-weight-bold",
     },
     {
-      Date: "12.2.22",
-      Time: "2:45",
-      CounsellingType: "Bar",
+      text: "Time",
+      value: "appointmentStartTime",
+      class: "subtitle-1 font-weight-bold",
     },
     {
-      Date: "20.3.22",
-      Time: "6:20",
-      CounsellingType: "Buzz",
+      text: "Counselling Programm",
+      value: "counselingType.name",
+      class: "subtitle-1 font-weight-bold",
     },
     {
-      Date: "1.4.22",
-      Time: "10:05",
-      CounsellingType: "Fizz",
-    },
-    {
-      Date: "9.4.22",
-      Time: "8:45",
-      CounsellingType: "Foo",
-    },
-    {
-      Date: "14.4.22",
-      Time: "9:45",
-      CounsellingType: "Bar",
+      text: "Action",
+      value: "Action",
+      sortable: false,
+      align: "center",
+      class: "subtitle-1 font-weight-bold",
     },
   ];
 
-  // created() {
-  //  console.log(this.response); 
-  // }
+  public reschedule: boolean = false;
+
+  public rescheduleAppointment() {
+    this.reschedule = true;
+  }
+  
 }
 </script>
-
-<style>
-tr:nth-of-type(even) {
-  background-color: #f7a3422e;
-}
-tr:nth-of-type(even):hover {
-  background-color: #fca744 !important;
-}
-</style>

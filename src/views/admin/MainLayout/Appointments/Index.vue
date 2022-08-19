@@ -3,7 +3,8 @@
     <v-row class="mt-5 ml-4">
       <h2>Appointments</h2>
     </v-row>
-    <v-row class="mx-2 my-6">
+   <appointment-calendar />
+       <!-- <v-row class="mx-2 my-6">
       <v-col cols="6" md="4">
         <v-card elevation="2" class="rounded pl-6">
           <v-row class="pt-3">
@@ -198,15 +199,18 @@
           </v-row>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import AppointmentCalendar from "./component/AppointmentCalendar.vue";
 
 @Component({
-  components: {},
+  components: {
+    AppointmentCalendar,
+  },
 })
 export default class Appointments extends Vue {
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
