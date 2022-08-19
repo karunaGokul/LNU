@@ -69,7 +69,7 @@
                     <div class="v-list-item__title">Clients</div>
                   </div>
                 </router-link>
-                <router-link
+                <!-- <router-link
                   to="/admin/home/calendar"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
@@ -81,7 +81,7 @@
                   <div class="v-list-item__content">
                     <div class="v-list-item__title">Calendar</div>
                   </div>
-                </router-link>
+                </router-link> -->
               </div>
             </v-list>
             <div class="mt-4">
