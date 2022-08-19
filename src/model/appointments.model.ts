@@ -1,13 +1,19 @@
 import { DataRequest } from "./base.model";
 import { CounselingModel } from "./registration.model";
 
+export class CoachDetailsModel {
+  Id: string = null;
+  Name: string = null;
+}
 export class BookAppointmentRequestModel {
   AppointmentDate: string;
   AppointmentTime: string;
   CounselingType: CounselingModel;
-  ExistingCoach: boolean;
-  Coach: string;
+  CoachDetails: CoachDetailsModel;
   AppointmentId?: string;
+}
+export class BookAppointmentValidationRequestModel  extends BookAppointmentRequestModel {
+  ExistingCoach: boolean = false;
 }
 export class AppoinmentRequestModel extends DataRequest {
   dateRange: string;

@@ -17,7 +17,12 @@
             outlined
             v-model="request.CounselingType"
             :items="counselingProgram"
-            item-text="name"
+            item-text="Name"
+            @change="
+              $v.request.CounselingType.$touch();
+              getExistingCoach();
+            "
+            @blur="$v.request.CounselingType.$touch()"
             required
             :error-messages="
               $v.request.CounselingType | errorMessages('CounselingType')
@@ -81,6 +86,38 @@
               @click:minute="$refs.menu.save(time)"
             ></v-time-picker>
           </v-menu>
+          <v-checkbox
+            v-model="request.ExistingCoach"
+            on-icon="check_box"
+            off-icon="check_box_outline_blank"
+            label="Previous Coach"
+            class="mt-0 pt-0"
+            :disabled="!request.CounselingType"
+            @change="getExistingCoach()"
+          ></v-checkbox>
+          <template
+            v-if="
+              request.CounselingType &&
+              Object.entries(request.CounselingType).length > 0 &&
+              request.ExistingCoach
+            "
+          >
+            <v-select
+              label="Avaliable Coach"
+              outlined
+              v-model="request.CoachDetails"
+              :items="existingCoach"
+              item-text="Name"
+              @change="$v.request.CoachDetails.$touch()"
+              @blur="$v.request.CoachDetails.$touch()"
+              required
+              :error-messages="
+                $v.request.CoachDetails | errorMessages('CoachDetails')
+              "
+              return-object
+            ></v-select>
+          </template>
+
           <v-btn
             depressed
             color="primary"
@@ -97,34 +134,57 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Inject } from "vue-property-decorator";
+import { Component, Inject } from "vue-property-decorator";
 
-import { IAppointmentService } from "@/service";
-import { BookAppointmentRequestModel } from "@/model";
+import { IAppointmentService, IProfileService } from "@/service";
+import { BookAppointmentRequestModel, BookAppointmentValidationRequestModel, CoachDetailsModel } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
 import AppAlert from "@/components/layout/AppAlert.vue";
 import { required } from "vuelidate/lib/validators";
 
-@Component({
-  validations: {
-    request: {
-      CounselingType: { required },
-      AppointmentDate: { required },
-      AppointmentTime: { required },
+let validations = {
+  request: {
+    CounselingType: { required },
+    AppointmentDate: { required },
+    AppointmentTime: { required },
+    CoachDetails: {
+      required: (value: any, jsonSchema: any) => {
+        let validation = false;
+
+        if (
+          jsonSchema.CounselingType &&
+          Object.entries(jsonSchema.CounselingType).length > 0 &&
+          jsonSchema.ExistingCoach
+        ) {
+          if (
+            jsonSchema.CoachDetails &&
+            Object.entries(jsonSchema.CoachDetails).length > 0
+          )
+            validation = true;
+          else validation = false;
+        } else validation = true;
+
+        return validation;
+      },
     },
   },
+};
+
+@Component({
+  validations: validations,
   components: {
     AppAlert,
   },
 })
 export default class BookAppointments extends BaseComponent {
   @Inject("appointmentService") service: IAppointmentService;
+  @Inject("profileService") profileService: IProfileService;
 
-  public request: BookAppointmentRequestModel =
-    new BookAppointmentRequestModel();
+  public request: BookAppointmentValidationRequestModel =
+    new BookAppointmentValidationRequestModel();
 
-    public response: string = "";
+  public response: string = "";
 
   public time: number = null;
   public menu2: boolean = false;
@@ -134,19 +194,42 @@ export default class BookAppointments extends BaseComponent {
     .toISOString()
     .substr(0, 10);
 
+  public existingCoach: Array<CoachDetailsModel> = [];
+
   public back() {
     this.$router.push("/client/home/appointments");
+  }
+
+  public getExistingCoach() {
+    this.request.CoachDetails = new CoachDetailsModel();
+    if (
+      this.request.CounselingType &&
+      Object.entries(this.request.CounselingType).length > 0 &&
+      this.request.ExistingCoach
+    ) {
+      this.profileService
+        .getCoachesByTypeForSelection(this.request.CounselingType.Id)
+        .then((response) => {
+          this.existingCoach = response;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   public bookNow() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
+      let request = new BookAppointmentRequestModel();
+      request.AppointmentDate = this.request.AppointmentDate;
+      request.AppointmentTime = this.request.AppointmentTime;
+      request.CounselingType = this.request.CounselingType;
+      request.CoachDetails = this.request.CoachDetails;
       this.service
-        .bookAppointments(this.request)
+        .bookAppointments(request)
         .then((response) => {
-          this.showAlert = true;
           this.response = response;
-          console.log(response);
         })
         .catch((err) => {
           console.log(err);

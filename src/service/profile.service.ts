@@ -1,9 +1,10 @@
-import { ClientRequestModel, ClientResponseModel } from "@/model";
+import { ClientRequestModel, ClientResponseModel, CoachDetailsModel } from "@/model";
 import { BaseService } from "./base.service";
 
 export interface IProfileService {
   getProfile(request: ClientRequestModel): Promise<ClientResponseModel>;
   updateProfile(file: File, request: ClientResponseModel): Promise<any>;
+  getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>>;
 }
 
 export class ProfileService
@@ -30,5 +31,13 @@ export class ProfileService
     formData.append("Id", request.Id);
 
     return this.upload(formData, `profile/EditProfile`);
+  }
+
+  getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>> {
+    return this.httpGet("profile/GetCoachesByTypeForSelection", {
+      councelingTypeId: councelingTypeId,
+    }).then((response) => {
+      return response.data;
+    });
   }
 }
