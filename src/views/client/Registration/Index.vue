@@ -164,8 +164,8 @@
                   dense
                   :items="counselingProgram"
                   append-icon="arrow_drop_down"
-                  item-text="name"
-                  item-value="id"
+                  item-text="Name"
+                  item-value="Id"
                   v-model="request.CounselingType"
                   @change="$v.request.CounselingType.$touch()"
                   @blur="$v.request.CounselingType.$touch()"
