@@ -15,7 +15,6 @@
             >
               Today
             </v-btn>
-
             <div class="d-flex align-center">
               <v-btn fab text small color="grey darken-2" @click="prev">
                 <v-icon small> chevron_left </v-icon>
@@ -62,7 +61,6 @@
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
-          @click:date="viewDay"
           @change="updateRange"
         ></v-calendar>
         <v-menu
@@ -86,24 +84,40 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <div v-if="tab == 'Confirmed'">
-                <h4>Appointments</h4>
+              <div>
+                <h4>Assign Coach</h4>
                 <v-divider class="my-3"></v-divider>
+                <v-row>
+                  <v-col cols="6" md="4">
+                    <h4 class="my-3 text-center">Client Name</h4>
+                  </v-col>
+                  <v-col>
+                    <v-text-field
+                      filled
+                      dense
+                      readonly
+                      placeholder="previous coach"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
 
-                <v-btn
-                  class="text-capitalize"
-                  plain
-                  color="primary"
-                  @click="reschedule"
-                  >Reschedule</v-btn
+                <v-select
+                  outlined
+                  dense
+                  :menu-props="{ offsetY: true }"
+                  label="Available Coaches"
+                  :items="response"
+                  item-text="Name"
+                ></v-select>
+                <v-btn class="text-capitalize" color="primary" dark
+                  >Assign</v-btn
                 >
-
                 <v-btn
                   class="text-capitalize ml-3"
-                  plain
                   color="red"
+                  dark
                   @click="selectedOpen = false"
-                  >Cancel Appointment</v-btn
+                  >cancel</v-btn
                 >
               </div>
             </v-card-text>
@@ -114,20 +128,24 @@
   </v-row>
 </template>
 <script lang="ts">
-import { Component, Prop, Inject } from "vue-property-decorator";
-
-import { EventsModel } from "@/model";
-
 import BaseComponent from "@/components/base/BaseComponent";
+import { GetCoachesModel } from "@/model";
+import { IAdminService } from "@/service";
+import { Component, Vue, Prop, Inject } from "vue-property-decorator";
 
 @Component
-export default class AppointmentCalendar extends BaseComponent {
+export default class Calendar extends BaseComponent {
+  @Inject("adminService") adminService: IAdminService;
 
-  @Prop() events: Array<EventsModel>;
-  @Prop() tab: string;
+  public availableCoaches: any = [];
+
+  public response: Array<GetCoachesModel> = [];
 
   public focus: string = "";
   public type: string = "month";
+  public time: number = null;
+  public menu2: boolean = false;
+  public item: any = ["Foo", "Bar", "Fizz", "Buzz"];
   public typeToLabel: any = {
     month: "Month",
     week: "Week",
@@ -137,6 +155,7 @@ export default class AppointmentCalendar extends BaseComponent {
   public selectedEvent: any = {};
   public selectedElement: any = null;
   public selectedOpen: boolean = false;
+  public events: Array<any> = [];
   public colors: Array<string> = [
     "blue",
     "indigo",
@@ -146,47 +165,46 @@ export default class AppointmentCalendar extends BaseComponent {
     "orange",
     "grey darken-1",
   ];
+  public names: Array<string> = [
+    "Meeting",
+    "Holiday",
+    "PTO",
+    "Travel",
+    "Event",
+    "Birthday",
+    "Conference",
+    "Party",
+  ];
+
+  created() {
+    this.getCoaches();
+  }
 
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
   }
-
-  public reschedule() {
-    this.selectedOpen = false;
-    this.$emit("reschedule",this.selectedEvent.id);
-  }
-
   public viewDay(data: any) {
     this.focus = data.date;
     this.type = "day";
-   
   }
-
-  getEventColor(event: any) {
+  public getEventColor(event: any) {
     return event.color;
   }
-
-  setToday() {
+  public setToday() {
     this.focus = "";
   }
-
   prev() {
     let calendar: any = this.$refs.calendar;
     calendar.prev();
-    this.type = "month";
   }
-
   next() {
     let calendar: any = this.$refs.calendar;
     calendar.next();
-    this.type = "month";
   }
-
   showEvent(data: any) {
     let nativeEvent = data.nativeEvent;
     let event = data.event;
-    console.log(event)
     const open = () => {
       this.selectedEvent = event;
       this.selectedElement = nativeEvent.target;
@@ -194,20 +212,53 @@ export default class AppointmentCalendar extends BaseComponent {
         requestAnimationFrame(() => (this.selectedOpen = true))
       );
     };
-
     if (this.selectedOpen) {
       this.selectedOpen = false;
       requestAnimationFrame(() => requestAnimationFrame(() => open()));
     } else {
       open();
     }
-
     nativeEvent.stopPropagation();
   }
-
   updateRange(data: any) {
-    if (this.type == "month")
-      this.$emit("updateRange", this.tab, data.start.date);
+    let start = data.start;
+    let end = data.end;
+    const events = [];
+    const min = new Date(`${start.date}T00:00:00`);
+    const max = new Date(`${end.date}T23:59:59`);
+    const days = (max.getTime() - min.getTime()) / 86400000;
+    const eventCount = this.rnd(days, days + 20);
+    for (let i = 0; i < eventCount; i++) {
+      const allDay = this.rnd(0, 3) === 0;
+      const firstTimestamp = this.rnd(min.getTime(), max.getTime());
+      const first = new Date(firstTimestamp - (firstTimestamp % 900000));
+      const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
+      const second = new Date(first.getTime() + secondTimestamp);
+      events.push({
+        name: this.names[this.rnd(0, this.names.length - 1)],
+        start: first,
+        end: second,
+        color: this.colors[this.rnd(0, this.colors.length - 1)],
+        timed: !allDay,
+      });
+    }
+    this.events = events;
+  }
+  private rnd(a: number, b: number) {
+    return Math.floor((b - a + 1) * Math.random()) + a;
+  }
+
+  private getCoaches() {
+    // this.loadingSpinner("show");
+    this.adminService.getCoaches().then((response: Array<GetCoachesModel>) => {
+      this.response = response;
+      // for (let i = 0; i < response.length; i++) {
+      //   this.availableCoaches = response[i].Name;
+      //   console.log(this.availableCoaches);
+      // }
+
+      // this.loadingSpinner("hide");
+    });
   }
 }
 </script>

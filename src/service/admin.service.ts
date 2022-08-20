@@ -13,10 +13,8 @@ export class AdminService
     super("admin");
   }
   public getCoaches(): Promise<Array<GetCoachesModel>> {
-    return this.httpGet("Admin/GetCoaches", null).then(
-      (response) => {
-        return response.data;
-      }
-    );
+    return this.httpGet("Admin/GetCoaches", null).then((response) => {
+      return response.data;
+    });
   }
 }

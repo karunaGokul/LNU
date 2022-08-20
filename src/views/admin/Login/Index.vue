@@ -110,14 +110,13 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Inject } from "vue-property-decorator";
+import { Component, Inject, Vue } from "vue-property-decorator";
+
 import { required } from "vuelidate/lib/validators";
 
-import { IAuthenticationService } from "@/service";
-
 import { LoginRequestModel, LoginResponseModel } from "@/model";
-
 import BaseComponent from "@/components/base/BaseComponent";
+import { IAuthenticationService } from "@/service";
 
 @Component({
   validations: {
@@ -129,6 +128,7 @@ import BaseComponent from "@/components/base/BaseComponent";
 })
 export default class Login extends BaseComponent {
   @Inject("authService") authService: IAuthenticationService;
+
   public request: LoginRequestModel = new LoginRequestModel();
 
   public showPassword: boolean = false;
