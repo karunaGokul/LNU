@@ -62,13 +62,6 @@ import RescheduleAppointment from "./RescheduleAppointment.vue";
 export default class PendingAppointments extends Vue {
   @Prop() response: Array<AppointmentResponseModel>;
 
-  // public headers: Array<string> = [
-  //   "Date",
-  //   "Time",
-  //   "Counselling Programm",
-  //   "Action",
-  // ];
-
   public headers: any = [
     {
       text: "Date",

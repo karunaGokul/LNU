@@ -45,7 +45,7 @@
                   label="Username/Email"
                   color="#78B849"
                   v-model="request.Email"
-                  append-icon="mdi-account"
+                  append-icon="person"
                   :error-messages="$v.request.Email | errorMessages('Username')"
                   filled
                   type="text"
@@ -61,7 +61,7 @@
                   :error-messages="
                     $v.request.Password | errorMessages('Password')
                   "
-                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :append-icon="showPassword ? 'visibility_off' : 'visibility'"
                   @click:append="showPassword = !showPassword"
                   filled
                   @input="$v.request.Password.$touch()"
@@ -82,12 +82,6 @@
               </v-form>
             </v-card>
           </div>
-          <v-row class="d-flex justify-center mt-16 mb-n10">
-            <h4>No account?</h4>
-            <router-link to="/coach/registration" class="text-decoration-none"
-              >Register here</router-link
-            >
-          </v-row>
         </v-container>
       </v-col>
     </v-row>

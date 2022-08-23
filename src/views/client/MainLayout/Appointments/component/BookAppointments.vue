@@ -229,6 +229,7 @@ export default class BookAppointments extends BaseComponent {
       this.service
         .bookAppointments(request)
         .then((response) => {
+          this.showAlert = true;
           this.response = response;
         })
         .catch((err) => {

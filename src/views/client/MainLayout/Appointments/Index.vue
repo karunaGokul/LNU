@@ -96,6 +96,7 @@ export default class AppointmentsLayout extends Vue {
     "grey darken-1",
   ];
 
+  
   public getAppointments(status: string, date?: any) {
     if (!date) date = this.$vuehelper.date.format(new Date(), "YYYY-MM-DD");
 
