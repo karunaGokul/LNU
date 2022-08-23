@@ -96,6 +96,7 @@ export default class CoachDetails extends BaseComponent {
 
 <style>
 .v-data-table .v-data-table-header tr th {
-  font-size: 18px !important;
+  font-size: 16px !important;
+  color: #78b849 !important;
 }
 </style>

@@ -5,11 +5,18 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left"><h2>UserName</h2></th>
-            <th class="text-left"><h2>About</h2></th>
+            <th
+              class="text-left primary--text"
+              style="font-size: 16px"
+              v-for="(item, i) in header"
+              :key="i"
+            >
+              {{ item }}
+            </th>
+            <!-- <th class="text-left"><h2>About</h2></th>
             <th class="text-left"><h2>CounsellingType</h2></th>
             <th class="text-left"><h2>Email</h2></th>
-            <th class="text-left"><h2>Phone</h2></th>
+            <th class="text-left"><h2>Phone</h2></th> -->
           </tr>
         </thead>
         <tbody>
@@ -37,7 +44,14 @@ import { Component, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class ClientDetails extends Vue {
-  public clientdetail = [
+  public header: Array<string> = [
+    "UserName",
+    "About",
+    "CounsellingType",
+    "Email",
+    "Phone",
+  ];
+  public clientdetail: Array<any> = [
     {
       id: 1,
       about:

@@ -26,7 +26,7 @@
                       :src="require('@/assets/profile.jpg' )"
                       alt="John"
                     /> </v-avatar> -->
-                    {{ item.Coach }}
+                  {{ item.Coach }}
                 </td>
                 <td>{{ item.Duration }}</td>
                 <td>{{ item.AmountPaid }}</td>
