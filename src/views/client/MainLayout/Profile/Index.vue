@@ -119,12 +119,12 @@ import BaseComponent from "@/components/base/BaseComponent";
 
 import { IProfileService } from "@/service";
 
-const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
+const alphaOnly = helpers.regex("alphaOnly", /^[a-z A-Z]*$/i);
 
 @Component({
   validations: {
     request: {
-      Name: { required, alphaOnly },
+      Name: { required, alphaOnly},
       PhoneNumber: {
         required,
         maxLength: maxLength(10),

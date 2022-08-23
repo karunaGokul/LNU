@@ -60,11 +60,9 @@ export default class Payment extends BaseComponent {
 
   public payment() {
     // this.request.ClientId = "id102"
-    console.log(this.request);
     this.loadingSpinner("show");
     this.paymentService.payment(this.request).then(
       (response: Array<PaymentResponseModel>) => {
-        console.log(response);
         this.loadingSpinner("hide");
       },
       (err) => {
