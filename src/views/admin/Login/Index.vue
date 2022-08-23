@@ -82,12 +82,6 @@
               </v-form>
             </v-card>
           </div>
-          <v-row class="d-flex justify-center mt-16 mb-n10">
-            <h4>No account?</h4>
-            <router-link to="/coach/registration" class="text-decoration-none"
-              >Register here</router-link
-            >
-          </v-row>
         </v-container>
       </v-col>
     </v-row>
