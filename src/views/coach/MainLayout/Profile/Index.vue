@@ -69,8 +69,8 @@
             filled
             dense
             :items="counselingProgram"
-            item-text="name"
-            item-value="id"
+            item-text="Name"
+            item-value="Id"
             v-model="request.counsellingType"
             @change="$v.request.counsellingType.$touch()"
             @blur="$v.request.counsellingType.$touch()"
