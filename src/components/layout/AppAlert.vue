@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" width="250"  v-if="response">
+    <v-dialog v-model="dialog" width="250" persistent v-if="response">
       <v-card class="text-center py-4 rounded-lg">
         <v-icon style="font-size: 5rem" color="blue">check_circle</v-icon>
         <v-card-subtitle class="blue--text text-h6"> Success </v-card-subtitle>
@@ -10,14 +10,14 @@
       </v-card>
       
     </v-dialog>
-    <v-dialog v-model="dialog" width="500" v-else>
-      <v-card>
-        <v-card-text class="text-center pt-4"
+    <v-dialog v-model="dialog" width="500" persistent v-else>
+      <v-card class="pt-10">
+        <v-card-text class="text-center red--text"
           >Are you sure you want to cancel the appointments</v-card-text
         >
-        <v-card-actions class="justify-end">
-          <v-btn plain color="primary" @click="cancelAppointment">yes</v-btn>
-          <v-btn plain color="red" @click="dialog = false">no</v-btn>
+        <v-card-actions class="justify-center">
+          <v-btn color="primary" class="text-capitalize" @click="cancelAppointment">yes</v-btn>
+          <v-btn dark color="red" class="text-capitalize" @click="close">no</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -52,6 +52,9 @@ export default class AppAlert extends Vue {
     this.dialog = false;
   }
  
-  
+  public close() {
+    this.dialog = false;
+    this.$emit("close");
+  }  
 }
 </script>
