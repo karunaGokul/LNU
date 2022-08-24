@@ -61,7 +61,6 @@
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
-          @change="updateRange"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
@@ -84,63 +83,38 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <div>
-                <h4>Assign Coach</h4>
-                <v-divider class="my-3"></v-divider>
-                <v-row>
-                  <v-col cols="6" md="4">
-                    <h4 class="my-3 text-center">Client Name</h4>
-                  </v-col>
-                  <v-col>
-                    <v-text-field
-                      filled
-                      dense
-                      readonly
-                      placeholder="previous coach"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-
-                <v-select
-                  outlined
-                  dense
-                  :menu-props="{ offsetY: true }"
-                  label="Available Coaches"
-                  :items="response"
-                  item-text="Name"
-                ></v-select>
-                <v-btn class="text-capitalize" color="primary" dark
-                  >Assign</v-btn
-                >
-                <v-btn
-                  class="text-capitalize ml-3"
-                  color="red"
-                  dark
-                  @click="selectedOpen = false"
-                  >cancel</v-btn
-                >
-              </div>
+              <v-btn plain dark class="text-capitalize" color="primary" @click="assignCoach">assign coach</v-btn>
+              <v-btn
+                class="text-capitalize ml-3"
+                color="red"
+                dark
+                plain
+                @click="showAlert = true"
+                >cancel appointment</v-btn
+              >
             </v-card-text>
           </v-card>
         </v-menu>
+        <app-alert v-if="showAlert" @cancelAppointment="cancelAppointment" />
       </v-sheet>
     </v-col>
   </v-row>
 </template>
 <script lang="ts">
 import BaseComponent from "@/components/base/BaseComponent";
-import { GetCoachesModel } from "@/model";
-import { IAdminService } from "@/service";
+import { EventsModel } from "@/model";
+import AppAlert from "@/components/layout/AppAlert.vue";
 import { Component, Vue, Prop, Inject } from "vue-property-decorator";
 
-@Component
+@Component ({
+  components: {
+    AppAlert,
+  }
+})
 export default class Calendar extends BaseComponent {
-  @Inject("adminService") adminService: IAdminService;
-
-  public availableCoaches: any = [];
-
-  public response: Array<GetCoachesModel> = [];
-
+  @Prop() events: Array<EventsModel>;
+  
+  public showAlert: boolean = false;
   public focus: string = "";
   public type: string = "month";
   public time: number = null;
@@ -155,7 +129,6 @@ export default class Calendar extends BaseComponent {
   public selectedEvent: any = {};
   public selectedElement: any = null;
   public selectedOpen: boolean = false;
-  public events: Array<any> = [];
   public colors: Array<string> = [
     "blue",
     "indigo",
@@ -176,14 +149,22 @@ export default class Calendar extends BaseComponent {
     "Party",
   ];
 
-  created() {
-    this.getCoaches();
-  }
+  
 
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
   }
+
+  public assignCoach() {
+    this.selectedOpen = false;
+    this.$emit("assignCoach",this.selectedEvent);
+  }
+
+  public cancelAppointment() {
+    this.$emit("cancelAppointment",this.selectedEvent);
+  }
+
   public viewDay(data: any) {
     this.focus = data.date;
     this.type = "day";
@@ -220,45 +201,11 @@ export default class Calendar extends BaseComponent {
     }
     nativeEvent.stopPropagation();
   }
-  updateRange(data: any) {
-    let start = data.start;
-    let end = data.end;
-    const events = [];
-    const min = new Date(`${start.date}T00:00:00`);
-    const max = new Date(`${end.date}T23:59:59`);
-    const days = (max.getTime() - min.getTime()) / 86400000;
-    const eventCount = this.rnd(days, days + 20);
-    for (let i = 0; i < eventCount; i++) {
-      const allDay = this.rnd(0, 3) === 0;
-      const firstTimestamp = this.rnd(min.getTime(), max.getTime());
-      const first = new Date(firstTimestamp - (firstTimestamp % 900000));
-      const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
-      const second = new Date(first.getTime() + secondTimestamp);
-      events.push({
-        name: this.names[this.rnd(0, this.names.length - 1)],
-        start: first,
-        end: second,
-        color: this.colors[this.rnd(0, this.colors.length - 1)],
-        timed: !allDay,
-      });
-    }
-    this.events = events;
-  }
+    
   private rnd(a: number, b: number) {
     return Math.floor((b - a + 1) * Math.random()) + a;
   }
 
-  private getCoaches() {
-    // this.loadingSpinner("show");
-    this.adminService.getCoaches().then((response: Array<GetCoachesModel>) => {
-      this.response = response;
-      // for (let i = 0; i < response.length; i++) {
-      //   this.availableCoaches = response[i].Name;
-      //   console.log(this.availableCoaches);
-      // }
-
-      // this.loadingSpinner("hide");
-    });
-  }
+  
 }
 </script>

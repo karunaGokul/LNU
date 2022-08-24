@@ -54,4 +54,6 @@ export class EventsModel {
   color: string;
   timed: boolean;
   id: string;
+  clientName: string;
+  coachName: string;
 }

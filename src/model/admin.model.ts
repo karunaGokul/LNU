@@ -11,3 +11,11 @@ export class GetCoachesModel {
   ProfileImage: string;
   About: string;
 }
+
+export class confirmAppointmentModel {
+  appointmentId: string;
+}
+
+export class cancelAppointmentModel extends confirmAppointmentModel {
+  reason: string;
+}
