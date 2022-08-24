@@ -6,17 +6,20 @@
     <v-data-table
       :headers="headers"
       :items="response"
-      :items-per-page="10"
-      class="elevation-1 mx-15"
+      :items-per-page="5"
+      class="elevation-1 mx-8"
     >
       <template v-slot:[`item.ProfileImage`]="{ item }">
         <div>
-          <v-avatar size="70">
+          <v-avatar size="70" v-if="item.ProfileImage !== null">
             <img
               :src="`data:image/png;base64,${item.ProfileImage}`"
               alt="John"
             />
           </v-avatar>
+          <div v-else class="box">
+            <span>{{ item.Name[0].toUpperCase() }}</span>
+          </div>
         </div>
       </template>
     </v-data-table>
@@ -42,12 +45,12 @@ export default class CoachDetails extends BaseComponent {
 
   public headers = [
     {
-      text: "",
+      text: "Username",
       sortable: false,
       value: "ProfileImage",
     },
     {
-      text: "UserName",
+      text: "",
       sortable: false,
       value: "Name",
     },
@@ -62,7 +65,7 @@ export default class CoachDetails extends BaseComponent {
       value: "Experience",
     },
     {
-      text: "CounsellingType",
+      text: "Counselling Type",
       sortable: false,
       value: "CounsellingType",
     },
@@ -87,7 +90,6 @@ export default class CoachDetails extends BaseComponent {
     this.loadingSpinner("show");
     this.adminService.getCoaches().then((response: Array<GetCoachesModel>) => {
       this.response = response;
-      console.log(response);
       this.loadingSpinner("hide");
     });
   }
@@ -96,7 +98,16 @@ export default class CoachDetails extends BaseComponent {
 
 <style>
 .v-data-table .v-data-table-header tr th {
-  font-size: 16px !important;
+  font-size: 14px !important;
   color: #78b849 !important;
+}
+.box {
+  width: 70px;
+  height: 70px;
+  background-color: #78b849;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

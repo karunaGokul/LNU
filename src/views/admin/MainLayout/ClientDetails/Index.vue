@@ -7,7 +7,7 @@
           <tr>
             <th
               class="text-left primary--text"
-              style="font-size: 16px"
+              style="font-size: 14px"
               v-for="(item, i) in header"
               :key="i"
             >
