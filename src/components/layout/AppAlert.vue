@@ -17,7 +17,7 @@
         >
         <v-card-actions class="justify-center">
           <v-btn color="primary" class="text-capitalize" @click="cancelAppointment">yes</v-btn>
-          <v-btn dark color="red" class="text-capitalize" @click="dialog = false">no</v-btn>
+          <v-btn dark color="red" class="text-capitalize" @click="close">no</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -52,6 +52,9 @@ export default class AppAlert extends Vue {
     this.dialog = false;
   }
  
-  
+  public close() {
+    this.dialog = false;
+    this.$emit("close");
+  }  
 }
 </script>

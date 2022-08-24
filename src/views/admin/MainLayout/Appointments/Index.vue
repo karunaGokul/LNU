@@ -3,14 +3,27 @@
     <v-row class="mt-5 ml-4">
       <h2>Appointments</h2>
     </v-row>
-   <appointment-calendar :events="events" @assignCoach="assignCoach" @cancelAppointment="cancelAppointment" />
-    <assign-coach v-if="showAssignCoach" :selectedEvent="selectedEvent" />
-       
+    <appointment-calendar
+      :events="events"
+      @assignCoach="assignCoach"
+      @cancelAppointment="cancelAppointment"
+    />
+    <assign-coach
+      v-if="showAssignCoach"
+      :selectedEvent="selectedEvent"
+      @done="updateAppointment"
+      @close="onClose"
+    />
   </v-container>
 </template>
 
 <script lang="ts">
-import { AppoinmentRequestModel, AppointmentResponseModel, cancelAppointmentModel, EventsModel } from "@/model";
+import {
+  AppoinmentRequestModel,
+  AppointmentResponseModel,
+  cancelAppointmentModel,
+  EventsModel,
+} from "@/model";
 import { IAdminService, IAppointmentService } from "@/service";
 import { Component, Inject, Vue } from "vue-property-decorator";
 import AppointmentCalendar from "./component/AppointmentCalendar.vue";
@@ -18,13 +31,14 @@ import AssignCoach from "./component/AssignCoach.vue";
 
 @Component({
   components: {
-    AppointmentCalendar, AssignCoach
+    AppointmentCalendar,
+    AssignCoach,
   },
 })
 export default class Appointments extends Vue {
   @Inject("appointmentService") service: IAppointmentService;
   @Inject("adminService") adminService: IAdminService;
-  
+
   public items = ["Foo", "Bar", "Fizz", "Buzz"];
   public showAssignCoach: boolean = false;
 
@@ -49,23 +63,29 @@ export default class Appointments extends Vue {
 
   created() {
     this.getAppointments("Confirmed");
-    
   }
 
   public assignCoach(event: any) {
     this.showAssignCoach = true;
     this.selectedEvent = event;
-  
+  }
+
+  public onClose() {
+    this.showAssignCoach = false;
+  }
+
+  public updateAppointment() {
+    this.showAssignCoach = false;
+    this.getAppointments("Confirmed");
   }
 
   public cancelAppointment(event: any) {
     this.cancelRequest.appointmentId = event.id;
     this.cancelRequest.reason = "change of plan";
-    console.log(this.cancelRequest.appointmentId);
     this.adminService
       .cancelAppointment(this.cancelRequest)
       .then((response: any) => {
-       this.getAppointments("Confirmed");
+        this.getAppointments("Confirmed");
       });
   }
 
@@ -84,8 +104,6 @@ export default class Appointments extends Vue {
           event.name = item.counselingType.name;
           event.clientName = item.clientName;
           event.coachName = item.coachName;
-          // console.log(event.clientName);
-          // console.log(event.coachName);
           event.start = this.getDate(
             item.appointmentDate,
             item.appointmentStartTime

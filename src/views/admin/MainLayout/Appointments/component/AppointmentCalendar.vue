@@ -83,7 +83,14 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <v-btn plain dark class="text-capitalize" color="primary" @click="assignCoach">assign coach</v-btn>
+              <v-btn
+                plain
+                dark
+                class="text-capitalize"
+                color="primary"
+                @click="assignCoach"
+                >assign coach</v-btn
+              >
               <v-btn
                 class="text-capitalize ml-3"
                 color="red"
@@ -95,7 +102,7 @@
             </v-card-text>
           </v-card>
         </v-menu>
-        <app-alert v-if="showAlert" @cancelAppointment="cancelAppointment" />
+        <app-alert v-if="showAlert" @cancelAppointment="cancelAppointment" @close="onClose" />
       </v-sheet>
     </v-col>
   </v-row>
@@ -106,14 +113,14 @@ import { EventsModel } from "@/model";
 import AppAlert from "@/components/layout/AppAlert.vue";
 import { Component, Vue, Prop, Inject } from "vue-property-decorator";
 
-@Component ({
+@Component({
   components: {
     AppAlert,
-  }
+  },
 })
 export default class Calendar extends BaseComponent {
   @Prop() events: Array<EventsModel>;
-  
+
   public showAlert: boolean = false;
   public focus: string = "";
   public type: string = "month";
@@ -149,8 +156,6 @@ export default class Calendar extends BaseComponent {
     "Party",
   ];
 
-  
-
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
@@ -158,11 +163,16 @@ export default class Calendar extends BaseComponent {
 
   public assignCoach() {
     this.selectedOpen = false;
-    this.$emit("assignCoach",this.selectedEvent);
+    this.$emit("assignCoach", this.selectedEvent);
   }
 
   public cancelAppointment() {
-    this.$emit("cancelAppointment",this.selectedEvent);
+    this.$emit("cancelAppointment", this.selectedEvent);
+    this.showAlert = false;
+  }
+
+  onClose() {
+    this.showAlert = false;
   }
 
   public viewDay(data: any) {
@@ -201,11 +211,9 @@ export default class Calendar extends BaseComponent {
     }
     nativeEvent.stopPropagation();
   }
-    
+
   private rnd(a: number, b: number) {
     return Math.floor((b - a + 1) * Math.random()) + a;
   }
-
-  
 }
 </script>
