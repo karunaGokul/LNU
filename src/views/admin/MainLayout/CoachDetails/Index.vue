@@ -18,7 +18,7 @@
             />
           </v-avatar>
           <div v-else class="box">
-            <span>{{ item.Name[0].toUpperCase() }}</span>
+            <!-- <span>{{ item.Name[0].toUpperCase() }}</span> -->
           </div>
         </div>
       </template>

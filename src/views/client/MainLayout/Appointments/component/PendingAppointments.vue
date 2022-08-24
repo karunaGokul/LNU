@@ -7,7 +7,8 @@
         :items-per-page="5"
         class="elevation-0"
       >
-        <template v-slot:[`item.Action`]="{  }">
+        <!-- <template v-slot:[`item.ProfileImage`]="{ item }"> -->
+        <template v-slot:[`item.Action`]="{ item }">
           <v-btn
             depressed
             color="primary"
@@ -15,7 +16,12 @@
             @click="rescheduleAppointment"
             >reschedule</v-btn
           >
-          <v-btn depressed dark color="red" class="text-capitalize"
+          <v-btn
+            depressed
+            dark
+            color="red"
+            class="text-capitalize"
+            @click="cancelAppoinment(item.id)"
             >cancel</v-btn
           >
         </template>
@@ -45,23 +51,27 @@
         </template>
       </v-simple-table> -->
       <reschedule-appointment v-if="reschedule" />
+      <dialog-message :dialog="dialog" @dialog="confirmDialog"></dialog-message>
     </v-card>
   </div>
 </template>
 
 <script lang="ts">
-import { AppointmentResponseModel } from "@/model";
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { AppointmentResponseModel, cancelAppointmentModel } from "@/model";
+import { Component, Prop, Vue, Inject } from "vue-property-decorator";
 import RescheduleAppointment from "./RescheduleAppointment.vue";
-
+import DialogMessage from "../Dialog/DialogMessage.vue";
+import { IAppointmentService } from "@/service";
 @Component({
   components: {
     RescheduleAppointment,
+    DialogMessage,
   },
 })
 export default class PendingAppointments extends Vue {
   @Prop() response: Array<AppointmentResponseModel>;
-
+  @Inject("appointmentService") service: IAppointmentService;
+  public request: cancelAppointmentModel = new cancelAppointmentModel();
   public headers: any = [
     {
       text: "Date",
@@ -93,6 +103,21 @@ export default class PendingAppointments extends Vue {
   public rescheduleAppointment() {
     this.reschedule = true;
   }
-  
+
+  public dialog = false;
+  cancelAppoinment(value: any) {
+    this.dialog = !this.dialog;
+    this.request.appointmentId = value;
+    this.request.reason = "change the counselling";
+  }
+  confirmDialog(value: boolean) {
+    if (value) {
+      console.log(this.request);
+      this.service.cancelAppointments(this.request).then((response: any) => {
+        // this.$emit("cancelAppointment");
+      });
+    }
+    this.dialog = false;
+  }
 }
 </script>

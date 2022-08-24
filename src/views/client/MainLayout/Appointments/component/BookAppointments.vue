@@ -137,7 +137,11 @@
 import { Component, Inject } from "vue-property-decorator";
 
 import { IAppointmentService, IProfileService } from "@/service";
-import { BookAppointmentRequestModel, BookAppointmentValidationRequestModel, CoachDetailsModel } from "@/model";
+import {
+  BookAppointmentRequestModel,
+  BookAppointmentValidationRequestModel,
+  CoachDetailsModel,
+} from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
 import AppAlert from "@/components/layout/AppAlert.vue";
@@ -222,6 +226,7 @@ export default class BookAppointments extends BaseComponent {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       let request = new BookAppointmentRequestModel();
+      console.log(request);
       request.AppointmentDate = this.request.AppointmentDate;
       request.AppointmentTime = this.request.AppointmentTime;
       request.CounselingType = this.request.CounselingType;

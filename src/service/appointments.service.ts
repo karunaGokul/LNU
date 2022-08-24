@@ -2,6 +2,7 @@ import {
   AppoinmentRequestModel,
   AppointmentResponseModel,
   BookAppointmentRequestModel,
+  cancelAppointmentModel,
 } from "@/model";
 import { IBaseService, BaseService } from "./base.service";
 
@@ -12,6 +13,7 @@ export interface IAppointmentService
   ): Promise<Array<AppointmentResponseModel>>;
   bookAppointments(request: BookAppointmentRequestModel): Promise<any>;
   rescheduleAppointments(request: BookAppointmentRequestModel): Promise<any>;
+  cancelAppointments(request: cancelAppointmentModel): Promise<any>;
 }
 
 export class AppointmentService
@@ -47,6 +49,17 @@ export class AppointmentService
       "Appointment/RescheduleAppointment?AppointmentId=" +
         request.AppointmentId,
       request
+    ).then((response) => {
+      return response.data;
+    });
+  }
+  public cancelAppointments(request: cancelAppointmentModel): Promise<any> {
+    return this.httpPost(
+      "Admin/CancelAppointment?appointmentId=" +
+        request.appointmentId +
+        "&reason=" +
+        request.reason,
+      null
     ).then((response) => {
       return response.data;
     });

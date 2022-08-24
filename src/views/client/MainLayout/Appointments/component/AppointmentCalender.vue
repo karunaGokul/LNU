@@ -102,13 +102,17 @@
                   class="text-capitalize ml-3"
                   plain
                   color="red"
-                  @click="selectedOpen = false"
+                  @click="cancelAppoinment"
                   >Cancel Appointment</v-btn
                 >
               </div>
             </v-card-text>
           </v-card>
         </v-menu>
+        <dialog-message
+          :dialog="dialog"
+          @dialog="ConfirmCancelApp"
+        ></dialog-message>
       </v-sheet>
     </v-col>
   </v-row>
@@ -116,16 +120,22 @@
 <script lang="ts">
 import { Component, Prop, Inject } from "vue-property-decorator";
 
-import { EventsModel } from "@/model";
+import { EventsModel, cancelAppointmentModel } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
+import DialogMessage from "../Dialog/DialogMessage.vue";
+import { IAppointmentService } from "@/service";
 
-@Component
+@Component({
+  components: {
+    DialogMessage,
+  },
+})
 export default class AppointmentCalendar extends BaseComponent {
-
   @Prop() events: Array<EventsModel>;
   @Prop() tab: string;
-
+  @Inject("appointmentService") service: IAppointmentService;
+  public request: cancelAppointmentModel = new cancelAppointmentModel();
   public focus: string = "";
   public type: string = "month";
   public typeToLabel: any = {
@@ -146,21 +156,36 @@ export default class AppointmentCalendar extends BaseComponent {
     "orange",
     "grey darken-1",
   ];
-
+  public dialog: boolean = false;
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
   }
 
+  public cancelAppoinment(value: boolean) {
+    this.selectedOpen = false;
+    this.dialog = !this.dialog;
+  }
+
+  public ConfirmCancelApp(value: any) {
+    if (value) {
+      this.request.appointmentId = this.selectedEvent.id;
+      this.request.reason = "change the counselling";
+      console.log(this.request);
+      this.service.cancelAppointments(this.request).then((response: any) => {
+        // this.$emit("cancelAppointment");
+      });
+    }
+    this.dialog = false;
+  }
   public reschedule() {
     this.selectedOpen = false;
-    this.$emit("reschedule",this.selectedEvent.id);
+    this.$emit("reschedule", this.selectedEvent.id);
   }
 
   public viewDay(data: any) {
     this.focus = data.date;
     this.type = "day";
-   
   }
 
   getEventColor(event: any) {
@@ -186,7 +211,7 @@ export default class AppointmentCalendar extends BaseComponent {
   showEvent(data: any) {
     let nativeEvent = data.nativeEvent;
     let event = data.event;
-    console.log(event)
+    console.log(event);
     const open = () => {
       this.selectedEvent = event;
       this.selectedElement = nativeEvent.target;

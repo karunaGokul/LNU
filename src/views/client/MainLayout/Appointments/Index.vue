@@ -27,6 +27,7 @@
           tab="Confirmed"
           @updateRange="updateAppointment"
           @reschedule="rescheduleAppoinment"
+          @cancelAppointment="cancelAppoinment"
         />
       </v-tab-item>
       <v-tab-item value="tab-previous-appointments">
@@ -37,7 +38,10 @@
         />
       </v-tab-item>
       <v-tab-item value="tab-pending-appointments">
-        <PendingAppointments :response="response" />
+        <PendingAppointments
+          @cancelAppointment="cancelAppoinment"
+          :response="response"
+        />
       </v-tab-item>
     </v-tabs-items>
     <reschedule-appointment
@@ -96,7 +100,10 @@ export default class AppointmentsLayout extends Vue {
     "grey darken-1",
   ];
 
-  
+  public cancelAppoinment() {
+    this.getAppointments("Approved");
+  }
+
   public getAppointments(status: string, date?: any) {
     if (!date) date = this.$vuehelper.date.format(new Date(), "YYYY-MM-DD");
 
