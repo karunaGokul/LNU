@@ -9,9 +9,9 @@
       :items-per-page="5"
       class="mx-8"
       :footer-props="{
-          prevIcon: 'chevron_left',
-          nextIcon: 'chevron_right',
-        }"
+        prevIcon: 'chevron_left',
+        nextIcon: 'chevron_right',
+      }"
     >
       <template v-slot:[`item.ProfileImage`]="{ item }">
         <div>
@@ -59,11 +59,7 @@ export default class CoachDetails extends BaseComponent {
       sortable: false,
       value: "ProfileImage",
     },
-    // {
-    //   text: "",
-    //   sortable: false,
-    //   value: "Name",
-    // },
+
     {
       text: "Email",
       sortable: false,
@@ -80,9 +76,9 @@ export default class CoachDetails extends BaseComponent {
       value: "About",
     },
     {
-      text: "Certificate",
+      text: "Experience",
       sortable: false,
-      value: "Certificate",
+      value: "Experience",
     },
     {
       text: "Counselling Program",
