@@ -27,7 +27,7 @@
             elevation="4"
             height="150"
             class="rounded-lg"
-            to="/admin/home/coachDetails"
+            to="/admin/home/details1"
           >
             <v-icon
               large
@@ -44,7 +44,7 @@
             elevation="4"
             height="150"
             class="rounded-lg"
-            to="/admin/home/clientDetails"
+            to="/admin/home/details2"
           >
             <v-icon
               large
@@ -56,7 +56,7 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row class="mt-6">
+      <!-- <v-row class="mt-6">
         <v-col cols="6" md="4">
           <v-card
             elevation="4"
@@ -87,7 +87,7 @@
             </v-file-input>
           </v-btn>
         </v-col>
-      </v-row>
+      </v-row> -->
     </v-container>
   </div>
 </template>

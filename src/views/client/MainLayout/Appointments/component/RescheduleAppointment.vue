@@ -14,7 +14,7 @@
               dense
               v-model="request.CounselingType"
               :items="counselingProgram"
-              item-text="name"
+              item-text="Name"
               return-object
             ></v-select>
             <v-menu
@@ -115,8 +115,6 @@ export default class RescheduleAppointment extends BaseComponent {
     this.service
       .rescheduleAppointments(this.request)
       .then((response) => {
-        console.log(this.request);
-        console.log(response);
         this.$emit("appointmentBooked");
         this.dialog = false;
       })

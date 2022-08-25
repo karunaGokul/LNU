@@ -40,6 +40,7 @@
       <v-tab-item value="tab-pending-appointments">
         <PendingAppointments
           @cancelAppointment="cancelAppoinment"
+          @pending="onAppointmentRescheduled"
           :response="response"
         />
       </v-tab-item>
@@ -99,10 +100,15 @@ export default class AppointmentsLayout extends Vue {
     "orange",
     "grey darken-1",
   ];
+
   public cancelAppoinment() {
     this.getAppointments("Pending");
   }
- 
+
+  public onAppointmentRescheduled() {
+    this.getAppointments("Pending");
+  }
+
   public getAppointments(status: string, date?: any) {
     if (!date) date = this.$vuehelper.date.format(new Date(), "YYYY-MM-DD");
 
@@ -113,7 +119,6 @@ export default class AppointmentsLayout extends Vue {
       .getAppointments(this.request)
       .then((response: Array<AppointmentResponseModel>) => {
         this.response = response;
-        console.log(this.response);
         response.forEach((item) => {
           let event: EventsModel = new EventsModel();
           event.name = item.counselingType.name;

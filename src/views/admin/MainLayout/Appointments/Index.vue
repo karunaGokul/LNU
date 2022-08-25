@@ -7,6 +7,7 @@
       :events="events"
       @assignCoach="assignCoach"
       @cancelAppointment="cancelAppointment"
+      @updateRange="updateAppointment"
     />
     <assign-coach
       v-if="showAssignCoach"
@@ -74,9 +75,9 @@ export default class Appointments extends Vue {
     this.showAssignCoach = false;
   }
 
-  public updateAppointment() {
+  public updateAppointment(date: string) {
     this.showAssignCoach = false;
-    this.getAppointments("Confirmed");
+    this.getAppointments("Confirmed", date);
   }
 
   public cancelAppointment(event: any) {

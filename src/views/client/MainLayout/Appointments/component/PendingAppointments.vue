@@ -13,7 +13,7 @@
             depressed
             color="primary"
             class="text-capitalize mr-3"
-            @click="rescheduleAppointment"
+            @click="rescheduleAppointment(item.id)"
             >reschedule</v-btn
           >
           <v-btn
@@ -50,7 +50,12 @@
           </tbody>
         </template>
       </v-simple-table> -->
-      <reschedule-appointment v-if="reschedule" />
+      <reschedule-appointment
+        v-if="reschedule"
+        @close="onClose"
+        :appointmentId="appointmentId"
+        @appointmentBooked="onAppointmentBooked"
+      />
       <app-alert
         v-if="showAlert"
         @cancelAppointment="cancelAppointment"
@@ -76,7 +81,12 @@ import { IAdminService } from "@/service";
 export default class PendingAppointments extends Vue {
   @Prop() response: Array<AppointmentResponseModel>;
   @Inject("adminService") service: IAdminService;
+
   public request: cancelAppointmentModel = new cancelAppointmentModel();
+  public appointmentId: string = "";
+  public showAlert: boolean = false;
+  public reschedule: boolean = false;
+
   public headers: any = [
     {
       text: "Date",
@@ -103,17 +113,20 @@ export default class PendingAppointments extends Vue {
     },
   ];
 
-  public reschedule: boolean = false;
-
-  public rescheduleAppointment() {
-    this.reschedule = true;
+  public onAppointmentBooked() {
+    this.$emit("pending");
   }
 
-  public showAlert: boolean = false;
+  public rescheduleAppointment(id: string) {
+    this.reschedule = true;
+    this.appointmentId = id;
+  }
+
   closeDialog(value: any) {
     this.showAlert = true;
     this.request.appointmentId = value;
   }
+
   public cancelAppointment() {
     this.showAlert = false;
     this.request.reason = "change the counselling";
@@ -124,6 +137,7 @@ export default class PendingAppointments extends Vue {
 
   onClose() {
     this.showAlert = false;
+    this.reschedule = false;
   }
 }
 </script>

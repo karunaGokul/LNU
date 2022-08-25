@@ -215,7 +215,6 @@ export default class AppointmentCalendar extends BaseComponent {
   showEvent(data: any) {
     let nativeEvent = data.nativeEvent;
     let event = data.event;
-    console.log(event);
     const open = () => {
       this.selectedEvent = event;
       this.selectedElement = nativeEvent.target;

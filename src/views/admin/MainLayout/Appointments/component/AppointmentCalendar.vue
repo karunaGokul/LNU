@@ -61,6 +61,7 @@
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
+          @change="updateRange"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
@@ -175,6 +176,12 @@ export default class Calendar extends BaseComponent {
     this.showAlert = false;
   }
 
+   updateRange(data: any) {
+    if (this.type == "month")
+      this.$emit("updateRange", data.start.date);
+  }
+
+
   public viewDay(data: any) {
     this.focus = data.date;
     this.type = "day";
@@ -188,10 +195,12 @@ export default class Calendar extends BaseComponent {
   prev() {
     let calendar: any = this.$refs.calendar;
     calendar.prev();
+    this.type = "month";
   }
   next() {
     let calendar: any = this.$refs.calendar;
     calendar.next();
+    this.type = "month";
   }
   showEvent(data: any) {
     let nativeEvent = data.nativeEvent;
