@@ -8,7 +8,6 @@
           {{ response }}
         </v-card-text>
       </v-card>
-      
     </v-dialog>
     <v-dialog v-model="dialog" width="500" persistent v-else>
       <v-card class="pt-10">
@@ -16,8 +15,15 @@
           >Are you sure you want to cancel the appointments</v-card-text
         >
         <v-card-actions class="justify-center">
-          <v-btn color="primary" class="text-capitalize" @click="cancelAppointment">yes</v-btn>
-          <v-btn dark color="red" class="text-capitalize" @click="close">no</v-btn>
+          <v-btn
+            color="primary"
+            class="text-capitalize"
+            @click="cancelAppointment"
+            >yes</v-btn
+          >
+          <v-btn dark color="red" class="text-capitalize" @click="close"
+            >no</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -32,7 +38,7 @@ import { Vue, Component, Prop, Inject } from "vue-property-decorator";
 @Component
 export default class AppAlert extends Vue {
   @Inject("adminService") adminService: IAdminService;
-  
+
   @Prop() response: string;
   @Prop() selectedEvent: EventsModel;
 
@@ -51,10 +57,10 @@ export default class AppAlert extends Vue {
     this.$emit("cancelAppointment");
     this.dialog = false;
   }
- 
+
   public close() {
     this.dialog = false;
     this.$emit("close");
-  }  
+  }
 }
 </script>

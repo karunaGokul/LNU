@@ -21,7 +21,7 @@
             dark
             color="red"
             class="text-capitalize"
-            @click="cancelAppoinment(item.id)"
+            @click="closeDialog(item.id)"
             >cancel</v-btn
           >
         </template>
@@ -51,7 +51,11 @@
         </template>
       </v-simple-table> -->
       <reschedule-appointment v-if="reschedule" />
-      <dialog-message :dialog="dialog" @dialog="confirmDialog"></dialog-message>
+      <app-alert
+        v-if="showAlert"
+        @cancelAppointment="cancelAppointment"
+        @close="onClose"
+      ></app-alert>
     </v-card>
   </div>
 </template>
@@ -60,17 +64,18 @@
 import { AppointmentResponseModel, cancelAppointmentModel } from "@/model";
 import { Component, Prop, Vue, Inject } from "vue-property-decorator";
 import RescheduleAppointment from "./RescheduleAppointment.vue";
-import DialogMessage from "../Dialog/DialogMessage.vue";
-import { IAppointmentService } from "@/service";
+import AppAlert from "@/components/layout/AppAlert.vue";
+import { IAdminService } from "@/service";
+
 @Component({
   components: {
     RescheduleAppointment,
-    DialogMessage,
+    AppAlert,
   },
 })
 export default class PendingAppointments extends Vue {
   @Prop() response: Array<AppointmentResponseModel>;
-  @Inject("appointmentService") service: IAppointmentService;
+  @Inject("adminService") service: IAdminService;
   public request: cancelAppointmentModel = new cancelAppointmentModel();
   public headers: any = [
     {
@@ -104,20 +109,21 @@ export default class PendingAppointments extends Vue {
     this.reschedule = true;
   }
 
-  public dialog = false;
-  cancelAppoinment(value: any) {
-    this.dialog = !this.dialog;
+  public showAlert: boolean = false;
+  closeDialog(value: any) {
+    this.showAlert = true;
     this.request.appointmentId = value;
-    this.request.reason = "change the counselling";
   }
-  confirmDialog(value: boolean) {
-    if (value) {
-      console.log(this.request);
-      this.service.cancelAppointments(this.request).then((response: any) => {
-        // this.$emit("cancelAppointment");
-      });
-    }
-    this.dialog = false;
+  public cancelAppointment() {
+    this.showAlert = false;
+    this.request.reason = "change the counselling";
+    this.service.cancelAppointment(this.request).then((response: any) => {
+      this.$emit("cancelAppointment");
+    });
+  }
+
+  onClose() {
+    this.showAlert = false;
   }
 }
 </script>

@@ -109,10 +109,11 @@
             </v-card-text>
           </v-card>
         </v-menu>
-        <dialog-message
-          :dialog="dialog"
-          @dialog="ConfirmCancelApp"
-        ></dialog-message>
+        <app-alert
+          v-if="showAlert"
+          @cancelAppointment="cancelAppointment"
+          @close="onClose"
+        ></app-alert>
       </v-sheet>
     </v-col>
   </v-row>
@@ -123,18 +124,18 @@ import { Component, Prop, Inject } from "vue-property-decorator";
 import { EventsModel, cancelAppointmentModel } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
-import DialogMessage from "../Dialog/DialogMessage.vue";
-import { IAppointmentService } from "@/service";
+import AppAlert from "@/components/layout/AppAlert.vue";
+import { IAdminService } from "@/service";
 
 @Component({
   components: {
-    DialogMessage,
+    AppAlert,
   },
 })
 export default class AppointmentCalendar extends BaseComponent {
   @Prop() events: Array<EventsModel>;
   @Prop() tab: string;
-  @Inject("appointmentService") service: IAppointmentService;
+  @Inject("adminService") service: IAdminService;
   public request: cancelAppointmentModel = new cancelAppointmentModel();
   public focus: string = "";
   public type: string = "month";
@@ -156,27 +157,30 @@ export default class AppointmentCalendar extends BaseComponent {
     "orange",
     "grey darken-1",
   ];
-  public dialog: boolean = false;
+
+  public showAlert: boolean = false;
+
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
   }
 
   public cancelAppoinment(value: boolean) {
+    this.showAlert = true;
     this.selectedOpen = false;
-    this.dialog = !this.dialog;
   }
 
-  public ConfirmCancelApp(value: any) {
-    if (value) {
-      this.request.appointmentId = this.selectedEvent.id;
-      this.request.reason = "change the counselling";
-      console.log(this.request);
-      this.service.cancelAppointments(this.request).then((response: any) => {
-        // this.$emit("cancelAppointment");
-      });
-    }
-    this.dialog = false;
+  public cancelAppointment() {
+    this.showAlert = false;
+    this.request.appointmentId = this.selectedEvent.id;
+    this.request.reason = "change the counselling";
+    this.service.cancelAppointment(this.request).then((response: any) => {
+      this.$emit("cancelAppointment");
+    });
+  }
+
+  onClose() {
+    this.showAlert = false;
   }
   public reschedule() {
     this.selectedOpen = false;
