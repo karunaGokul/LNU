@@ -8,6 +8,10 @@
       :items="response"
       :items-per-page="5"
       class="mx-8"
+      :footer-props="{
+          prevIcon: 'chevron_left',
+          nextIcon: 'chevron_right',
+        }"
     >
       <template v-slot:[`item.ProfileImage`]="{ item }">
         <div>

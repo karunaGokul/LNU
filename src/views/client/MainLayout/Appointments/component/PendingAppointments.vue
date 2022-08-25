@@ -6,8 +6,11 @@
         :items="response"
         :items-per-page="5"
         class="elevation-0"
+        :footer-props="{
+          prevIcon: 'chevron_left',
+          nextIcon: 'chevron_right',
+        }"
       >
-        <!-- <template v-slot:[`item.ProfileImage`]="{ item }"> -->
         <template v-slot:[`item.Action`]="{ item }">
           <v-btn
             depressed
@@ -25,6 +28,15 @@
             >cancel</v-btn
           >
         </template>
+        <!-- <template v-slot:footer.prepend>
+        <v-btn
+          color="primary"
+          dark
+          class="ma-2"
+          @click="buttonCallback">
+            Button
+          </v-btn>
+      </template> -->
       </v-data-table>
       <!-- <v-simple-table class="mt-4">
         <template v-slot:default>
