@@ -1,7 +1,7 @@
 <template>
   <div class="primary-linear px-15 pt-10">
     <h1 class="text-xl-h1 mb-5" style="font-size: 30px">Client Details</h1>
-    <v-simple-table style="box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2)">
+    <v-simple-table>
       <template v-slot:default>
         <thead>
           <tr>
@@ -22,7 +22,7 @@
         <tbody>
           <tr v-for="client in clientdetail" :key="client.id" height="90">
             <td class="ma-10">
-              <v-avatar size="70">
+              <v-avatar size="60">
                 <img src="@/assets/profile.jpg" alt="John" />
               </v-avatar>
             </td>
