@@ -56,4 +56,6 @@ export class EventsModel {
   id: string;
   clientName: string;
   coachName: string;
+  clientId: string;
+  counselingTypeId: number;
 }

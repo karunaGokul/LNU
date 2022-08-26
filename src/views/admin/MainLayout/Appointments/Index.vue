@@ -22,7 +22,7 @@
 import {
   AppoinmentRequestModel,
   AppointmentResponseModel,
-  cancelAppointmentModel,
+  CancelAppointmentModel,
   EventsModel,
 } from "@/model";
 import { IAdminService, IAppointmentService } from "@/service";
@@ -48,7 +48,7 @@ export default class Appointments extends Vue {
   public appointmentId: string = "";
   public selectedEvent: any;
 
-  public cancelRequest: cancelAppointmentModel = new cancelAppointmentModel();
+  public cancelRequest: CancelAppointmentModel = new CancelAppointmentModel();
   public request: AppoinmentRequestModel = new AppoinmentRequestModel();
   public response: Array<AppointmentResponseModel> = [];
   public events: Array<EventsModel> = [];
@@ -62,9 +62,9 @@ export default class Appointments extends Vue {
     "grey darken-1",
   ];
 
-  created() {
-    this.getAppointments("Confirmed");
-  }
+  // created() {
+  //   this.getAppointments("Confirmed");
+  // }
 
   public assignCoach(event: any) {
     this.showAssignCoach = true;
@@ -77,7 +77,7 @@ export default class Appointments extends Vue {
 
   public updateAppointment(date: string) {
     this.showAssignCoach = false;
-    this.getAppointments("Confirmed", date);
+    this.getAppointments("Pending", date);
   }
 
   public cancelAppointment(event: any) {
@@ -105,6 +105,8 @@ export default class Appointments extends Vue {
           event.name = item.counselingType.name;
           event.clientName = item.clientName;
           event.coachName = item.coachName;
+          event.clientId = item.clientId;
+          event.counselingTypeId = item.counselingType.id;
           event.start = this.getDate(
             item.appointmentDate,
             item.appointmentStartTime

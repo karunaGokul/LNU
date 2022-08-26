@@ -1,14 +1,19 @@
 import {
-  cancelAppointmentModel,
-  confirmAppointmentModel,
+  CancelAppointmentModel,
+  ConfirmAppointmentModel,
   GetCoachesModel,
+  GetPreviousCoachesRequestModel,
+  GetPreviousCoachesModel,
 } from "@/model";
 import { BaseService } from "./base.service";
 
 export interface IAdminService {
   getCoaches(): Promise<Array<GetCoachesModel>>;
-  confirmAppointment(request: confirmAppointmentModel): Promise<any>;
-  cancelAppointment(request: cancelAppointmentModel): Promise<any>;
+  confirmAppointment(request: ConfirmAppointmentModel): Promise<any>;
+  cancelAppointment(request: CancelAppointmentModel): Promise<any>;
+  getPreviousCoaches(
+    request: GetPreviousCoachesRequestModel
+  ): Promise<Array<GetPreviousCoachesModel>>;
 }
 
 export class AdminService
@@ -24,7 +29,7 @@ export class AdminService
     });
   }
 
-  public confirmAppointment(request: confirmAppointmentModel): Promise<any> {
+  public confirmAppointment(request: ConfirmAppointmentModel): Promise<any> {
     return this.httpPost(
       "Admin/ConfirmAppointment?appointmentId=" + request.appointmentId,
       null
@@ -33,12 +38,26 @@ export class AdminService
     });
   }
 
-  public cancelAppointment(request: cancelAppointmentModel): Promise<any> {
+  public cancelAppointment(request: CancelAppointmentModel): Promise<any> {
     return this.httpPost(
       "Admin/CancelAppointment?appointmentId=" +
         request.appointmentId +
         "&reason=" +
         request.reason,
+      null
+    ).then((response) => {
+      return response.data;
+    });
+  }
+
+  public getPreviousCoaches(
+    request: GetPreviousCoachesRequestModel
+  ): Promise<Array<GetPreviousCoachesModel>> {
+    return this.httpGet(
+      "Admin/GetPrevoiusCoaches?clientId=" +
+        request.clientId +
+        "&counselingTypeId=" +
+        request.counselingTypeId,
       null
     ).then((response) => {
       return response.data;

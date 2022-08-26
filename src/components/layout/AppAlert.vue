@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { cancelAppointmentModel, EventsModel } from "@/model";
+import { CancelAppointmentModel, EventsModel } from "@/model";
 import { IAdminService } from "@/service";
 import { Vue, Component, Prop, Inject } from "vue-property-decorator";
 
@@ -43,7 +43,7 @@ export default class AppAlert extends Vue {
   @Prop() selectedEvent: EventsModel;
 
   public dialog: boolean = true;
-  public request: cancelAppointmentModel = new cancelAppointmentModel();
+  public request: CancelAppointmentModel = new CancelAppointmentModel();
 
   created() {
     if (this.response) {

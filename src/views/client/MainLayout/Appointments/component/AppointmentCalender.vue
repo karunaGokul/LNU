@@ -121,7 +121,7 @@
 <script lang="ts">
 import { Component, Prop, Inject } from "vue-property-decorator";
 
-import { EventsModel, cancelAppointmentModel } from "@/model";
+import { EventsModel, CancelAppointmentModel } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
 import AppAlert from "@/components/layout/AppAlert.vue";
@@ -136,7 +136,7 @@ export default class AppointmentCalendar extends BaseComponent {
   @Prop() events: Array<EventsModel>;
   @Prop() tab: string;
   @Inject("adminService") service: IAdminService;
-  public request: cancelAppointmentModel = new cancelAppointmentModel();
+  public request: CancelAppointmentModel = new CancelAppointmentModel();
   public focus: string = "";
   public type: string = "month";
   public typeToLabel: any = {
