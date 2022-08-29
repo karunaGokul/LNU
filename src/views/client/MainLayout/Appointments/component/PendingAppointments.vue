@@ -112,7 +112,7 @@ export default class PendingAppointments extends Vue {
       class: "subtitle-1 font-weight-bold",
     },
     {
-      text: "Counselling Programm",
+      text: "Counselling Program",
       value: "counselingType.name",
       class: "subtitle-1 font-weight-bold",
     },

@@ -102,7 +102,7 @@
                   class="text-capitalize ml-3"
                   plain
                   color="red"
-                  @click="cancelAppoinment"
+                  @click="deleteAppointment"
                   >Cancel Appointment</v-btn
                 >
               </div>
@@ -165,7 +165,7 @@ export default class AppointmentCalendar extends BaseComponent {
     calendar.checkChange();
   }
 
-  public cancelAppoinment(value: boolean) {
+  public deleteAppointment(value: boolean) {
     this.showAlert = true;
     this.selectedOpen = false;
   }

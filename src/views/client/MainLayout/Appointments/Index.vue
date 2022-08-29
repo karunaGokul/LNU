@@ -101,6 +101,9 @@ export default class AppointmentsLayout extends Vue {
     "grey darken-1",
   ];
 
+  created() {
+    this.getAppointments("Pending");
+  }
   public cancelAppoinment() {
     this.getAppointments("Pending");
   }
