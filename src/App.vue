@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import moment from "moment";
 import { DIContainer } from "./dicontainer";
 
 import axios from "axios";
@@ -38,6 +39,15 @@ export default class App extends DIContainer {
   createFilters() {
     Vue.filter("errorMessages", (value: any, name: string) => {
       return this.$vuehelper.val.messages(value, name);
+    });
+    Vue.filter("dateDisplay", (value: any, format: string) => {
+      if (!value) return "";
+
+      console.log(value)
+
+      if (!format) format = "MM-DD-YYYY";
+
+      return moment(value).format(format);
     });
   }
 

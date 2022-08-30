@@ -20,7 +20,7 @@
                   to="/client/home/dashboard"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
+                  active-class="primary v-list-item--active"
                   exact
                 >
                   <div class="v-list-item__icon">
@@ -34,7 +34,7 @@
                   to="/client/home/profile"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
+                  active-class="primary v-list-item--active"
                 >
                   <div class="v-list-item__icon">
                     <v-icon>person</v-icon>
@@ -47,7 +47,7 @@
                   to="/client/home/appointments"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
+                  active-class="primary v-list-item--active"
                 >
                   <div class="v-list-item__icon">
                     <v-icon> book_online </v-icon>
@@ -60,7 +60,7 @@
                   to="/client/home/messages"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
+                  active-class="primary v-list-item--active"
                 >
                   <div class="v-list-item__icon">
                     <v-icon> sms </v-icon>
@@ -73,7 +73,7 @@
                   to="/client/home/payment"
                   tag="div"
                   class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
+                  active-class="primary v-list-item--active"
                 >
                   <div class="v-list-item__icon">
                     <v-icon>local_atm</v-icon>
@@ -146,6 +146,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class MainLayout extends Vue {
+  
   public logout() {
     this.$store.dispatch("logout");
     this.$router.push("/");

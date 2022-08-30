@@ -62,7 +62,7 @@
                 <thead>
                   <tr>
                     <th class="text-left">Date</th>
-                    <th class="text-left">Counseling Type</th>
+                    <th class="text-left">Counseling Program</th>
                     <th class="text-left">Status</th>
                   </tr>
                 </thead>
@@ -94,7 +94,7 @@
                 <thead>
                   <tr>
                     <th class="text-left">Date</th>
-                    <th class="text-left">Counseling Type</th>
+                    <th class="text-left">Counseling Program</th>
                     <th class="text-left">Status</th>
                   </tr>
                 </thead>

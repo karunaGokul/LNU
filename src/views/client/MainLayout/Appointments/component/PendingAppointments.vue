@@ -1,79 +1,62 @@
 <template>
-  <div class="pa-8">
-    <v-card outlined elevation="0">
-      <v-data-table
-        :headers="headers"
-        :items="response"
-        :items-per-page="5"
-        class="elevation-0"
-        :footer-props="{
-          prevIcon: 'chevron_left',
-          nextIcon: 'chevron_right',
-        }"
-      >
-        <template v-slot:[`item.Action`]="{ item }">
-          <v-btn
-            depressed
-            color="primary"
-            class="text-capitalize mr-3"
-            @click="rescheduleAppointment(item.id)"
-            >reschedule</v-btn
-          >
-          <v-btn
-            depressed
-            dark
-            color="red"
-            class="text-capitalize"
-            @click="closeDialog(item.id)"
-            >cancel</v-btn
-          >
-        </template>
-        <!-- <template v-slot:footer.prepend>
-        <v-btn
-          color="primary"
-          dark
-          class="ma-2"
-          @click="buttonCallback">
-            Button
-          </v-btn>
-      </template> -->
-      </v-data-table>
-      <!-- <v-simple-table class="mt-4">
-        <template v-slot:default>
-          <thead>
-            <th v-for="(header, i) in headers" :key="i" class="pa-4">
-              {{ header }}
-            </th>
-          </thead>
-          <tbody>
-            <tr v-for="(item, index) in response" :key="index">
-              <td>{{ item.appointmentDate }}</td>
-              <td>{{ item.appointmentStartTime }}</td>
-              <td>{{ item.counselingType.name }}</td>
-              <td class="text-center">
-                <v-btn depressed color="primary" class="text-capitalize mr-3" @click="rescheduleAppointment"
-                  >reschedule</v-btn
-                >
-                <v-btn depressed dark color="red" class="text-capitalize"
-                  >cancel</v-btn
-                >
-              </td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table> -->
-      <reschedule-appointment
-        v-if="reschedule"
-        @close="onClose"
-        :appointmentId="appointmentId"
-        @appointmentBooked="onAppointmentBooked"
-      />
-      <app-alert
-        v-if="showAlert"
-        @cancelAppointment="cancelAppointment"
-        @close="onClose"
-      ></app-alert>
-    </v-card>
+  <div class="pa-2 pt-4">
+    <v-data-table
+      :headers="headers"
+      :items="response"
+      :items-per-page="10"
+      class="elevation-0"
+      :footer-props="{
+        prevIcon: 'chevron_left',
+        nextIcon: 'chevron_right',
+      }"
+    >
+      <template v-slot:[`item.Date`]="{ item }">
+        test
+        {{item.appointmentDate | dateDisplay("MM/DD/YYYY")}}
+      </template>
+      <template v-slot:[`item.Action`]="{ item }">
+        <v-tooltip bottom> 
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              depressed
+              fab
+              small
+              class="mr-3"
+              @click="rescheduleAppointment(item.id)"
+              ><v-icon color="primary">today</v-icon></v-btn
+            >
+          </template>
+          <span>Reschedule Appointment</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              depressed
+              fab
+              small
+              @click="closeDialog(item.id)"
+              ><v-icon color="red">event_busy</v-icon></v-btn
+            >
+          </template>
+          <span>Cancel Appointment</span>
+        </v-tooltip>
+      </template>
+    </v-data-table>
+    <reschedule-appointment
+      v-if="reschedule"
+      @close="onClose"
+      :appointmentId="appointmentId"
+      @appointmentBooked="onAppointmentBooked"
+    />
+    <app-alert
+      v-if="showAlert"
+      @cancelAppointment="cancelAppointment"
+      @close="onClose"
+    ></app-alert>
   </div>
 </template>
 
@@ -92,6 +75,7 @@ import { IAdminService } from "@/service";
 })
 export default class PendingAppointments extends Vue {
   @Prop() response: Array<AppointmentResponseModel>;
+  
   @Inject("adminService") service: IAdminService;
 
   public request: cancelAppointmentModel = new cancelAppointmentModel();
@@ -112,7 +96,7 @@ export default class PendingAppointments extends Vue {
       class: "subtitle-1 font-weight-bold",
     },
     {
-      text: "Counselling Programm",
+      text: "Counseling Program",
       value: "counselingType.name",
       class: "subtitle-1 font-weight-bold",
     },

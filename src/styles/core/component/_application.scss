@@ -1,3 +1,17 @@
 .primary-linear {
-    background: linear-gradient(180deg, $primary-color -60.28%, $white-color 26.8%)
+  background: linear-gradient(
+    180deg,
+    $primary-color -60.28%,
+    $white-color 26.8%
+  );
+}
+.v-list-item {
+  &--active {
+    color: #ffffff;
+
+    .v-list-item__title,
+    .v-icon {
+      color: #ffffff !important;
+    }
+  }
 }

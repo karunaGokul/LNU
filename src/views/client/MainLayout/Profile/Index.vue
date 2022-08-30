@@ -1,44 +1,54 @@
 <template>
   <v-row class="d-flex align-center justify-center" style="height: 100vh">
     <v-col cols="4" sm="12" md="5">
-      <h4 class="text-h4 font-weight-bold text-center pa-4">Hey, Client!</h4>
-      <div class="text-center pa-4" style="position: relative">
-        <img
-          :src="viewImage"
-          alt="Profile image"
-          width="120"
-          height="130"
-          v-if="profilePhoto"
-        />
-        <v-icon v-else x-large color="#E0E0E0" style="font-size: 16rem">
-          account_circle
-        </v-icon>
-        <input
-          type="file"
-          ref="profileUpload"
-          @change="uploadProfile"
-          class="d-none"
-        />
-        <v-btn
-          color="primary"
-          fab
-          absolute
-          style="right: 130px; bottom: 60px"
-          @click.stop="openProfileUpload()"
-        >
-          <v-icon>photo_camera</v-icon>
-        </v-btn>
-      </div>
-      <div class="text-center pa-4">
-        <v-btn color="white" class="text-capitalize rounded-lg">
-          <v-icon left>info</v-icon>
-          <router-link
-            to="/client/home/payment"
-            class="text-decoration-none black--text"
-            >Payment info</router-link
-          >
-        </v-btn>
-      </div>
+      <v-card width="608" elevation="0" color="transparent">
+        <v-card-title class="justify-center">
+          <h4 class="text-h4 font-weight-bold pa-4">
+            Hey, Client!
+          </h4>
+        </v-card-title>
+        <v-card-text>
+          <div class="position-relative text-center pa-4">
+            <img
+              :src="viewImage"
+              alt="Profile Image"
+              width="120"
+              height="130"
+              v-if="profilePhoto"
+            />
+            <v-icon v-else x-large color="#E0E0E0" style="font-size: 16rem">
+              account_circle
+            </v-icon>
+            <input
+              type="file"
+              ref="profileUpload"
+              @change="uploadProfile"
+              class="d-none"
+            />
+            <v-btn
+              color="primary"
+              fab
+              absolute
+              style="right: 130px; bottom: 60px"
+              @click.stop="openProfileUpload()"
+            >
+              <v-icon>photo_camera</v-icon>
+            </v-btn>
+          </div>
+        </v-card-text>
+        <v-card-actions class="justify-center">
+          <div class="text-center pa-4">
+            <v-btn color="white" class="text-capitalize rounded-lg">
+              <v-icon left>info</v-icon>
+              <router-link
+                to="/client/home/payment"
+                class="text-decoration-none black--text"
+                >Payment info</router-link
+              >
+            </v-btn>
+          </div>
+        </v-card-actions>
+      </v-card>
     </v-col>
     <v-col cols="8" sm="12" md="7" class="pa-8">
       <v-form class="ma-10 pa-5" @submit.prevent="updateProfile">
@@ -124,7 +134,7 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-z A-Z]*$/i);
 @Component({
   validations: {
     request: {
-      Name: { required, alphaOnly},
+      Name: { required, alphaOnly },
       PhoneNumber: {
         required,
         maxLength: maxLength(10),

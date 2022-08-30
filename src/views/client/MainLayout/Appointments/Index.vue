@@ -7,10 +7,16 @@
       </v-btn>
     </div>
     <v-tabs v-model="tab">
-      <v-tab href="#tab-active-appointments" class="text-capitalize"
+      <v-tab
+        href="#tab-active-appointments"
+        class="text-capitalize"
+        @click="getAppointments('Confirmed')"
         >Active Appointments</v-tab
       >
-      <v-tab href="#tab-previous-appointments" class="text-capitalize"
+      <v-tab
+        href="#tab-previous-appointments"
+        class="text-capitalize"
+        @click="getAppointments('Completed')"
         >Previous Appointments</v-tab
       >
       <v-tab
@@ -33,8 +39,8 @@
       <v-tab-item value="tab-previous-appointments">
         <AppointmentCalendar
           :events="events"
-          tab="Completed"
           @updateRange="updateAppointment"
+          tab="Completed"
         />
       </v-tab-item>
       <v-tab-item value="tab-pending-appointments">
@@ -115,6 +121,7 @@ export default class AppointmentsLayout extends Vue {
     this.request.dateRange = date;
     this.request.status = status;
     this.events = [];
+    this.response = [];
     this.service
       .getAppointments(this.request)
       .then((response: Array<AppointmentResponseModel>) => {
