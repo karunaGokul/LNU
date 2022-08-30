@@ -7,7 +7,7 @@
         </v-card-title>
 
         <v-card-text>
-          <v-form @submit.prevent="reschedule">
+          <v-form>
             <v-select
               label="Counselling Type"
               outlined
@@ -91,7 +91,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn depressed color="primary"> Confirm </v-btn>
+          <v-btn @click="reschedule" depressed color="primary"> Confirm </v-btn>
           <v-btn depressed @click="close"> Cancel </v-btn>
         </v-card-actions>
       </v-card>
@@ -142,6 +142,7 @@ export default class RescheduleAppointment extends BaseComponent {
       this.service
         .rescheduleAppointments(this.request)
         .then((response) => {
+          console.log(response);
           this.$emit("appointmentBooked");
           this.dialog = false;
         })

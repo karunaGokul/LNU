@@ -95,7 +95,7 @@
                 class="text-capitalize"
                 color="primary"
                 dark
-                @click="appointment"
+                @click="reschedule"
                 >reschedule</v-btn
               >
               <v-btn
@@ -114,7 +114,11 @@
           @close="onClose"
         ></app-alert>
       </v-sheet>
-      <up-coming-appointment v-if="showAppointment" />
+      <up-coming-appointment
+        :appointmentId="appointmentId"
+        @close="Close"
+        v-if="showAppointment"
+      />
     </v-col>
   </v-row>
 </template>
@@ -152,7 +156,7 @@ export default class Calendar extends BaseComponent {
   @Inject("adminService") service: IAdminService;
   public request: BookAppointmentRequestModel =
     new BookAppointmentRequestModel();
-
+  public appointmentId: string = "";
   public focus: string = "";
   public type: string = "month";
   public showAppointment: boolean = false;
@@ -194,13 +198,17 @@ export default class Calendar extends BaseComponent {
     "Conference",
     "Party",
   ];
-  created() {
-    this.getAppointments("Pending");
-  }
-  public appointment() {
+  // created() {
+  //   this.getAppointments("Pending");
+  // }
+  public reschedule() {
+    this.appointmentId = this.selectedEvent.id;
     this.showAppointment = true;
+    this.selectedOpen = false;
   }
-
+  public Close() {
+    this.showAppointment = false;
+  }
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
@@ -250,7 +258,7 @@ export default class Calendar extends BaseComponent {
   }
   updateRange(data: any) {
     if (this.type == "month") {
-      this.getAppointments("Confirmed", data.start.date);
+      this.getAppointments("Pending", data.start.date);
     }
   }
   // updateRange(data: any) {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" width="500">
+    <v-dialog v-model="dialog" persistent width="500">
       <v-card>
         <v-card-title class="text-h6">
           <v-icon class="pl-n2 pr-1">today</v-icon>Reschedule
@@ -73,14 +73,10 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="dialog = false" class="primary text-capitalize">
+          <v-btn text @click="reschedule" class="primary text-capitalize">
             Reschedule
           </v-btn>
-          <v-btn
-            class="text-capitalize red white--text"
-            text
-            @click="dialog = false"
-          >
+          <v-btn class="text-capitalize red white--text" text @click="close">
             Cancel
           </v-btn>
         </v-card-actions>
@@ -90,19 +86,48 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-
+import { Component, Vue, Inject, Prop } from "vue-property-decorator";
+import { IAppointmentService } from "@/service";
+import { BookAppointmentRequestModel, CounselingModel } from "@/model";
+import { required } from "vuelidate/lib/validators";
 @Component({
   components: {},
 })
 export default class UpComingAppointment extends Vue {
+  @Inject("appointmentService") service: IAppointmentService;
+
+  @Prop() appointmentId: string;
   public dialog: boolean = true;
   public menu1: boolean = false;
   public menu2: boolean = false;
   public time: number = null;
-
+  public request: BookAppointmentRequestModel =
+    new BookAppointmentRequestModel();
   public date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
     .toISOString()
     .substr(0, 10);
+
+  public reschedule() {
+    this.dialog = false;
+    console.log(this.request);
+    this.$v.$touch();
+    if (!this.$v.$invalid) {
+      this.request.AppointmentId = this.appointmentId;
+      this.service
+        .rescheduleAppointments(this.request)
+        .then((response) => {
+          console.log(response);
+          this.$emit("appointmentBooked");
+          this.dialog = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+  public close() {
+    this.dialog = false;
+    this.$emit("close");
+  }
 }
 </script>
