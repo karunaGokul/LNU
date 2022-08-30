@@ -11,8 +11,9 @@ export class BookAppointmentRequestModel {
   CounselingType: CounselingModel;
   CoachDetails: CoachDetailsModel;
   AppointmentId?: string;
+  Queries?: string;
 }
-export class BookAppointmentValidationRequestModel  extends BookAppointmentRequestModel {
+export class BookAppointmentValidationRequestModel extends BookAppointmentRequestModel {
   ExistingCoach: boolean = false;
 }
 export class AppoinmentRequestModel extends DataRequest {

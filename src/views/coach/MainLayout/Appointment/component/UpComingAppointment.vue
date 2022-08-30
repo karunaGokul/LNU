@@ -7,12 +7,22 @@
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mb-n6">
-          <v-text-field
+          <v-select
+            label="Appointment Type"
             outlined
             dense
+            v-model="request.CounselingType"
+            :items="counselingProgram"
+            item-text="Name"
             class="mt-4"
-            label="Appointment Type"
-          ></v-text-field>
+            @change="$v.request.CounselingType.$touch()"
+            @blur="$v.request.CounselingType.$touch()"
+            required
+            :error-messages="
+              $v.request.CounselingType | errorMessages('Appointment Type')
+            "
+            return-object
+          ></v-select>
           <v-menu
             ref="menu"
             v-model="menu2"
@@ -26,7 +36,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="time"
+                v-model="request.AppointmentTime"
                 label="Select Duration"
                 prepend-inner-icon="schedule"
                 readonly
@@ -34,11 +44,14 @@
                 dense
                 v-bind="attrs"
                 v-on="on"
+                :error-messages="
+                  $v.request.AppointmentTime | errorMessages('AppointmentTime')
+                "
               ></v-text-field>
             </template>
             <v-time-picker
               v-if="menu2"
-              v-model="time"
+              v-model="request.AppointmentTime"
               full-width
               @click:minute="$refs.menu.save(time)"
             ></v-time-picker>
@@ -53,7 +66,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date"
+                v-model="request.AppointmentDate"
                 label="Select Date"
                 prepend-inner-icon="calendar_month"
                 readonly
@@ -61,14 +74,22 @@
                 outlined
                 v-bind="attrs"
                 v-on="on"
+                :error-messages="
+                  $v.request.AppointmentDate | errorMessages('AppointmentDate')
+                "
               ></v-text-field>
             </template>
             <v-date-picker
-              v-model="date"
+              v-model="request.AppointmentDate"
               @input="menu1 = false"
             ></v-date-picker>
           </v-menu>
-          <v-textarea outlined label="Queries"></v-textarea>
+          <v-textarea
+            outlined
+            label="Queries"
+            v-model="request.Queries"
+            :error-messages="$v.request.Queries | errorMessages('Queries')"
+          ></v-textarea>
         </v-card-text>
 
         <v-card-actions>
@@ -88,10 +109,17 @@
 <script lang="ts">
 import { Component, Vue, Inject, Prop } from "vue-property-decorator";
 import { IAppointmentService } from "@/service";
-import { BookAppointmentRequestModel, CounselingModel } from "@/model";
+import { BookAppointmentRequestModel } from "@/model";
 import { required } from "vuelidate/lib/validators";
 @Component({
-  components: {},
+  validations: {
+    request: {
+      CounselingType: { required },
+      AppointmentDate: { required },
+      AppointmentTime: { required },
+      Queries: { required },
+    },
+  },
 })
 export default class UpComingAppointment extends Vue {
   @Inject("appointmentService") service: IAppointmentService;
@@ -108,7 +136,6 @@ export default class UpComingAppointment extends Vue {
     .substr(0, 10);
 
   public reschedule() {
-    this.dialog = false;
     console.log(this.request);
     this.$v.$touch();
     if (!this.$v.$invalid) {
@@ -117,7 +144,7 @@ export default class UpComingAppointment extends Vue {
         .rescheduleAppointments(this.request)
         .then((response) => {
           console.log(response);
-          this.$emit("appointmentBooked");
+          this.$emit("close");
           this.dialog = true;
         })
         .catch((err) => {
@@ -128,6 +155,9 @@ export default class UpComingAppointment extends Vue {
   public close() {
     this.dialog = false;
     this.$emit("close");
+  }
+  get counselingProgram() {
+    return this.$store.getters.counselingProgram;
   }
 }
 </script>
