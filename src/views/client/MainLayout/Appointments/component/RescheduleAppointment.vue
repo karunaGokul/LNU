@@ -2,10 +2,11 @@
   <div class="text-center">
     <v-dialog v-model="dialog" persistent width="500">
       <v-card>
-        <v-card-title class="text-h5 mb-4">
-          Reschedule Appointment
-        </v-card-title>
-        <v-form @submit.prevent="reschedule">
+        <v-form>
+          <v-card-title class="text-h5 mb-4">
+            Reschedule Appointment
+          </v-card-title>
+
           <v-card-text>
             <v-select
               label="Counselling Type"
@@ -89,7 +90,14 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn depressed color="primary"> Confirm </v-btn>
+            <v-btn
+              depressed
+              color="primary"
+              type="submit"
+              @click.prevent="reschedule"
+            >
+              Confirm
+            </v-btn>
             <v-btn depressed @click="close"> Cancel </v-btn>
           </v-card-actions>
         </v-form>
