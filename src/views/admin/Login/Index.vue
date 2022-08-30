@@ -85,7 +85,8 @@
         </v-container>
       </v-col>
     </v-row>
-    <v-snackbar
+    <snack-bar :snackbarText="snackbarText" :snackbar="snackbar" @close="onClose" />
+    <!-- <v-snackbar
       v-model="snackbar"
       :timeout="2000"
       color="deep-orange lighten-5 pink--text"
@@ -100,7 +101,7 @@
           <v-icon> mdi-close-box</v-icon>
         </v-btn>
       </template>
-    </v-snackbar>
+    </v-snackbar> -->
   </div>
 </template>
 <script lang="ts">
@@ -110,9 +111,13 @@ import { required } from "vuelidate/lib/validators";
 
 import { LoginRequestModel, LoginResponseModel } from "@/model";
 import BaseComponent from "@/components/base/BaseComponent";
+import SnackBar from "@/components/layout/SnackBar.vue";
 import { IAuthenticationService } from "@/service";
 
 @Component({
+  components: {
+    SnackBar,
+  },
   validations: {
     request: {
       Email: { required },
@@ -128,6 +133,10 @@ export default class Login extends BaseComponent {
   public showPassword: boolean = false;
   public snackbar: boolean = false;
   public snackbarText: string = "";
+
+  public onClose() {
+    this.snackbar = false;
+  }
 
   public login() {
     this.$v.$touch();

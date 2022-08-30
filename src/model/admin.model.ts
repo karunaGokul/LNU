@@ -12,10 +12,20 @@ export class GetCoachesModel {
   About: string;
 }
 
-export class confirmAppointmentModel {
+export class ConfirmAppointmentModel {
   appointmentId: string;
 }
 
-export class cancelAppointmentModel extends confirmAppointmentModel {
+export class CancelAppointmentModel extends ConfirmAppointmentModel {
   reason: string;
+}
+
+export class GetPreviousCoachesRequestModel {
+  clientId: string;
+  counselingTypeId: number;
+}
+
+export class GetPreviousCoachesModel {
+  id: string;
+  name: string;
 }

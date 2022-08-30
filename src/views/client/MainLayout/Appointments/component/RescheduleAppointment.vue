@@ -2,12 +2,12 @@
   <div class="text-center">
     <v-dialog v-model="dialog" persistent width="500">
       <v-card>
-        <v-card-title class="text-h5 mb-4">
-          Reschedule Appointment
-        </v-card-title>
+        <v-form>
+          <v-card-title class="text-h5 mb-4">
+            Reschedule Appointment
+          </v-card-title>
 
-        <v-card-text>
-          <v-form>
+          <v-card-text>
             <v-select
               label="Counselling Type"
               outlined
@@ -15,6 +15,12 @@
               v-model="request.CounselingType"
               :items="counselingProgram"
               item-text="Name"
+              @change="$v.request.CounselingType.$touch()"
+              @blur="$v.request.CounselingType.$touch()"
+              required
+              :error-messages="
+                $v.request.CounselingType | errorMessages('CounselingType')
+              "
               return-object
             ></v-select>
             <v-menu
@@ -35,6 +41,11 @@
                   outlined
                   v-bind="attrs"
                   v-on="on"
+                  required
+                  :error-messages="
+                    $v.request.AppointmentDate
+                      | errorMessages('AppointmentDate')
+                  "
                 ></v-text-field>
               </template>
               <v-date-picker
@@ -59,6 +70,11 @@
                   readonly
                   v-bind="attrs"
                   v-on="on"
+                  required
+                  :error-messages="
+                    $v.request.AppointmentTime
+                      | errorMessages('AppointmentTime')
+                  "
                 ></v-text-field>
               </template>
               <v-time-picker
@@ -68,16 +84,23 @@
                 @click:minute="$refs.menu.save(time)"
               ></v-time-picker>
             </v-menu>
-          </v-form>
-        </v-card-text>
+          </v-card-text>
 
-        <v-divider></v-divider>
+          <v-divider></v-divider>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn depressed color="primary" @click="reschedule"> Confirm </v-btn>
-          <v-btn depressed @click="close"> Cancel </v-btn>
-        </v-card-actions>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              depressed
+              color="primary"
+              type="submit"
+              @click.prevent="reschedule"
+            >
+              Confirm
+            </v-btn>
+            <v-btn depressed @click="close"> Cancel </v-btn>
+          </v-card-actions>
+        </v-form>
       </v-card>
     </v-dialog>
   </div>
@@ -89,8 +112,17 @@ import { IAppointmentService, IRegistrationService } from "@/service";
 import { BookAppointmentRequestModel, CounselingModel } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
+import { required } from "vuelidate/lib/validators";
 
-@Component
+@Component({
+  validations: {
+    request: {
+      CounselingType: { required },
+      AppointmentDate: { required },
+      AppointmentTime: { required },
+    },
+  },
+})
 export default class RescheduleAppointment extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
   @Inject("appointmentService") service: IAppointmentService;
@@ -111,16 +143,20 @@ export default class RescheduleAppointment extends BaseComponent {
     .substr(0, 10);
 
   public reschedule() {
-    this.request.AppointmentId = this.appointmentId;
-    this.service
-      .rescheduleAppointments(this.request)
-      .then((response) => {
-        this.$emit("appointmentBooked");
-        this.dialog = false;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.$v.$touch();
+    if (!this.$v.$invalid) {
+      this.request.AppointmentId = this.appointmentId;
+      this.service
+        .rescheduleAppointments(this.request)
+        .then((response) => {
+          console.log(response);
+          this.$emit("appointmentBooked");
+          this.dialog = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   public close() {
@@ -131,6 +167,5 @@ export default class RescheduleAppointment extends BaseComponent {
   get counselingProgram() {
     return this.$store.getters.counselingProgram;
   }
-
 }
 </script>

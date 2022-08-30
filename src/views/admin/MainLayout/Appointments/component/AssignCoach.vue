@@ -29,7 +29,7 @@
               outlined
               dense
               readonly
-              :placeholder="selectedEvent.coachName"
+              :placeholder="coachName"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -38,10 +38,10 @@
           dense
           :menu-props="{ offsetY: true }"
           label="Available Coaches"
-          :items="response"
+          :items="responseCoach"
           item-text="Name"
           class="mt-2"
-          v-if="!selectedEvent.coachName"
+          v-if="!coachName"
         ></v-select>
       </v-card-text>
       <v-divider></v-divider>
@@ -62,30 +62,38 @@
 </template>
 
 <script lang="ts">
-import { confirmAppointmentModel, GetCoachesModel } from "@/model";
+import BaseComponent from "@/components/base/BaseComponent";
+import {
+  ConfirmAppointmentModel,
+  GetPreviousCoachesRequestModel,
+  GetPreviousCoachesModel,
+  GetCoachesModel,
+} from "@/model";
 import { IAdminService } from "@/service";
 import { Component, Inject, Prop, Vue } from "vue-property-decorator";
 
 @Component({
   components: {},
 })
-export default class AssignCoach extends Vue {
+export default class AssignCoach extends BaseComponent {
   @Inject("adminService") adminService: IAdminService;
   @Prop() selectedEvent: any;
 
-  public response: Array<GetCoachesModel> = [];
-  public availableCoaches: any = [];
+  public response: Array<GetPreviousCoachesModel> = [];
   public dialog: boolean = true;
-  public request: confirmAppointmentModel = new confirmAppointmentModel();
+  public request: ConfirmAppointmentModel = new ConfirmAppointmentModel();
+  public requestCoaches: GetPreviousCoachesRequestModel =
+    new GetPreviousCoachesRequestModel();
+  public responseCoach: Array<GetCoachesModel> = [];
+  public coachName: string;
 
   created() {
+    this.getPreviousCoaches();
     this.getCoaches();
   }
 
   public confirmAppointment() {
-    console.log(this.selectedEvent.id);
     this.request.appointmentId = this.selectedEvent.id;
-    console.log(this.request.appointmentId);
     this.adminService.confirmAppointment(this.request).then((response: any) => {
       this.dialog = false;
       this.$emit("done");
@@ -97,13 +105,25 @@ export default class AssignCoach extends Vue {
     this.$emit("close");
   }
 
+  private getPreviousCoaches() {
+    this.requestCoaches.clientId = this.selectedEvent.clientId;
+    this.requestCoaches.counselingTypeId = this.selectedEvent.counselingTypeId;
+    this.adminService
+      .getPreviousCoaches(this.requestCoaches)
+      .then((response: Array<GetPreviousCoachesModel>) => {
+        response.forEach((item) => {
+          this.coachName = item.name;
+        });
+      });
+  }
+
   private getCoaches() {
+    this.loadingSpinner("show");
     this.adminService.getCoaches().then((response: Array<GetCoachesModel>) => {
-      this.response = response;
-      for (let i = 0; i < response.length; i++) {
-        this.availableCoaches = response[i].Name;
-      }
+      this.responseCoach = response;
+      this.loadingSpinner("hide");
     });
   }
+  
 }
 </script>

@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import { AppointmentResponseModel, cancelAppointmentModel } from "@/model";
+import { AppointmentResponseModel, CancelAppointmentModel } from "@/model";
 import { Component, Prop, Vue, Inject } from "vue-property-decorator";
 import RescheduleAppointment from "./RescheduleAppointment.vue";
 import AppAlert from "@/components/layout/AppAlert.vue";
@@ -78,7 +78,7 @@ export default class PendingAppointments extends Vue {
   
   @Inject("adminService") service: IAdminService;
 
-  public request: cancelAppointmentModel = new cancelAppointmentModel();
+  public request: CancelAppointmentModel = new CancelAppointmentModel();
   public appointmentId: string = "";
   public showAlert: boolean = false;
   public reschedule: boolean = false;
@@ -96,7 +96,7 @@ export default class PendingAppointments extends Vue {
       class: "subtitle-1 font-weight-bold",
     },
     {
-      text: "Counseling Program",
+      text: "Counselling Program",
       value: "counselingType.name",
       class: "subtitle-1 font-weight-bold",
     },
