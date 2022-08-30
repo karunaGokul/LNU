@@ -10,6 +10,11 @@
 [data-theme="admin-theme"] {
     --primary-color: #20AB8A;
 }
+
 $primary-color: var(--primary-color);
 $white-color: var(--white-color);
+
 $position: relative absolute fixed;
+
+$snackBar-color: #F6c3AB;
+$snackText-color: #FF69B4;

@@ -5,9 +5,8 @@
         <v-card-title class="text-h5 mb-4">
           Reschedule Appointment
         </v-card-title>
-
-        <v-card-text>
-          <v-form>
+        <v-form @submit.prevent="reschedule">
+          <v-card-text>
             <v-select
               label="Counselling Type"
               outlined
@@ -84,16 +83,16 @@
                 @click:minute="$refs.menu.save(time)"
               ></v-time-picker>
             </v-menu>
-          </v-form>
-        </v-card-text>
+          </v-card-text>
 
-        <v-divider></v-divider>
+          <v-divider></v-divider>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn @click="reschedule" depressed color="primary"> Confirm </v-btn>
-          <v-btn depressed @click="close"> Cancel </v-btn>
-        </v-card-actions>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn depressed color="primary"> Confirm </v-btn>
+            <v-btn depressed @click="close"> Cancel </v-btn>
+          </v-card-actions>
+        </v-form>
       </v-card>
     </v-dialog>
   </div>
