@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <v-row no-gutters class="primary-linear">
       <v-col cols="12" md="6">
         <v-img
@@ -13,7 +13,7 @@
             </v-row>
             <v-row>
               <v-col md="6" offset-md="6">
-                <!-- <h4 class="text-h4">Bring Out The Magic In You</h4> -->
+                <h4 class="text-h4">Bring Out The Magic In You</h4>
               </v-col>
             </v-row>
           </v-container>
@@ -86,7 +86,7 @@
       </v-col>
     </v-row>
     <snack-bar :snackbarText="snackbarText" :snackbar="snackbar" @close="onClose" />
-    <!-- <v-snackbar
+    <v-snackbar
       v-model="snackbar"
       :timeout="2000"
       color="deep-orange lighten-5 pink--text"
@@ -101,62 +101,27 @@
           <v-icon> mdi-close-box</v-icon>
         </v-btn>
       </template>
-    </v-snackbar> -->
+    </v-snackbar>
+  </div> -->
+  <div>
+    <login :tab="tab" />
   </div>
 </template>
 <script lang="ts">
-import { Component, Inject, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
-import { required } from "vuelidate/lib/validators";
+// import SnackBar from "@/components/layout/SnackBar.vue";
 
-import { LoginRequestModel, LoginResponseModel } from "@/model";
-import BaseComponent from "@/components/base/BaseComponent";
-import SnackBar from "@/components/layout/SnackBar.vue";
-import { IAuthenticationService } from "@/service";
+import Login from "@/components/layout/Login.vue";
 
 @Component({
   components: {
-    SnackBar,
+    // SnackBar,
+    Login,
   },
-  validations: {
-    request: {
-      Email: { required },
-      Password: { required },
-    },
-  },
+  
 })
-export default class Login extends BaseComponent {
-  @Inject("authService") authService: IAuthenticationService;
-
-  public request: LoginRequestModel = new LoginRequestModel();
-
-  public showPassword: boolean = false;
-  public snackbar: boolean = false;
-  public snackbarText: string = "";
-
-  public onClose() {
-    this.snackbar = false;
-  }
-
-  public login() {
-    this.$v.$touch();
-    if (!this.$v.$invalid) {
-      this.loadingSpinner("show");
-      this.authService.login(this.request).then(
-        (response: LoginResponseModel) => {
-          this.$store.dispatch("login", response);
-          this.loadingSpinner("hide");
-          this.$router.push("home/dashboard");
-        },
-        (err) => {
-          this.loadingSpinner("hide");
-          if (err.response.status === 400) {
-            this.snackbarText = err.response.data;
-            this.snackbar = true;
-          }
-        }
-      );
-    }
-  }
+export default class AdminLogin extends Vue {
+  public tab: string = "admin";
 }
 </script>
