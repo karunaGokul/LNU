@@ -221,6 +221,16 @@ const defaultRoutes: Array<RouteConfig> = [
     },
   },
   {
+    path: '/success',
+    name: "Success",
+    component: () => import("@/views/client/MainLayout/PaymentInfo/Success.vue")
+  },
+  {
+    path: '/cancel',
+    name: "Cancel",
+    component: () => import("@/views/client/MainLayout/PaymentInfo/Cancel.vue")
+  },
+  {
     path: "*",
     name: "PageNotFound",
     component: () => import("@/views/PageNotFound.vue"),

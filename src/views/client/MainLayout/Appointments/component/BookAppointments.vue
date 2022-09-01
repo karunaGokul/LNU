@@ -125,12 +125,21 @@
             large
             style="width: 100%"
           >
-            Book
+            Make payment
           </v-btn>
         </v-form>
         <app-alert v-if="showAlert" :response="response" />
       </v-col>
     </v-row>
+    <stripe-checkout
+      ref="checkoutRef"
+      mode="payment"
+      :pk="publishableKey"
+      :lineItems="lineItems"
+      :success-url="successUrl"
+      :cancel-url="cancelUrl"
+      v-if="showCheckOut"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -146,6 +155,10 @@ import {
 import BaseComponent from "@/components/base/BaseComponent";
 import AppAlert from "@/components/layout/AppAlert.vue";
 import { required } from "vuelidate/lib/validators";
+
+import { Settings } from "@/config";
+
+import { StripeCheckout } from "@vue-stripe/vue-stripe";
 
 let validations = {
   request: {
@@ -178,6 +191,7 @@ let validations = {
 @Component({
   validations: validations,
   components: {
+    StripeCheckout,
     AppAlert,
   },
 })
@@ -187,6 +201,12 @@ export default class BookAppointments extends BaseComponent {
 
   public request: BookAppointmentValidationRequestModel =
     new BookAppointmentValidationRequestModel();
+
+  public showCheckOut: boolean = false;
+  public publishableKey: string = "";
+  public lineItems: any = [];
+  public successUrl: string = "";
+  public cancelUrl: string = "";
 
   public response: string = "";
 
@@ -199,6 +219,12 @@ export default class BookAppointments extends BaseComponent {
     .substr(0, 10);
 
   public existingCoach: Array<CoachDetailsModel> = [];
+
+  created() {
+    this.publishableKey = Settings.PublicKey;
+    this.successUrl = window.location.origin + "/success";
+    this.cancelUrl = window.location.origin + "/cancel";
+  }
 
   public back() {
     this.$router.push("/client/home/appointments");
@@ -225,6 +251,18 @@ export default class BookAppointments extends BaseComponent {
   public bookNow() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
+      this.showCheckOut = true;
+      this.lineItems = [
+        { price: "price_1LdD6qSCihPchh4L1e5pbzWI", quantity: 1 },
+      ];
+      
+      setTimeout(() => {
+        (this.$refs.checkoutRef as any).redirectToCheckout();
+      }, 1000);
+      /*this.$store.dispatch("addPurchaseCredits", {
+        credits: this.credits,
+        amount: this.amount,
+      });
       let request = new BookAppointmentRequestModel();
       console.log(request);
       request.AppointmentDate = this.request.AppointmentDate;
@@ -239,7 +277,7 @@ export default class BookAppointments extends BaseComponent {
         })
         .catch((err) => {
           console.log(err);
-        });
+        });*/
     }
   }
 
