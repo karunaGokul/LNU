@@ -170,6 +170,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class SideBar extends Vue {
+
   public logout() {
     this.$store.dispatch("logout");
     this.$router.push("/");
@@ -180,7 +181,6 @@ export default class SideBar extends Vue {
   }
 
   get page() {
-    console.log(this.$route.path.split("/")[1]);
     return this.$route.path.split("/")[1];
   }
 }
