@@ -85,11 +85,7 @@
         </v-container>
       </v-col>
     </v-row>
-    <snack-bar
-      :snackbarText="snackbarText"
-      :snackbar="snackbar"
-      @close="onClose"
-    />
+    <snack-bar :snackbarText="snackbarText" :snackbar="snackbar" @close="onClose" />
     <!-- <v-snackbar
       v-model="snackbar"
       :timeout="2000"

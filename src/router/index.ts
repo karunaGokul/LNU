@@ -25,48 +25,10 @@ const coachRoutes: Array<RouteConfig> = [
         component: () => import("@/views/coach/Registration/Index.vue"),
         meta: { anonymous: true },
       },
-      // {
-      //   path: "home",
-      //   name: "Coach Main Layout",
-      //   component: () => import("@/views/coach/MainLayout/Index.vue"),
-      // children: [
-      //   {
-      //     path: "dashboard",
-      //     name: "Coach Dashboard",
-      //     component: () =>
-      //       import("@/views/coach/MainLayout/Dashboard/Index.vue"),
-      //   },
-      //   {
-      //     path: "profile",
-      //     name: "Coach Profile",
-      //     component: () =>
-      //       import("@/views/coach/MainLayout/Profile/Index.vue"),
-      //   },
-      //   {
-      //     path: "appointments",
-      //     name: "Coach Appointment",
-      //     component: () =>
-      //       import("@/views/coach/MainLayout/Appointment/Index.vue"),
-      //   },
-      //   {
-      //     path: "message",
-      //     name: "Coach message",
-      //     component: () =>
-      //       import("@/views/coach/MainLayout/Message/Index.vue"),
-      //   },
-      //   {
-      //     path: "support",
-      //     name: "coach support",
-      //     component: () =>
-      //       import("@/views/coach/MainLayout/Support/Index.vue"),
-      //   },
-      // ],
-      // },
       {
         path: "home",
-        name: "Coach MainLayout",
-        component: () => import("@/components/sidebar/Index.vue"),
-        meta: { anonymous: true },
+        name: "Coach Main Layout",
+        component: () => import("@/views/coach/MainLayout/Index.vue"),
         children: [
           {
             path: "dashboard",
@@ -117,54 +79,10 @@ const adminRoutes: Array<RouteConfig> = [
         component: () => import("@/views/admin/Login/Index.vue"),
         meta: { anonymous: true },
       },
-      // {
-      //   path: "home",
-      //   name: "Admin Main Layout",
-      //   component: () => import("@/views/admin/MainLayout/Index.vue"),
-      //   meta: { anonymous: true },
-      //   children: [
-      //     {
-      //       path: "dashboard",
-      //       name: "Admin Dashboard",
-      //       component: () =>
-      //         import("@/views/admin/MainLayout/Dashboard/Index.vue"),
-      //     },
-      //     {
-      //       path: "appointments",
-      //       name: "Appointments",
-      //       component: () =>
-      //         import("@/views/admin/MainLayout/Appointments/Index.vue"),
-      //     },
-      //     {
-      //       path: "details1",
-      //       name: "CoachDetails",
-      //       component: () =>
-      //         import("@/views/admin/MainLayout/CoachDetails/Index.vue"),
-      //     },
-      //     {
-      //       path: "details2",
-      //       name: "ClientDetails",
-      //       component: () =>
-      //         import("@/views/admin/MainLayout/ClientDetails/Index.vue"),
-      //     },
-      //     {
-      //       path: "calendar",
-      //       name: "Calendar",
-      //       component: () =>
-      //         import("@/views/admin/MainLayout/Calendar/Index.vue"),
-      //     },
-      //     {
-      //       path: "support",
-      //       name: "Admin support",
-      //       component: () =>
-      //         import("@/views/admin/MainLayout/Support/Index.vue"),
-      //     },
-      //   ],
-      // },
       {
         path: "home",
-        name: "Admin MainLayout",
-        component: () => import("@/components/sidebar/Index.vue"),
+        name: "Admin Main Layout",
+        component: () => import("@/views/admin/MainLayout/Index.vue"),
         meta: { anonymous: true },
         children: [
           {
@@ -231,74 +149,10 @@ const clientRoutes: Array<RouteConfig> = [
         component: () => import("@/views/client/Registration/Index.vue"),
         meta: { anonymous: true },
       },
-      // {
-      //   path: "homee",
-      //   name: "Client Main Layout",
-      //   component: () => import("@/views/client/MainLayout/Index.vue"),
-      // children: [
-      //   {
-      //     path: "dashboard",
-      //     name: "Client Dashboard",
-      //     component: () =>
-      //       import("@/views/client/MainLayout/Dashboard/Index.vue"),
-      //   },
-      //   {
-      //     path: "profile",
-      //     name: "Client Profile",
-      //     component: () =>
-      //       import("@/views/client/MainLayout/Profile/Index.vue"),
-      //   },
-      //   {
-      //     path: "appointments",
-      //     name: "Client Appointments",
-      //     component: () =>
-      //       import("@/views/client/MainLayout/Appointments/Index.vue"),
-      //   },
-      //   {
-      //     path: "/client/home/appointments/:id",
-      //     name: "Book Appointment",
-      //     component: () =>
-      //       import(
-      //         "@/views/client/MainLayout/Appointments/component/BookAppointments.vue"
-      //       ),
-      //   },
-      //   {
-      //     path: "payment",
-      //     name: "Client Payment",
-      //     component: () =>
-      //       import("@/views/client/MainLayout/Payment/Index.vue"),
-      //   },
-      //   {
-      //     path: "journal",
-      //     name: "Client Journal",
-      //     component: () =>
-      //       import("@/views/client/MainLayout/MyJournal/Index.vue"),
-      //   },
-      //   {
-      //     path: "messages",
-      //     name: "Client Messages",
-      //     component: () =>
-      //       import("@/views/client/MainLayout/Message/Index.vue"),
-      //   },
-      //   {
-      //     path: "newsletter",
-      //     name: "Client Newsletter",
-      //     component: () =>
-      //       import("@/views/client/MainLayout/Newsletter/Index.vue"),
-      //   },
-      //   {
-      //     path: "support",
-      //     name: "Client support",
-      //     component: () =>
-      //       import("@/views/client/MainLayout/Support/Index.vue"),
-      //   },
-      // ],
-      // },
       {
         path: "home",
-        name: "Client MainLayout",
-        component: () => import("@/components/sidebar/Index.vue"),
-        meta: { anonymous: true },
+        name: "Client Main Layout",
+        component: () => import("@/views/client/MainLayout/Index.vue"),
         children: [
           {
             path: "dashboard",
@@ -321,10 +175,7 @@ const clientRoutes: Array<RouteConfig> = [
           {
             path: "/client/home/appointments/:id",
             name: "Book Appointment",
-            component: () =>
-              import(
-                "@/views/client/MainLayout/Appointments/component/BookAppointments.vue"
-              ),
+            component: () => import("@/views/client/MainLayout/Appointments/component/BookAppointments.vue")
           },
           {
             path: "payment",

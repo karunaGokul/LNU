@@ -1,6 +1,8 @@
 <template>
   <div class="primary-linear">
-    <h1 class="text-xl mx-7 pt-10 mb-2">Coach Details</h1>
+    <h1 class="text-xl mx-7 pt-10 mb-2">
+      Coach Details
+    </h1>
     <v-data-table
       :headers="headers"
       :items="response"
