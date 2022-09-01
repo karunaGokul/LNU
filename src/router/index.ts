@@ -49,7 +49,7 @@ const coachRoutes: Array<RouteConfig> = [
               import("@/views/coach/MainLayout/Appointment/Index.vue"),
           },
           {
-            path: "message",
+            path: "messages",
             name: "Coach message",
             component: () =>
               import("@/views/coach/MainLayout/Message/Index.vue"),
@@ -98,13 +98,13 @@ const adminRoutes: Array<RouteConfig> = [
               import("@/views/admin/MainLayout/Appointments/Index.vue"),
           },
           {
-            path: "details1",
+            path: "coach",
             name: "CoachDetails",
             component: () =>
               import("@/views/admin/MainLayout/CoachDetails/Index.vue"),
           },
           {
-            path: "details2",
+            path: "client",
             name: "ClientDetails",
             component: () =>
               import("@/views/admin/MainLayout/ClientDetails/Index.vue"),
@@ -175,7 +175,10 @@ const clientRoutes: Array<RouteConfig> = [
           {
             path: "/client/home/appointments/:id",
             name: "Book Appointment",
-            component: () => import("@/views/client/MainLayout/Appointments/component/BookAppointments.vue")
+            component: () =>
+              import(
+                "@/views/client/MainLayout/Appointments/component/BookAppointments.vue"
+              ),
           },
           {
             path: "payment",
