@@ -2,106 +2,7 @@
   <v-container fluid class="pa-0">
     <v-row no-gutters>
       <v-col cols="2" sm="2" md="2">
-        <v-card height="100vh" width="100%" elevation="0">
-          <v-navigation-drawer permanent class="pa-4 none">
-            <v-list-item class="pa-0">
-              <v-list-item-content>
-                <v-list-item-title class="text-h6 font-weight-bold py-4">
-                  Life N You
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list dense nav class="pa-0">
-              <div>
-                <router-link
-                  to="/coach/home/dashboard"
-                  tag="div"
-                  class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
-                  exact
-                >
-                  <div class="v-list-item__icon">
-                    <v-icon class="icon">dashboard</v-icon>
-                  </div>
-                  <div class="v-list-item__content">
-                    <div class="v-list-item__title">Dashboard</div>
-                  </div>
-                </router-link>
-              </div>
-              <div>
-                <router-link
-                  to="/coach/home/profile"
-                  tag="div"
-                  class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
-                  exact
-                >
-                  <div class="v-list-item__icon">
-                    <v-icon class="icon">person</v-icon>
-                  </div>
-                  <div class="v-list-item__content">
-                    <div class="v-list-item__title">Profile</div>
-                  </div>
-                </router-link>
-              </div>
-              <div>
-                <router-link
-                  to="/coach/home/appointments"
-                  tag="div"
-                  class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
-                  exact
-                >
-                  <div class="v-list-item__icon">
-                    <v-icon class="icon">book_online</v-icon>
-                  </div>
-                  <div class="v-list-item__content">
-                    <div class="v-list-item__title">Appointments</div>
-                  </div>
-                </router-link>
-              </div>
-              <div>
-                <router-link
-                  to="/coach/home/message"
-                  tag="div"
-                  class="my-4 v-list-item v-list-item--link px-4"
-                  active-class="primary"
-                  exact
-                >
-                  <div class="v-list-item__icon">
-                    <v-icon class="icon"> chat</v-icon>
-                  </div>
-                  <div class="v-list-item__content">
-                    <div class="v-list-item__title">Messages</div>
-                  </div>
-                </router-link>
-              </div>
-            </v-list>
-
-            <div class="pa-4 btn">
-              <div class="mt-4">
-                <v-btn
-                  to="/coach/home/support"
-                  elevation="0"
-                  rounded
-                  class="px-6 text-capitalize"
-                  >Support</v-btn
-                >
-              </div>
-              <div class="mt-4">
-                <v-btn
-                  elevation="0"
-                  color="primary"
-                  rounded
-                  class="px-7 text-capitalize white--text"
-                  @click="logout"
-                  >Logout</v-btn
-                >
-              </div>
-            </div>
-          </v-navigation-drawer>
-        </v-card>
+        <side-bar />
       </v-col>
       <v-col cols="10" sm="10" md="10">
         <router-view />
@@ -112,8 +13,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import SideBar from "@/components/SideBar.vue";
 
-@Component
+@Component({
+  components: {
+    SideBar,
+  },
+})
 export default class MainLayout extends Vue {
   public logout() {
     this.$store.dispatch("logout");
@@ -121,16 +27,3 @@ export default class MainLayout extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.primary {
-  background-color: #5949b8;
-  color: white;
-}
-.primary .icon {
-  color: white !important;
-}
-.btn {
-  margin-top: 120px;
-}
-</style>

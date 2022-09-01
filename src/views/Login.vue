@@ -5,13 +5,13 @@
         <h4 class="text-h4 white--text position-absolute logo">Life N You</h4>
 
         <v-img
-          v-if="tab == 'client'"
+          v-if="page == 'client'"
           src="@/assets/client-login.jpeg"
           height="100vh"
           class="rounded-xl rounded-l-0"
         />
         <v-img
-          v-else-if="tab == 'coach'"
+          v-else-if="page == 'coach'"
           src="@/assets/coachLogin.jpg"
           height="100vh"
           class="rounded-xl rounded-l-0"
@@ -22,9 +22,8 @@
           height="100vh"
           class="rounded-xl rounded-l-0"
         />
-
         <div
-          v-if="tab == 'client'"
+          v-if="page == 'client'"
           class="white--text position-absolute description"
         >
           <h5
@@ -39,7 +38,7 @@
           </h5>
         </div>
         <div
-          v-else-if="tab == 'coach'"
+          v-else-if="page == 'coach'"
           class="white--text position-absolute description"
         >
           <h4 class="text-h5">We help you build a better life</h4>
@@ -56,7 +55,7 @@
         align-center
         flex-column
       >
-        <h2 v-if="tab == 'client'" class="mb-10 text-h4 font-weight-bold">
+        <h2 v-if="page == 'client'" class="mb-10 text-h4 font-weight-bold">
           Feel stuck? We are here to help you!
         </h2>
 
@@ -70,12 +69,12 @@
             <v-row>
               <v-col cols="12" md="4" offset-md="4">
                 <v-card-title
-                  v-if="tab == 'client'"
+                  v-if="page == 'client'"
                   class="text-h5 font-weight-bold ml-4"
                   >Client</v-card-title
                 >
                 <v-card-title
-                  v-else-if="tab == 'coach'"
+                  v-else-if="page == 'coach'"
                   class="text-h5 font-weight-bold ml-4"
                   >Coach</v-card-title
                 >
@@ -84,7 +83,7 @@
                 >
               </v-col>
 
-              <v-col v-if="tab == 'client'">
+              <v-col v-if="page == 'client'">
                 <v-icon color="primary" class="mt-5 ml-16">
                   check_circle
                 </v-icon>
@@ -133,7 +132,7 @@
               </div>
             </v-form>
           </v-card>
-          <div v-if="tab == 'client'">
+          <div v-if="page == 'client'">
             <div class="text-center mb-4">
               If you are an admin,
               <router-link
@@ -155,7 +154,7 @@
             </div>
           </div>
 
-          <div v-if="tab !== 'admin'" class="text-center mt-16">
+          <div v-if="page != 'admin'" class="text-center mt-16">
             No account?
             <router-link
               to="/client/registration"
@@ -187,7 +186,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Inject, Prop } from "vue-property-decorator";
+import { Component, Inject } from "vue-property-decorator";
 
 import { required } from "vuelidate/lib/validators";
 
@@ -206,7 +205,6 @@ import BaseComponent from "@/components/base/BaseComponent";
 })
 export default class Login extends BaseComponent {
   @Inject("authService") authService: IAuthenticationService;
-  @Prop() tab: string;
 
   public request: LoginRequestModel = new LoginRequestModel();
 
@@ -216,6 +214,7 @@ export default class Login extends BaseComponent {
 
   public login() {
     this.$v.$touch();
+    this.request.pageType = this.page;
     if (!this.$v.$invalid) {
       this.loadingSpinner("show");
       this.authService.login(this.request).then(
@@ -233,6 +232,10 @@ export default class Login extends BaseComponent {
         }
       );
     }
+  }
+
+  get page() {
+    return this.$route.path.split("/")[1];
   }
 }
 </script>

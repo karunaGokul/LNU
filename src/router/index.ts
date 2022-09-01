@@ -16,7 +16,7 @@ const coachRoutes: Array<RouteConfig> = [
       {
         path: "login",
         name: "Coach Login",
-        component: () => import("@/views/coach/Login/Index.vue"),
+        component: () => import("@/views/Login.vue"),
         meta: { anonymous: true },
       },
       {
@@ -76,7 +76,7 @@ const adminRoutes: Array<RouteConfig> = [
       {
         path: "login",
         name: "Admin Login",
-        component: () => import("@/views/admin/Login/Index.vue"),
+        component: () => import("@/views/Login.vue"),
         meta: { anonymous: true },
       },
       {
@@ -140,7 +140,7 @@ const clientRoutes: Array<RouteConfig> = [
       {
         path: "login",
         name: "Client Login",
-        component: () => import("@/views/client/Login/Index.vue"),
+        component: () => import("@/views/Login.vue"),
         meta: { anonymous: true },
       },
       {
