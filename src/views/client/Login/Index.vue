@@ -2,11 +2,7 @@
   <v-row no-gutters class="primary-linear">
     <v-col cols="12" md="6">
       <v-container fill-height fluid class="pa-0 position-relative">
-        <h4
-          class="text-h4 white--text position-absolute logo"
-        >
-          Life N You
-        </h4>
+        <h4 class="text-h4 white--text position-absolute logo">Life N You</h4>
 
         <v-img
           src="@/assets/client-login.jpeg"
@@ -14,9 +10,7 @@
           class="rounded-xl rounded-l-0"
         />
 
-        <div
-          class="white--text position-absolute description"
-        >
+        <div class="white--text position-absolute description">
           <h5
             class="text-h4 text-center mb-2"
             style="font-family: Questario Icon !important"
@@ -124,7 +118,10 @@
 
           <div class="text-center mt-16">
             No account?
-            <router-link to="/client/registration" class="text-decoration-none" tag="a"
+            <router-link
+              to="/client/registration"
+              class="text-decoration-none"
+              tag="a"
               >Register here</router-link
             >
           </div>
@@ -199,4 +196,3 @@ export default class Login extends BaseComponent {
   }
 }
 </script>
-

@@ -1,5 +1,5 @@
 <template>
-  <v-row  no-gutters class="primary-linear">
+  <v-row no-gutters class="primary-linear">
     <v-col cols="12" md="6">
       <v-img
         src="@/assets/coachLogin.jpg"
@@ -40,9 +40,7 @@
                 color="primary"
                 v-model="request.Email"
                 append-icon="person"
-                :error-messages="
-                  $v.request.Email | errorMessages('Username')
-                "
+                :error-messages="$v.request.Email | errorMessages('Username')"
                 filled
                 type="text"
                 required
@@ -79,27 +77,28 @@
           </v-card>
         </div>
         <v-row class="d-flex justify-center mt-16 mb-n10">
-          <h4>No account?</h4>&nbsp;
+          <h4>No account?</h4>
+          &nbsp;
           <router-link to="/coach/registration" class="text-decoration-none"
             >Register here</router-link
           >
         </v-row>
         <v-snackbar
-            v-model="snackbar"
-            :timeout="2000"
-            color="deep-orange lighten-5 pink--text"
-            right
-            top
-          >
-            <v-icon color="pink">mdi-exclamation-thick </v-icon>
-            {{ snackbarText }}
+          v-model="snackbar"
+          :timeout="2000"
+          color="deep-orange lighten-5 pink--text"
+          right
+          top
+        >
+          <v-icon color="pink">mdi-exclamation-thick </v-icon>
+          {{ snackbarText }}
 
-            <template v-slot:action="{ attrs }">
-              <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
-                <v-icon> mdi-close-box</v-icon>
-              </v-btn>
-            </template>
-          </v-snackbar>
+          <template v-slot:action="{ attrs }">
+            <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+              <v-icon> mdi-close-box</v-icon>
+            </v-btn>
+          </template>
+        </v-snackbar>
       </v-container>
     </v-col>
   </v-row>
@@ -143,7 +142,7 @@ export default class Login extends BaseComponent {
         },
         (err) => {
           this.loadingSpinner("hide");
-           if (err.response.status === 400) {
+          if (err.response.status === 400) {
             this.snackbarText = err.response.data;
             this.snackbar = true;
           }
