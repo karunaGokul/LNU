@@ -177,7 +177,7 @@ export default class SideBar extends Vue {
   }
 
   public support() {
-    this.$router.push(`${this.page}/home/support`);
+    this.$router.push("support");
   }
 
   get page() {

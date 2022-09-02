@@ -15,6 +15,7 @@ export class ClientRegistrationModel extends RegisterModel {
 export class CounselingModel {
   Id: number;
   Name: string;
+  ProductId: string;
 }
 
 export class CertificationModel {

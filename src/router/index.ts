@@ -210,6 +210,16 @@ const clientRoutes: Array<RouteConfig> = [
             component: () =>
               import("@/views/client/MainLayout/Support/Index.vue"),
           },
+          {
+            path: 'success',
+            name: "Success",
+            component: () => import("@/views/client/MainLayout/PaymentInfo/Success.vue")
+          },
+          {
+            path: 'cancel',
+            name: "Cancel",
+            component: () => import("@/views/client/MainLayout/PaymentInfo/Cancel.vue")
+          },
         ],
       },
     ],
@@ -222,16 +232,6 @@ const defaultRoutes: Array<RouteConfig> = [
     redirect: {
       name: "Client",
     },
-  },
-  {
-    path: '/success',
-    name: "Success",
-    component: () => import("@/views/client/MainLayout/PaymentInfo/Success.vue")
-  },
-  {
-    path: '/cancel',
-    name: "Cancel",
-    component: () => import("@/views/client/MainLayout/PaymentInfo/Cancel.vue")
   },
   {
     path: "*",
