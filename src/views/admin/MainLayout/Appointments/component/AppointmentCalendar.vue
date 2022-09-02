@@ -103,7 +103,11 @@
             </v-card-text>
           </v-card>
         </v-menu>
-        <app-alert v-if="showAlert" @cancelAppointment="cancelAppointment" @close="onClose" />
+        <app-alert
+          v-if="showAlert"
+          @cancelAppointment="cancelAppointment"
+          @close="onClose"
+        />
       </v-sheet>
     </v-col>
   </v-row>
@@ -176,11 +180,9 @@ export default class Calendar extends BaseComponent {
     this.showAlert = false;
   }
 
-   updateRange(data: any) {
-    if (this.type == "month")
-      this.$emit("updateRange", data.start.date);
+  updateRange(data: any) {
+    if (this.type == "month") this.$emit("updateRange", data.start.date);
   }
-
 
   public viewDay(data: any) {
     this.focus = data.date;
