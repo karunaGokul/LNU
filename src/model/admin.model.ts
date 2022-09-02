@@ -11,6 +11,14 @@ export class GetCoachesModel {
   ProfileImage: string;
   About: string;
 }
+export class GetClientsModel {
+  Id: string;
+  Username: string;
+  Email: string;
+  PhoneNumber: number;
+  ProfileImage: string;
+  About: string;
+}
 
 export class ConfirmAppointmentModel {
   appointmentId: string;
