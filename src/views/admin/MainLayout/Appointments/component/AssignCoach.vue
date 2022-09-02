@@ -20,7 +20,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-row class="mt-0">
+        <v-row class="mt-0" v-if="typeof selectedEvent.coachName === 'string'">
           <v-col class="mt-2" cols="3">
             <v-label>Coach</v-label>
           </v-col>
@@ -29,7 +29,7 @@
               outlined
               dense
               readonly
-              :placeholder="coachName"
+              :placeholder="selectedEvent.coachName"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -41,7 +41,7 @@
           :items="responseCoach"
           item-text="Name"
           class="mt-2"
-          v-if="!coachName"
+          v-if="!selectedEvent.coachName"
         ></v-select>
       </v-card-text>
       <v-divider></v-divider>
@@ -78,7 +78,6 @@ import { Component, Inject, Prop, Vue } from "vue-property-decorator";
 export default class AssignCoach extends BaseComponent {
   @Inject("adminService") adminService: IAdminService;
   @Prop() selectedEvent: any;
-
   public response: Array<GetPreviousCoachesModel> = [];
   public dialog: boolean = true;
   public request: ConfirmAppointmentModel = new ConfirmAppointmentModel();
@@ -88,7 +87,7 @@ export default class AssignCoach extends BaseComponent {
   public coachName: string;
 
   created() {
-    this.getPreviousCoaches();
+    // this.getPreviousCoaches();
     this.getCoaches();
   }
 
@@ -120,10 +119,10 @@ export default class AssignCoach extends BaseComponent {
   private getCoaches() {
     this.loadingSpinner("show");
     this.adminService.getCoaches().then((response: Array<GetCoachesModel>) => {
+      console.log(response);
       this.responseCoach = response;
       this.loadingSpinner("hide");
     });
   }
-  
 }
 </script>
