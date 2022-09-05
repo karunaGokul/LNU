@@ -7,7 +7,7 @@ export interface IProfileService {
   updateProfile(file: File, request: ClientResponseModel): Promise<any>;
   updateProfileCoach(file: File, request: CoachResponseModel): Promise<any>;
   // getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>>;
-  // getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>>;
+  getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>>;
 }
 
 export class ProfileService
@@ -63,4 +63,10 @@ export class ProfileService
   //     return response.data;
   //   });
   // }
+
+  getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>> {
+    return this.httpGet("Admin/GetPrevoiusCoaches", request).then((response) => {
+      return response.data;
+    });
+  }
 }
