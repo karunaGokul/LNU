@@ -231,26 +231,26 @@ export default class BookAppointments extends BaseComponent {
     this.$router.push("/client/home/appointments");
   }
 
-  public getExistingCoach() {
-    this.request.CoachDetails = new CoachDetailsModel();
-    let request = new PreviousCoachRequestModel();
-    request.clientId = this.$store.getters.id;
-    request.counselingTypeId = this.request.CounselingType.Id;
-    if (
-      this.request.CounselingType &&
-      Object.entries(this.request.CounselingType).length > 0 &&
-      this.request.ExistingCoach
-    ) {
-      this.profileService
-        .getPreviousCoaches(request)
-        .then((response) => {
-          this.existingCoach = response;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }
+  // public getExistingCoach() {
+  //   this.request.CoachDetails = new CoachDetailsModel();
+  //   let request = new PreviousCoachRequestModel();
+  //   request.clientId = this.$store.getters.id;
+  //   request.counselingTypeId = this.request.CounselingType.Id;
+  //   if (
+  //     this.request.CounselingType &&
+  //     Object.entries(this.request.CounselingType).length > 0 &&
+  //     this.request.ExistingCoach
+  //   ) {
+  //     this.profileService
+  //       .getPreviousCoaches(request)
+  //       .then((response) => {
+  //         this.existingCoach = response;
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // }
 
   public bookNow() {
     this.$v.$touch();
