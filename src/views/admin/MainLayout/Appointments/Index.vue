@@ -86,7 +86,7 @@ export default class Appointments extends Vue {
     this.adminService
       .cancelAppointment(this.cancelRequest)
       .then((response: any) => {
-        this.getAppointments("Confirmed");
+        this.getAppointments("Pending");
       });
   }
 
