@@ -154,10 +154,19 @@
             </div>
           </div>
 
-          <div v-if="page != 'admin'" class="text-center mt-16">
+          <div v-if="page == 'client'" class="text-center mt-16">
             No account?
             <router-link
               to="/client/registration"
+              class="text-decoration-none"
+              tag="a"
+              >Register here</router-link
+            >
+          </div>
+          <div v-if="page == 'coach'" class="text-center mt-16">
+            No account?
+            <router-link
+              to="/coach/registration"
               class="text-decoration-none"
               tag="a"
               >Register here</router-link

@@ -193,6 +193,7 @@
           item-text="Name"
           item-value="Id"
           v-model="request.CounselingType"
+          return-object
         ></v-select>
         <v-file-input
           label="Qualifications"

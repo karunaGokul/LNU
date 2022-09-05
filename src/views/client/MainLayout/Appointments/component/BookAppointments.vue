@@ -7,7 +7,7 @@
       </v-btn>
     </div>
     <v-row class="px-15 mt-15" justify="center">
-      <v-col md="8">
+      <v-col md="4">
         <v-form @submit.prevent="bookNow">
           <div class="pa-0 text-center mb-5">
             <h1>Book Appointment</h1>
@@ -15,6 +15,7 @@
           <v-select
             label="Counseling Program"
             outlined
+            dense
             v-model="request.CounselingType"
             :items="counselingProgram"
             item-text="Name"
@@ -44,6 +45,7 @@
                 prepend-inner-icon="calendar_month"
                 readonly
                 outlined
+                dense
                 v-bind="attrs"
                 v-on="on"
                 required
@@ -68,6 +70,7 @@
               <v-text-field
                 v-model="request.AppointmentTime"
                 outlined
+                dense
                 label="Select Time"
                 append-icon="schedule"
                 readonly
@@ -105,6 +108,7 @@
             <v-select
               label="Avaliable Coach"
               outlined
+              dense 
               v-model="request.CoachDetails"
               :items="existingCoach"
               item-text="Name"

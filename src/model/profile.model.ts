@@ -20,3 +20,4 @@ export class CoachResponseModel {
   CounselingType: CounselingModel;
   Image: any = null;
 }
+

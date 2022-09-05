@@ -3,7 +3,7 @@ import { CounselingModel } from "./registration.model";
 
 export class PreviousCoachRequestModel {
   clientId: string;
-  counselingTypeId: number;
+  counselingTypeId: string;
 }
 export class CoachDetailsModel {
   Id: string = null;

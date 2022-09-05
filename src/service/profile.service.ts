@@ -43,12 +43,12 @@ export class ProfileService
   }
 
   updateProfileCoach(file: File, request: CoachResponseModel): Promise<any> {
-    let postData = JSON.stringify(request.CounselingType);
+    // let postData = JSON.stringify(request.CounselingType.Id);
     let formData = new FormData();
     formData.append("image", file);
     formData.append("Name", request.Name);
     formData.append("Experience", request.Experience);
-    formData.append("CounselingType", postData);
+    formData.append("CounselingTypeId", request.CounselingType.Id);
     formData.append("Id", request.Id);
 
     return this.upload(formData, `profile/EditProfile`);
