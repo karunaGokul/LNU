@@ -13,7 +13,7 @@
             <h1>Book Appointment</h1>
           </div>
           <v-select
-            label="Counselling Type"
+            label="Counseling Program"
             outlined
             v-model="request.CounselingType"
             :items="counselingProgram"
@@ -150,6 +150,7 @@ import {
   BookAppointmentRequestModel,
   BookAppointmentValidationRequestModel,
   CoachDetailsModel,
+  PreviousCoachRequestModel,
 } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
@@ -222,8 +223,8 @@ export default class BookAppointments extends BaseComponent {
 
   created() {
     this.publishableKey = Settings.PublicKey;
-    this.successUrl = window.location.origin + "/success";
-    this.cancelUrl = window.location.origin + "/cancel";
+    this.successUrl = window.location.origin + "/client/home/success";
+    this.cancelUrl = window.location.origin + "/client/home/cancel";
   }
 
   public back() {
@@ -232,13 +233,16 @@ export default class BookAppointments extends BaseComponent {
 
   public getExistingCoach() {
     this.request.CoachDetails = new CoachDetailsModel();
+    let request = new PreviousCoachRequestModel();
+    request.clientId = this.$store.getters.id;
+    request.counselingTypeId = this.request.CounselingType.Id;
     if (
       this.request.CounselingType &&
       Object.entries(this.request.CounselingType).length > 0 &&
       this.request.ExistingCoach
     ) {
       this.profileService
-        .getCoachesByTypeForSelection(this.request.CounselingType.Id)
+        .getPreviousCoaches(request)
         .then((response) => {
           this.existingCoach = response;
         })
@@ -251,33 +255,20 @@ export default class BookAppointments extends BaseComponent {
   public bookNow() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
-      this.showCheckOut = true;
-      this.lineItems = [
-        { price: "price_1LdD6qSCihPchh4L1e5pbzWI", quantity: 1 },
-      ];
-      
-      setTimeout(() => {
-        (this.$refs.checkoutRef as any).redirectToCheckout();
-      }, 1000);
-      /*this.$store.dispatch("addPurchaseCredits", {
-        credits: this.credits,
-        amount: this.amount,
-      });
       let request = new BookAppointmentRequestModel();
-      console.log(request);
       request.AppointmentDate = this.request.AppointmentDate;
       request.AppointmentTime = this.request.AppointmentTime;
       request.CounselingType = this.request.CounselingType;
       request.CoachDetails = this.request.CoachDetails;
-      this.service
-        .bookAppointments(request)
-        .then((response) => {
-          this.showAlert = true;
-          this.response = response;
-        })
-        .catch((err) => {
-          console.log(err);
-        });*/
+
+      this.showCheckOut = true;
+      this.lineItems = [
+        { price: this.request.CounselingType.ProductId, quantity: 1 },
+      ];
+
+      setTimeout(() => {
+        (this.$refs.checkoutRef as any).redirectToCheckout();
+      }, 1000);
     }
   }
 

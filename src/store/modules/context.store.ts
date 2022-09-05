@@ -6,15 +6,33 @@ import { RegistrationService } from "@/service";
 
 const state: any = {
   counselingProgram: [],
+  appointmentRequest: {
+    AppointmentDate: "",
+    AppointmentTime: "",
+    CounselingType: {
+      Id: null,
+      Name: null,
+    },
+    CoachDetails: {
+      Id: null,
+      Name: null,
+    },
+  },
 };
 const getters: GetterTree<any, any> = {
   counselingProgram: (state) => {
     return state.counselingProgram;
   },
+  request: (state) => {
+    return state.appointmentRequest;
+  },
 };
 const mutations: MutationTree<any> = {
   onCounselingProgram(state, payload) {
     state.counselingProgram = payload;
+  },
+  onAppointmentRequest(state, payload) {
+    state.appointmentRequest = payload;
   },
 };
 const actions: ActionTree<any, any> = {
@@ -34,6 +52,9 @@ const actions: ActionTree<any, any> = {
         resolve(context.state.counselingProgram);
       });
     }
+  },
+  appointmentRequest(context, payload) {
+    context.commit("onAppointmentRequest", payload);
   },
 };
 

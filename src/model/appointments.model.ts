@@ -1,6 +1,10 @@
 import { DataRequest } from "./base.model";
 import { CounselingModel } from "./registration.model";
 
+export class PreviousCoachRequestModel {
+  clientId: string;
+  counselingTypeId: number;
+}
 export class CoachDetailsModel {
   Id: string = null;
   Name: string = null;

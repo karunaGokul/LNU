@@ -9,6 +9,7 @@ export class LoginRequestModel extends DataRequest{
 export class LoginResponseModel {
     accessToken: string;
     refreshToken: string;
+    role: string;
+    username: string;
     id: string;
-    expiry?: string;
 }

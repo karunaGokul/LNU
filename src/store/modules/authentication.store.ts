@@ -5,12 +5,16 @@ import JwtDecode from "jwt-decode";
 
 const ACCESS_TOKEN_KEY = "access_token";
 const REFRESH_TOKEN_KEY = "refresh_token";
+const USERNAME = "username";
+const ID = "id";
+const ROLE = "role";
 
 const state: LoginResponseModel = {
   accessToken: localStorage.getItem(ACCESS_TOKEN_KEY) || "",
   refreshToken: localStorage.getItem(REFRESH_TOKEN_KEY) || "",
-  id: "",
-  expiry: "",
+  id: localStorage.getItem(ID) || "",
+  username: localStorage.getItem(USERNAME) || "",
+  role: localStorage.getItem(ROLE) || "",
 };
 const getters: GetterTree<LoginResponseModel, any> = {
   accessToken: (state) => {
@@ -26,15 +30,6 @@ const getters: GetterTree<LoginResponseModel, any> = {
       userInfo = new UserModel();
       userInfo.Id = tokenParsed.Id;
       userInfo.Role = tokenParsed.Role;
-      
-      console.log(tokenParsed);
-
-      /*userInfo.userName = tokenParsed.preferred_username;
-      userInfo.fullName = tokenParsed.name;
-      userInfo.firstName = tokenParsed.given_name;
-      userInfo.lastName = tokenParsed.family_name;
-      userInfo.emailVerified = tokenParsed.email_verified;
-      userInfo.phoneNumber = tokenParsed.phoneNumber;*/
     }
 
     return userInfo;
@@ -58,19 +53,37 @@ const getters: GetterTree<LoginResponseModel, any> = {
   refreshToken: (state) => {
     return state.refreshToken;
   },
+  role: (state) => {
+    return state.role;
+  },
+  id: (state) => {
+    return state.id;
+  },
+  username: (state) => {
+    return state.username;
+  },
 };
 const mutations: MutationTree<LoginResponseModel> = {
   onLogin(state, payload: LoginResponseModel) {
     localStorage.setItem(ACCESS_TOKEN_KEY, payload.accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, payload.refreshToken);
+    localStorage.setItem(ROLE, payload.role);
+    localStorage.setItem(ID, payload.id);
+    localStorage.setItem(USERNAME, payload.username);
 
     state.accessToken = payload.accessToken;
     state.refreshToken = payload.refreshToken;
+    state.username = payload.username;
+    state.id = payload.id;
+    state.role = payload.role;
   },
   onLogout(state) {
     localStorage.clear();
     state.accessToken = "";
     state.refreshToken = "";
+    state.id = "";
+    state.username = "";
+    state.role = "";
   },
 };
 const actions: ActionTree<LoginResponseModel, any> = {

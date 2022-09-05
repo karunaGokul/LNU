@@ -1,4 +1,4 @@
-import { ClientRequestModel, ClientResponseModel, CoachDetailsModel, CoachResponseModel } from "@/model";
+import { ClientRequestModel, ClientResponseModel, CoachDetailsModel, PreviousCoachRequestModel, CoachResponseModel } from "@/model";
 import { BaseService } from "./base.service";
 
 export interface IProfileService {
@@ -6,7 +6,8 @@ export interface IProfileService {
   getProfileCoach(request: ClientRequestModel): Promise<CoachResponseModel>;
   updateProfile(file: File, request: ClientResponseModel): Promise<any>;
   updateProfileCoach(file: File, request: CoachResponseModel): Promise<any>;
-  getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>>;
+  // getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>>;
+  // getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>>;
 }
 
 export class ProfileService
@@ -53,11 +54,13 @@ export class ProfileService
     return this.upload(formData, `profile/EditProfile`);
   }
 
-  getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>> {
-    return this.httpGet("profile/GetCoachesByTypeForSelection", {
-      councelingTypeId: councelingTypeId,
-    }).then((response) => {
-      return response.data;
-    });
-  }
+  // getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>> {
+  //   return this.httpGet("profile/GetCoachesByTypeForSelection", {
+  //     councelingTypeId: councelingTypeId,
+  //   }).then((response) => {
+  // getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>> {
+  //   return this.httpGet("Admin/GetPrevoiusCoaches", request).then((response) => {
+  //     return response.data;
+  //   });
+  // }
 }

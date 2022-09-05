@@ -1,49 +1,53 @@
 <template>
-  <div class="primary-linear px-15 pt-10">
+  <div class="primary-linear px-8 pt-10">
     <h1 class="text-xl-h1 mb-5" style="font-size: 30px">Client Details</h1>
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th
-              class="text-left primary--text"
-              style="font-size: 14px"
-              v-for="(item, i) in header"
-              :key="i"
-            >
-              {{ item }}
-            </th>
-            <!-- <th class="text-left"><h2>About</h2></th>
-            <th class="text-left"><h2>CounsellingType</h2></th>
-            <th class="text-left"><h2>Email</h2></th>
-            <th class="text-left"><h2>Phone</h2></th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="client in clientdetail" :key="client.id" height="90">
-            <td class="ma-10">
-              <v-avatar size="60">
-                <img src="@/assets/profile.jpg" alt="John" />
-              </v-avatar>
-            </td>
-            <td>{{ client.about }}</td>
-            <td>{{ client.counsellingType }}</td>
-            <td>{{ client.email }}</td>
-            <td>{{ client.phone }}</td>
-          </tr>
-        </tbody>
+    <v-data-table
+      :headers="headers"
+      :items="response"
+      :items-per-page="10"
+      class="mx-8"
+      :footer-props="{
+        prevIcon: 'chevron_left',
+        nextIcon: 'chevron_right',
+      }"
+    >
+      <template v-slot:[`item.ProfileImage`]="{ item }">
+        <div>
+          <div v-if="item.ProfileImage" class="d-flex align-center">
+            <v-avatar size="35">
+              <img
+                :src="`data:image/png;base64,${item.ProfileImage}`"
+                alt="John"
+              />
+            </v-avatar>
+            <p class="ma-0 ml-2">{{ item.Username }}</p>
+          </div>
+          <div v-else class="d-flex align-center">
+            <v-avatar color="primary" size="35">
+              <span class="white--text">{{
+                item.Username.charAt(0).toUpperCase()
+              }}</span>
+            </v-avatar>
+            <p class="ma-0 ml-2">{{ item.Username }}</p>
+          </div>
+        </div>
       </template>
-    </v-simple-table>
+    </v-data-table>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-
+import { Component, Vue, Inject } from "vue-property-decorator";
+import BaseComponent from "@/components/base/BaseComponent";
+import { GetClientsModel } from "@/model";
+import { IAdminService } from "@/service";
 @Component({
   components: {},
 })
-export default class ClientDetails extends Vue {
+export default class ClientDetails extends BaseComponent {
+  @Inject("adminService") service: IAdminService;
+  public response: Array<GetClientsModel> = [];
+
   public header: Array<string> = [
     "UserName",
     "About",
@@ -51,39 +55,39 @@ export default class ClientDetails extends Vue {
     "Email",
     "Phone",
   ];
-  public clientdetail: Array<any> = [
+
+  created() {
+    this.getClient();
+  }
+  public headers = [
     {
-      id: 1,
-      about:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ut ipsam eos consequuntur temporibus vero sed impedit?",
-      counsellingType: "Marriage Counselling",
-      email: "coach@mail.com",
-      phone: 1234567890,
+      text: "Name",
+      sortable: false,
+      value: "ProfileImage",
     },
     {
-      id: 2,
-      about:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ut ipsam eos consequuntur temporibus vero sed impedit?",
-      counsellingType: "Marriage Counselling",
-      email: "coach@mail.com",
-      phone: 1234567890,
+      text: "Email",
+      sortable: false,
+      value: "Email",
     },
     {
-      id: 3,
-      about:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ut ipsam eos consequuntur temporibus vero sed impedit?",
-      counsellingType: "Marriage Counselling",
-      email: "coach@mail.com",
-      phone: 1234567890,
+      text: "Phone",
+      sortable: false,
+      value: "PhoneNumber",
     },
     {
-      id: 4,
-      about:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ut ipsam eos consequuntur temporibus vero sed impedit?",
-      counsellingType: "Marriage Counselling",
-      email: "coach@mail.com",
-      phone: 1234567890,
+      text: "About",
+      sortable: false,
+      value: "About",
     },
   ];
+  private getClient() {
+    this.loadingSpinner("show");
+    this.service.getClient().then((response: Array<GetClientsModel>) => {
+      this.response = response;
+      console.log(response);
+      this.loadingSpinner("hide");
+    });
+  }
 }
 </script>

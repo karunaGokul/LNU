@@ -4,11 +4,13 @@ import {
   GetCoachesModel,
   GetPreviousCoachesRequestModel,
   GetPreviousCoachesModel,
+  GetClientsModel,
 } from "@/model";
 import { BaseService } from "./base.service";
 
 export interface IAdminService {
   getCoaches(): Promise<Array<GetCoachesModel>>;
+  getClient(): Promise<Array<GetClientsModel>>;
   confirmAppointment(request: ConfirmAppointmentModel): Promise<any>;
   cancelAppointment(request: CancelAppointmentModel): Promise<any>;
   getPreviousCoaches(
@@ -25,6 +27,11 @@ export class AdminService
   }
   public getCoaches(): Promise<Array<GetCoachesModel>> {
     return this.httpGet("Admin/GetCoaches", null).then((response) => {
+      return response.data;
+    });
+  }
+  public getClient(): Promise<Array<GetClientsModel>> {
+    return this.httpGet("Admin/GetClients", null).then((response) => {
       return response.data;
     });
   }
