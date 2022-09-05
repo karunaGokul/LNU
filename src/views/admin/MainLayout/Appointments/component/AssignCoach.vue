@@ -63,13 +63,8 @@
 
 <script lang="ts">
 import BaseComponent from "@/components/base/BaseComponent";
-import {
-  ConfirmAppointmentModel,
-  GetPreviousCoachesRequestModel,
-  GetPreviousCoachesModel,
-  GetCoachesModel,
-} from "@/model";
-import { IAdminService } from "@/service";
+import { CoachDetailsModel, ConfirmAppointmentModel, GetCoachesModel } from "@/model";
+import { IAdminService, IAppointmentService } from "@/service";
 import { Component, Inject, Prop, Vue } from "vue-property-decorator";
 
 @Component({
@@ -77,18 +72,20 @@ import { Component, Inject, Prop, Vue } from "vue-property-decorator";
 })
 export default class AssignCoach extends BaseComponent {
   @Inject("adminService") adminService: IAdminService;
+  @Inject("appointmentService") appointmentService: IAppointmentService;
   @Prop() selectedEvent: any;
-  public response: Array<GetPreviousCoachesModel> = [];
+  // public response: Array<GetPreviousCoachesModel> = [];
   public dialog: boolean = true;
   public request: ConfirmAppointmentModel = new ConfirmAppointmentModel();
-  public requestCoaches: GetPreviousCoachesRequestModel =
-    new GetPreviousCoachesRequestModel();
-  public responseCoach: Array<GetCoachesModel> = [];
+  // public requestCoaches: GetPreviousCoachesRequestModel =
+  //   new GetPreviousCoachesRequestModel();
+  // public responseCoach: Array<GetCoachesModel> = [];
+  public responseCoach: Array<CoachDetailsModel> = [];
   public coachName: string;
 
   created() {
-    // this.getPreviousCoaches();
-    this.getCoaches();
+    // this.getCoaches();
+    this.getCoachesBySelection();
   }
 
   public confirmAppointment() {
@@ -104,25 +101,38 @@ export default class AssignCoach extends BaseComponent {
     this.$emit("close");
   }
 
-  private getPreviousCoaches() {
-    this.requestCoaches.clientId = this.selectedEvent.clientId;
-    this.requestCoaches.counselingTypeId = this.selectedEvent.counselingTypeId;
-    this.adminService
-      .getPreviousCoaches(this.requestCoaches)
-      .then((response: Array<GetPreviousCoachesModel>) => {
-        response.forEach((item) => {
-          this.coachName = item.name;
-        });
+  private getCoachesBySelection() {
+     this.loadingSpinner("show");
+    this.appointmentService
+      .getCoachesByTypeForSelection(this.selectedEvent.counselingTypeId)
+      .then((response: any) => {
+        response.forEach((item: any) => {
+          this.responseCoach = item.Name;
+          this.loadingSpinner("hide");
+        })
+        
       });
   }
 
-  private getCoaches() {
-    this.loadingSpinner("show");
-    this.adminService.getCoaches().then((response: Array<GetCoachesModel>) => {
-      console.log(response);
-      this.responseCoach = response;
-      this.loadingSpinner("hide");
-    });
-  }
+  // private getPreviousCoaches() {
+  //   this.requestCoaches.clientId = this.selectedEvent.clientId;
+  //   this.requestCoaches.counselingTypeId = this.selectedEvent.counselingTypeId;
+  //   this.adminService
+  //     .getPreviousCoaches(this.requestCoaches)
+  //     .then((response: Array<GetPreviousCoachesModel>) => {
+  //       response.forEach((item) => {
+  //         this.coachName = item.name;
+  //       });
+  //     });
+  // }
+
+  // private getCoaches() {
+  //   this.loadingSpinner("show");
+  //   this.adminService.getCoaches().then((response: Array<GetCoachesModel>) => {
+  //     console.log(response);
+  //     this.responseCoach = response;
+  //     this.loadingSpinner("hide");
+  //   });
+  // }
 }
 </script>

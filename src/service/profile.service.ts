@@ -6,7 +6,6 @@ export interface IProfileService {
   getProfileCoach(request: ClientRequestModel): Promise<CoachResponseModel>;
   updateProfile(file: File, request: ClientResponseModel): Promise<any>;
   updateProfileCoach(file: File, request: CoachResponseModel): Promise<any>;
-  // getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>>;
   getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>>;
 }
 
@@ -43,7 +42,6 @@ export class ProfileService
   }
 
   updateProfileCoach(file: File, request: CoachResponseModel): Promise<any> {
-    // let postData = JSON.stringify(request.CounselingType.Id);
     let formData = new FormData();
     formData.append("image", file);
     formData.append("Name", request.Name);
@@ -54,16 +52,7 @@ export class ProfileService
     return this.upload(formData, `profile/EditProfile`);
   }
 
-  // getCoachesByTypeForSelection(councelingTypeId: number): Promise<Array<CoachDetailsModel>> {
-  //   return this.httpGet("profile/GetCoachesByTypeForSelection", {
-  //     councelingTypeId: councelingTypeId,
-  //   }).then((response) => {
-  // getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>> {
-  //   return this.httpGet("Admin/GetPrevoiusCoaches", request).then((response) => {
-  //     return response.data;
-  //   });
-  // }
-
+  
   getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>> {
     return this.httpGet("Admin/GetPrevoiusCoaches", request).then((response) => {
       return response.data;

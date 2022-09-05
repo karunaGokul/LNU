@@ -1,6 +1,6 @@
 <template>
   <div class="primary-linear px-8 pt-10">
-    <h1 class="text-xl-h1 mb-5" style="font-size: 30px">Client Details</h1>
+    <h1 class="mb-5">Client Details</h1>
     <v-data-table
       :headers="headers"
       :items="response"

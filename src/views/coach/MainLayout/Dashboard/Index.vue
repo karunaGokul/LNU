@@ -33,7 +33,7 @@
         </v-col>
         <v-col class="mr-5">
           <v-card
-            to="/coach/home/message"
+            to="/coach/home/messages"
             height="150"
             class="d-flex flex-column align-center justify-center rounded-lg"
           >

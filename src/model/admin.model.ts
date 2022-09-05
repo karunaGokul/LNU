@@ -28,12 +28,3 @@ export class CancelAppointmentModel extends ConfirmAppointmentModel {
   reason: string;
 }
 
-export class GetPreviousCoachesRequestModel {
-  clientId: string;
-  counselingTypeId: number;
-}
-
-export class GetPreviousCoachesModel {
-  id: string;
-  name: string;
-}
