@@ -54,7 +54,7 @@ export class ProfileService
 
   
   getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>> {
-    return this.httpGet("Admin/GetPrevoiusCoaches", request).then((response) => {
+    return this.httpGet("profile/GetPrevoiusCoaches", request).then((response) => {
       return response.data;
     });
   }

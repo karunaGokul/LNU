@@ -40,6 +40,7 @@
           label="Available Coaches"
           :items="responseCoach"
           item-text="Name"
+          item-value="Id"
           class="mt-2"
           v-if="!selectedEvent.coachName"
         ></v-select>
@@ -80,6 +81,7 @@ export default class AssignCoach extends BaseComponent {
   // public requestCoaches: GetPreviousCoachesRequestModel =
   //   new GetPreviousCoachesRequestModel();
   // public responseCoach: Array<GetCoachesModel> = [];
+
   public responseCoach: Array<CoachDetailsModel> = [];
   public coachName: string;
 
@@ -106,11 +108,8 @@ export default class AssignCoach extends BaseComponent {
     this.appointmentService
       .getCoachesByTypeForSelection(this.selectedEvent.counselingTypeId)
       .then((response: any) => {
-        response.forEach((item: any) => {
-          this.responseCoach = item.Name;
+          this.responseCoach = response;
           this.loadingSpinner("hide");
-        })
-        
       });
   }
 

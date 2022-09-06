@@ -33,7 +33,7 @@
           tab="Confirmed"
           @updateRange="updateAppointment"
           @reschedule="rescheduleAppoinment"
-          @cancelAppointment="cancelAppoinment"
+          @cancelAppointment="cancel"
         />
       </v-tab-item>
       <v-tab-item value="tab-previous-appointments">
@@ -108,6 +108,10 @@ export default class AppointmentsLayout extends Vue {
   ];
   public cancelAppoinment() {
     this.getAppointments("Pending");
+  }
+
+  public cancel() {
+    this.getAppointments("Confirmed");
   }
 
   public onAppointmentRescheduled() {

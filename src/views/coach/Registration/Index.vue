@@ -135,11 +135,11 @@
                       $v.request.ConfirmPassword
                         | errorMessages('ConfirmPassword')
                     "
-                    :type="showPassword ? 'text' : 'password'"
+                    :type="showConfirmpassword ? 'text' : 'password'"
                     :append-icon="
-                      showPassword ? 'visibility_off' : 'visibility'
+                      showConfirmpassword ? 'visibility_off' : 'visibility'
                     "
-                    @click:append="showPassword = !showPassword"
+                    @click:append="showConfirmpassword = !showConfirmpassword"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -158,7 +158,23 @@
                   $v.request.PhoneNumber | errorMessages('PhoneNumber')
                 "
               ></v-text-field>
-
+              <v-select
+                label="Counselling Type"
+                  color="primary"
+                  filled
+                  dense
+                  :items="counselingProgram"
+                  append-icon="arrow_drop_down"
+                  item-text="Name"
+                  item-value="Id"
+                  v-model="request.CounselingType"
+                  @change="$v.request.CounselingType.$touch()"
+                  @blur="$v.request.CounselingType.$touch()"
+                  required
+                  :error-messages="
+                    $v.request.CounselingType | errorMessages('CounselingType')
+                  "
+              ></v-select>
               <v-row>
                 <v-col>
                   <v-select
@@ -268,7 +284,8 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
       Password: { required },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
       CertificationId: { required },
-      Experience: { required }
+      Experience: { required },
+      CounselingType: { required },
     },
   },
 })
@@ -277,6 +294,7 @@ export default class CoachRegistration extends BaseComponent {
   public request: CoachRegistrationModel = new CoachRegistrationModel();
   public certificationType: Array<CertificationModel> = [];
   public showPassword: boolean = false;
+  public showConfirmpassword: boolean = false;
   public snackbar: boolean = false;
   public snackbarText: string = "";
 
@@ -313,5 +331,10 @@ export default class CoachRegistration extends BaseComponent {
       );
     }
   }
+
+  get counselingProgram() {
+    return this.$store.getters.counselingProgram;
+  }
+
 }
 </script>
