@@ -80,11 +80,17 @@ export default class ClientDetails extends BaseComponent {
       sortable: false,
       value: "About",
     },
+    {
+      text: "Counseling Type",
+      sortable: false,
+      value: "CounselingType",
+    },
   ];
   private getClient() {
     this.loadingSpinner("show");
     this.service.getClient().then((response: Array<GetClientsModel>) => {
       this.response = response;
+      console.log(response);
       console.log(response);
       this.loadingSpinner("hide");
     });

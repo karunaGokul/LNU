@@ -14,6 +14,7 @@ export class GetCoachesModel {
 export class GetClientsModel {
   Id: string;
   Username: string;
+  CounselingType: string;
   Email: string;
   PhoneNumber: number;
   ProfileImage: string;
@@ -27,4 +28,3 @@ export class ConfirmAppointmentModel {
 export class CancelAppointmentModel extends ConfirmAppointmentModel {
   reason: string;
 }
-
