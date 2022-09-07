@@ -34,6 +34,7 @@
           </v-col>
         </v-row>
         <v-select
+          v-model="selectedCoachName"
           outlined
           dense
           :menu-props="{ offsetY: true }"
@@ -51,8 +52,17 @@
           dark
           class="text-capitalize"
           color="primary"
-          @click="confirmAppointment"
+          @click="assignCoach"
+          v-if="!coachAssigned && !selectedEvent.coachName"
           >Assign</v-btn
+        >
+        <v-btn
+          dark
+          class="text-capitalize"
+          color="primary"
+          v-if="coachAssigned || selectedEvent.coachName"
+          @click="confirmAppointment"
+          >Confirm</v-btn
         >
         <v-btn class="text-capitalize ml-3" color="red" dark @click="close"
           >cancel</v-btn
@@ -64,7 +74,11 @@
 
 <script lang="ts">
 import BaseComponent from "@/components/base/BaseComponent";
-import { CoachDetailsModel, ConfirmAppointmentModel, GetCoachesModel } from "@/model";
+import {
+  AssignCoachModel,
+  CoachDetailsModel,
+  ConfirmAppointmentModel,
+} from "@/model";
 import { IAdminService, IAppointmentService } from "@/service";
 import { Component, Inject, Prop, Vue } from "vue-property-decorator";
 
@@ -75,24 +89,25 @@ export default class AssignCoach extends BaseComponent {
   @Inject("adminService") adminService: IAdminService;
   @Inject("appointmentService") appointmentService: IAppointmentService;
   @Prop() selectedEvent: any;
-  // public response: Array<GetPreviousCoachesModel> = [];
+
   public dialog: boolean = true;
   public request: ConfirmAppointmentModel = new ConfirmAppointmentModel();
-  // public requestCoaches: GetPreviousCoachesRequestModel =
-  //   new GetPreviousCoachesRequestModel();
-  // public responseCoach: Array<GetCoachesModel> = [];
-
+  public requestAssignCoach: AssignCoachModel = new AssignCoachModel();
   public responseCoach: Array<CoachDetailsModel> = [];
   public coachName: string;
+  public coachAssigned: boolean = false;
+
+  public selectedCoachName: string = "";
 
   created() {
-    // this.getCoaches();
     this.getCoachesBySelection();
   }
 
   public confirmAppointment() {
     this.request.appointmentId = this.selectedEvent.id;
+    this.loadingSpinner("show");
     this.adminService.confirmAppointment(this.request).then((response: any) => {
+      this.loadingSpinner("hide");
       this.dialog = false;
       this.$emit("done");
     });
@@ -103,35 +118,27 @@ export default class AssignCoach extends BaseComponent {
     this.$emit("close");
   }
 
-  private getCoachesBySelection() {
-     this.loadingSpinner("show");
-    this.appointmentService
-      .getCoachesByTypeForSelection(this.selectedEvent.counselingTypeId)
+  
+  private assignCoach() {
+    this.requestAssignCoach.appointmentId = this.selectedEvent.id;
+    this.requestAssignCoach.coachId = this.selectedCoachName;
+    this.loadingSpinner("show");
+    this.adminService
+      .assignCoach(this.requestAssignCoach)
       .then((response: any) => {
-          this.responseCoach = response;
-          this.loadingSpinner("hide");
+        this.loadingSpinner("hide");
+        this.coachAssigned = true;
       });
   }
 
-  // private getPreviousCoaches() {
-  //   this.requestCoaches.clientId = this.selectedEvent.clientId;
-  //   this.requestCoaches.counselingTypeId = this.selectedEvent.counselingTypeId;
-  //   this.adminService
-  //     .getPreviousCoaches(this.requestCoaches)
-  //     .then((response: Array<GetPreviousCoachesModel>) => {
-  //       response.forEach((item) => {
-  //         this.coachName = item.name;
-  //       });
-  //     });
-  // }
-
-  // private getCoaches() {
-  //   this.loadingSpinner("show");
-  //   this.adminService.getCoaches().then((response: Array<GetCoachesModel>) => {
-  //     console.log(response);
-  //     this.responseCoach = response;
-  //     this.loadingSpinner("hide");
-  //   });
-  // }
+  private getCoachesBySelection() {
+    this.loadingSpinner("show");
+    this.appointmentService
+      .getCoachesByTypeForSelection(this.selectedEvent.counselingTypeId)
+      .then((response: any) => {
+        this.responseCoach = response;
+        this.loadingSpinner("hide");
+      });
+  }
 }
 </script>

@@ -80,7 +80,7 @@ export default class CoachDetails extends BaseComponent {
     {
       text: "Counselling Program",
       sortable: false,
-      value: "CounsellingType",
+      value: "CounselingType",
     },
     {
       text: "Certificate",

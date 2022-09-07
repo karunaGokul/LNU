@@ -1,5 +1,4 @@
 <template>
- 
   <v-row class="d-flex align-center justify-center" style="height: 100vh">
     <v-col cols="4" sm="12" md="5">
       <v-card width="608" elevation="0" color="transparent">
@@ -79,7 +78,7 @@
           label="Qualifications"
           prepend-inner-icon="upload"
           class="ml-n8"
-          chips 
+          chips
           multiple
           filled
           dense
@@ -119,7 +118,7 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-z A-Z]*$/i);
   },
 })
 export default class Profile extends BaseComponent {
- @Inject("profileService") profileService: IProfileService;
+  @Inject("profileService") profileService: IProfileService;
 
   public request: CoachResponseModel = new CoachResponseModel();
   // public CounselingTypes: Array<CounselingModel> = [];
@@ -161,26 +160,27 @@ export default class Profile extends BaseComponent {
     if (!this.$v.$invalid) {
       this.request.Id = this.userInfo.Id;
       this.loadingSpinner("show");
-      this.profileService.updateProfileCoach(this.profilePhoto, this.request).then(
-        (response: CoachResponseModel) => {
-          this.loadingSpinner("hide");
-          this.getProfile();
-        },
-        (err) => {
-          this.loadingSpinner("hide");
-          if (err.response.status === 400) {
-            // this.snackbarText = err.response.data;
-            // this.snackbar = true;
+      this.profileService
+        .updateProfileCoach(this.profilePhoto, this.request)
+        .then(
+          (response: CoachResponseModel) => {
+            this.loadingSpinner("hide");
+            this.getProfile();
+          },
+          (err) => {
+            this.loadingSpinner("hide");
+            if (err.response.status === 400) {
+              // this.snackbarText = err.response.data;
+              // this.snackbar = true;
+            }
           }
-        }
-      );
+        );
     }
   }
   get counselingProgram() {
     return this.$store.getters.counselingProgram;
   }
 
- 
   get userInfo() {
     return this.$store.getters.userInfo;
   }

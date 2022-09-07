@@ -40,10 +40,10 @@ export default class calender extends BaseComponent {
   ];
 
   public updateRange(data: any) {
-    this.getAppointments("Pending", data);
+    this.getAppointments("Confirmed", data);
   }
   public cancelAppointment() {
-    this.getAppointments("Pending");
+    this.getAppointments("Confirmed");
   }
   public getAppointments(status: string, date?: any) {
     if (!date) date = this.$vuehelper.date.format(new Date(), "YYYY-MM-DD");

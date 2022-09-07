@@ -165,7 +165,7 @@ export default class AppointmentsLayout extends Vue {
 
   onAppointmentBooked() {
     this.showBookAppoinment = false;
-    this.getAppointments("Approved");
+    this.getAppointments("Confirmed");
   }
 
   onClose() {
