@@ -83,7 +83,6 @@
           small-chips
           filled
           dense
-          v-model="request.Certificates"
           @change="selectFiles"
         ></v-file-input>
         <div class="text-end">
@@ -207,14 +206,13 @@ export default class Profile extends BaseComponent {
     file.click();
   }
 
-  public selectFiles(e: File) {
-    this.certificate = e;
+  public selectFiles(event: File) {
+    this.certificate = Object.assign([], event)[0];
   }
 
   public uploadProfile(event: any) {
     let file: File = event.target.files[0];
     if (!file) return;
-
     this.profilePhoto = file;
   }
   get viewImage() {
