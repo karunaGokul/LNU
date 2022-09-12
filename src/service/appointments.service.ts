@@ -3,6 +3,7 @@ import {
   AppointmentResponseModel,
   BookAppointmentRequestModel,
   CoachDetailsModel,
+  UpdatePaymentRequestModel,
 } from "@/model";
 import { IBaseService, BaseService } from "./base.service";
 
@@ -16,6 +17,7 @@ export interface IAppointmentService
   getCoachesByTypeForSelection(
     councelingTypeId: number
   ): Promise<Array<CoachDetailsModel>>;
+  updatePayment(request: UpdatePaymentRequestModel): Promise<any>;
 }
 
 export class AppointmentService
@@ -38,6 +40,14 @@ export class AppointmentService
 
   public bookAppointments(request: BookAppointmentRequestModel): Promise<any> {
     return this.httpPost("Appointment/BookAppointment", request).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  }
+
+  public updatePayment(request: UpdatePaymentRequestModel): Promise<any> {
+    return this.httpPost("Appointment/UpdatePayment?appointmentId=" + request.appointmentId, request).then(
       (response) => {
         return response.data;
       }

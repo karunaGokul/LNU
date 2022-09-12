@@ -17,6 +17,14 @@ export class BookAppointmentRequestModel {
   AppointmentId?: string;
   Queries?: string;
 }
+
+export class UpdatePaymentRequestModel {
+  appointmentId: string;
+  Amount: number;
+  Status: string;
+  PaymentType: string;
+}
+
 export class BookAppointmentValidationRequestModel extends BookAppointmentRequestModel {
   ExistingCoach: boolean = false;
 }

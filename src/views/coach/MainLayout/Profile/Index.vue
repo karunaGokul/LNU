@@ -80,8 +80,11 @@
           class="ml-n8"
           chips
           multiple
+          small-chips
           filled
           dense
+          v-model="request.Certificates"
+          @change="selectFiles"
         ></v-file-input>
         <div class="text-end">
           <v-btn color="primary" class="text-capitalize" rounded type="submit">
@@ -100,6 +103,7 @@ import { helpers, required } from "vuelidate/lib/validators";
 import BaseComponent from "@/components/base/BaseComponent";
 
 import {
+  CertificateModel,
   ClientRequestModel,
   CoachResponseModel,
   CounselingModel,
@@ -121,9 +125,9 @@ export default class Profile extends BaseComponent {
   @Inject("profileService") profileService: IProfileService;
 
   public request: CoachResponseModel = new CoachResponseModel();
-  // public CounselingTypes: Array<CounselingModel> = [];
-
+  public requestCertificate: CertificateModel = new CertificateModel();
   public profilePhoto: any = null;
+  public certificate: File;
 
   mounted() {
     this.getProfile();
@@ -155,6 +159,17 @@ export default class Profile extends BaseComponent {
       });
   }
 
+  public editCertificates() {
+    this.requestCertificate.id = this.userInfo.Id;
+    this.requestCertificate.Id = this.userInfo.Id;
+    this.loadingSpinner("show");
+    this.profileService
+      .editCertificates(this.certificate, this.requestCertificate)
+      .then((response: any) => {
+        this.loadingSpinner("hide");
+      });
+  }
+
   public updateProfile() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
@@ -164,6 +179,7 @@ export default class Profile extends BaseComponent {
         .updateProfileCoach(this.profilePhoto, this.request)
         .then(
           (response: CoachResponseModel) => {
+            this.editCertificates();
             this.loadingSpinner("hide");
             this.getProfile();
           },
@@ -189,6 +205,10 @@ export default class Profile extends BaseComponent {
     let file: any = this.$refs.profileUpload;
 
     file.click();
+  }
+
+  public selectFiles(e: File) {
+    this.certificate = e;
   }
 
   public uploadProfile(event: any) {

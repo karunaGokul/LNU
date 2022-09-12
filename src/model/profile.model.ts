@@ -21,3 +21,8 @@ export class CoachResponseModel {
   Image: any = null;
 }
 
+export class CertificateModel {
+  id: string;
+  Id: string;
+  Certificates: File;
+}

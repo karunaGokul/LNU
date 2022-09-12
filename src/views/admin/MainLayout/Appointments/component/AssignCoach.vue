@@ -128,6 +128,7 @@ export default class AssignCoach extends BaseComponent {
       .then((response: any) => {
         this.loadingSpinner("hide");
         this.coachAssigned = true;
+        // this.selectedEvent.coachName = this.selectedCoachName;
       });
   }
 

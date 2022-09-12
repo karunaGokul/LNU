@@ -1,4 +1,5 @@
-import { ClientRequestModel, ClientResponseModel, CoachDetailsModel, PreviousCoachRequestModel, CoachResponseModel } from "@/model";
+import { ClientRequestModel, ClientResponseModel, CoachDetailsModel, PreviousCoachRequestModel, CoachResponseModel, CertificateModel } from "@/model";
+import { AxiosRequestConfig } from "axios";
 import { BaseService } from "./base.service";
 
 export interface IProfileService {
@@ -7,6 +8,7 @@ export interface IProfileService {
   updateProfile(file: File, request: ClientResponseModel): Promise<any>;
   updateProfileCoach(file: File, request: CoachResponseModel): Promise<any>;
   getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>>;
+  editCertificates(file: File, request: CertificateModel): Promise<any>;
 }
 
 export class ProfileService
@@ -52,6 +54,13 @@ export class ProfileService
     return this.upload(formData, `profile/EditProfile`);
   }
 
+  editCertificates(file: File, request: CertificateModel): Promise<any> {
+    let formData = new FormData();
+    formData.append("Certificates", file);
+    formData.append("Id", request.Id);
+
+    return this.upload(formData, `profile/EditCertificates?id=${request.id}`);
+  }
   
   getPreviousCoaches(request: PreviousCoachRequestModel): Promise<Array<CoachDetailsModel>> {
     return this.httpGet("profile/GetPrevoiusCoaches", request).then((response) => {
