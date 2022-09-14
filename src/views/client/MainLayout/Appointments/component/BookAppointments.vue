@@ -7,7 +7,7 @@
       </v-btn>
     </div>
     <v-row class="px-15 mt-15" justify="center">
-      <v-col md="8">
+      <v-col md="4">
         <v-form @submit.prevent="bookNow">
           <div class="pa-0 text-center mb-5">
             <h1>Book Appointment</h1>
@@ -15,6 +15,7 @@
           <v-select
             label="Counseling Program"
             outlined
+            dense
             v-model="request.CounselingType"
             :items="counselingProgram"
             item-text="Name"
@@ -44,6 +45,7 @@
                 prepend-inner-icon="calendar_month"
                 readonly
                 outlined
+                dense
                 v-bind="attrs"
                 v-on="on"
                 required
@@ -68,6 +70,7 @@
               <v-text-field
                 v-model="request.AppointmentTime"
                 outlined
+                dense
                 label="Select Time"
                 append-icon="schedule"
                 readonly
@@ -105,6 +108,7 @@
             <v-select
               label="Avaliable Coach"
               outlined
+              dense
               v-model="request.CoachDetails"
               :items="existingCoach"
               item-text="Name"
@@ -151,6 +155,7 @@ import {
   BookAppointmentValidationRequestModel,
   CoachDetailsModel,
   PreviousCoachRequestModel,
+  UpdatePaymentRequestModel,
 } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
@@ -202,6 +207,9 @@ export default class BookAppointments extends BaseComponent {
 
   public request: BookAppointmentValidationRequestModel =
     new BookAppointmentValidationRequestModel();
+
+  public requestPayment: UpdatePaymentRequestModel =
+    new UpdatePaymentRequestModel();
 
   public showCheckOut: boolean = false;
   public publishableKey: string = "";
@@ -260,6 +268,30 @@ export default class BookAppointments extends BaseComponent {
       request.AppointmentTime = this.request.AppointmentTime;
       request.CounselingType = this.request.CounselingType;
       request.CoachDetails = this.request.CoachDetails;
+
+      this.service
+        .bookAppointments(request)
+        .then((response) => {
+          this.loadingSpinner("hide");
+          console.log(response);
+        })
+        .catch((err) => {
+          this.loadingSpinner("hide");
+          console.log(err);
+        });
+
+      // this.requestPayment.Amount = 1000;
+      // this.requestPayment.Status = "Success";
+      // this.requestPayment.PaymentType = "Credit Card";
+      // this.requestPayment.appointmentId = "79098e59-3077-4e00-a68b-639b5cf31570";
+      // this.service
+      //   .updatePayment(this.requestPayment)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
 
       this.showCheckOut = true;
       this.lineItems = [

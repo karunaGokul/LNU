@@ -33,7 +33,7 @@
           tab="Confirmed"
           @updateRange="updateAppointment"
           @reschedule="rescheduleAppoinment"
-          @cancelAppointment="cancelAppoinment"
+          @cancelAppointment="cancel"
         />
       </v-tab-item>
       <v-tab-item value="tab-previous-appointments">
@@ -110,6 +110,10 @@ export default class AppointmentsLayout extends Vue {
     this.getAppointments("Pending");
   }
 
+  public cancel() {
+    this.getAppointments("Confirmed");
+  }
+
   public onAppointmentRescheduled() {
     this.getAppointments("Pending");
   }
@@ -161,7 +165,7 @@ export default class AppointmentsLayout extends Vue {
 
   onAppointmentBooked() {
     this.showBookAppoinment = false;
-    this.getAppointments("Approved");
+    this.getAppointments("Confirmed");
   }
 
   onClose() {

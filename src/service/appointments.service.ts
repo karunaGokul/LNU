@@ -2,6 +2,8 @@ import {
   AppoinmentRequestModel,
   AppointmentResponseModel,
   BookAppointmentRequestModel,
+  CoachDetailsModel,
+  UpdatePaymentRequestModel,
 } from "@/model";
 import { IBaseService, BaseService } from "./base.service";
 
@@ -12,6 +14,10 @@ export interface IAppointmentService
   ): Promise<Array<AppointmentResponseModel>>;
   bookAppointments(request: BookAppointmentRequestModel): Promise<any>;
   rescheduleAppointments(request: BookAppointmentRequestModel): Promise<any>;
+  getCoachesByTypeForSelection(
+    councelingTypeId: number
+  ): Promise<Array<CoachDetailsModel>>;
+  updatePayment(request: UpdatePaymentRequestModel): Promise<any>;
 }
 
 export class AppointmentService
@@ -40,6 +46,14 @@ export class AppointmentService
     );
   }
 
+  public updatePayment(request: UpdatePaymentRequestModel): Promise<any> {
+    return this.httpPost("Appointment/UpdatePayment?appointmentId=" + request.appointmentId, request).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  }
+
   public rescheduleAppointments(
     request: BookAppointmentRequestModel
   ): Promise<any> {
@@ -49,6 +63,16 @@ export class AppointmentService
       request
     ).then((response) => {
       console.log(response);
+      return response.data;
+    });
+  }
+
+  getCoachesByTypeForSelection(
+    councelingTypeId: number
+  ): Promise<Array<CoachDetailsModel>> {
+    return this.httpGet("profile/GetCoachesByTypeForSelection", {
+      councelingTypeId: councelingTypeId,
+    }).then((response) => {
       return response.data;
     });
   }

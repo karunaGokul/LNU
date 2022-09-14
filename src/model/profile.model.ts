@@ -1,4 +1,5 @@
 import { DataRequest } from "./base.model";
+import { CounselingModel } from "./registration.model";
 
 export class ClientRequestModel {
   id: string;
@@ -10,4 +11,18 @@ export class ClientResponseModel {
   Email: string;
   Queries: string;
   Image: any = null;
+}
+
+export class CoachResponseModel {
+  Id: string;
+  Name: string;
+  Experience: string;
+  CounselingType: CounselingModel;
+  Image: any = null;
+}
+
+export class CertificateModel {
+  id: string;
+  Id: string;
+  Certificates: File;
 }

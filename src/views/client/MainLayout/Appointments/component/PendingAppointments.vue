@@ -12,10 +12,10 @@
     >
       <template v-slot:[`item.Date`]="{ item }">
         test
-        {{item.appointmentDate | dateDisplay("MM/DD/YYYY")}}
+        {{ item.appointmentDate | dateDisplay("MM/DD/YYYY") }}
       </template>
       <template v-slot:[`item.Action`]="{ item }">
-        <v-tooltip bottom> 
+        <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               v-bind="attrs"
@@ -75,7 +75,7 @@ import { IAdminService } from "@/service";
 })
 export default class PendingAppointments extends Vue {
   @Prop() response: Array<AppointmentResponseModel>;
-  
+
   @Inject("adminService") service: IAdminService;
 
   public request: CancelAppointmentModel = new CancelAppointmentModel();
@@ -111,6 +111,7 @@ export default class PendingAppointments extends Vue {
 
   public onAppointmentBooked() {
     this.$emit("pending");
+    this.reschedule = false;
   }
 
   public rescheduleAppointment(id: string) {

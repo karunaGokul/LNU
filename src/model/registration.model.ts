@@ -13,7 +13,7 @@ export class ClientRegistrationModel extends RegisterModel {
 }
 
 export class CounselingModel {
-  Id: number;
+  Id: string;
   Name: string;
   ProductId: string;
 }

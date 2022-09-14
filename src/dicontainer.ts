@@ -9,8 +9,8 @@ import {
   RegistrationService,
   IPaymentService,
   PaymentService,
-  CoachProfileService,
-  ICoachProfileService,
+  // CoachProfileService,
+  // ICoachProfileService,
   ICoachCalendarService,
   CoachCalendarService,
   IAppointmentService,
@@ -28,8 +28,8 @@ export class DIContainer extends Vue {
     new RegistrationService();
   @Provide("paymentService") paymentService: IPaymentService =
     new PaymentService();
-  @Provide("coachProfileService") coachProfileService: ICoachProfileService =
-    new CoachProfileService();
+  // @Provide("coachProfileService") coachProfileService: ICoachProfileService =
+  //   new CoachProfileService();
   @Provide("coachCalendarService") coachCalenderService: ICoachCalendarService =
     new CoachCalendarService();
   @Provide("appointmentService") appointmentService: IAppointmentService =
