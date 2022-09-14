@@ -18,6 +18,7 @@ export class CoachResponseModel {
   Name: string;
   Experience: string;
   CounselingType: CounselingModel;
+  Certificates: string;
   Image: any = null;
 }
 
