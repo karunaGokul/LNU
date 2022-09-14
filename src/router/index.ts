@@ -98,13 +98,13 @@ const adminRoutes: Array<RouteConfig> = [
               import("@/views/admin/MainLayout/Appointments/Index.vue"),
           },
           {
-            path: "coach",
+            path: "coachs",
             name: "CoachDetails",
             component: () =>
               import("@/views/admin/MainLayout/CoachDetails/Index.vue"),
           },
           {
-            path: "client",
+            path: "clients",
             name: "ClientDetails",
             component: () =>
               import("@/views/admin/MainLayout/ClientDetails/Index.vue"),
@@ -211,14 +211,16 @@ const clientRoutes: Array<RouteConfig> = [
               import("@/views/client/MainLayout/Support/Index.vue"),
           },
           {
-            path: 'success',
+            path: "success",
             name: "Success",
-            component: () => import("@/views/client/MainLayout/PaymentInfo/Success.vue")
+            component: () =>
+              import("@/views/client/MainLayout/PaymentInfo/Success.vue"),
           },
           {
-            path: 'cancel',
+            path: "cancel",
             name: "Cancel",
-            component: () => import("@/views/client/MainLayout/PaymentInfo/Cancel.vue")
+            component: () =>
+              import("@/views/client/MainLayout/PaymentInfo/Cancel.vue"),
           },
         ],
       },
@@ -254,9 +256,10 @@ const router = new VueRouter({
 export default router;
 
 router.beforeEach((to, from, next) => {
-  if (to.path.includes("client"))
+  let path = to.path.split("/")[1];
+  if (path.includes("client"))
     document.documentElement.setAttribute("data-theme", "client-theme");
-  else if (to.path.includes("coach"))
+  else if (path.includes("coach"))
     document.documentElement.setAttribute("data-theme", "coach-theme");
   else document.documentElement.setAttribute("data-theme", "admin-theme");
 

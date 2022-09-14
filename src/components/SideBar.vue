@@ -15,7 +15,7 @@
             to="dashboard"
             tag="div"
             class="my-4 v-list-item v-list-item--link px-4"
-            active-class="primary v-list-item--active"
+            active-class="primary v-list-item__active"
             exact
           >
             <div class="v-list-item__icon">
@@ -31,7 +31,7 @@
             to="profile"
             tag="div"
             class="my-4 v-list-item v-list-item--link px-4"
-            active-class="primary v-list-item--active"
+            active-class="primary v-list-item__active"
             exact
           >
             <div class="v-list-item__icon">
@@ -47,7 +47,7 @@
             to="appointments"
             tag="div"
             class="my-4 v-list-item v-list-item--link px-4"
-            active-class="primary v-list-item--active"
+            active-class="primary v-list-item__active"
             exact
           >
             <div class="v-list-item__icon">
@@ -63,7 +63,7 @@
             to="messages"
             tag="div"
             class="my-4 v-list-item v-list-item--link px-4"
-            active-class="primary v-list-item--active"
+            active-class="primary v-list-item__active"
             exact
           >
             <div class="v-list-item__icon">
@@ -79,7 +79,7 @@
             to="payment"
             tag="div"
             class="my-4 v-list-item v-list-item--link px-4"
-            active-class="primary v-list-item--active"
+            active-class="primary v-list-item__active"
             exact
           >
             <div class="v-list-item__icon">
@@ -108,10 +108,10 @@
         </div>
         <div v-if="page == 'admin'">
           <router-link
-            to="coach"
+            to="coachs"
             tag="div"
             class="my-4 v-list-item v-list-item--link px-4"
-            active-class="primary v-list-item--active"
+            active-class="primary v-list-item__active"
             exact
           >
             <div class="v-list-item__icon">
@@ -124,10 +124,10 @@
         </div>
         <div v-if="page == 'admin'">
           <router-link
-            to="client"
+            to="clients"
             tag="div"
             class="my-4 v-list-item v-list-item--link px-4"
-            active-class="primary v-list-item--active"
+            active-class="primary v-list-item__active"
             exact
           >
             <div class="v-list-item__icon">
