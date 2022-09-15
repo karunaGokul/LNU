@@ -77,7 +77,7 @@
         <v-file-input
           label="Qualifications"
           prepend-inner-icon="upload"
-          class="ml-n8"
+          :prepend-icon="null"
           chips
           multiple
           small-chips
@@ -208,6 +208,7 @@ export default class Profile extends BaseComponent {
 
   public selectFiles(event: File) {
     this.certificate = Object.assign([], event)[0];
+    console.log(this.certificate);
   }
 
   public uploadProfile(event: any) {
