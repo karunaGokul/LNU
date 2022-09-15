@@ -274,6 +274,14 @@ export default class BookAppointments extends BaseComponent {
         .then((response) => {
           this.loadingSpinner("hide");
           console.log(response);
+          localStorage.setItem("appointmentId", response);
+          this.showCheckOut = true;
+          this.lineItems = [
+            { price: this.request.CounselingType.ProductId, quantity: 1 },
+          ];
+          setTimeout(() => {
+            (this.$refs.checkoutRef as any).redirectToCheckout();
+          }, 1000);
         })
         .catch((err) => {
           this.loadingSpinner("hide");
@@ -293,14 +301,7 @@ export default class BookAppointments extends BaseComponent {
       //     console.log(err);
       //   });
 
-      this.showCheckOut = true;
-      this.lineItems = [
-        { price: this.request.CounselingType.ProductId, quantity: 1 },
-      ];
-
-      setTimeout(() => {
-        (this.$refs.checkoutRef as any).redirectToCheckout();
-      }, 1000);
+      /**/
     }
   }
 
