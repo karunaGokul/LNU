@@ -84,7 +84,12 @@
           filled
           dense
           @change="selectFiles"
-        ></v-file-input>
+          ><template v-slot:selection="{ text }">
+            <v-chip small label color="primary">
+              {{ text }}
+            </v-chip>
+          </template></v-file-input
+        >
         <div class="text-end">
           <v-btn color="primary" class="text-capitalize" rounded type="submit">
             Save
