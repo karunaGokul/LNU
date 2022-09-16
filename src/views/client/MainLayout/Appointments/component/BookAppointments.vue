@@ -287,16 +287,6 @@ export default class BookAppointments extends BaseComponent {
           this.loadingSpinner("hide");
           console.log(err);
         });
-
-     
-      this.showCheckOut = true;
-      this.lineItems = [
-        { price: this.request.CounselingType.ProductId, quantity: 1 },
-      ];
-
-      setTimeout(() => {
-        (this.$refs.checkoutRef as any).redirectToCheckout();
-      }, 1000);
     }
   }
 
