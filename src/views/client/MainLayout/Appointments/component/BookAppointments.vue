@@ -280,19 +280,7 @@ export default class BookAppointments extends BaseComponent {
           console.log(err);
         });
 
-      // this.requestPayment.Amount = 1000;
-      // this.requestPayment.Status = "Success";
-      // this.requestPayment.PaymentType = "Credit Card";
-      // this.requestPayment.appointmentId = "79098e59-3077-4e00-a68b-639b5cf31570";
-      // this.service
-      //   .updatePayment(this.requestPayment)
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
-
+     
       this.showCheckOut = true;
       this.lineItems = [
         { price: this.request.CounselingType.ProductId, quantity: 1 },

@@ -29,11 +29,11 @@ export default class Success extends BaseComponent {
       this.$router.push("/client/home/appointments");
     }, 3000);
 
-    // this.requestPayment.Amount = 1000;
-    // this.requestPayment.Status = "Success";
-    // this.requestPayment.PaymentType = "Credit Card";
+    this.requestPayment.Amount = 1000;
+    this.requestPayment.Status = "Success";
+    this.requestPayment.PaymentType = "Credit Card";
     // this.requestPayment.appointmentId = "79098e59-3077-4e00-a68b-639b5cf31570";
-    this.requestPayment = this.$store.getters.request;
+    // this.requestPayment.appointmentId = this.$store.getters.request;
 
     this.service
       .updatePayment(this.requestPayment)
