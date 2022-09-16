@@ -17,7 +17,7 @@ export interface IProfileService {
   getPreviousCoaches(
     request: PreviousCoachRequestModel
   ): Promise<Array<CoachDetailsModel>>;
-  editCertificates(file: File, request: CertificateModel): Promise<any>;
+  editCertificates(files: Array<File>, request: CertificateModel): Promise<any>;
 }
 
 export class ProfileService
@@ -63,14 +63,13 @@ export class ProfileService
     return this.upload(formData, `profile/EditProfile`);
   }
 
-  editCertificates(file: File, request: CertificateModel): Promise<any> {
+  editCertificates(files: Array<File>, request: CertificateModel): Promise<any> {
    
     let formData = new FormData();
 
-    for(const k in request) {
-      formData.append("Certificates", k.Certificates);
-    }
-    // formData.append("Certificates", file);
+    files.forEach((file) => {
+      formData.append("Certificates", file);
+    })
     formData.append("Id", request.Id);
 
     return this.upload(

@@ -18,7 +18,7 @@ export class CoachResponseModel {
   Name: string;
   Experience: string;
   CounselingType: CounselingModel;
-  Certificates: string;
+  Certificates: Array<File>;
   Image: any = null;
 }
 

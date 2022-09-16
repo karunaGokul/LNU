@@ -90,6 +90,16 @@
             </v-chip>
           </template></v-file-input
         >
+        <div v-if="certificates.length">
+          <h5>All files</h5>
+          <v-chip
+            v-for="(file, index) in certificates"
+            :key="index"
+            class="mr-1"
+          >
+            {{ file.name }}
+          </v-chip>
+        </div>
         <div class="text-end">
           <v-btn color="primary" class="text-capitalize" rounded type="submit">
             Save
@@ -133,6 +143,8 @@ export default class Profile extends BaseComponent {
   public profilePhoto: any = null;
   public certificate: File;
 
+  private certificates: Array<File> = [];
+
   mounted() {
     this.getProfile();
   }
@@ -146,6 +158,7 @@ export default class Profile extends BaseComponent {
       .then((response) => {
         this.loadingSpinner("hide");
         this.request = response;
+        this.certificates = response.Certificates;
 
         if (this.request.Image) {
           fetch(this.$vuehelper.getImageUrl(this.request.Image))
@@ -163,14 +176,24 @@ export default class Profile extends BaseComponent {
       });
   }
 
+  public selectFiles(file: any) {
+    if (file) this.certificates.push(file[0]);
+
+    console.log(file[0]);
+
+    //this.certificate = Object.assign([], event)[0];
+    //console.log(this.certificate);
+  }
+
   public editCertificates() {
     this.requestCertificate.id = this.userInfo.Id;
     this.requestCertificate.Id = this.userInfo.Id;
     this.loadingSpinner("show");
     this.profileService
-      .editCertificates(this.certificate, this.requestCertificate)
+      .editCertificates(this.certificates, this.requestCertificate)
       .then((response: any) => {
         this.loadingSpinner("hide");
+        this.getProfile();
       });
   }
 
@@ -184,8 +207,6 @@ export default class Profile extends BaseComponent {
         .then(
           (response: CoachResponseModel) => {
             this.editCertificates();
-            this.loadingSpinner("hide");
-            this.getProfile();
           },
           (err) => {
             this.loadingSpinner("hide");
@@ -209,11 +230,6 @@ export default class Profile extends BaseComponent {
     let file: any = this.$refs.profileUpload;
 
     file.click();
-  }
-
-  public selectFiles(event: File) {
-    this.certificate = Object.assign([], event)[0];
-    console.log(this.certificate);
   }
 
   public uploadProfile(event: any) {
