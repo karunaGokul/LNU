@@ -47,7 +47,7 @@ export class AppointmentService
   }
 
   public updatePayment(request: UpdatePaymentRequestModel): Promise<any> {
-    return this.httpPost("Appointment/UpdatePayment?appointmentId=" + request.appointmentId, request).then(
+    return this.httpPost("Appointment/UpdatePayment?appointmentId=" + request.AppointmentId, request).then(
       (response) => {
         return response.data;
       }

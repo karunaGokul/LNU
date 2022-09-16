@@ -19,10 +19,10 @@ export class BookAppointmentRequestModel {
 }
 
 export class UpdatePaymentRequestModel {
-  appointmentId: string;
-  Amount: number;
+  AppointmentId: string;
+  //Amount: number;
   Status: string;
-  PaymentType: string;
+  //PaymentType: string;
 }
 
 export class BookAppointmentValidationRequestModel extends BookAppointmentRequestModel {

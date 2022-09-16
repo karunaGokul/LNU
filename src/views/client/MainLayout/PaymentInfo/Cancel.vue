@@ -1,23 +1,44 @@
 <template>
-  <div></div>
+  <div>
+    <app-success :message="message" status="Cancel" />
+  </div>
 </template>
 <script lang="ts">
+import { Component, Inject } from "vue-property-decorator";
+
 import BaseComponent from "@/components/base/BaseComponent";
-import { Component } from "vue-property-decorator";
+import { IAppointmentService } from "@/service";
+import { UpdatePaymentRequestModel } from "@/model";
 
 @Component
 export default class Cancel extends BaseComponent {
-    
+  @Inject("appointmentService") service: IAppointmentService;
+
+  public message: string = "";
+  public showAlert = false;
+
   created() {
     this.loadingSpinner("show");
-    setTimeout(() => {
-      this.redirectAppointment();
-    }, 3000);
+    this.confirmAppointment();
   }
 
-  redirectAppointment() {
-    this.loadingSpinner("hide");
-    this.$router.push("/client/home/appointments");
+  private confirmAppointment() {
+    let request: UpdatePaymentRequestModel = new UpdatePaymentRequestModel();
+
+    request.AppointmentId = localStorage.getItem("appointmentId");
+    request.Status = "Cancel";
+    localStorage.removeItem("appointmentId");
+
+    this.service.updatePayment(request).then((response) => {
+      this.message = response;
+      this.loadingSpinner("hide");
+      this.showAlert = true;
+
+      setTimeout(() => {
+        this.$router.push("/client/home/appointments");
+        this.showAlert = false;
+      }, 3000);
+    });
   }
 }
 </script>
