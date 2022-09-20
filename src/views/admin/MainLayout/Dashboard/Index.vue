@@ -27,7 +27,7 @@
             elevation="4"
             height="150"
             class="rounded-lg"
-            to="/admin/home/coach"
+            to="/admin/home/coachs"
           >
             <v-icon
               large
@@ -44,7 +44,7 @@
             elevation="4"
             height="150"
             class="rounded-lg"
-            to="/admin/home/client"
+            to="/admin/home/clients"
           >
             <v-icon
               large
