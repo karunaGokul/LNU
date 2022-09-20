@@ -37,8 +37,28 @@
         </v-card-text>
       </v-card>
     </v-col>
-    <v-col cols="8" sm="12" md="7" class="pa-8">
+    <v-col cols="8" sm="12" md="7">
       <v-form class="ma-10 pa-5" @submit.prevent="updateProfile">
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="First Name"
+              color="primary"
+              filled
+              dense
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              label="Last Name"
+              color="primary"
+              filled
+              dense
+              required
+            ></v-text-field>
+          </v-col>
+        </v-row>
         <v-text-field
           label="Full Name"
           type="text"
@@ -51,17 +71,40 @@
           @blur="$v.request.Name.$touch()"
           :error-messages="$v.request.Name | errorMessages('Name')"
         ></v-text-field>
+
         <v-text-field
-          label="Experience(Years)"
-          type="text"
+          label="Email"
           color="primary"
           filled
           dense
           required
-          v-model="request.Experience"
-          @input="$v.request.Experience.$touch()"
-          @blur="$v.request.Experience.$touch()"
-          :error-messages="$v.request.Experience | errorMessages('Experience')"
+        ></v-text-field>
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="Password"
+              color="primary"
+              filled
+              dense
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              label="Confirm Password"
+              color="primary"
+              filled
+              dense
+              required
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-text-field
+          label="Phone number"
+          color="primary"
+          filled
+          dense
+          required
         ></v-text-field>
         <v-select
           label="Counselling Programm"
@@ -74,36 +117,63 @@
           v-model="request.CounselingType"
           return-object
         ></v-select>
-        <v-file-input
-          label="Qualifications"
-          prepend-inner-icon="upload"
-          :prepend-icon="null"
-          chips
-          multiple
-          small-chips
-          filled
-          dense
-          @change="selectFiles"
-          ><template v-slot:selection="{ text }">
-            <v-chip small label color="primary">
-              {{ text }}
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="Experience(Years)"
+              type="text"
+              color="primary"
+              filled
+              dense
+              required
+              v-model="request.Experience"
+              @input="$v.request.Experience.$touch()"
+              @blur="$v.request.Experience.$touch()"
+              :error-messages="
+                $v.request.Experience | errorMessages('Experience')
+              "
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-file-input
+              label="Qualifications"
+              prepend-inner-icon="upload"
+              :prepend-icon="null"
+              chips
+              multiple
+              small-chips
+              filled
+              dense
+              @change="selectFiles"
+              ><template v-slot:selection="{ text }">
+                <v-chip small label color="primary">
+                  {{ text }}
+                </v-chip>
+              </template></v-file-input
+            >
+          </v-col>
+        </v-row>
+        <div v-if="certificates.length" class="d-flex justify-space-between">
+          <div>
+            <h5>All files</h5>
+            <v-chip
+              v-for="(file, index) in certificates"
+              :key="index"
+              class="mr-1"
+            >
+              {{ file.name }}
             </v-chip>
-          </template></v-file-input
-        >
-        <div v-if="certificates.length">
-          <h5>All files</h5>
-          <v-chip
-            v-for="(file, index) in certificates"
-            :key="index"
-            class="mr-1"
-          >
-            {{ file.name }}
-          </v-chip>
-        </div>
-        <div class="text-end">
-          <v-btn color="primary" class="text-capitalize" rounded type="submit">
-            Save
-          </v-btn>
+          </div>
+          <div class="align-self-end">
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              rounded
+              type="submit"
+            >
+              Save
+            </v-btn>
+          </div>
         </div>
       </v-form>
     </v-col>
