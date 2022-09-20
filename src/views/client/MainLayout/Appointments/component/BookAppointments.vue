@@ -135,7 +135,7 @@
         <app-alert v-if="showAlert" :response="response" />
       </v-col>
     </v-row>
-    <stripe-checkout
+    <!-- <stripe-checkout
       ref="checkoutRef"
       mode="payment"
       :pk="publishableKey"
@@ -143,7 +143,8 @@
       :success-url="successUrl"
       :cancel-url="cancelUrl"
       v-if="showCheckOut"
-    />
+    /> -->
+    <payment-card @update="onUpdate" v-if="showCheckOut" />
   </div>
 </template>
 <script lang="ts">
@@ -165,6 +166,8 @@ import { required } from "vuelidate/lib/validators";
 import { Settings } from "@/config";
 
 import { StripeCheckout } from "@vue-stripe/vue-stripe";
+
+import PaymentCard from "./PaymentCard.vue";
 
 let validations = {
   request: {
@@ -199,6 +202,7 @@ let validations = {
   components: {
     StripeCheckout,
     AppAlert,
+    PaymentCard,
   },
 })
 export default class BookAppointments extends BaseComponent {
@@ -261,7 +265,8 @@ export default class BookAppointments extends BaseComponent {
   }
 
   public bookNow() {
-    this.$v.$touch();
+    this.showCheckOut = true;
+    /*this.$v.$touch();
     if (!this.$v.$invalid) {
       let request = new BookAppointmentRequestModel();
       request.AppointmentDate = this.request.AppointmentDate;
@@ -287,7 +292,12 @@ export default class BookAppointments extends BaseComponent {
           this.loadingSpinner("hide");
           console.log(err);
         });
-    }
+    }*/
+  }
+
+  onUpdate(token: any) {
+    console.log(token);
+    this.showCheckOut = false;
   }
 
   get counselingProgram() {
