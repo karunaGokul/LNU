@@ -97,16 +97,29 @@
                       <label for="html">You and Your Spouse</label>
                     </li>
                   </ol> -->
-                  <v-radio-group>
+                  <v-radio-group class="ms-3">
                     <v-radio
-                      :off-icon="radioButton"
-                      v-for="n in 3"
-                      :key="n"
-                      :label="`Radio ${n}`"
-                      :value="n"
-                      @change="radioValue(n)"
+                      off-icon="radio_button_unchecked"
+                      on-icon="radio_button_checked"
+                      label="yourself"
+                      value="Yourself"
+                      @change="radioValue('Yourself')"
+                    ></v-radio>
+                    <v-radio
+                      off-icon="radio_button_unchecked"
+                      on-icon="radio_button_checked"
+                      label="You and Your Spouse"
+                      value="You and Your Spouse"
+                      @change="radioValue('You and Your Spouse')"
                     ></v-radio>
                   </v-radio-group>
+                  <v-col class="pa-0 ms-3" md="8">
+                    <v-text-field
+                      name="first-question"
+                      class="pa-0 ma-0"
+                      label="Someone Else- Relationship with you"
+                    ></v-text-field>
+                  </v-col>
                 </v-list-item-content>
               </v-list-item>
               <h4 class="mt-5 mb-3 subtitle-1">
@@ -163,10 +176,8 @@ import { Vue, Component } from "vue-property-decorator";
 
 @Component
 export default class AppAlert extends Vue {
-  public radioButton = "radio_button_unchecked";
   radioValue(n: any) {
     console.log(n);
-    this.radioButton = "radio_button_checked";
   }
 }
 </script>
