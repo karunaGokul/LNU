@@ -17,6 +17,10 @@ export class CoachResponseModel {
   Id: string;
   Name: string;
   Experience: string;
+  Email: string;
+  FirstName: string;
+  LastName: string;
+  PhoneNumber: string;
   CounselingType: CounselingModel;
   Certificates: Array<File>;
   Image: any = null;
