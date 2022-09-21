@@ -47,6 +47,12 @@
               filled
               dense
               required
+              v-model="request.FirstName"
+              @input="$v.request.FirstName.$touch()"
+              @blur="$v.request.FirstName.$touch()"
+              :error-messages="
+                $v.request.FirstName | errorMessages('FirstName')
+              "
             ></v-text-field>
           </v-col>
           <v-col>
@@ -56,6 +62,10 @@
               filled
               dense
               required
+               v-model="request.LastName"
+              @input="$v.request.LastName.$touch()"
+              @blur="$v.request.LastName.$touch()"
+              :error-messages="$v.request.LastName | errorMessages('LastName')"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -78,8 +88,12 @@
           filled
           dense
           required
+           v-model="request.Email"
+          @input="$v.request.Email.$touch()"
+          @blur="$v.request.Email.$touch()"
+          :error-messages="$v.request.Email | errorMessages('Email')"
         ></v-text-field>
-        <v-row>
+        <!-- <v-row>
           <v-col>
             <v-text-field
               label="Password"
@@ -98,13 +112,19 @@
               required
             ></v-text-field>
           </v-col>
-        </v-row>
+        </v-row> -->
         <v-text-field
           label="Phone number"
           color="primary"
           filled
           dense
           required
+          v-model="request.PhoneNumber"
+          @input="$v.request.PhoneNumber.$touch()"
+          @blur="$v.request.PhoneNumber.$touch()"
+          :error-messages="
+            $v.request.PhoneNumber | errorMessages('PhoneNumber')
+          "
         ></v-text-field>
         <v-select
           label="Counselling Programm"
@@ -182,7 +202,7 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-property-decorator";
-import { helpers, required } from "vuelidate/lib/validators";
+import { email, helpers, maxLength, minLength, numeric, required } from "vuelidate/lib/validators";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
@@ -200,7 +220,16 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-z A-Z]*$/i);
 @Component({
   validations: {
     request: {
+      FirstName: { required, alphaOnly },
+      LastName: { required, alphaOnly },
       Name: { required, alphaOnly },
+      Email: { required, email },
+      PhoneNumber: {
+        required,
+        maxLength: maxLength(10),
+        minLength: minLength(10),
+        numeric,
+      },
       Experience: { required },
     },
   },
