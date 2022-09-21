@@ -10,6 +10,7 @@
       <v-tab
         href="#tab-active-appointments"
         class="text-capitalize"
+        @change="reloadToCurrentMonth"
         @click="getAppointments('Confirmed')"
         >Active Appointments</v-tab
       >
@@ -106,12 +107,16 @@ export default class AppointmentsLayout extends Vue {
     "orange",
     "grey darken-1",
   ];
+
   public cancelAppoinment() {
     this.getAppointments("Pending");
   }
-
+  reloadToCurrentMonth() {
+    location.reload();
+  }
   public cancel() {
     this.getAppointments("Confirmed");
+    location.reload();
   }
 
   public onAppointmentRescheduled() {
