@@ -2,7 +2,7 @@
   <div class="pa-2 pt-4">
     <v-data-table
       :headers="headers"
-      :items="response"
+      :items="responsePendingAppointment"
       :items-per-page="10"
       class="elevation-0"
       :footer-props="{
@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import { AppointmentResponseModel, CancelAppointmentModel } from "@/model";
+import { AppointmentByStatusResponseModel, AppointmentResponseModel, CancelAppointmentModel } from "@/model";
 import { Component, Prop, Vue, Inject } from "vue-property-decorator";
 import RescheduleAppointment from "./RescheduleAppointment.vue";
 import AppAlert from "@/components/layout/AppAlert.vue";
@@ -74,7 +74,7 @@ import { IAdminService } from "@/service";
   },
 })
 export default class PendingAppointments extends Vue {
-  @Prop() response: Array<AppointmentResponseModel>;
+  @Prop() responsePendingAppointment: Array<AppointmentByStatusResponseModel>;
 
   @Inject("adminService") service: IAdminService;
 
