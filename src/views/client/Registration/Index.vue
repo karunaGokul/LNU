@@ -195,21 +195,18 @@
       <v-container
         fluid
         style="overflow: scroll; height: 100vh"
-        class="pt-4 pl-4"
+        class="pt-4 pl-4 ml-4"
       >
-        <h3>
-          Welcome Onboard! Whatever your requirement from us, we hope to deliver
-          the best. So let us do a few quick questions to get started.
-        </h3>
-        <br />
+        <h2 class="mb-2 text-h4 font-weight-bold">Welcome Onboard!</h2>
+        <h4 class="text-h7 mb-2">
+          Whatever your requirement from us, we hope to deliver the best. So let
+          us do a few quick questions to get started.
+        </h4>
 
-        <v-row>
-          <v-col cols="6" md="4">
-            <h4>Name:</h4>
-          </v-col>
-          <v-col cols="6" md="4">
+        <v-row class="mt-2">
+          <v-col cols="6">
             <v-text-field
-              placeholder="Name"
+              placeholder="Your Name"
               color="primary"
               dense
               filled
@@ -217,33 +214,32 @@
           </v-col>
         </v-row>
 
-        <v-row>
-          <v-col cols="6" md="4">
-            <h4>Are you looking for help for yourself or someone else?</h4>
-          </v-col>
-          <v-col cols="6" md="4">
+        <h4>Are you looking for help for yourself or someone else?</h4>
+
+        <v-row class="mt-1">
+          <v-col cols="6">
             <v-text-field
-              placeholder="Help for"
               color="primary"
               filled
               dense
             ></v-text-field>
           </v-col>
         </v-row>
-        <br />
-        <h3 class="text-capitalize">basic details questionnaire</h3>
-        <br />
+
+        <h3 class="text-h7 mb-2">Basic Details Questionnaire</h3>
         <p>
           Help us know you better so we can design your personalized
           questionnaire to offer perfect solutions.
         </p>
 
-        <v-row>
-          <v-col cols="6" md="3">
-            <h4>Your Email ID:</h4>
-          </v-col>
-          <v-col cols="6" md="6">
-            <v-text-field dense placeholder="Email Id" color="primary" filled>
+        <v-row class="mt-1">
+          <v-col cols="6">
+            <v-text-field
+              dense
+              placeholder="Your Email Id"
+              color="primary"
+              filled
+            >
             </v-text-field>
           </v-col>
         </v-row>
@@ -327,7 +323,7 @@
           </v-col>
         </v-row>
 
-        <h4>
+        <h4 class="mb-2">
           6. Are you already on any medication? If Yes, please mention the name.
         </h4>
         <v-row>
@@ -385,6 +381,10 @@
             ></v-text-field>
           </v-col>
         </v-row>
+
+        <div class="d-flex align-center justify-end">
+          <v-btn class="primary">Done</v-btn>
+        </div>
       </v-container>
     </v-col>
 
