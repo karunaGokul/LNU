@@ -188,9 +188,7 @@ export default class Calendar extends BaseComponent {
     "Conference",
     "Party",
   ];
-  // created() {
-  //   this.getAppointments("Pending");
-  // }
+ 
   public reschedule() {
     this.appointmentId = this.selectedEvent.id;
     this.showAppointment = true;
@@ -198,6 +196,7 @@ export default class Calendar extends BaseComponent {
   }
   public Close() {
     this.showAppointment = false;
+    location.reload();
   }
   mounted() {
     let calendar: any = this.$refs.calendar;
@@ -249,7 +248,6 @@ export default class Calendar extends BaseComponent {
   updateRange(data: any) {
     if (this.type == "month") {
       this.$emit("updateRange", data.start.date);
-      // this.getAppointments("Pending", data.start.date);
     }
   }
 
@@ -278,7 +276,6 @@ export default class Calendar extends BaseComponent {
     this.service
       .cancelAppointment(this.removeAppointment)
       .then((response: any) => {
-        // this.getAppointments("Pending");
         this.$emit("cancelAppointment");
       });
   }
