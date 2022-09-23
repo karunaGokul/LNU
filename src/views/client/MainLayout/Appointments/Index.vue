@@ -23,7 +23,7 @@
       <v-tab
         href="#tab-pending-appointments"
         class="text-capitalize"
-        @click="getAppointments('Pending')"
+        @click="getPendingAppointment"
         >Pending Appointments</v-tab
       >
     </v-tabs>
@@ -48,7 +48,7 @@
         <PendingAppointments
           @cancelAppointment="cancelAppoinment"
           @pending="onAppointmentRescheduled"
-          :response="response"
+          :responsePendingAppointment="responsePendingAppointment"
         />
       </v-tab-item>
     </v-tabs-items>
@@ -73,6 +73,8 @@ import {
   AppoinmentRequestModel,
   EventsModel,
   AppointmentResponseModel,
+  AppointmentByStatusRequestModel,
+  AppointmentByStatusResponseModel,
 } from "@/model";
 
 @Component({
@@ -97,6 +99,9 @@ export default class AppointmentsLayout extends Vue {
   public request: AppoinmentRequestModel = new AppoinmentRequestModel();
   public response: Array<AppointmentResponseModel> = [];
 
+  public requestPendingAppointment: AppointmentByStatusRequestModel = new AppointmentByStatusRequestModel();
+  public responsePendingAppointment: Array<AppointmentByStatusResponseModel> = [];
+
   public events: Array<EventsModel> = [];
   public colors: Array<string> = [
     "blue",
@@ -108,19 +113,29 @@ export default class AppointmentsLayout extends Vue {
     "grey darken-1",
   ];
 
+  
   public cancelAppoinment() {
     this.getAppointments("Pending");
   }
+
   reloadToCurrentMonth() {
     location.reload();
   }
+  
   public cancel() {
     this.getAppointments("Confirmed");
     location.reload();
   }
 
   public onAppointmentRescheduled() {
-    this.getAppointments("Pending");
+    this.getPendingAppointment();
+  }
+
+  public getPendingAppointment() {
+    this.requestPendingAppointment.status = "Pending";
+    this.service.getPendingAppointment(this.requestPendingAppointment).then((response: Array<AppointmentByStatusResponseModel>) => {
+      this.responsePendingAppointment = response;
+    });
   }
 
   public getAppointments(status: string, date?: any) {

@@ -1,4 +1,5 @@
 import { DataRequest } from "./base.model";
+import { PaymentRequestModel } from "./payment.model";
 import { CounselingModel } from "./registration.model";
 
 export class PreviousCoachRequestModel {
@@ -71,4 +72,19 @@ export class EventsModel {
   coachName: string;
   clientId: string;
   counselingTypeId: number;
+}
+
+export class AppointmentByStatusRequestModel {
+  status: string;
+}
+
+export class AppointmentByStatusResponseModel extends AppointmentResponseModel {
+ payment: PaymentModel;
+}
+
+export class PaymentModel {
+  amount: string;
+  status: string;
+  paymentDate: string;
+  paymentType: string;
 }

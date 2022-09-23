@@ -1,5 +1,7 @@
 import {
   AppoinmentRequestModel,
+  AppointmentByStatusRequestModel,
+  AppointmentByStatusResponseModel,
   AppointmentResponseModel,
   BookAppointmentRequestModel,
   CoachDetailsModel,
@@ -18,6 +20,7 @@ export interface IAppointmentService
     councelingTypeId: number
   ): Promise<Array<CoachDetailsModel>>;
   updatePayment(request: UpdatePaymentRequestModel): Promise<any>;
+  getPendingAppointment(request: AppointmentByStatusRequestModel): Promise<Array<AppointmentByStatusResponseModel>>;
 }
 
 export class AppointmentService
@@ -40,6 +43,14 @@ export class AppointmentService
 
   public bookAppointments(request: BookAppointmentRequestModel): Promise<any> {
     return this.httpPost("Appointment/BookAppointment", request).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  }
+
+  public getPendingAppointment(request: AppointmentByStatusRequestModel): Promise<Array<AppointmentByStatusResponseModel>> {
+    return this.httpGet("Appointment/GetAllAppointmentsByStatus?status=" + request.status, null).then(
       (response) => {
         return response.data;
       }
