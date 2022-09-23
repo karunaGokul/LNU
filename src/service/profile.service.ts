@@ -54,12 +54,11 @@ export class ProfileService
 
   updateProfileCoach(file: File, request: CoachResponseModel): Promise<any> {
     let formData = new FormData();
-    formData.append("image", file);
+    formData.append("Image", file);
     formData.append("FirstName", request.FirstName);
     formData.append("LastName", request.LastName);
     formData.append("Email", request.Email);
     formData.append("PhoneNumber", request.PhoneNumber);
-    formData.append("Name", request.Name);
     formData.append("Experience", request.Experience);
     formData.append("CounselingTypeId", request.CounselingType.Id);
     formData.append("Id", request.Id);

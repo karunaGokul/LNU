@@ -209,8 +209,7 @@ import BaseComponent from "@/components/base/BaseComponent";
 import {
   CertificateModel,
   ClientRequestModel,
-  CoachResponseModel,
-  CounselingModel,
+  CoachResponseModel
 } from "@/model";
 
 import { IProfileService } from "@/service";
@@ -259,6 +258,10 @@ export default class Profile extends BaseComponent {
         this.request = response;
         this.certificates = response.Certificates;
 
+        this.certificates.forEach((item) => {
+          console.log(item);
+        })
+
         if (this.request.Image) {
           fetch(this.$vuehelper.getImageUrl(this.request.Image))
             .then((res) => res.blob())
@@ -280,8 +283,6 @@ export default class Profile extends BaseComponent {
 
     console.log(file[0]);
 
-    //this.certificate = Object.assign([], event)[0];
-    //console.log(this.certificate);
   }
 
   public editCertificates() {
@@ -336,6 +337,7 @@ export default class Profile extends BaseComponent {
     if (!file) return;
     this.profilePhoto = file;
   }
+
   get viewImage() {
     return this.profilePhoto
       ? window.URL.createObjectURL(this.profilePhoto)

@@ -208,6 +208,7 @@
             <v-text-field
               placeholder="Your Name"
               color="primary"
+              v-model="questionnaireRequest.Name"
               dense
               filled
             ></v-text-field>
@@ -220,6 +221,7 @@
           <v-col cols="6">
             <v-text-field
               color="primary"
+              v-model="questionnaireRequest.Help"
               filled
               dense
             ></v-text-field>
@@ -237,6 +239,7 @@
             <v-text-field
               dense
               placeholder="Your Email Id"
+              v-model="questionnaireRequest.Email"
               color="primary"
               filled
             >
@@ -245,7 +248,7 @@
         </v-row>
 
         <h4>1. Who is the person who needs help</h4>
-        <v-radio-group v-model="radios">
+        <v-radio-group v-model="questionnaireRequest.WhoIsThePersonNeedHelp">
           <v-radio
             v-for="i in items"
             :key="i"
@@ -259,7 +262,7 @@
         <br />
 
         <h4>2. How would you like to identify yourself</h4>
-        <v-radio-group v-model="radios">
+        <v-radio-group v-model="questionnaireRequest.IdentifyYourSelf">
           <v-radio
             v-for="i in items1"
             :key="i"
@@ -272,7 +275,7 @@
         </v-radio-group>
 
         <h4>3. What brought you to visit us?</h4>
-        <v-radio-group v-model="radios">
+        <v-radio-group v-model="questionnaireRequest.VisitUs">
           <v-radio
             v-for="i in items2"
             :key="i"
@@ -286,7 +289,7 @@
         <h4>
           4. What do you expect from your interactions with the therapist?
         </h4>
-        <v-radio-group v-model="radios">
+        <v-radio-group v-model="questionnaireRequest.ExpectFromTherapist">
           <v-radio
             v-for="i in items3"
             :key="i"
@@ -330,6 +333,7 @@
           <v-col cols="6" md="6">
             <v-text-field
               placeholder="Medication Name"
+              v-model="questionnaireRequest.MedicationName"
               color="primary"
               filled
               dense
@@ -338,7 +342,7 @@
         </v-row>
 
         <h4>7. What is your preferred mode of communication</h4>
-        <v-radio-group v-model="radios">
+        <v-radio-group v-model="questionnaireRequest.PreferredModeOfCommunication">
           <v-radio
             v-for="i in items5"
             :key="i"
@@ -355,7 +359,7 @@
         </h4>
         <br />
         <h4>How should we get in touch with the person requiring counseling</h4>
-        <v-radio-group v-model="radios">
+        <v-radio-group v-model="questionnaireRequest.GetInTouch">
           <v-radio
             v-for="i in items6"
             :key="i"
@@ -375,6 +379,7 @@
           <v-col cols="6" md="6">
             <v-text-field
               placeholder="Mode of Communication"
+              v-model="questionnaireRequest.PreferredModeOfCommunicationToCollectData"
               color="primary"
               filled
               dense
@@ -383,7 +388,7 @@
         </v-row>
 
         <div class="d-flex align-center justify-end">
-          <v-btn class="primary">Done</v-btn>
+          <v-btn class="primary" @click="updateForm">Done</v-btn>
         </div>
       </v-container>
     </v-col>
@@ -419,7 +424,7 @@ import {
   helpers,
 } from "vuelidate/lib/validators";
 
-import { ClientRegistrationModel, CounselingModel } from "@/model";
+import { ClientRegistrationModel, QuestionnaireModel } from "@/model";
 import { IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
@@ -449,6 +454,8 @@ export default class ClientRegistration extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
 
   public request: ClientRegistrationModel = new ClientRegistrationModel();
+
+  public questionnaireRequest: QuestionnaireModel = new QuestionnaireModel();
 
   public showPassword: boolean = false;
   public showConfirmpassword: boolean = false;
@@ -530,6 +537,10 @@ export default class ClientRegistration extends BaseComponent {
         }
       );
     }
+  }
+
+  public updateForm() {
+    console.log(this.questionnaireRequest);
   }
 
   get counselingProgram() {

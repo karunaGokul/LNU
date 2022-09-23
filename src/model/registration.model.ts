@@ -30,20 +30,28 @@ export class CoachRegistrationModel extends RegisterModel {
 }
 
 export class QuestionnaireModel {
-  name: string;
-  help: string;
-  emailId: string;
-  whoIsThePersonNeedHelp: string;
-  identifyYourSelf: string;
-  visitUs: string;
-  expectFromTherapist: string;
-  alreadyMedication: string;
-  medicationName: string;
-  preferredModeOfCommunication: string;
-  getInTouch: string;
-  preferredModeOfCommunicationToCollectData: string;
+  Name: string;
+  Help: string;
+  Email: string;
+  WhoIsThePersonNeedHelp: string;
+  IdentifyYourSelf: string;
+  VisitUs: string;
+  ExpectFromTherapist: string;
+  Scale: QuestionnaireScaleModel;
+  AlreadyMedication: string;
+  MedicationName: string;
+  PreferredModeOfCommunication: string;
+  GetInTouch: string;
+  PreferredModeOfCommunicationToCollectData: string;
 }
 
 export class QuestionnaireScaleModel {
-  
+  EatingHabits: number;
+  PhysicalHealth: number;
+  DailyEatingHabits: number;
+  MindSet: number;
+  UrgeToLive: number;
+  SocialInteractions: number;
+  Addictions: number;
+  FearOfUnknown: number;
 }
