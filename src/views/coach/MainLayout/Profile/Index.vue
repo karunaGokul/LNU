@@ -62,7 +62,7 @@
               filled
               dense
               required
-               v-model="request.LastName"
+              v-model="request.LastName"
               @input="$v.request.LastName.$touch()"
               @blur="$v.request.LastName.$touch()"
               :error-messages="$v.request.LastName | errorMessages('LastName')"
@@ -88,7 +88,7 @@
           filled
           dense
           required
-           v-model="request.Email"
+          v-model="request.Email"
           @input="$v.request.Email.$touch()"
           @blur="$v.request.Email.$touch()"
           :error-messages="$v.request.Email | errorMessages('Email')"
@@ -202,14 +202,21 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-property-decorator";
-import { email, helpers, maxLength, minLength, numeric, required } from "vuelidate/lib/validators";
+import {
+  email,
+  helpers,
+  maxLength,
+  minLength,
+  numeric,
+  required,
+} from "vuelidate/lib/validators";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
 import {
   CertificateModel,
   ClientRequestModel,
-  CoachResponseModel
+  CoachResponseModel,
 } from "@/model";
 
 import { IProfileService } from "@/service";
@@ -259,8 +266,8 @@ export default class Profile extends BaseComponent {
         this.certificates = response.Certificates;
 
         this.certificates.forEach((item) => {
-          console.log(item);
-        })
+          // console.log(item);
+        });
 
         if (this.request.Image) {
           fetch(this.$vuehelper.getImageUrl(this.request.Image))
@@ -280,15 +287,14 @@ export default class Profile extends BaseComponent {
 
   public selectFiles(file: any) {
     if (file) this.certificates.push(file[0]);
-
     console.log(file[0]);
-
   }
 
   public editCertificates() {
     this.requestCertificate.id = this.userInfo.Id;
     this.requestCertificate.Id = this.userInfo.Id;
     this.loadingSpinner("show");
+
     this.profileService
       .editCertificates(this.certificates, this.requestCertificate)
       .then((response: any) => {
@@ -328,7 +334,6 @@ export default class Profile extends BaseComponent {
 
   public openProfileUpload() {
     let file: any = this.$refs.profileUpload;
-
     file.click();
   }
 

@@ -66,18 +66,18 @@ export class ProfileService
     return this.upload(formData, `profile/EditProfile`);
   }
 
-  editCertificates(files: Array<File>, request: CertificateModel): Promise<any> {
-   
+  editCertificates(
+    files: Array<File>,
+    request: CertificateModel
+  ): Promise<any> {
     let formData = new FormData();
 
     files.forEach((file) => {
       formData.append("Certificates", file);
-    })
+    });
     formData.append("Id", request.Id);
 
-    return this.upload(
-      formData, `profile/EditCertificates?id=${request.id}`
-    );
+    return this.upload(formData, `profile/EditCertificates?id=${request.id}`);
   }
 
   getPreviousCoaches(
