@@ -286,14 +286,15 @@ export default class Profile extends BaseComponent {
   }
 
   public selectFiles(file: any) {
-    if (file) this.certificates = file;
+    if (file) this.certificates.push(file[0]);
+    console.log(file[0]);
   }
 
   public editCertificates() {
     this.requestCertificate.id = this.userInfo.Id;
     this.requestCertificate.Id = this.userInfo.Id;
     this.loadingSpinner("show");
-    console.log(this.certificates);
+
     this.profileService
       .editCertificates(this.certificates, this.requestCertificate)
       .then((response: any) => {
@@ -333,7 +334,6 @@ export default class Profile extends BaseComponent {
 
   public openProfileUpload() {
     let file: any = this.$refs.profileUpload;
-
     file.click();
   }
 

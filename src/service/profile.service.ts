@@ -73,7 +73,7 @@ export class ProfileService
     let formData = new FormData();
 
     files.forEach((file) => {
-      formData.append("Certificates[]", file);
+      formData.append("Certificates", file);
     });
     formData.append("Id", request.Id);
 
