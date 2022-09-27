@@ -93,26 +93,7 @@
           @blur="$v.request.Email.$touch()"
           :error-messages="$v.request.Email | errorMessages('Email')"
         ></v-text-field>
-        <!-- <v-row>
-          <v-col>
-            <v-text-field
-              label="Password"
-              color="primary"
-              filled
-              dense
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              label="Confirm Password"
-              color="primary"
-              filled
-              dense
-              required
-            ></v-text-field>
-          </v-col>
-        </v-row> -->
+       
         <v-text-field
           label="Phone number"
           color="primary"
@@ -264,14 +245,21 @@ export default class Profile extends BaseComponent {
         this.loadingSpinner("hide");
         this.request = response;
         this.certificates = response.Certificates;
-        var blob = new Blob([JSON.stringify(this.request.Certificates[0])], {
-          type: "application/json",
-        });
-        var fileOfBlob = new File([blob], "aFileName.json");
-        console.log(this.request.Certificates);
-        console.log(fileOfBlob);
+
+        // var blob = new Blob([JSON.stringify(response.Certificates[0])], {
+        //   type: "application/json",
+        // });
+        // var fileOfBlob = new File([blob], "aFileName.json");
+        // // console.log(this.request.Certificates);
+        // console.log(fileOfBlob);
+
         this.certificates.forEach((item) => {
           // console.log(item);
+          var blob = new Blob([JSON.stringify(item)], {
+            type: "application/json",
+          });
+          var fileOfBlob = new File([blob], "aFileName.json");
+          console.log(fileOfBlob);
         });
 
         if (this.request.Image) {
