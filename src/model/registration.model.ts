@@ -53,9 +53,10 @@ export class QuestionnaireModel {
   Addictions: QuestionnaireScaleModel = new QuestionnaireScaleModel();
   FearOfUnknown: QuestionnaireScaleModel = new QuestionnaireScaleModel();
   PhysicalFeeling: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  data: any;
 }
 
-export  class QuestionnaireScaleModel {
+export class QuestionnaireScaleModel {
   value: boolean;
   rate: number;
 }

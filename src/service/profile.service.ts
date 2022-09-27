@@ -43,6 +43,8 @@ export class ProfileService
   updateProfile(file: File, request: ClientResponseModel): Promise<any> {
     let formData = new FormData();
     formData.append("image", file);
+    formData.append("FirstName", request.FirstName);
+    formData.append("LastName", request.LastName);
     formData.append("Name", request.Name);
     formData.append("phoneNumber", request.PhoneNumber);
     formData.append("Email", request.Email);
