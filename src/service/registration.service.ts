@@ -25,6 +25,7 @@ export class RegistrationService
     super("");
   }
   public clientId: string;
+  
   public clientRegister(request: ClientRegistrationModel): Promise<any> {
     return this.httpPost("Register", request).then((response) => {
       this.clientId = response.data;

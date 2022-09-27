@@ -17,7 +17,7 @@
         </h4>
       </v-container>
     </v-col>
-    <v-col lg="6" md="6" sm="12" v-if="!questionaire">
+    <v-col lg="6" md="6" sm="12" v-if="!showQuestionaire">
       <v-container
         fill-height
         fluid
@@ -191,7 +191,7 @@
         </div>
       </v-container>
     </v-col>
-    <v-col lg="6" md="6" sm="12" v-if="questionaire">
+    <v-col lg="6" md="6" sm="12" v-if="showQuestionaire">
       <v-container
         fluid
         style="overflow: scroll; height: 100vh"
@@ -671,7 +671,7 @@ export default class ClientRegistration extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
 
-  public questionaire: boolean = false;
+  public showQuestionaire: boolean = false;
   public radios: number = 1;
 
   public IdentifyYourself: any = ["Man", "Woman", "Others"];
@@ -708,9 +708,11 @@ export default class ClientRegistration extends BaseComponent {
     "Whatsapp",
     "Phone call",
   ];
+
   update() {
     console.log("submit");
   }
+  
   public register() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
@@ -721,7 +723,7 @@ export default class ClientRegistration extends BaseComponent {
           console.log(response);
 
           this.loadingSpinner("hide");
-          this.questionaire = true;
+          this.showQuestionaire = true;
           // this.$router.push("login");
         },
         (err) => {
@@ -738,7 +740,8 @@ export default class ClientRegistration extends BaseComponent {
 
   public updateForm() {
     // console.log(this.questionnaireRequest);
-    let clone = Object.assign({}, this.questionnaireRequest);
+    //let clone = Object.assign({}, this.questionnaireRequest);
+    let clone = this.$vuehelper.clone(this.questionnaireRequest);
     // console.log(this.questionnaireRequest);
     // delete clone.Addictions;
     // delete clone.DailyEatingHabits;
