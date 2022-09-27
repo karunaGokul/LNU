@@ -14,7 +14,7 @@ export interface IRegistrationService {
   getCounselingType(): Promise<Array<CounselingModel>>;
   getCertificationType(): Promise<Array<CertificationModel>>;
   abortRequest(): Promise<any>;
-  getQuestionnaire(request: QuestionnaireModel): Promise<any>;
+  saveQuestionnaire(request: QuestionnaireModel, id: string): Promise<any>;
 }
 
 export class RegistrationService
@@ -24,17 +24,17 @@ export class RegistrationService
   constructor() {
     super("");
   }
-  public clientId: string;
-  
+
   public clientRegister(request: ClientRegistrationModel): Promise<any> {
     return this.httpPost("Register", request).then((response) => {
-      this.clientId = response.data;
       return response.data;
     });
   }
-  public getQuestionnaire(request: QuestionnaireModel): Promise<any> {
-    console.log(this.clientId);
-    return this.httpPost("UpdateQuestionnaire" + this.clientId, request).then(
+  public saveQuestionnaire(
+    request: QuestionnaireModel,
+    id: string
+  ): Promise<any> {
+    return this.httpPost("UpdateQuestionnaire" + id, request).then(
       (response) => {
         return response.data;
       }

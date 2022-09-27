@@ -670,7 +670,7 @@ export default class ClientRegistration extends BaseComponent {
   public showConfirmpassword: boolean = false;
   public snackbar: boolean = false;
   public snackbarText: string = "";
-
+  private UserId: any;
   public showQuestionaire: boolean = false;
   public radios: number = 1;
 
@@ -712,7 +712,7 @@ export default class ClientRegistration extends BaseComponent {
   update() {
     console.log("submit");
   }
-  
+
   public register() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
@@ -721,7 +721,7 @@ export default class ClientRegistration extends BaseComponent {
       this.registerService.clientRegister(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
           console.log(response);
-
+          this.UserId = response;
           this.loadingSpinner("hide");
           this.showQuestionaire = true;
           // this.$router.push("login");
@@ -739,19 +739,38 @@ export default class ClientRegistration extends BaseComponent {
   }
 
   public updateForm() {
-    // console.log(this.questionnaireRequest);
-    //let clone = Object.assign({}, this.questionnaireRequest);
-    let clone = this.$vuehelper.clone(this.questionnaireRequest);
-    // console.log(this.questionnaireRequest);
-    // delete clone.Addictions;
-    // delete clone.DailyEatingHabits;
-    // delete clone.EatingHabits;
-    // console.log(clone);
+    let questionnaireObject = this.$vuehelper.clone(this.questionnaireRequest);
+    if (!questionnaireObject.Addictions.value) {
+      delete questionnaireObject.Addictions;
+    }
+    if (!questionnaireObject.EatingHabits.value) {
+      delete questionnaireObject.EatingHabits;
+    }
+    if (!questionnaireObject.PhysicalHealth.value) {
+      delete questionnaireObject.PhysicalHealth;
+    }
+    if (!questionnaireObject.DailyEatingHabits.value) {
+      delete questionnaireObject.DailyEatingHabits;
+    }
+    if (!questionnaireObject.MindSet.value) {
+      delete questionnaireObject.MindSet;
+    }
+    if (!questionnaireObject.UrgeToLive.value) {
+      delete questionnaireObject.UrgeToLive;
+    }
+    if (!questionnaireObject.SocialInteractions.value) {
+      delete questionnaireObject.SocialInteractions;
+    }
+    if (!questionnaireObject.FearOfUnknown.value) {
+      delete questionnaireObject.FearOfUnknown;
+    }
+    if (!questionnaireObject.PhysicalFeeling.value) {
+      delete questionnaireObject.PhysicalFeeling;
+    }
+
     this.registerService
-      .getQuestionnaire(clone)
-      .then((response: Array<QuestionnaireModel>) => {
-        console.log(response);
-      });
+      .saveQuestionnaire(questionnaireObject, this.UserId)
+      .then((response: Array<QuestionnaireModel>) => {});
     // let clone = this.$clione(this.questionnaireRequest);
     /*
       clone.!eatingHabits delete that object 
