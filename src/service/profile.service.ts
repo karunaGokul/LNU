@@ -74,8 +74,11 @@ export class ProfileService
 
     files.forEach((file) => {
       formData.append("Certificates", file);
+      formData.append("CertificateNames", file.name);
     });
     formData.append("Id", request.Id);
+
+    console.log(formData);
 
     return this.upload(formData, `profile/EditCertificates?id=${request.id}`);
   }
