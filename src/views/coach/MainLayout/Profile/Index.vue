@@ -264,11 +264,13 @@ export default class Profile extends BaseComponent {
         this.loadingSpinner("hide");
         this.request = response;
         this.certificates = response.Certificates;
-        var blob = new Blob([JSON.stringify(this.request.Certificates[0])], {
+        let blob = new Blob([JSON.stringify(this.request.Certificates[0])], {
           type: "application/json",
         });
-        var fileOfBlob = new File([blob], "aFileName.json");
-        console.log(this.request.Certificates);
+
+        let fileOfBlob = new File([blob], "aFileName.json");
+
+        console.log(this.request.Certificates[0]);
         console.log(fileOfBlob);
         this.certificates.forEach((item) => {
           // console.log(item);
