@@ -50,7 +50,37 @@
     </v-col>
     <v-col cols="8" sm="12" md="7" class="pa-8">
       <v-form class="ma-10 pa-5" @submit.prevent="updateProfile">
-        <v-text-field
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="First Name"
+              color="primary"
+              filled
+              dense
+              required
+              v-model="request.FirstName"
+              @input="$v.request.FirstName.$touch()"
+              @blur="$v.request.FirstName.$touch()"
+              :error-messages="
+                $v.request.FirstName | errorMessages('FirstName')
+              "
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              label="Last Name"
+              color="primary"
+              filled
+              dense
+              required
+              v-model="request.LastName"
+              @input="$v.request.LastName.$touch()"
+              @blur="$v.request.LastName.$touch()"
+              :error-messages="$v.request.LastName | errorMessages('LastName')"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <!-- <v-text-field
           label="Name"
           type="text"
           color="#FCB258"
@@ -61,7 +91,7 @@
           @input="$v.request.Name.$touch()"
           @blur="$v.request.Name.$touch()"
           :error-messages="$v.request.Name | errorMessages('Name')"
-        ></v-text-field>
+        ></v-text-field> -->
         <v-text-field
           label="Phone Number"
           type="text"
@@ -132,7 +162,9 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-z A-Z]*$/i);
 @Component({
   validations: {
     request: {
-      Name: { required, alphaOnly },
+      FirstName: { required, alphaOnly },
+      LastName: { required, alphaOnly },
+      // Name: { required, alphaOnly },
       PhoneNumber: {
         required,
         maxLength: maxLength(10),
@@ -197,7 +229,7 @@ export default class ClientProfileLayout extends BaseComponent {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       this.request.Id = this.userInfo.Id;
-      console.log(this.request);
+      // console.log(this.request);
       this.loadingSpinner("show");
       this.profileService.updateProfile(this.profilePhoto, this.request).then(
         (response: ClientResponseModel) => {

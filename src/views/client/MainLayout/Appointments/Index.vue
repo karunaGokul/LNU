@@ -115,7 +115,8 @@ export default class AppointmentsLayout extends Vue {
 
   
   public cancelAppoinment() {
-    this.getAppointments("Pending");
+    // this.getAppointments("Pending");
+    this.getPendingAppointment();
   }
 
   reloadToCurrentMonth() {
