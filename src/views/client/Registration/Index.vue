@@ -724,7 +724,6 @@ export default class ClientRegistration extends BaseComponent {
           this.UserId = response;
           this.loadingSpinner("hide");
           this.showQuestionaire = true;
-          // this.$router.push("login");
         },
         (err) => {
           console.log(err.status);
@@ -770,13 +769,9 @@ export default class ClientRegistration extends BaseComponent {
 
     this.registerService
       .saveQuestionnaire(questionnaireObject, this.UserId)
-      .then((response: Array<QuestionnaireModel>) => {});
-    // let clone = this.$clione(this.questionnaireRequest);
-    /*
-      clone.!eatingHabits delete that object 
-      200 
-
-    */
+      .then((response: Array<QuestionnaireModel>) => {
+        this.$router.push("login");
+      });
   }
 
   get counselingProgram() {
