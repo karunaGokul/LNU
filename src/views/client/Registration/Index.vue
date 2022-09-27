@@ -671,7 +671,7 @@ export default class ClientRegistration extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
 
-  public questionaire: boolean = true;
+  public questionaire: boolean = false;
   public radios: number = 1;
 
   public IdentifyYourself: any = ["Man", "Woman", "Others"];
@@ -708,7 +708,9 @@ export default class ClientRegistration extends BaseComponent {
     "Whatsapp",
     "Phone call",
   ];
-
+  update() {
+    console.log("submit");
+  }
   public register() {
     this.$v.$touch();
     if (!this.$v.$invalid) {
@@ -716,11 +718,14 @@ export default class ClientRegistration extends BaseComponent {
       this.loadingSpinner("show");
       this.registerService.clientRegister(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
+          console.log(response);
+
           this.loadingSpinner("hide");
           this.questionaire = true;
-          this.$router.push("login");
+          // this.$router.push("login");
         },
         (err) => {
+          console.log(err.status);
           this.loadingSpinner("hide");
           if (err.response.status === 400) {
             this.snackbarText = err.response.data;
@@ -732,7 +737,24 @@ export default class ClientRegistration extends BaseComponent {
   }
 
   public updateForm() {
-    console.log(this.questionnaireRequest);
+    // console.log(this.questionnaireRequest);
+    let clone = Object.assign({}, this.questionnaireRequest);
+    // console.log(this.questionnaireRequest);
+    // delete clone.Addictions;
+    // delete clone.DailyEatingHabits;
+    // delete clone.EatingHabits;
+    // console.log(clone);
+    this.registerService
+      .getQuestionnaire(clone)
+      .then((response: Array<QuestionnaireModel>) => {
+        console.log(response);
+      });
+    // let clone = this.$clione(this.questionnaireRequest);
+    /*
+      clone.!eatingHabits delete that object 
+      200 
+
+    */
   }
 
   get counselingProgram() {
