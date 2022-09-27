@@ -6,6 +6,8 @@ export class ClientRequestModel {
 }
 export class ClientResponseModel {
   Id: string;
+  FirstName: string;
+  LastName: string;
   Name: string;
   PhoneNumber: string;
   Email: string;
