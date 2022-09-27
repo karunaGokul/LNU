@@ -62,10 +62,7 @@ export default class Appointments extends Vue {
     "grey darken-1",
   ];
 
-  // created() {
-  //   this.getAppointments("Confirmed");
-  // }
-
+ 
   public assignCoach(event: any) {
     this.showAssignCoach = true;
     this.selectedEvent = event;
@@ -73,6 +70,7 @@ export default class Appointments extends Vue {
 
   public onClose() {
     this.showAssignCoach = false;
+    location.reload();
   }
 
   public updateAppointment(date: string) {
