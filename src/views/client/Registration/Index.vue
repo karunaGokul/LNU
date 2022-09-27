@@ -220,6 +220,7 @@
         <v-row class="mt-1">
           <v-col cols="6">
             <v-text-field
+              placeholder="Looking for help"
               color="primary"
               v-model="questionnaireRequest.Help"
               filled
@@ -238,7 +239,7 @@
           <v-col cols="6">
             <v-text-field
               dense
-              placeholder="Your Email Id"
+              placeholder="Your Email id"
               v-model="questionnaireRequest.Email"
               color="primary"
               filled
@@ -250,24 +251,52 @@
         <h4>1. Who is the person who needs help</h4>
         <v-radio-group v-model="questionnaireRequest.WhoIsThePersonNeedHelp">
           <v-radio
-            v-for="i in items"
-            :key="i"
-            :label="i"
-            :value="i"
+            label="Yoruself"
+            value="Yoruself"
             off-icon="radio_button_unchecked"
             on-icon="radio_button_checked"
-          ></v-radio>
+          >
+          </v-radio>
+          <div class="d-flex align-center justify-start">
+            <v-radio
+              label="Someone Else- Relationship with you"
+              value="Someone Else- Relationship with you"
+              off-icon="radio_button_unchecked"
+              on-icon="radio_button_checked"
+            >
+            </v-radio>
+            <v-text-field
+              dense
+              placeholder=""
+              color="primary"
+              filled
+              v-if="
+                questionnaireRequest.WhoIsThePersonNeedHelp ==
+                'Someone Else- Relationship with you'
+              "
+              v-model="questionnaireRequest.PersonNeedHelp"
+            >
+            </v-text-field>
+          </div>
+          <v-radio
+            label="You and Your Spouse"
+            value="You and Your Spouse"
+            off-icon="radio_button_unchecked"
+            on-icon="radio_button_checked"
+          >
+          </v-radio>
         </v-radio-group>
+
         <h3>If it's for yourself, please answer the questions below</h3>
         <br />
 
         <h4>2. How would you like to identify yourself</h4>
         <v-radio-group v-model="questionnaireRequest.IdentifyYourSelf">
           <v-radio
-            v-for="i in items1"
-            :key="i"
-            :label="i"
-            :value="i"
+            v-for="identify in IdentifyYourself"
+            :key="identify"
+            :label="identify"
+            :value="identify"
             off-icon="radio_button_unchecked"
             on-icon="radio_button_checked"
           >
@@ -277,10 +306,10 @@
         <h4>3. What brought you to visit us?</h4>
         <v-radio-group v-model="questionnaireRequest.VisitUs">
           <v-radio
-            v-for="i in items2"
-            :key="i"
-            :label="i"
-            :value="i"
+            v-for="visit in VisitUs"
+            :key="visit"
+            :label="visit"
+            :value="visit"
             off-icon="radio_button_unchecked"
             on-icon="radio_button_checked"
           ></v-radio>
@@ -291,10 +320,10 @@
         </h4>
         <v-radio-group v-model="questionnaireRequest.ExpectFromTherapist">
           <v-radio
-            v-for="i in items3"
-            :key="i"
-            :label="i"
-            :value="i"
+            v-for="expect in ExpectFromTherapist"
+            :key="expect"
+            :label="expect"
+            :value="expect"
             off-icon="radio_button_unchecked"
             on-icon="radio_button_checked"
           ></v-radio>
@@ -305,11 +334,11 @@
           worst and 10 being the most or best)
         </h4>
 
-        <v-row v-for="i in items4" :key="i">
+        <v-row>
           <v-col cols="6" md="4">
             <v-checkbox
-              :label="i"
-              :value="i"
+              label="Eating Habits"
+              v-model="questionnaireRequest.EatingHabits.value"
               off-icon="check_box_outline_blank"
               on-icon="check_box"
             ></v-checkbox>
@@ -322,6 +351,183 @@
               thumb-label
               dense
               class="px-16 mx-16"
+              v-model="questionnaireRequest.EatingHabits.rate"
+            ></v-slider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" md="4">
+            <v-checkbox
+              label="Your understanding of your physical health"
+              v-model="questionnaireRequest.PhysicalHealth.value"
+              off-icon="check_box_outline_blank"
+              on-icon="check_box"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            <v-slider
+              max="10"
+              min="1"
+              step="1"
+              thumb-label
+              dense
+              class="px-16 mx-16"
+              v-model="questionnaireRequest.PhysicalHealth.rate"
+            ></v-slider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" md="4">
+            <v-checkbox
+              label="Your daily eating habits"
+              v-model="questionnaireRequest.DailyEatingHabits.value"
+              off-icon="check_box_outline_blank"
+              on-icon="check_box"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            <v-slider
+              max="10"
+              min="1"
+              step="1"
+              thumb-label
+              dense
+              class="px-16 mx-16"
+              v-model="questionnaireRequest.DailyEatingHabits.rate"
+            ></v-slider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" md="4">
+            <v-checkbox
+              label="The current state of mind"
+              v-model="questionnaireRequest.MindSet.value"
+              off-icon="check_box_outline_blank"
+              on-icon="check_box"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            <v-slider
+              max="10"
+              min="1"
+              step="1"
+              thumb-label
+              dense
+              class="px-16 mx-16"
+              v-model="questionnaireRequest.MindSet.rate"
+            ></v-slider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" md="4">
+            <v-checkbox
+              label="Urge to Live"
+              v-model="questionnaireRequest.UrgeToLive.value"
+              off-icon="check_box_outline_blank"
+              on-icon="check_box"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            <v-slider
+              max="10"
+              min="1"
+              step="1"
+              thumb-label
+              dense
+              class="px-16 mx-16"
+              v-model="questionnaireRequest.UrgeToLive.rate"
+            ></v-slider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" md="4">
+            <v-checkbox
+              label="Social Interactions"
+              v-model="questionnaireRequest.SocialInteractions.value"
+              off-icon="check_box_outline_blank"
+              on-icon="check_box"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            <v-slider
+              max="10"
+              min="1"
+              step="1"
+              thumb-label
+              dense
+              class="px-16 mx-16"
+              v-model="questionnaireRequest.SocialInteractions.rate"
+            ></v-slider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" md="4">
+            <v-checkbox
+              label="Dependency on Addictions, if any"
+              v-model="questionnaireRequest.Addictions.value"
+              off-icon="check_box_outline_blank"
+              on-icon="check_box"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            <v-slider
+              max="10"
+              min="1"
+              step="1"
+              thumb-label
+              dense
+              class="px-16 mx-16"
+              v-model="questionnaireRequest.Addictions.rate"
+            ></v-slider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" md="4">
+            <v-checkbox
+              label="Fear of the unknown"
+              v-model="questionnaireRequest.FearOfUnknown.value"
+              off-icon="check_box_outline_blank"
+              on-icon="check_box"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            <v-slider
+              max="10"
+              min="1"
+              step="1"
+              thumb-label
+              dense
+              class="px-16 mx-16"
+              v-model="questionnaireRequest.FearOfUnknown.rate"
+            ></v-slider>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="6" md="4">
+            <v-checkbox
+              label="The physical feeling of pain or illness"
+              v-model="questionnaireRequest.PhysicalFeeling.value"
+              off-icon="check_box_outline_blank"
+              on-icon="check_box"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            <v-slider
+              max="10"
+              min="1"
+              step="1"
+              thumb-label
+              dense
+              class="px-16 mx-16"
+              v-model="questionnaireRequest.PhysicalFeeling.rate"
             ></v-slider>
           </v-col>
         </v-row>
@@ -342,12 +548,14 @@
         </v-row>
 
         <h4>7. What is your preferred mode of communication</h4>
-        <v-radio-group v-model="questionnaireRequest.PreferredModeOfCommunication">
+        <v-radio-group
+          v-model="questionnaireRequest.PreferredModeOfCommunication"
+        >
           <v-radio
-            v-for="i in items5"
-            :key="i"
-            :label="i"
-            :value="i"
+            v-for="preferred in PreferredModeOfCommunication"
+            :key="preferred"
+            :label="preferred"
+            :value="preferred"
             off-icon="radio_button_unchecked"
             on-icon="radio_button_checked"
           ></v-radio>
@@ -361,25 +569,26 @@
         <h4>How should we get in touch with the person requiring counseling</h4>
         <v-radio-group v-model="questionnaireRequest.GetInTouch">
           <v-radio
-            v-for="i in items6"
-            :key="i"
-            :label="i"
-            :value="i"
+            v-for="touch in GetInTouch"
+            :key="touch"
+            :label="touch"
+            :value="touch"
             off-icon="radio_button_unchecked"
             on-icon="radio_button_checked"
           ></v-radio>
         </v-radio-group>
 
-        <h4>
+        <h4 class="mb-2">
           The details about the preferred mode of communication to collect the
           data (like Mobile No./Whatsapp number/ e-mail ID etc.)
         </h4>
-        <br />
         <v-row>
           <v-col cols="6" md="6">
             <v-text-field
               placeholder="Mode of Communication"
-              v-model="questionnaireRequest.PreferredModeOfCommunicationToCollectData"
+              v-model="
+                questionnaireRequest.PreferredModeOfCommunicationToCollectData
+              "
               color="primary"
               filled
               dense
@@ -465,15 +674,9 @@ export default class ClientRegistration extends BaseComponent {
   public questionaire: boolean = true;
   public radios: number = 1;
 
-  public items: any = [
-    "Yourself",
-    "Someone Else- Relationship with you",
-    "You and Your Spouse",
-  ];
+  public IdentifyYourself: any = ["Man", "Woman", "Others"];
 
-  public items1: any = ["Man", "Woman", "Others"];
-
-  public items2: any = [
+  public VisitUs: any = [
     "Constant feeling low",
     "I've been through a trauma",
     "Lack of self-confidence",
@@ -482,7 +685,7 @@ export default class ClientRegistration extends BaseComponent {
     "Not sure, I'm Not OK, and I know that I need help",
   ];
 
-  public items3: any = [
+  public ExpectFromTherapist: any = [
     "Just good listening",
     "Help build my confidence",
     "Show me a better way to live",
@@ -491,18 +694,7 @@ export default class ClientRegistration extends BaseComponent {
     "Others",
   ];
 
-  public items4: any = [
-    "Eating Habits",
-    "Your understanding of your physical health",
-    "Your daily eating habits",
-    "The current state of mind",
-    "Urge to Live",
-    "Social Interactions",
-    "Dependency on Addictions, if any",
-    "Fear of the unknown",
-    "The physical feeling of pain or illness",
-  ];
-  public items5: any = [
+  public PreferredModeOfCommunication: any = [
     "Skype or videoconferencing",
     "Telephonic conversation",
     "Personal meetings",
@@ -510,7 +702,7 @@ export default class ClientRegistration extends BaseComponent {
     "Whatsapp",
   ];
 
-  public items6: any = [
+  public GetInTouch: any = [
     "Email",
     "Video conferencing",
     "Whatsapp",

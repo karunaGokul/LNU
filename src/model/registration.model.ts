@@ -34,24 +34,28 @@ export class QuestionnaireModel {
   Help: string;
   Email: string;
   WhoIsThePersonNeedHelp: string;
+  PersonNeedHelp: string;
   IdentifyYourSelf: string;
   VisitUs: string;
   ExpectFromTherapist: string;
-  Scale: QuestionnaireScaleModel;
   AlreadyMedication: string;
   MedicationName: string;
   PreferredModeOfCommunication: string;
   GetInTouch: string;
   PreferredModeOfCommunicationToCollectData: string;
+
+  EatingHabits: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  PhysicalHealth: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  DailyEatingHabits: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  MindSet: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  UrgeToLive: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  SocialInteractions: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  Addictions: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  FearOfUnknown: QuestionnaireScaleModel = new QuestionnaireScaleModel();
+  PhysicalFeeling: QuestionnaireScaleModel = new QuestionnaireScaleModel();
 }
 
-export class QuestionnaireScaleModel {
-  EatingHabits: number;
-  PhysicalHealth: number;
-  DailyEatingHabits: number;
-  MindSet: number;
-  UrgeToLive: number;
-  SocialInteractions: number;
-  Addictions: number;
-  FearOfUnknown: number;
+export  class QuestionnaireScaleModel {
+  value: boolean;
+  rate: number;
 }
