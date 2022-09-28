@@ -70,19 +70,6 @@
           </v-col>
         </v-row>
         <v-text-field
-          label="Full Name"
-          type="text"
-          color="primary"
-          filled
-          dense
-          required
-          v-model="request.Name"
-          @input="$v.request.Name.$touch()"
-          @blur="$v.request.Name.$touch()"
-          :error-messages="$v.request.Name | errorMessages('Name')"
-        ></v-text-field>
-
-        <v-text-field
           label="Email"
           color="primary"
           filled
@@ -93,7 +80,7 @@
           @blur="$v.request.Email.$touch()"
           :error-messages="$v.request.Email | errorMessages('Email')"
         ></v-text-field>
-       
+
         <v-text-field
           label="Phone number"
           color="primary"
@@ -137,7 +124,7 @@
           </v-col>
           <v-col>
             <v-file-input
-              label="Qualifications"
+              label="Ceritifications"
               prepend-inner-icon="upload"
               :prepend-icon="null"
               chips
@@ -209,7 +196,6 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-z A-Z]*$/i);
     request: {
       FirstName: { required, alphaOnly },
       LastName: { required, alphaOnly },
-      Name: { required, alphaOnly },
       Email: { required, email },
       PhoneNumber: {
         required,
@@ -244,23 +230,15 @@ export default class Profile extends BaseComponent {
       .then((response) => {
         this.loadingSpinner("hide");
         this.request = response;
-        this.certificates = response.Certificates;
-        let blob = new Blob([JSON.stringify(this.request.Certificates[0])], {
-          type: "application/json",
-        });
-
-        let fileOfBlob = new File([blob], "aFileName.json");
-
-        console.log(this.request.Certificates[0]);
-        console.log(fileOfBlob);
-        this.certificates.forEach((item) => {
-          // console.log(item);
-          var blob = new Blob([JSON.stringify(item)], {
+        
+        for (let i in response.Certificates) {
+          let blob = new Blob([JSON.stringify(response.Certificates[i])], {
             type: "application/json",
           });
-          var fileOfBlob = new File([blob], "aFileName.json");
-          console.log(fileOfBlob);
-        });
+
+          let fileOfBlob = new File([blob], response.CertificateNames[i]);
+          this.certificates.push(fileOfBlob);
+        }
 
         if (this.request.Image) {
           fetch(this.$vuehelper.getImageUrl(this.request.Image))
