@@ -32,9 +32,9 @@ export class RegistrationService
   }
   public saveQuestionnaire(
     request: QuestionnaireModel,
-    id: string
+    userId: string
   ): Promise<any> {
-    return this.httpPost("UpdateQuestionnaire" + id, request).then(
+    return this.httpPost("UpdateQuestionnaire?UserId=" + userId, request).then(
       (response) => {
         return response.data;
       }

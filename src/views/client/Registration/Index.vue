@@ -228,7 +228,23 @@
             ></v-text-field>
           </v-col>
         </v-row>
-
+        <div>
+          <p>
+            If for Yourself, Please fill in the following details, and one of
+            our experts will email you a questionnaire to collect further
+            information. You can also help fill in details of this questionnaire
+            for another person if you think you can answer them on their behalf;
+            else, go to the next set of questions.
+          </p>
+          <p>
+            The link to the basic questionnaire is below (the first set of
+            questions) If someone else, Please fill in the following basic
+            details and share the contact details of the person who should be
+            contacted to collect further details. Link to Basic questionnaire to
+            talk to the person requiring counseling (the one below the first
+            questionnaire)
+          </p>
+        </div>
         <h3 class="text-h7 mb-2">Basic Details Questionnaire</h3>
         <p>
           Help us know you better so we can design your personalized
@@ -334,14 +350,9 @@
           worst and 10 being the most or best)
         </h4>
 
-        <v-row>
+        <v-row class="mt-2">
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="Eating Habits"
-              v-model="questionnaireRequest.EatingHabits.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>Eating Habits</span>
           </v-col>
           <v-col>
             <v-slider
@@ -350,20 +361,22 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.EatingHabits.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ms-1">10</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="Your understanding of your physical health"
-              v-model="questionnaireRequest.PhysicalHealth.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>Your understanding of your physical health</span>
           </v-col>
           <v-col>
             <v-slider
@@ -372,20 +385,22 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.PhysicalHealth.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ml-1">10</span>
+              </template></v-slider
+            >
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="Your daily eating habits"
-              v-model="questionnaireRequest.DailyEatingHabits.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>Your daily eating habits</span>
           </v-col>
           <v-col>
             <v-slider
@@ -394,20 +409,22 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.DailyEatingHabits.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ml-1">10</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="The current state of mind"
-              v-model="questionnaireRequest.MindSet.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>The current state of mind</span>
           </v-col>
           <v-col>
             <v-slider
@@ -416,20 +433,22 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.MindSet.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ml-1">10</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="Urge to Live"
-              v-model="questionnaireRequest.UrgeToLive.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>Urge to Live</span>
           </v-col>
           <v-col>
             <v-slider
@@ -438,20 +457,22 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.UrgeToLive.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ml-1">10</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="Social Interactions"
-              v-model="questionnaireRequest.SocialInteractions.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>Social Interactions</span>
           </v-col>
           <v-col>
             <v-slider
@@ -460,20 +481,22 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.SocialInteractions.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ml-1">10</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="Dependency on Addictions, if any"
-              v-model="questionnaireRequest.Addictions.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>Dependency on Addictions, if any</span>
           </v-col>
           <v-col>
             <v-slider
@@ -482,20 +505,22 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.Addictions.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ml-1">10</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="Fear of the unknown"
-              v-model="questionnaireRequest.FearOfUnknown.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>Fear of the unknown</span>
           </v-col>
           <v-col>
             <v-slider
@@ -504,20 +529,22 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.FearOfUnknown.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ml-1">10</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="6" md="4">
-            <v-checkbox
-              label="The physical feeling of pain or illness"
-              v-model="questionnaireRequest.PhysicalFeeling.value"
-              off-icon="check_box_outline_blank"
-              on-icon="check_box"
-            ></v-checkbox>
+            <span>The physical feeling of pain or illness</span>
           </v-col>
           <v-col>
             <v-slider
@@ -526,9 +553,16 @@
               step="1"
               thumb-label
               dense
-              class="px-16 mx-16"
+              class="px-12 mx-12"
               v-model="questionnaireRequest.PhysicalFeeling.rate"
-            ></v-slider>
+            >
+              <template v-slot:prepend>
+                <span class="mr-1">1</span>
+              </template>
+              <template v-slot:append>
+                <span class="ml-1">10</span>
+              </template>
+            </v-slider>
           </v-col>
         </v-row>
 
@@ -675,7 +709,7 @@ export default class ClientRegistration extends BaseComponent {
   public radios: number = 1;
 
   public IdentifyYourself: any = ["Man", "Woman", "Others"];
-
+  public value = [1, 10];
   public VisitUs: any = [
     "Constant feeling low",
     "I've been through a trauma",
@@ -724,7 +758,6 @@ export default class ClientRegistration extends BaseComponent {
           this.UserId = response;
           this.loadingSpinner("hide");
           this.showQuestionaire = true;
-          // this.$router.push("login");
         },
         (err) => {
           console.log(err.status);
@@ -739,44 +772,21 @@ export default class ClientRegistration extends BaseComponent {
   }
 
   public updateForm() {
-    let questionnaireObject = this.$vuehelper.clone(this.questionnaireRequest);
-    if (!questionnaireObject.Addictions.value) {
-      delete questionnaireObject.Addictions;
-    }
-    if (!questionnaireObject.EatingHabits.value) {
-      delete questionnaireObject.EatingHabits;
-    }
-    if (!questionnaireObject.PhysicalHealth.value) {
-      delete questionnaireObject.PhysicalHealth;
-    }
-    if (!questionnaireObject.DailyEatingHabits.value) {
-      delete questionnaireObject.DailyEatingHabits;
-    }
-    if (!questionnaireObject.MindSet.value) {
-      delete questionnaireObject.MindSet;
-    }
-    if (!questionnaireObject.UrgeToLive.value) {
-      delete questionnaireObject.UrgeToLive;
-    }
-    if (!questionnaireObject.SocialInteractions.value) {
-      delete questionnaireObject.SocialInteractions;
-    }
-    if (!questionnaireObject.FearOfUnknown.value) {
-      delete questionnaireObject.FearOfUnknown;
-    }
-    if (!questionnaireObject.PhysicalFeeling.value) {
-      delete questionnaireObject.PhysicalFeeling;
-    }
-
     this.registerService
-      .saveQuestionnaire(questionnaireObject, this.UserId)
-      .then((response: Array<QuestionnaireModel>) => {});
-    // let clone = this.$clione(this.questionnaireRequest);
-    /*
-      clone.!eatingHabits delete that object 
-      200 
-
-    */
+      .saveQuestionnaire(this.questionnaireRequest, this.UserId)
+      .then(
+        (response: Array<QuestionnaireModel>) => {
+          this.$router.push("login");
+        },
+        (err) => {
+          console.log(err.status);
+          this.loadingSpinner("hide");
+          if (err.response.status === 400) {
+            this.snackbarText = err.response.data;
+            this.snackbar = true;
+          }
+        }
+      );
   }
 
   get counselingProgram() {
@@ -784,3 +794,9 @@ export default class ClientRegistration extends BaseComponent {
   }
 }
 </script>
+
+<style scoped>
+span {
+  opacity: 0.8;
+}
+</style>
