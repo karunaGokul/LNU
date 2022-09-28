@@ -6,7 +6,10 @@
         Book Appointment
       </v-btn>
     </div>
-    <v-tabs v-model="tab">
+
+    <appointment-calendar :events="events" @updateRange="updateAppointment" />
+
+    <!-- <v-tabs v-model="tab">
       <v-tab
         href="#tab-active-appointments"
         class="text-capitalize"
@@ -51,7 +54,7 @@
           :responsePendingAppointment="responsePendingAppointment"
         />
       </v-tab-item>
-    </v-tabs-items>
+    </v-tabs-items> -->
     <reschedule-appointment
       v-if="showBookAppoinment"
       @appointmentBooked="onAppointmentBooked"
@@ -73,8 +76,6 @@ import {
   AppoinmentRequestModel,
   EventsModel,
   AppointmentResponseModel,
-  AppointmentByStatusRequestModel,
-  AppointmentByStatusResponseModel,
 } from "@/model";
 
 @Component({
@@ -99,8 +100,10 @@ export default class AppointmentsLayout extends Vue {
   public request: AppoinmentRequestModel = new AppoinmentRequestModel();
   public response: Array<AppointmentResponseModel> = [];
 
-  public requestPendingAppointment: AppointmentByStatusRequestModel = new AppointmentByStatusRequestModel();
-  public responsePendingAppointment: Array<AppointmentByStatusResponseModel> = [];
+  // public requestPendingAppointment: AppointmentByStatusRequestModel =
+  //   new AppointmentByStatusRequestModel();
+  // public responsePendingAppointment: Array<AppointmentByStatusResponseModel> =
+  //   [];
 
   public events: Array<EventsModel> = [];
   public colors: Array<string> = [
@@ -113,37 +116,38 @@ export default class AppointmentsLayout extends Vue {
     "grey darken-1",
   ];
 
-  
   public cancelAppoinment() {
     // this.getAppointments("Pending");
-    this.getPendingAppointment();
+    // this.getPendingAppointment();
   }
 
   reloadToCurrentMonth() {
     location.reload();
   }
-  
+
   public cancel() {
     this.getAppointments("Confirmed");
     location.reload();
   }
 
   public onAppointmentRescheduled() {
-    this.getPendingAppointment();
+    // this.getPendingAppointment();
   }
 
-  public getPendingAppointment() {
-    this.requestPendingAppointment.status = "Pending";
-    this.service.getPendingAppointment(this.requestPendingAppointment).then((response: Array<AppointmentByStatusResponseModel>) => {
-      this.responsePendingAppointment = response;
-    });
-  }
+  // public getPendingAppointment() {
+  //   this.requestPendingAppointment.status = "Pending";
+  //   this.service
+  //     .getPendingAppointment(this.requestPendingAppointment)
+  //     .then((response: Array<AppointmentByStatusResponseModel>) => {
+  //       this.responsePendingAppointment = response;
+  //     });
+  // }
 
   public getAppointments(status: string, date?: any) {
     if (!date) date = this.$vuehelper.date.format(new Date(), "YYYY-MM-DD");
 
     this.request.dateRange = date;
-    this.request.status = status;
+    // this.request.status = status;
     this.events = [];
     this.response = [];
     this.service
@@ -152,19 +156,25 @@ export default class AppointmentsLayout extends Vue {
         this.response = response;
         response.forEach((item) => {
           let event: EventsModel = new EventsModel();
-          event.name = item.counselingType.name;
+          event.name = item.counselingType.Name;
+          event.status = item.status;
+          if (event.status == "Confirmed") {
+            event.color = "green";
+          } else if (event.status == "Completed") {
+            event.color = "grey";
+          } else {
+            event.color = "orange";
+          }
+
           event.start = this.getDate(
             item.appointmentDate,
-            item.appointmentStartTime
+            item.appointmentTime
           );
-          event.end = this.getDate(
-            item.appointmentDate,
-            item.appointmentEndTime
-          );
-          event.color =
-            this.colors[Math.floor(Math.random() * this.colors.length)];
+          event.end = this.getDate(item.appointmentDate, item.appointmentTime);
+          // event.color =
+          //   this.colors[Math.floor(Math.random() * this.colors.length)];
           event.timed = true;
-          event.id = item.id;
+          // event.id = item.id;
           this.events.push(event);
         });
       })

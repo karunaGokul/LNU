@@ -92,7 +92,7 @@ export default class Appointments extends Vue {
     if (!date) date = this.$vuehelper.date.format(new Date(), "YYYY-MM-DD");
 
     this.request.dateRange = date;
-    this.request.status = status;
+    // this.request.status = status;
     this.events = [];
     this.service
       .getAppointments(this.request)
@@ -100,23 +100,23 @@ export default class Appointments extends Vue {
         this.response = response;
         response.forEach((item) => {
           let event: EventsModel = new EventsModel();
-          event.name = item.counselingType.name;
+          event.name = item.counselingType.Name;
           event.clientName = item.clientName;
           event.coachName = item.coachName;
           event.clientId = item.clientId;
-          event.counselingTypeId = item.counselingType.id;
-          event.start = this.getDate(
-            item.appointmentDate,
-            item.appointmentStartTime
-          );
-          event.end = this.getDate(
-            item.appointmentDate,
-            item.appointmentEndTime
-          );
+          event.counselingTypeId = item.counselingType.Id;
+          // event.start = this.getDate(
+          //   item.appointmentDate,
+          //   item.appointmentStartTime
+          // );
+          // event.end = this.getDate(
+          //   item.appointmentDate,
+          //   item.appointmentEndTime
+          // );
           event.color =
             this.colors[Math.floor(Math.random() * this.colors.length)];
           event.timed = true;
-          event.id = item.id;
+          // event.id = item.id;
           this.events.push(event);
         });
       })

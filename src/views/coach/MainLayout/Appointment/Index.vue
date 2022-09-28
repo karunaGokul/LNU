@@ -49,7 +49,7 @@ export default class calender extends BaseComponent {
     if (!date) date = this.$vuehelper.date.format(new Date(), "YYYY-MM-DD");
 
     this.requests.dateRange = date;
-    this.requests.status = status;
+    // this.requests.status = status;
     this.events = [];
     this.appointmentService
       .getAppointments(this.requests)
@@ -58,19 +58,19 @@ export default class calender extends BaseComponent {
 
         response.forEach((item) => {
           let event: EventsModel = new EventsModel();
-          event.name = item.counselingType.name;
-          event.start = this.getDate(
-            item.appointmentDate,
-            item.appointmentStartTime
-          );
-          event.end = this.getDate(
-            item.appointmentDate,
-            item.appointmentEndTime
-          );
+          event.name = item.counselingType.Name;
+          // event.start = this.getDate(
+          //   item.appointmentDate,
+          //   item.appointmentStartTime
+          // );
+          // event.end = this.getDate(
+          //   item.appointmentDate,
+          //   item.appointmentEndTime
+          // );
           event.color =
             this.colors[Math.floor(Math.random() * this.colors.length)];
           event.timed = true;
-          event.id = item.id;
+          // event.id = item.id;
           this.events.push(event);
         });
       })

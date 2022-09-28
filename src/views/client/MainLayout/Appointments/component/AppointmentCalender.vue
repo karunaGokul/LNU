@@ -71,7 +71,7 @@
           :activator="selectedElement"
           offset-x
         >
-          <v-card color="grey lighten-4" min-width="350px" flat>
+          <v-card color="grey lighten-4" width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-btn icon>
                 <v-icon>edit</v-icon>
@@ -86,25 +86,30 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <div v-if="tab == 'Confirmed'">
+              <div>
                 <h4>Appointments</h4>
                 <v-divider class="my-3"></v-divider>
+                <v-row>
+                  <v-col cols="4" md="4">
+                    <v-btn
+                      class="text-capitalize"
+                      plain
+                      color="primary"
+                      @click="reschedule"
+                      >Reschedule</v-btn
+                    >
+                  </v-col>
 
-                <v-btn
-                  class="text-capitalize"
-                  plain
-                  color="primary"
-                  @click="reschedule"
-                  >Reschedule</v-btn
-                >
-
-                <v-btn
-                  class="text-capitalize ml-3"
-                  plain
-                  color="red"
-                  @click="deleteAppointment"
-                  >Cancel Appointment</v-btn
-                >
+                  <v-col>
+                    <v-btn
+                      class="text-capitalize text-wrap"
+                      plain
+                      color="red"
+                      @click="deleteAppointment"
+                      >Cancel Appointment</v-btn
+                    >
+                  </v-col>
+                </v-row>
               </div>
             </v-card-text>
           </v-card>
@@ -234,8 +239,7 @@ export default class AppointmentCalendar extends BaseComponent {
   }
 
   updateRange(data: any) {
-    if (this.type == "month")
-      this.$emit("updateRange", this.tab, data.start.date);
+    if (this.type == "month") this.$emit("updateRange", data.start.date);
   }
 }
 </script>

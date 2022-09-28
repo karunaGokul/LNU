@@ -31,7 +31,7 @@ export class BookAppointmentValidationRequestModel extends BookAppointmentReques
 }
 export class AppoinmentRequestModel extends DataRequest {
   dateRange: string;
-  status: string;
+  // status: string;
 }
 export class AppointmentStatusModel {
   name: string;
@@ -42,24 +42,32 @@ export class AppointmentStatusModel {
   creationDate: string;
 }
 export class AppointmentCounselingProgramModel {
-  name: string;
-  id: 5;
-  createdDate: string;
-  updatedDate: string;
+  Name: string;
+  Id: 5;
+  ProductId: string;
+
+  // createdDate: string;
+  // updatedDate: string;
 }
 export class AppointmentResponseModel {
   clientName: string;
   clientId: string;
   appointmentDate: string;
-  appointmentStartTime: string;
-  appointmentEndTime: string;
+  appointmentTime: string;
   counselingType: AppointmentCounselingProgramModel;
-  status: Array<AppointmentStatusModel>;
   coachName: string;
   coachId: string;
-  id: string;
-  createdDate: string;
-  updatedDate: string;
+  coachDetails: string;
+  status: string;
+  payment: string;
+  
+  // appointmentStartTime: string;
+  // appointmentEndTime: string;
+  // status: Array<AppointmentStatusModel>;
+  // id: string;
+  // createdDate: string;
+  // updatedDate: string;
+ 
 }
 export class EventsModel {
   name: string;
@@ -72,15 +80,16 @@ export class EventsModel {
   coachName: string;
   clientId: string;
   counselingTypeId: number;
+  status: string;
 }
 
 export class AppointmentByStatusRequestModel {
   status: string;
 }
 
-export class AppointmentByStatusResponseModel extends AppointmentResponseModel {
- payment: PaymentModel;
-}
+// export class AppointmentByStatusResponseModel extends AppointmentResponseModel {
+//  payment: PaymentModel;
+// }
 
 export class PaymentModel {
   amount: string;

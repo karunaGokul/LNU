@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts">
-import { AppointmentByStatusResponseModel, AppointmentResponseModel, CancelAppointmentModel } from "@/model";
+import {  AppointmentResponseModel, CancelAppointmentModel } from "@/model";
 import { Component, Prop, Vue, Inject } from "vue-property-decorator";
 import RescheduleAppointment from "./RescheduleAppointment.vue";
 import AppAlert from "@/components/layout/AppAlert.vue";
@@ -74,7 +74,7 @@ import { IAdminService } from "@/service";
   },
 })
 export default class PendingAppointments extends Vue {
-  @Prop() responsePendingAppointment: Array<AppointmentByStatusResponseModel>;
+  // @Prop() responsePendingAppointment: Array<AppointmentByStatusResponseModel>;
 
   @Inject("adminService") service: IAdminService;
 
