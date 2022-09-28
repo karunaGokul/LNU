@@ -44,18 +44,13 @@ export class QuestionnaireModel {
   GetInTouch: string;
   PreferredModeOfCommunicationToCollectData: string;
 
-  EatingHabits: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  PhysicalHealth: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  DailyEatingHabits: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  MindSet: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  UrgeToLive: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  SocialInteractions: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  Addictions: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  FearOfUnknown: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  PhysicalFeeling: QuestionnaireScaleModel = new QuestionnaireScaleModel();
-  data: any;
-}
-
-export class QuestionnaireScaleModel {
-  rate: number;
+  EatingHabits: number;
+  PhysicalHealth: number;
+  DailyEatingHabits: number;
+  MindSet: number;
+  UrgeToLive: number;
+  SocialInteractions: number;
+  Addictions: number;
+  FearOfUnknown: number;
+  PhysicalFeeling: number;
 }

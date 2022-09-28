@@ -236,13 +236,18 @@
             for another person if you think you can answer them on their behalf;
             else, go to the next set of questions.
           </p>
-          <p>
+          <p class="red--text">
             The link to the basic questionnaire is below (the first set of
-            questions) If someone else, Please fill in the following basic
-            details and share the contact details of the person who should be
-            contacted to collect further details. Link to Basic questionnaire to
-            talk to the person requiring counseling (the one below the first
-            questionnaire)
+            questions)
+          </p>
+          <p>
+            If someone else, Please fill in the following basic details and
+            share the contact details of the person who should be contacted to
+            collect further details.
+          </p>
+          <p class="red--text">
+            Link to Basic questionnaire to talk to the person requiring
+            counseling (the one below the first questionnaire)
           </p>
         </div>
         <h3 class="text-h7 mb-2">Basic Details Questionnaire</h3>
@@ -362,7 +367,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.EatingHabits.rate"
+              v-model="questionnaireRequest.EatingHabits"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -386,7 +391,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.PhysicalHealth.rate"
+              v-model="questionnaireRequest.PhysicalHealth"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -410,7 +415,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.DailyEatingHabits.rate"
+              v-model="questionnaireRequest.DailyEatingHabits"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -434,7 +439,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.MindSet.rate"
+              v-model="questionnaireRequest.MindSet"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -458,7 +463,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.UrgeToLive.rate"
+              v-model="questionnaireRequest.UrgeToLive"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -482,7 +487,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.SocialInteractions.rate"
+              v-model="questionnaireRequest.SocialInteractions"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -506,7 +511,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.Addictions.rate"
+              v-model="questionnaireRequest.Addictions"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -530,7 +535,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.FearOfUnknown.rate"
+              v-model="questionnaireRequest.FearOfUnknown"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -554,7 +559,7 @@
               thumb-label
               dense
               class="px-12 mx-12"
-              v-model="questionnaireRequest.PhysicalFeeling.rate"
+              v-model="questionnaireRequest.PhysicalFeeling"
             >
               <template v-slot:prepend>
                 <span class="mr-1">1</span>
@@ -709,7 +714,7 @@ export default class ClientRegistration extends BaseComponent {
   public radios: number = 1;
 
   public IdentifyYourself: any = ["Man", "Woman", "Others"];
-  public value = [1, 10];
+
   public VisitUs: any = [
     "Constant feeling low",
     "I've been through a trauma",
@@ -742,10 +747,6 @@ export default class ClientRegistration extends BaseComponent {
     "Whatsapp",
     "Phone call",
   ];
-
-  update() {
-    console.log("submit");
-  }
 
   public register() {
     this.$v.$touch();
