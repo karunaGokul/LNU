@@ -57,6 +57,5 @@ export class QuestionnaireModel {
 }
 
 export class QuestionnaireScaleModel {
-  value: boolean;
   rate: number;
 }
