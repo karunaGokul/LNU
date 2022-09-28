@@ -150,7 +150,7 @@ export default class RescheduleAppointment extends BaseComponent {
         .rescheduleAppointments(this.request)
         .then((response) => {
           console.log(response);
-          this.$emit("appointmentBooked");
+          this.$emit("appointmentRescheduled");
           this.dialog = false;
         })
         .catch((err) => {

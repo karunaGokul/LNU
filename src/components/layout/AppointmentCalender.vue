@@ -52,7 +52,7 @@
           </div>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="600">
+      <v-sheet height="480">
         <v-calendar
           ref="calendar"
           v-model="focus"
@@ -63,7 +63,7 @@
           @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"
-          @change="updateRange"
+          @change="updateCalender"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
@@ -119,6 +119,27 @@
           @cancelAppointment="cancelAppointment"
           @close="onClose"
         ></app-alert>
+      </v-sheet>
+      <v-sheet height="40">
+        <ul
+          class="d-flex align-center justify-start legends mt-4"
+          style="width: 100%"
+        >
+          <li class="legends-item">
+            <v-icon small color="#408D43">trip_origin</v-icon>
+            Active Appointments
+          </li>
+          <li class="legends-item">
+            <v-icon small color="#5e5c57">trip_origin</v-icon>
+            Previous Appointments
+          </li>
+          <li class="legends-item">
+            <v-icon small color="#cfa532">trip_origin</v-icon> Pending Appointments
+          </li>
+          <li class="legends-item">
+            <v-icon small color="#2b2a28">trip_origin</v-icon> Cancelled Appointments
+          </li>
+        </ul>
       </v-sheet>
     </v-col>
   </v-row>
@@ -187,6 +208,7 @@ export default class AppointmentCalendar extends BaseComponent {
   onClose() {
     this.showAlert = false;
   }
+  
   public reschedule() {
     this.selectedOpen = false;
     this.$emit("reschedule", this.selectedEvent.id);
@@ -238,8 +260,8 @@ export default class AppointmentCalendar extends BaseComponent {
     nativeEvent.stopPropagation();
   }
 
-  updateRange(data: any) {
-    if (this.type == "month") this.$emit("updateRange", data.start.date);
+  updateCalender(data: any) {
+    if (this.type == "month") this.$emit("updateCalender", data.start.date);
   }
 }
 </script>

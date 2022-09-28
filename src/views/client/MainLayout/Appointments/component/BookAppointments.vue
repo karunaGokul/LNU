@@ -93,7 +93,7 @@
             v-model="request.ExistingCoach"
             on-icon="check_box"
             off-icon="check_box_outline_blank"
-            label="Previous Coach"
+            label="Do you consult with Previous Coach"
             class="mt-0 pt-0"
             :disabled="!request.CounselingType"
             @change="getExistingCoach()"

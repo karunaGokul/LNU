@@ -80,7 +80,7 @@ import {
   ConfirmAppointmentModel,
 } from "@/model";
 import { IAdminService, IAppointmentService } from "@/service";
-import { Component, Inject, Prop, Vue } from "vue-property-decorator";
+import { Component, Inject, Prop } from "vue-property-decorator";
 
 @Component({
   components: {},
