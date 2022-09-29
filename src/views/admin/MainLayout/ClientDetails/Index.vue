@@ -22,7 +22,7 @@
             </v-avatar>
             <p class="ma-0 ml-2">{{ item.Username }}</p>
           </div>
-          <div v-else class="d-flex align-center">
+          <div v-if="(!item.ProfileImage) && (item.Username)" class="d-flex align-center">
             <v-avatar color="primary" size="35">
               <span class="white--text">{{
                 item.Username.charAt(0).toUpperCase()
@@ -48,17 +48,11 @@ export default class ClientDetails extends BaseComponent {
   @Inject("adminService") service: IAdminService;
   public response: Array<GetClientsModel> = [];
 
-  public header: Array<string> = [
-    "UserName",
-    "About",
-    "CounsellingType",
-    "Email",
-    "Phone",
-  ];
-
+  
   created() {
     this.getClient();
   }
+  
   public headers = [
     {
       text: "Name",
@@ -90,8 +84,6 @@ export default class ClientDetails extends BaseComponent {
     this.loadingSpinner("show");
     this.service.getClient().then((response: Array<GetClientsModel>) => {
       this.response = response;
-      console.log(response);
-      console.log(response);
       this.loadingSpinner("hide");
     });
   }

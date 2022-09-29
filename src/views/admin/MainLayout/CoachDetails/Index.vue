@@ -22,11 +22,10 @@
             </v-avatar>
             <p class="ma-0 ml-2">{{ item.Name }}</p>
           </div>
-          <div v-else class="d-flex align-center">
+          <div v-if="(!item.ProfileImage) && (item.Name)" class="d-flex align-center">
             <v-avatar color="primary" size="35">
-              <span class="white--text">{{
-                item.Name.charAt(0).toUpperCase()
-              }}</span>
+              <span class="white--text">
+                {{ item.Name.charAt(0).toUpperCase() }}</span>
             </v-avatar>
             <p class="ma-0 ml-2">{{ item.Name }}</p>
           </div>
