@@ -64,7 +64,7 @@ export class AppointmentResponseModel {
   // appointmentStartTime: string;
   // appointmentEndTime: string;
   // status: Array<AppointmentStatusModel>;
-  // id: string;
+  id: string;
   // createdDate: string;
   // updatedDate: string;
  

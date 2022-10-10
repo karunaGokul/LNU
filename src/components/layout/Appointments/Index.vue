@@ -15,6 +15,7 @@
       @close="onClose"
       :appointmentId="appointmentId"
     />
+
     <assign-coach
       v-if="showAssignCoach"
       :selectedEvent="selectedEvent"
@@ -77,6 +78,9 @@ export default class AppointmentsLayout extends Vue {
           let event: EventsModel = new EventsModel();
           event.name = item.counselingType.Name;
           event.status = item.status;
+          event.clientName = item.clientName;
+          event.coachName = item.coachName;
+          event.id = item.id;
 
           if (event.status == "Confirmed") event.color = "#408D43";
           else if (event.status == "Completed") event.color = "#5e5c57";
@@ -123,6 +127,7 @@ export default class AppointmentsLayout extends Vue {
 
   onClose() {
     this.showBookAppoinment = false;
+    location.reload();
   }
 
   public rescheduleAppoinment(id: string) {
