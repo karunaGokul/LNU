@@ -149,7 +149,7 @@
               :key="index"
               class="mr-1"
             >
-              {{ file.name }} {{ index }}
+              {{ file.name }}
             </v-chip>
           </div>
           <div class="align-self-end">
@@ -231,7 +231,7 @@ export default class Profile extends BaseComponent {
       .then((response) => {
         this.loadingSpinner("hide");
         this.request = response;
-        console.log(this.certificates);
+
         for (let i in response.Certificates) {
           let blob = new Blob([JSON.stringify(response.Certificates[i])], {
             type: "application/json",
