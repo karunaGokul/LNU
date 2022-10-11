@@ -14,7 +14,25 @@
           </div>
           <v-container class="pa-0">
             <h4 style="opacity: 0.7">Counseling Program</h4>
-            <v-radio-group v-model="request.CounselingType" class="mt-2">
+
+            <ul class="grid-box my-5">
+              <li v-for="n in counselingProgram" :key="n.id" class="mb-2">
+                <v-radio-group
+                  v-model="request.CounselingType"
+                  class="pa-0 ma-0"
+                >
+                  <v-radio
+                    style="margin: -10px"
+                    off-icon="radio_button_unchecked"
+                    on-icon="radio_button_checked"
+                    :label="n.Name"
+                    :value="n"
+                  ></v-radio>
+                </v-radio-group>
+              </li>
+            </ul>
+
+            <!-- <v-radio-group v-model="request.CounselingType" class="mt-2">
               <v-radio
                 off-icon="radio_button_unchecked"
                 on-icon="radio_button_checked"
@@ -31,8 +49,9 @@
                 :error-messages="
                   $v.request.CounselingType | errorMessages('CounselingType')
                 "
-              ></v-radio>
-            </v-radio-group>
+              >
+              </v-radio>
+            </v-radio-group> -->
           </v-container>
           <!-- <v-select
             label="Counseling Program"
@@ -122,9 +141,10 @@
             </v-col>
           </v-row>
           <v-switch
+            class="v-input--reverse .v-input__slot"
             style="margin-top: -5px"
             v-model="request.ExistingCoach"
-            label="Do you consult with Previous Coach"
+            label="Do you consult.."
             :disabled="!request.CounselingType"
             @change="getExistingCoach()"
           ></v-switch>
@@ -277,6 +297,7 @@ export default class BookAppointments extends BaseComponent {
     this.successUrl = window.location.origin + "/client/home/success";
     this.cancelUrl = window.location.origin + "/client/home/cancel";
     console.log(this.counselingProgram);
+    this.request.AppointmentTime = "9:00";
   }
 
   public back() {
@@ -285,9 +306,12 @@ export default class BookAppointments extends BaseComponent {
 
   public getExistingCoach() {
     this.request.CoachDetails = new CoachDetailsModel();
+
+    console.log(this.request.AppointmentTime);
     let request = new PreviousCoachRequestModel();
     request.clientId = this.$store.getters.id;
     request.counselingTypeId = this.request.CounselingType.Id;
+
     if (
       this.request.CounselingType &&
       Object.entries(this.request.CounselingType).length > 0 &&
@@ -345,3 +369,13 @@ export default class BookAppointments extends BaseComponent {
   }
 }
 </script>
+<style scoped>
+.grid-box {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 50px;
+  list-style: none;
+}
+</style>

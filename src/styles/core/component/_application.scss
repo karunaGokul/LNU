@@ -10,8 +10,12 @@
     color: #ffffff;
 
     .v-list-item__title,
-     .v-icon {
+    .v-icon {
       color: #ffffff !important;
-     }
+    }
   }
+}
+
+.v-input--reverse .v-input__slot {
+  flex-direction: row-reverse;
 }
