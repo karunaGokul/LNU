@@ -12,7 +12,26 @@
           <div class="pa-0 text-center mb-5">
             <h1>Book Appointment</h1>
           </div>
-          <v-select
+          <v-radio-group v-model="request.CounselingType">
+            <v-radio
+              off-icon="radio_button_unchecked"
+              on-icon="radio_button_checked"
+              v-for="n in counselingProgram"
+              :key="n.id"
+              :label="n.Name"
+              :value="n"
+              @change="
+                $v.request.CounselingType.$touch();
+                getExistingCoach();
+              "
+              @blur="$v.request.CounselingType.$touch()"
+              required
+              :error-messages="
+                $v.request.CounselingType | errorMessages('CounselingType')
+              "
+            ></v-radio>
+          </v-radio-group>
+          <!-- <v-select
             label="Counseling Program"
             outlined
             dense
@@ -29,67 +48,84 @@
               $v.request.CounselingType | errorMessages('CounselingType')
             "
             return-object
-          ></v-select>
-          <v-menu
-            v-model="menu1"
-            :close-on-content-click="false"
-            :nudge-right="40"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="request.AppointmentDate"
-                label="Select Date"
-                prepend-inner-icon="calendar_month"
-                readonly
-                outlined
-                dense
-                v-bind="attrs"
-                v-on="on"
-                required
-                :error-messages="
-                  $v.request.AppointmentDate | errorMessages('AppointmentDate')
-                "
-              ></v-text-field>
-            </template>
-            <v-date-picker
-              v-model="request.AppointmentDate"
-              @input="menu1 = false"
-            ></v-date-picker>
-          </v-menu>
-          <v-menu
-            ref="menu"
-            v-model="menu2"
-            :close-on-content-click="false"
-            :return-value.sync="time"
-            transition="scale-transition"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="request.AppointmentTime"
-                outlined
-                dense
-                label="Select Time"
-                append-icon="schedule"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-                required
-                :error-messages="
-                  $v.request.AppointmentTime | errorMessages('AppointmentTime')
-                "
-              ></v-text-field>
-            </template>
-            <v-time-picker
-              v-if="menu2"
-              v-model="request.AppointmentTime"
-              full-width
-              @click:minute="$refs.menu.save(time)"
-            ></v-time-picker>
-          </v-menu>
-          <v-checkbox
+          ></v-select> -->
+          <v-row>
+            <v-col class="py-0">
+              <v-menu
+                v-model="menu1"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="request.AppointmentDate"
+                    label="Select Date"
+                    prepend-inner-icon="calendar_month"
+                    readonly
+                    outlined
+                    dense
+                    v-bind="attrs"
+                    v-on="on"
+                    required
+                    :error-messages="
+                      $v.request.AppointmentDate
+                        | errorMessages('AppointmentDate')
+                    "
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="request.AppointmentDate"
+                  @input="menu1 = false"
+                ></v-date-picker>
+              </v-menu>
+            </v-col>
+            <v-col class="py-0">
+              <v-menu
+                :nudge-left="150"
+                ref="menu"
+                v-model="menu2"
+                :close-on-content-click="false"
+                :return-value.sync="time"
+                transition="scale-transition"
+                min-width="300"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="request.AppointmentTime"
+                    outlined
+                    dense
+                    label="Select Time"
+                    append-icon="schedule"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                    required
+                    :error-messages="
+                      $v.request.AppointmentTime
+                        | errorMessages('AppointmentTime')
+                    "
+                  ></v-text-field>
+                </template>
+                <v-time-picker
+                  v-if="menu2"
+                  v-model="request.AppointmentTime"
+                  full-width
+                  @click:minute="$refs.menu.save(time)"
+                ></v-time-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
+          <v-switch
+            style="margin-top: -5px"
+            v-model="request.ExistingCoach"
+            label="Do you consult with Previous Coach"
+            :disabled="!request.CounselingType"
+            @change="getExistingCoach()"
+          ></v-switch>
+          <!-- <v-checkbox
             v-model="request.ExistingCoach"
             on-icon="check_box"
             off-icon="check_box_outline_blank"
@@ -97,7 +133,7 @@
             class="mt-0 pt-0"
             :disabled="!request.CounselingType"
             @change="getExistingCoach()"
-          ></v-checkbox>
+          ></v-checkbox> -->
           <template
             v-if="
               request.CounselingType &&
@@ -237,6 +273,7 @@ export default class BookAppointments extends BaseComponent {
     this.publishableKey = Settings.PublicKey;
     this.successUrl = window.location.origin + "/client/home/success";
     this.cancelUrl = window.location.origin + "/client/home/cancel";
+    console.log(this.counselingProgram);
   }
 
   public back() {
