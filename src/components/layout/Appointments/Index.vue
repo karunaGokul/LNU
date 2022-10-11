@@ -81,6 +81,7 @@ export default class AppointmentsLayout extends Vue {
           event.clientName = item.clientName;
           event.coachName = item.coachName;
           event.id = item.id;
+          event.counselingTypeId = item.counselingType.Id;
 
           if (event.status == "Confirmed") event.color = "#408D43";
           else if (event.status == "Completed") event.color = "#5e5c57";
@@ -135,15 +136,17 @@ export default class AppointmentsLayout extends Vue {
     this.showBookAppoinment = true;
   }
 
-  private onAppointmentRescheduled() {
+  public onAppointmentRescheduled() {
     this.showBookAppoinment = false;
-    this.getAppointments();
+    // this.getAppointments();
+    location.reload();
   }
 
   // Reschedule Appoinment Method End
 
   public cancelAppoinment() {
-    this.getAppointments();
+    // this.getAppointments();
+    location.reload();
   }
 
   private getDate(date: string, time: string) {

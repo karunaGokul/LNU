@@ -100,6 +100,7 @@ export default class AssignCoach extends BaseComponent {
   public selectedCoachName: string = "";
 
   created() {
+    console.log(this.selectedEvent.counselingTypeId);
     this.getCoachesBySelection();
   }
 
