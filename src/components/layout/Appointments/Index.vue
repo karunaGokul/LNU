@@ -136,15 +136,17 @@ export default class AppointmentsLayout extends Vue {
     this.showBookAppoinment = true;
   }
 
-  private onAppointmentRescheduled() {
+  public onAppointmentRescheduled() {
     this.showBookAppoinment = false;
-    this.getAppointments();
+    // this.getAppointments();
+    location.reload();
   }
 
   // Reschedule Appoinment Method End
 
   public cancelAppoinment() {
-    this.getAppointments();
+    // this.getAppointments();
+    location.reload();
   }
 
   private getDate(date: string, time: string) {
