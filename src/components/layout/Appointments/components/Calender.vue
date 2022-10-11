@@ -64,34 +64,39 @@
           @click:more="viewDay"
           @click:date="viewDay"
           @change="updateCalender"
-        ></v-calendar>
+        >
+        <template v-slot:events="{ events }">
+          <div class="pl-5">
+            {{ events }}
+          </div>
+        </template>
+        </v-calendar>
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"
           offset-x
-          v-if="selectedEvent.status == 'Pending'"
         >
-          <v-card color="grey lighten-4" width="350px" height="450px" flat>
+          <v-card color="grey lighten-4" width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
-              <v-btn icon>
+              <!-- <v-btn icon>
                 <v-icon>edit</v-icon>
-              </v-btn>
+              </v-btn> -->
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn icon>
+              <!-- <v-btn icon>
                 <v-icon>favorite</v-icon>
               </v-btn>
               <v-btn icon>
-                <v-icon>more-vert</v-icon>
-              </v-btn>
+                <v-icon>more_vert</v-icon>
+              </v-btn> -->
             </v-toolbar>
             <v-card-text>
               <div>
                 <h4>Appointments</h4>
                 <v-divider class="my-3"></v-divider>
                 <v-row>
-                  <v-col cols="4" md="4">
+                  <v-col cols="5" md="5">
                     <v-btn
                       plain
                       dark
@@ -136,19 +141,19 @@
           style="width: 100%"
         >
           <li class="legends-item">
-            <v-icon small color="#408D43">trip_origin</v-icon>
+            <v-icon small color="#408D43">lens</v-icon>
             Active Appointments
           </li>
           <li class="legends-item">
-            <v-icon small color="#5e5c57">trip_origin</v-icon>
+            <v-icon small color="#5e5c57">lens</v-icon>
             Previous Appointments
           </li>
           <li class="legends-item">
-            <v-icon small color="#cfa532">trip_origin</v-icon> Pending
+            <v-icon small color="#cfa532">lens</v-icon> Pending
             Appointments
           </li>
           <li class="legends-item">
-            <v-icon small color="#2b2a28">trip_origin</v-icon> Cancelled
+            <v-icon small color="#2b2a28">lens</v-icon> Cancelled
             Appointments
           </li>
         </ul>
