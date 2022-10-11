@@ -27,31 +27,20 @@
                     on-icon="radio_button_checked"
                     :label="n.Name"
                     :value="n"
+                    @change="
+                      $v.request.CounselingType.$touch();
+                      getExistingCoach();
+                    "
+                    @blur="$v.request.CounselingType.$touch()"
+                    required
+                    :error-messages="
+                      $v.request.CounselingType
+                        | errorMessages('CounselingType')
+                    "
                   ></v-radio>
                 </v-radio-group>
               </li>
             </ul>
-
-            <!-- <v-radio-group v-model="request.CounselingType" class="mt-2">
-              <v-radio
-                off-icon="radio_button_unchecked"
-                on-icon="radio_button_checked"
-                v-for="n in counselingProgram"
-                :key="n.id"
-                :label="n.Name"
-                :value="n"
-                @change="
-                  $v.request.CounselingType.$touch();
-                  getExistingCoach();
-                "
-                @blur="$v.request.CounselingType.$touch()"
-                required
-                :error-messages="
-                  $v.request.CounselingType | errorMessages('CounselingType')
-                "
-              >
-              </v-radio>
-            </v-radio-group> -->
           </v-container>
           <!-- <v-select
             label="Counseling Program"
