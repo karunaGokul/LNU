@@ -330,6 +330,7 @@ export default class BookAppointments extends BaseComponent {
       request.AppointmentTime = this.request.AppointmentTime;
       request.CounselingType = this.request.CounselingType;
       request.CoachDetails = this.request.CoachDetails;
+      request.TellAboutYourSelf  = this.request.TellAboutYourSelf;
 
       this.service
         .bookAppointments(request)
