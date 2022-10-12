@@ -27,7 +27,7 @@
                     on-icon="radio_button_checked"
                     :label="n.Name"
                     :value="n"
-                    @change="
+                    @click="
                       $v.request.CounselingType.$touch();
                       getExistingCoach();
                     "
@@ -296,7 +296,6 @@ export default class BookAppointments extends BaseComponent {
   public getExistingCoach() {
     this.request.CoachDetails = new CoachDetailsModel();
 
-    console.log(this.request.AppointmentTime);
     let request = new PreviousCoachRequestModel();
     request.clientId = this.$store.getters.id;
     request.counselingTypeId = this.request.CounselingType.Id;
