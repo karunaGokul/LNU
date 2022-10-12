@@ -159,21 +159,21 @@
                 "
               ></v-text-field>
               <v-select
-                label="Counselling Type"
-                  color="primary"
-                  filled
-                  dense
-                  :items="counselingProgram"
-                  append-icon="arrow_drop_down"
-                  item-text="Name"
-                  item-value="Id"
-                  v-model="request.CounselingType"
-                  @change="$v.request.CounselingType.$touch()"
-                  @blur="$v.request.CounselingType.$touch()"
-                  required
-                  :error-messages="
-                    $v.request.CounselingType | errorMessages('CounselingType')
-                  "
+                label="Counseling Type"
+                color="primary"
+                filled
+                dense
+                :items="counselingProgram"
+                append-icon="arrow_drop_down"
+                item-text="Name"
+                item-value="Id"
+                v-model="request.CounselingType"
+                @change="$v.request.CounselingType.$touch()"
+                @blur="$v.request.CounselingType.$touch()"
+                required
+                :error-messages="
+                  $v.request.CounselingType | errorMessages('CounselingType')
+                "
               ></v-select>
               <v-row>
                 <v-col>
@@ -335,6 +335,5 @@ export default class CoachRegistration extends BaseComponent {
   get counselingProgram() {
     return this.$store.getters.counselingProgram;
   }
-
 }
 </script>

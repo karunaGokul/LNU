@@ -95,7 +95,7 @@
           "
         ></v-text-field>
         <v-select
-          label="Counselling Programm"
+          label="Counseling Program"
           color="#5949B8"
           filled
           dense
