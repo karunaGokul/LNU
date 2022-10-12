@@ -66,11 +66,11 @@
           @click:date="viewDay"
           @change="updateCalender"
         >
-        <template v-slot:events="{ events }">
-          <div class="pl-5">
-            {{ events }}
-          </div>
-        </template>
+          <template v-slot:events="{ events }">
+            <div class="pl-5">
+              {{ events }}
+            </div>
+          </template>
         </v-calendar>
         <v-menu
           v-model="selectedOpen"
@@ -96,7 +96,32 @@
               <div>
                 <h4>Appointments</h4>
                 <v-divider class="my-3"></v-divider>
+
                 <v-row>
+                  <v-col>
+                    <v-label>CounsellingType:</v-label>
+                  </v-col>
+                  <v-col >
+                    <h4>{{ this.selectedEvent.name }}</h4>
+                  </v-col>
+                </v-row>
+                <v-row v-if="this.selectedEvent.coachName">
+                  <v-col>
+                    <v-label>CoachName:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{ this.selectedEvent.coachName }}</h4>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                    <v-label>AppointmentTime:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{ this.selectedEvent.start }}</h4>
+                  </v-col>
+                </v-row>
+                <v-row  v-if="(this.selectedEvent.status === 'Pending') || (this.selectedEvent.status === 'Confirmed')">
                   <v-col cols="5" md="5">
                     <v-btn
                       plain
@@ -150,12 +175,10 @@
             Previous Appointments
           </li>
           <li class="legends-item">
-            <v-icon small color="#cfa532">lens</v-icon> Pending
-            Appointments
+            <v-icon small color="#cfa532">lens</v-icon> Pending Appointments
           </li>
           <li class="legends-item">
-            <v-icon small color="#2b2a28">lens</v-icon> Cancelled
-            Appointments
+            <v-icon small color="#2b2a28">lens</v-icon> Cancelled Appointments
           </li>
         </ul>
       </v-sheet>

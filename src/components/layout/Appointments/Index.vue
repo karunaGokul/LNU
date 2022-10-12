@@ -128,7 +128,7 @@ export default class AppointmentsLayout extends Vue {
 
   onClose() {
     this.showBookAppoinment = false;
-    location.reload();
+    // location.reload();
   }
 
   public rescheduleAppoinment(id: string) {
@@ -138,8 +138,8 @@ export default class AppointmentsLayout extends Vue {
 
   public onAppointmentRescheduled() {
     this.showBookAppoinment = false;
-    // this.getAppointments();
-    location.reload();
+    this.getAppointments();
+    // location.reload();
   }
 
   // Reschedule Appoinment Method End
