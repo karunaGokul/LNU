@@ -9,7 +9,7 @@
 
           <v-card-text>
             <v-select
-              label="Counselling Type"
+              label="Counselling Program"
               outlined
               dense
               v-model="request.CounselingType"
@@ -94,10 +94,13 @@
               depressed
               color="primary"
               type="submit"
+              class="text-capitalize"
             >
               Confirm
             </v-btn>
-            <v-btn depressed @click="close"> Cancel </v-btn>
+            <v-btn depressed @click="close" class="text-capitalize">
+              Cancel
+            </v-btn>
           </v-card-actions>
         </v-form>
       </v-card>

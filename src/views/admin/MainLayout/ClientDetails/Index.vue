@@ -75,7 +75,7 @@ export default class ClientDetails extends BaseComponent {
       value: "About",
     },
     {
-      text: "Counseling Type",
+      text: "Counselling Program",
       sortable: false,
       value: "CounselingType",
     },
