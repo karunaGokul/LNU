@@ -6,27 +6,33 @@
         Back
       </v-btn>
     </div>
-    <v-row class="px-15 mt-15" justify="center">
-      <v-col md="4">
+    <v-row class="px-15 mt-2" justify="center">
+      <v-col md="5">
+        <h1 class="pa-0 text-center mb-2">Book Appointment</h1>
         <v-form @submit.prevent="bookNow">
-          <div class="pa-0 text-center mb-5">
-            <h1>Book Appointment</h1>
-          </div>
           <v-container class="pa-0">
-            <h4 style="opacity: 0.7">Counseling Program</h4>
+            <h4 class="text-h6 font-weight-bold">Counseling Program</h4>
 
-            <ul class="grid-box my-5">
-              <li v-for="n in counselingProgram" :key="n.id" class="mb-2">
+            <div class="row pa-2">
+              <div
+                v-for="(item, index) in CounselingColumn"
+                :key="index"
+                class="col-6"
+              >
                 <v-radio-group
+                  v-for="(program, i) in counselingProgram.slice(
+                    index * itemsPerRow,
+                    (index + 1) * itemsPerRow
+                  )"
+                  :key="i"
                   v-model="request.CounselingType"
-                  class="pa-0 ma-0"
                 >
                   <v-radio
                     style="margin: -10px"
                     off-icon="radio_button_unchecked"
                     on-icon="radio_button_checked"
-                    :label="n.Name"
-                    :value="n"
+                    :label="program.Name"
+                    :value="program"
                     @click="
                       $v.request.CounselingType.$touch();
                       getExistingCoach();
@@ -39,146 +45,142 @@
                     "
                   ></v-radio>
                 </v-radio-group>
-              </li>
-            </ul>
-          </v-container>
-          <!-- <v-select
-            label="Counseling Program"
-            outlined
-            dense
-            v-model="request.CounselingType"
-            :items="counselingProgram"
-            item-text="Name"
-            @change="
-              $v.request.CounselingType.$touch();
-              getExistingCoach();
-            "
-            @blur="$v.request.CounselingType.$touch()"
-            required
-            :error-messages="
-              $v.request.CounselingType | errorMessages('CounselingType')
-            "
-            return-object
-          ></v-select> -->
-          <v-row>
-            <v-col class="py-0">
-              <v-menu
-                v-model="menu1"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
+              </div>
+            </div>
+            <div
+              class="error-text text-start"
+              v-if="
+                !$v.request.CounselingType.required &&
+                $v.request.CounselingType.$dirty
+              "
+            >
+              Counseling Program is required
+            </div>
+
+            <v-row class="mt-4 mb-2">
+              <v-col class="py-0">
+                <v-menu
+                  v-model="menu1"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="request.AppointmentDate"
+                      label="Select Date"
+                      prepend-inner-icon="calendar_month"
+                      readonly
+                      outlined
+                      dense
+                      v-bind="attrs"
+                      v-on="on"
+                      required
+                      :error-messages="
+                        $v.request.AppointmentDate
+                          | errorMessages('AppointmentDate')
+                      "
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
                     v-model="request.AppointmentDate"
-                    label="Select Date"
-                    prepend-inner-icon="calendar_month"
-                    readonly
-                    outlined
-                    dense
-                    v-bind="attrs"
-                    v-on="on"
-                    required
-                    :error-messages="
-                      $v.request.AppointmentDate
-                        | errorMessages('AppointmentDate')
-                    "
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="request.AppointmentDate"
-                  @input="menu1 = false"
-                ></v-date-picker>
-              </v-menu>
-            </v-col>
-            <v-col class="py-0">
-              <v-menu
-                :nudge-left="150"
-                ref="menu"
-                v-model="menu2"
-                :close-on-content-click="false"
-                :return-value.sync="time"
-                transition="scale-transition"
-                min-width="300"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
+                    @input="menu1 = false"
+                  ></v-date-picker>
+                </v-menu>
+              </v-col>
+              <v-col class="py-0">
+                <v-menu
+                  :nudge-left="150"
+                  ref="menu"
+                  v-model="menu2"
+                  :close-on-content-click="false"
+                  :return-value.sync="time"
+                  transition="scale-transition"
+                  min-width="300"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="request.AppointmentTime"
+                      outlined
+                      dense
+                      label="Select Time"
+                      append-icon="schedule"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                      required
+                      :error-messages="
+                        $v.request.AppointmentTime
+                          | errorMessages('AppointmentTime')
+                      "
+                    ></v-text-field>
+                  </template>
+                  <v-time-picker
+                    v-if="menu2"
                     v-model="request.AppointmentTime"
-                    outlined
-                    dense
-                    label="Select Time"
-                    append-icon="schedule"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                    required
-                    :error-messages="
-                      $v.request.AppointmentTime
-                        | errorMessages('AppointmentTime')
-                    "
-                  ></v-text-field>
-                </template>
-                <v-time-picker
-                  v-if="menu2"
-                  v-model="request.AppointmentTime"
-                  full-width
-                  @click:minute="$refs.menu.save(time)"
-                ></v-time-picker>
-              </v-menu>
-            </v-col>
-          </v-row>
-          <v-switch
-            class="v-input--reverse .v-input__slot"
-            style="margin-top: -5px"
-            v-model="request.ExistingCoach"
-            label="Do you consult.."
-            :disabled="!request.CounselingType"
-            @change="getExistingCoach()"
-          ></v-switch>
-          <!-- <v-checkbox
-            v-model="request.ExistingCoach"
-            on-icon="check_box"
-            off-icon="check_box_outline_blank"
-            label="Do you consult with Previous Coach"
-            class="mt-0 pt-0"
-            :disabled="!request.CounselingType"
-            @change="getExistingCoach()"
-          ></v-checkbox> -->
-          <template
-            v-if="
-              request.CounselingType &&
-              Object.entries(request.CounselingType).length > 0 &&
-              request.ExistingCoach
-            "
-          >
-            <v-select
-              label="Avaliable Coach"
-              outlined
-              dense
-              v-model="request.CoachDetails"
-              :items="existingCoach"
-              item-text="Name"
-              @change="$v.request.CoachDetails.$touch()"
-              @blur="$v.request.CoachDetails.$touch()"
+                    full-width
+                    @click:minute="$refs.menu.save(time)"
+                  ></v-time-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+
+            <v-textarea
+              filled
+              label="Tell About Yourself"
+              v-model="request.TellAboutYourSelf"
+              @change="$v.request.TellAboutYourSelf.$touch()"
+              @blur="$v.request.TellAboutYourSelf.$touch()"
               required
               :error-messages="
-                $v.request.CoachDetails | errorMessages('CoachDetails')
+                $v.request.TellAboutYourSelf
+                  | errorMessages('TellAboutYourSelf')
               "
-              return-object
-            ></v-select>
-          </template>
+            ></v-textarea>
+            <v-switch
+              class="v-input--reverse .v-input__slot"
+              style="margin-top: -5px"
+              v-model="request.ExistingCoach"
+              label="Do you consult.."
+              :disabled="!request.CounselingType"
+              @change="getExistingCoach()"
+            ></v-switch>
+            <template
+              v-if="
+                request.CounselingType &&
+                Object.entries(request.CounselingType).length > 0 &&
+                request.ExistingCoach
+              "
+            >
+              <v-select
+                label="Avaliable Coach"
+                outlined
+                dense
+                v-model="request.CoachDetails"
+                :items="existingCoach"
+                item-text="Name"
+                @change="$v.request.CoachDetails.$touch()"
+                @blur="$v.request.CoachDetails.$touch()"
+                required
+                :error-messages="
+                  $v.request.CoachDetails | errorMessages('CoachDetails')
+                "
+                return-object
+              ></v-select>
+            </template>
 
-          <v-btn
-            depressed
-            color="primary"
-            type="submit"
-            large
-            style="width: 100%"
-          >
-            Make payment
-          </v-btn>
+            <v-btn
+              depressed
+              color="primary"
+              type="submit"
+              large
+              style="width: 100%"
+            >
+              Make payment
+            </v-btn>
+          </v-container>
         </v-form>
         <app-alert v-if="showAlert" :response="response" />
       </v-col>
@@ -192,7 +194,7 @@
       :cancel-url="cancelUrl"
       v-if="showCheckOut"
     />
-   <!-- <payment-card @update="onUpdate" v-if="showCheckOut" /> -->
+    <!-- <payment-card @update="onUpdate" v-if="showCheckOut" /> -->
   </div>
 </template>
 <script lang="ts">
@@ -242,6 +244,7 @@ let validations = {
         return validation;
       },
     },
+    TellAboutYourSelf: { required },
   },
 };
 
@@ -280,6 +283,8 @@ export default class BookAppointments extends BaseComponent {
     .substr(0, 10);
 
   public existingCoach: Array<CoachDetailsModel> = [];
+
+  public itemsPerRow: number = 3;
 
   created() {
     this.publishableKey = Settings.PublicKey;
@@ -355,15 +360,11 @@ export default class BookAppointments extends BaseComponent {
   get counselingProgram() {
     return this.$store.getters.counselingProgram;
   }
+
+  get CounselingColumn() {
+    return Array.from(
+      Array(Math.ceil(this.counselingProgram.length / this.itemsPerRow)).keys()
+    );
+  }
 }
 </script>
-<style scoped>
-.grid-box {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 50px;
-  list-style: none;
-}
-</style>

@@ -17,6 +17,7 @@ export class BookAppointmentRequestModel {
   CoachDetails: CoachDetailsModel;
   AppointmentId?: string;
   Queries?: string;
+  TellAboutYourSelf: string;
 }
 
 export class UpdatePaymentRequestModel {
