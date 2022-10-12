@@ -1,0 +1,10 @@
+.v-calendar-weekly__day {
+  overflow-y: auto !important;
+}
+.v-event {
+    height: 30px !important;
+
+    &-summary {
+        padding: 4px;
+    }
+}
