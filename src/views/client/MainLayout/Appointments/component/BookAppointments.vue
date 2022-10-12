@@ -183,7 +183,7 @@
         <app-alert v-if="showAlert" :response="response" />
       </v-col>
     </v-row>
-    <!-- <stripe-checkout
+    <stripe-checkout
       ref="checkoutRef"
       mode="payment"
       :pk="publishableKey"
@@ -191,8 +191,8 @@
       :success-url="successUrl"
       :cancel-url="cancelUrl"
       v-if="showCheckOut"
-    /> -->
-    <payment-card @update="onUpdate" v-if="showCheckOut" />
+    />
+   <!-- <payment-card @update="onUpdate" v-if="showCheckOut" /> -->
   </div>
 </template>
 <script lang="ts">
@@ -318,7 +318,7 @@ export default class BookAppointments extends BaseComponent {
 
   public bookNow() {
     this.showCheckOut = true;
-    /*this.$v.$touch();
+    this.$v.$touch();
     if (!this.$v.$invalid) {
       let request = new BookAppointmentRequestModel();
       request.AppointmentDate = this.request.AppointmentDate;
@@ -344,7 +344,7 @@ export default class BookAppointments extends BaseComponent {
           this.loadingSpinner("hide");
           console.log(err);
         });
-    }*/
+    }
   }
 
   onUpdate(token: any) {
