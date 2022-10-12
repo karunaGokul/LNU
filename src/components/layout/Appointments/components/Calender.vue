@@ -99,15 +99,15 @@
 
                 <v-row>
                   <v-col>
-                    <v-label>CounsellingType:</v-label>
+                    <v-label >Counselling Program:</v-label>
                   </v-col>
-                  <v-col >
+                  <v-col>
                     <h4>{{ this.selectedEvent.name }}</h4>
                   </v-col>
                 </v-row>
                 <v-row v-if="this.selectedEvent.coachName">
                   <v-col>
-                    <v-label>CoachName:</v-label>
+                    <v-label>Coach Name:</v-label>
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.coachName }}</h4>
@@ -115,7 +115,7 @@
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-label>AppointmentTime:</v-label>
+                    <v-label>Appointment Time:</v-label>
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.start }}</h4>
