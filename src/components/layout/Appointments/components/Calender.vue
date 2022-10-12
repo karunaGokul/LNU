@@ -59,6 +59,7 @@
           color="primary"
           :events="events"
           :event-color="getEventColor"
+          :event-more="eventMore"
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
@@ -286,6 +287,10 @@ export default class Calendar extends BaseComponent {
 
   updateCalender(data: any) {
     if (this.type == "month") this.$emit("updateCalender", data.start.date);
+  }
+
+  get eventMore() {
+    return false;
   }
 }
 </script>
