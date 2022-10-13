@@ -31,9 +31,9 @@
             Create new account
           </h2>
           <div class="mb-4 px-8 text-h7 text-start">
-            Already A Member?
+            Already have an account?
             <router-link to="/coach/login" class="text-decoration-none" tag="a"
-              >Log In
+              >Sign In
             </router-link>
           </div>
           <div>
@@ -221,7 +221,7 @@
                   type="submit"
                   large
                   style="width: 100%"
-                  >Create account</v-btn
+                  >register</v-btn
                 >
               </div>
             </v-form>
@@ -267,6 +267,10 @@ import { IRegistrationService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
+const passwordRule = helpers.regex(
+  "passwordRule",
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]{8,}$/
+);
 
 @Component({
   validations: {
@@ -281,7 +285,11 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
         maxLength: maxLength(10),
       },
       Email: { required, email },
-      Password: { required },
+      Password: {
+        required,
+        minLength: minLength(8),
+        passwordRule,
+      },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
       CertificationId: { required },
       Experience: { required },

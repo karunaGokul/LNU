@@ -67,6 +67,13 @@ class ValHelper {
         !evaluation.alphaOnly
       )
         error = `Please enter a character`;
+
+      if (
+        Object.prototype.hasOwnProperty.call(evaluation, "passwordRule") &&
+        !evaluation.passwordRule
+      )
+        error = `Please enter atleast One UpperCaseLetter, One LowerCaseLetter, One Number and One SpecialCharacter`;
+     
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "numeric") &&
         !evaluation.numeric

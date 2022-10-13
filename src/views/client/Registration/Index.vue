@@ -30,9 +30,9 @@
           Create new account
         </h2>
         <div class="mb-4 px-8 text-h7 text-start">
-          Already A Member?
+          Already have an account?
           <router-link to="/client/login" class="text-decoration-none" tag="a"
-            >Log In
+            >Sign In
           </router-link>
         </div>
         <div style="width: 590px">
@@ -184,7 +184,7 @@
                 large
                 type="submit"
                 style="width: 100%"
-                >Create account</v-btn
+                >register</v-btn
               >
             </div>
           </v-form>
@@ -636,7 +636,9 @@
         </v-row>
 
         <div class="d-flex align-center justify-end">
-          <v-btn class="primary text-capitalize" @click="updateForm">Done</v-btn>
+          <v-btn class="primary text-capitalize" @click="updateForm"
+            >Done</v-btn
+          >
         </div>
       </v-container>
     </v-col>
@@ -678,6 +680,10 @@ import { IRegistrationService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
+const passwordRule = helpers.regex(
+  "passwordRule",
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]{8,}$/
+);
 
 @Component({
   validations: {
@@ -686,7 +692,7 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
       LastName: { required, alphaOnly },
       Username: { required },
       Email: { required, email },
-      Password: { required },
+      Password: { required, minLength: minLength(8), passwordRule },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
       PhoneNumber: {
         required,
