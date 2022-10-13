@@ -155,21 +155,21 @@
           </div>
 
           <div v-if="page == 'client'" class="text-center mt-16">
-            No account?
+            Don't have an account?
             <router-link
               to="/client/registration"
               class="text-decoration-none"
               tag="a"
-              >Register here</router-link
+              >Sign Up</router-link
             >
           </div>
           <div v-if="page == 'coach'" class="text-center mt-16">
-            No account?
+            Don't have an account?
             <router-link
               to="/coach/registration"
               class="text-decoration-none"
               tag="a"
-              >Register here</router-link
+              >Sign Up</router-link
             >
           </div>
           <v-snackbar
