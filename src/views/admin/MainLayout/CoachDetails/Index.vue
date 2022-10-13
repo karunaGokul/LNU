@@ -77,7 +77,7 @@ export default class CoachDetails extends BaseComponent {
       value: "Experience",
     },
     {
-      text: "Counselling Program",
+      text: "Counseling Program",
       sortable: false,
       value: "CounselingType",
     },

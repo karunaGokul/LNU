@@ -1,14 +1,14 @@
 <template>
   <div class="pa-4">
     <div class="text-left mb-4">
-      <v-btn depressed color="#1867c0" class="white--text" @click="back">
+      <v-btn depressed color="#1867c0" class="white--text text-capitalize" @click="back">
         <v-icon class="pr-2">keyboard_backspace</v-icon>
         Back
       </v-btn>
     </div>
     <v-row class="px-15 mt-2" justify="center">
       <v-col md="5">
-        <h1 class="pa-0 text-center mb-2">Book Appointment</h1>
+        <h1 class="pa-0 text-center mb-4">Book Appointment</h1>
         <v-form @submit.prevent="bookNow">
           <v-container class="pa-0">
             <h4 class="text-h6 font-weight-bold">Counseling Program</h4>
@@ -177,6 +177,7 @@
               type="submit"
               large
               style="width: 100%"
+              class="text-capitalize"
             >
               Make payment
             </v-btn>
@@ -290,7 +291,6 @@ export default class BookAppointments extends BaseComponent {
     this.publishableKey = Settings.PublicKey;
     this.successUrl = window.location.origin + "/client/home/success";
     this.cancelUrl = window.location.origin + "/client/home/cancel";
-    console.log(this.counselingProgram);
     this.request.AppointmentTime = "9:00";
   }
 

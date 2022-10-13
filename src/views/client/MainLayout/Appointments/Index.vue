@@ -2,7 +2,7 @@
   <div class="pa-4">
     <div class="d-flex align-center justify-space-between">
       <h2 class="font-weight-bold my-4">Appointments</h2>
-      <v-btn depressed color="primary" @click="navigateBookAppointment">
+      <v-btn depressed color="primary" @click="navigateBookAppointment" class="text-capitalize">
         Book Appointment
       </v-btn>
     </div>

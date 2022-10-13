@@ -159,7 +159,7 @@
                 "
               ></v-text-field>
               <v-select
-                label="Counseling Type"
+                label="Counseling Program"
                 color="primary"
                 filled
                 dense

@@ -61,11 +61,12 @@ export class AppointmentResponseModel {
   coachDetails: string;
   status: string;
   payment: string;
-  
+  id: string;
+  tellAboutYourSelf: string;
+
   // appointmentStartTime: string;
   // appointmentEndTime: string;
   // status: Array<AppointmentStatusModel>;
-  id: string;
   // createdDate: string;
   // updatedDate: string;
  
@@ -82,6 +83,7 @@ export class EventsModel {
   clientId: string;
   counselingTypeId: number;
   status: string;
+  tellAboutYourSelf: string;
 }
 
 export class AppointmentByStatusRequestModel {

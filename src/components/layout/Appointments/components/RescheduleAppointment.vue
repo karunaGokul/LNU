@@ -9,7 +9,7 @@
 
           <v-card-text>
             <v-select
-              label="Counselling Program"
+              label="Counseling Program"
               outlined
               dense
               v-model="request.CounselingType"

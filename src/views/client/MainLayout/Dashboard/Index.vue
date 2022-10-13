@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-16">
-    <h1 class="text-h4 font-weight-bold">Welcomes Back ABCe...</h1>
+    <h1 class="text-h4 font-weight-bold">Welcome Back ABCe...</h1>
     <v-container>
       <v-row class="mt-5">
         <v-col>

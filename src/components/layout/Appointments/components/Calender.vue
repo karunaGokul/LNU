@@ -99,7 +99,7 @@
 
                 <v-row>
                   <v-col>
-                    <v-label >Counselling Program:</v-label>
+                    <v-label >Counseling Program:</v-label>
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.name }}</h4>
@@ -119,6 +119,14 @@
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.start }}</h4>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                    <v-label>Comments:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{ this.selectedEvent.tellAboutYourSelf }}</h4>
                   </v-col>
                 </v-row>
                 <v-row  v-if="(this.selectedEvent.status === 'Pending') || (this.selectedEvent.status === 'Confirmed')">
@@ -228,7 +236,7 @@ export default class Calendar extends BaseComponent {
   ];
 
   public showAlert: boolean = false;
-
+  
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();

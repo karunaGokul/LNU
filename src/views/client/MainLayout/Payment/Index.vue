@@ -18,7 +18,7 @@
             </thead>
             <tbody>
               <tr v-for="(item, index) in items" :key="index" class="">
-                <td>{{ item.CounsellingProgram }}</td>
+                <td>{{ item.CounselingProgram }}</td>
                 <td>{{ item.Date }}</td>
                 <td>
                   {{ item.Coach }}
@@ -71,7 +71,7 @@ export default class Payment extends BaseComponent {
   }
 
   public headers: Array<string> = [
-    "Counselling Program",
+    "Counseling Program",
     "Date",
     "Coach",
     "Duration",
@@ -80,7 +80,7 @@ export default class Payment extends BaseComponent {
 
   public items: Array<any> = [
     {
-      CounsellingProgram: "Marriage Counselling",
+      CounselingProgram: "Marriage Counseling",
       Date: "10.2.22",
       Coach: "alex",
       icon: "@/assets/profile.jpg",
@@ -88,35 +88,35 @@ export default class Payment extends BaseComponent {
       AmountPaid: "1200",
     },
     {
-      CounsellingProgram: "Child Counselling",
+      CounselingProgram: "Child Counseling",
       Date: "15.3.22",
       Coach: "jai",
       Duration: "30 min",
       AmountPaid: "1500",
     },
     {
-      CounsellingProgram: "Behavioural Counselling",
+      CounselingProgram: "Behavioural Counseling",
       Date: "11.4.22",
       Coach: "jhon",
       Duration: "15 min",
       AmountPaid: "500",
     },
     {
-      CounsellingProgram: "Mental Health Counselling",
+      CounselingProgram: "Mental Health Counseling",
       Date: "10.2.22",
       Coach: "alex",
       Duration: "25 min",
       AmountPaid: "1200",
     },
     {
-      CounsellingProgram: "Child Counselling",
+      CounselingProgram: "Child Counseling",
       Date: "15.3.22",
       Coach: "jai",
       Duration: "30 min",
       AmountPaid: "1500",
     },
     {
-      CounsellingProgram: "Career Counselling",
+      CounselingProgram: "Career Counseling",
       Date: "11.4.22",
       Coach: "jhon",
       Duration: "15 min",

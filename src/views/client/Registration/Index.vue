@@ -40,7 +40,7 @@
             <v-row>
               <v-col>
                 <v-text-field
-                  label="First name"
+                  label="First Name"
                   color="primary"
                   append-icon="person"
                   filled
@@ -56,7 +56,7 @@
               </v-col>
               <v-col>
                 <v-text-field
-                  label="Last name"
+                  label="Last Name"
                   color="primary"
                   append-icon="person"
                   filled
@@ -72,7 +72,7 @@
               </v-col>
             </v-row>
             <v-text-field
-              label="Username"
+              label="User Name"
               color="primary"
               append-icon="person"
               filled
@@ -158,7 +158,7 @@
               </v-col>
               <v-col lg="6" md="6">
                 <v-select
-                  label="Counselling Type"
+                  label="Counseling Program"
                   color="primary"
                   filled
                   dense
@@ -180,7 +180,7 @@
               <v-btn
                 color="primary"
                 depressed
-                class="white--text rounded font-weight-bold"
+                class="white--text rounded text-capitalize"
                 large
                 type="submit"
                 style="width: 100%"
@@ -280,7 +280,7 @@
           </v-radio>
           <div class="d-flex align-center justify-start">
             <v-radio
-              label="Someone Else- Relationship with you"
+              label="Someone Else - Relationship with you"
               value="Someone Else- Relationship with you"
               off-icon="radio_button_unchecked"
               on-icon="radio_button_checked"
@@ -370,10 +370,10 @@
               v-model="questionnaireRequest.EatingHabits"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ms-1">10</span>
+                <span class="mt-1">10</span>
               </template>
             </v-slider>
           </v-col>
@@ -394,10 +394,10 @@
               v-model="questionnaireRequest.PhysicalHealth"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ml-1">10</span>
+                <span class="mt-1">10</span>
               </template></v-slider
             >
           </v-col>
@@ -418,10 +418,10 @@
               v-model="questionnaireRequest.DailyEatingHabits"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ml-1">10</span>
+                <span class="mt-1">10</span>
               </template>
             </v-slider>
           </v-col>
@@ -442,10 +442,10 @@
               v-model="questionnaireRequest.MindSet"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ml-1">10</span>
+                <span class="mt-1">10</span>
               </template>
             </v-slider>
           </v-col>
@@ -466,10 +466,10 @@
               v-model="questionnaireRequest.UrgeToLive"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ml-1">10</span>
+                <span class="mt-1">10</span>
               </template>
             </v-slider>
           </v-col>
@@ -490,10 +490,10 @@
               v-model="questionnaireRequest.SocialInteractions"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ml-1">10</span>
+                <span class="mt-1">10</span>
               </template>
             </v-slider>
           </v-col>
@@ -514,10 +514,10 @@
               v-model="questionnaireRequest.Addictions"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ml-1">10</span>
+                <span class="mt-1">10</span>
               </template>
             </v-slider>
           </v-col>
@@ -538,10 +538,10 @@
               v-model="questionnaireRequest.FearOfUnknown"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ml-1">10</span>
+                <span class="mt-1">10</span>
               </template>
             </v-slider>
           </v-col>
@@ -562,16 +562,16 @@
               v-model="questionnaireRequest.PhysicalFeeling"
             >
               <template v-slot:prepend>
-                <span class="mr-1">1</span>
+                <span class="mr-1 mt-1">1</span>
               </template>
               <template v-slot:append>
-                <span class="ml-1">10</span>
+                <span class="mt-1">10</span>
               </template>
             </v-slider>
           </v-col>
         </v-row>
 
-        <h4 class="mb-2">
+        <h4 class="my-2">
           6. Are you already on any medication? If Yes, please mention the name.
         </h4>
         <v-row>
@@ -636,7 +636,7 @@
         </v-row>
 
         <div class="d-flex align-center justify-end">
-          <v-btn class="primary" @click="updateForm">Done</v-btn>
+          <v-btn class="primary text-capitalize" @click="updateForm">Done</v-btn>
         </div>
       </v-container>
     </v-col>
