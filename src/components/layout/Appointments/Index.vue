@@ -43,7 +43,7 @@ import {
   components: {
     RescheduleAppointment,
     Calendar,
-    AssignCoach
+    AssignCoach,
   },
 })
 export default class AppointmentsLayout extends Vue {
@@ -53,7 +53,7 @@ export default class AppointmentsLayout extends Vue {
   public date: string = "";
 
   public showBookAppoinment: boolean = false;
-  public showAssignCoach:boolean = false;
+  public showAssignCoach: boolean = false;
   public selectedEvent: any;
   public appointmentId: string = "";
   public rescheduleDate: any;
@@ -130,6 +130,7 @@ export default class AppointmentsLayout extends Vue {
   onClose() {
     this.showBookAppoinment = false;
     // location.reload();
+    this.showAssignCoach = false;
   }
 
   public rescheduleAppoinment(id: string) {

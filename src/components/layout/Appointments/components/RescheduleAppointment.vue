@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-dialog v-model="dialog" persistent width="500">
       <v-card>
-        <v-form @submit="reschedule">
+        <v-form @submit.prevent="reschedule">
           <v-card-title class="text-h5 mb-4">
             Reschedule Appointment
           </v-card-title>
