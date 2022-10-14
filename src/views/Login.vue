@@ -130,7 +130,7 @@
               to="/client/registration"
               class="text-decoration-none"
               tag="a"
-              >Sign Up</router-link
+              >sign up</router-link
             >
           </div>
           <div v-if="page == 'coach'" class="text-center mb-16">
@@ -139,19 +139,10 @@
               to="/coach/registration"
               class="text-decoration-none"
               tag="a"
-              >Sign Up</router-link
+              >sign up</router-link
             >
           </div>
-          <div v-if="page == 'client'">
-            <div class="text-center mb-4">
-              If you are an admin,
-              <router-link
-                to="/admin/login"
-                class="text-decoration-none"
-                tag="a"
-                >Click here</router-link
-              >
-            </div>
+          <div v-if="page == 'client'">            
 
             <div class="text-center mb-4">
               If you are a coach,
@@ -159,7 +150,16 @@
                 to="/coach/login"
                 class="text-decoration-none"
                 tag="a"
-                >Click here</router-link
+                >click here</router-link
+              >
+            </div>
+            <div class="text-center mb-4">
+              If you are an admin,
+              <router-link
+                to="/admin/login"
+                class="text-decoration-none"
+                tag="a"
+                >click here</router-link
               >
             </div>
           </div>

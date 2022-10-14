@@ -1,8 +1,8 @@
 <template>
-  <v-row class="fill-height">
+  <v-row class="fill-height mt-3">
     <v-col>
-      <v-sheet height="64">
-        <v-toolbar flat>
+      <v-sheet height="70" color="transparent">
+        <v-toolbar flat color="transparent">
           <div
             class="d-flex align-center justify-space-between"
             style="width: 100%"
@@ -52,7 +52,7 @@
           </div>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="680">
+      <v-sheet height="680" color="transparent">
         <v-calendar
           ref="calendar"
           v-model="focus"
@@ -122,7 +122,7 @@
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-label>Comments:</v-label>
+                    <v-label>Notes:</v-label>
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.tellAboutYourSelf }}</h4>
