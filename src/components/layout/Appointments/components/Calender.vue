@@ -52,11 +52,10 @@
           </div>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="480">
+      <v-sheet height="680">
         <v-calendar
           ref="calendar"
           v-model="focus"
-          color="primary"
           :events="events"
           :event-color="getEventColor"
           :event-more="eventMore"
@@ -67,7 +66,7 @@
           @change="updateCalender"
         >
           <template v-slot:events="{ events }">
-            <div class="pl-5">
+            <div class="pl-1">
               {{ events }}
             </div>
           </template>
@@ -321,7 +320,7 @@ export default class Calendar extends BaseComponent {
   }
 
   get eventMore() {
-    return false;
+    return true;
   }
 }
 </script>

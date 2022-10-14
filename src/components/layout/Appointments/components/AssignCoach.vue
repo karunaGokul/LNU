@@ -109,17 +109,16 @@ export default class AssignCoach extends BaseComponent {
     this.loadingSpinner("show");
     this.adminService.confirmAppointment(this.request).then((response: any) => {
       this.loadingSpinner("hide");
-      this.dialog = false;
+      // this.dialog = false;
       this.$emit("done");
     });
   }
 
   private close() {
-    this.dialog = false;
+    // this.dialog = false;
     this.$emit("close");
   }
 
-  
   private assignCoach() {
     this.requestAssignCoach.appointmentId = this.selectedEvent.id;
     this.requestAssignCoach.coachId = this.selectedCoachName;

@@ -8,19 +8,16 @@
           v-if="page == 'client'"
           src="@/assets/client-login.jpeg"
           height="100vh"
-          class="rounded-xl rounded-l-0"
         />
         <v-img
           v-else-if="page == 'coach'"
           src="@/assets/coachLogin.jpg"
           height="100vh"
-          class="rounded-xl rounded-l-0"
         />
         <v-img
           v-else
           src="@/assets/adminLogin.jpg"
           height="100vh"
-          class="rounded-xl rounded-l-0"
         />
         <div
           v-if="page == 'client'"
@@ -64,35 +61,30 @@
             elevation="3"
             outlined
             width="450"
-            class="rounded-lg pb-4 mb-8"
+            class="rounded-lg pa-4 pb-8 mb-8"
           >
             <v-row>
               <v-col cols="12" md="4" offset-md="4">
                 <v-card-title
                   v-if="page == 'client'"
                   class="text-h5 font-weight-bold ml-4"
-                  >Client</v-card-title
+                  >LOGIN</v-card-title
                 >
                 <v-card-title
                   v-else-if="page == 'coach'"
                   class="text-h5 font-weight-bold ml-4"
-                  >Coach</v-card-title
+                  >LOGIN</v-card-title
                 >
                 <v-card-title v-else class="text-h5 font-weight-bold ml-4"
-                  >Admin</v-card-title
+                  >LOGIN</v-card-title
                 >
               </v-col>
 
-              <v-col v-if="page == 'client'">
-                <v-icon color="primary" class="mt-5 ml-16">
-                  check_circle
-                </v-icon>
-              </v-col>
             </v-row>
 
             <v-form class="px-8" @submit.prevent="login">
               <v-text-field
-                label="Username / Email"
+                label="Username"
                 color="primary"
                 v-model="request.Email"
                 append-icon="person"
@@ -132,6 +124,24 @@
               </div>
             </v-form>
           </v-card>
+          <div v-if="page == 'client'" class="text-center mb-16">
+            Don't have an account?
+            <router-link
+              to="/client/registration"
+              class="text-decoration-none"
+              tag="a"
+              >Sign Up</router-link
+            >
+          </div>
+          <div v-if="page == 'coach'" class="text-center mb-16">
+            Don't have an account?
+            <router-link
+              to="/coach/registration"
+              class="text-decoration-none"
+              tag="a"
+              >Sign Up</router-link
+            >
+          </div>
           <div v-if="page == 'client'">
             <div class="text-center mb-4">
               If you are an admin,
@@ -154,24 +164,6 @@
             </div>
           </div>
 
-          <div v-if="page == 'client'" class="text-center mt-16">
-            Don't have an account?
-            <router-link
-              to="/client/registration"
-              class="text-decoration-none"
-              tag="a"
-              >Sign Up</router-link
-            >
-          </div>
-          <div v-if="page == 'coach'" class="text-center mt-16">
-            Don't have an account?
-            <router-link
-              to="/coach/registration"
-              class="text-decoration-none"
-              tag="a"
-              >Sign Up</router-link
-            >
-          </div>
           <v-snackbar
             v-model="snackbar"
             :timeout="2000"
