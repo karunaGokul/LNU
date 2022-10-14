@@ -680,10 +680,10 @@ import { IRegistrationService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
-const passwordRule = helpers.regex(
-  "passwordRule",
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]{8,}$/
-);
+// const passwordRule = helpers.regex(
+//   "passwordRule",
+//   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]{8,}$/
+// );
 
 @Component({
   validations: {
@@ -692,7 +692,29 @@ const passwordRule = helpers.regex(
       LastName: { required, alphaOnly },
       Username: { required },
       Email: { required, email },
-      Password: { required, minLength: minLength(8), passwordRule },
+      Password: { required, minLength: minLength(8), 
+      // passwordRule,
+       upperCaseLetter: (value: any) => {
+          let validation = false;
+          if (value && value != "") validation = /^(?=.*?[A-Z])/.test(value);
+          return validation;
+        },
+        lowerCaseLetter: (value: any) => {
+          let validation = false;
+          if (value && value != "") validation = /^(?=.*?[a-z])/.test(value);
+          return validation;
+        },
+        number: (value: any) => {
+          let validation = false;
+          if (value && value != "") validation = /[0-9]/.test(value);
+          return validation;
+        },
+        special: (value: any) => {
+          let validation = false;
+          if (value && value != "")
+            validation = /[!@#$%^&*()_+={};':"\\|,.<>]/.test(value);
+          return validation;
+        }, },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
       PhoneNumber: {
         required,
