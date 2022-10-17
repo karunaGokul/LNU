@@ -272,8 +272,8 @@
         <h4>1. Who is the person who needs help</h4>
         <v-radio-group v-model="questionnaireRequest.WhoIsThePersonNeedHelp">
           <v-radio
-            label="Yoruself"
-            value="Yoruself"
+            label="Yourself"
+            value="Yourself"
             off-icon="radio_button_unchecked"
             on-icon="radio_button_checked"
           >
@@ -738,7 +738,7 @@ export default class ClientRegistration extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
   private UserId: any;
-  public showQuestionaire: boolean = false;
+  public showQuestionaire: boolean = true;
   public radios: number = 1;
 
   public IdentifyYourself: any = ["Man", "Woman", "Others"];

@@ -126,7 +126,6 @@
             <v-file-input
               label="Ceritifications"
               prepend-inner-icon="upload"
-              :prepend-icon="null"
               chips
               multiple
               small-chips
@@ -134,7 +133,15 @@
               dense
               @change="selectFiles"
               ><template v-slot:selection="{ text }">
-                <v-chip small label color="primary">
+                <v-chip
+                  small
+                  label
+                  color="primary"
+                  v-if="chip1"
+                  close
+                  close-icon="cancel"
+                  @click:close="chip1 = false"
+                >
                   {{ text }}
                 </v-chip>
               </template></v-file-input
@@ -214,6 +221,7 @@ export default class Profile extends BaseComponent {
   public requestCertificate: CertificateModel = new CertificateModel();
   public profilePhoto: any = null;
   public certificate: File;
+  chip1 = true;
 
   private certificates: Array<File> = [];
 
@@ -258,8 +266,12 @@ export default class Profile extends BaseComponent {
   }
 
   public selectFiles(file: any) {
-    if (file) this.certificates.push(file[0]);
-    console.log(file[0]);
+    if (file)
+    {
+      this.certificates.push(file[0]);
+    } else {
+      this.certificates.splice(file[0]);
+    }
   }
 
   public editCertificates() {
