@@ -278,27 +278,25 @@
             on-icon="radio_button_checked"
           >
           </v-radio>
-          <div class="d-flex align-center justify-start">
-            <v-radio
-              label="Someone Else - Relationship with you"
-              value="Someone Else- Relationship with you"
-              off-icon="radio_button_unchecked"
-              on-icon="radio_button_checked"
-            >
-            </v-radio>
-            <v-text-field
-              dense
-              placeholder=""
-              color="primary"
-              filled
-              v-if="
-                questionnaireRequest.WhoIsThePersonNeedHelp ==
-                'Someone Else- Relationship with you'
-              "
-              v-model="questionnaireRequest.PersonNeedHelp"
-            >
-            </v-text-field>
-          </div>
+          <v-radio
+            label="Someone Else - Relationship with you"
+            value="Someone Else- Relationship with you"
+            off-icon="radio_button_unchecked"
+            on-icon="radio_button_checked"
+          >
+          </v-radio>
+          <v-text-field
+            dense
+            placeholder=""
+            color="primary"
+            filled
+            v-if="
+              questionnaireRequest.WhoIsThePersonNeedHelp ==
+              'Someone Else- Relationship with you'
+            "
+            v-model="questionnaireRequest.PersonNeedHelp"
+          >
+          </v-text-field>
           <v-radio
             label="You and Your Spouse"
             value="You and Your Spouse"
@@ -692,9 +690,11 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
       LastName: { required, alphaOnly },
       Username: { required },
       Email: { required, email },
-      Password: { required, minLength: minLength(8), 
-      // passwordRule,
-       upperCaseLetter: (value: any) => {
+      Password: {
+        required,
+        minLength: minLength(8),
+        // passwordRule,
+        upperCaseLetter: (value: any) => {
           let validation = false;
           if (value && value != "") validation = /^(?=.*?[A-Z])/.test(value);
           return validation;
@@ -714,7 +714,8 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
           if (value && value != "")
             validation = /[!@#$%^&*()_+={};':"\\|,.<>]/.test(value);
           return validation;
-        }, },
+        },
+      },
       ConfirmPassword: { required, sameAsPassword: sameAs("Password") },
       PhoneNumber: {
         required,
@@ -738,7 +739,7 @@ export default class ClientRegistration extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
   private UserId: any;
-  public showQuestionaire: boolean = true;
+  public showQuestionaire: boolean = false;
   public radios: number = 1;
 
   public IdentifyYourself: any = ["Man", "Woman", "Others"];
