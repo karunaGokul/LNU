@@ -1,9 +1,9 @@
 <template>
-  <v-card height="100%" width="100%" elevation="0">
-    <v-navigation-drawer permanent class="pa-4 none">
+  <v-card height="100vh" width="100%" elevation="0">
+    <v-navigation-drawer permanent class="pa-4 none" style="box-shadow: 10px 0px 5px 0px rgb(62 62 62 / 5%)">
       <v-list-item class="pa-0">
         <v-list-item-content>
-          <v-list-item-title class="text-h6 font-weight-bold py-4">
+          <v-list-item-title class="text-h6 font-weight-bold py-4" style="color: #fcb258">
             Life N You
           </v-list-item-title>
         </v-list-item-content>
