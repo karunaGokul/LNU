@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" persistent width="500">
       <v-card>
         <v-form @submit.prevent="reschedule">
-          <v-card-title class="text-h5 mb-4">
+          <v-card-title class="text-h5 mb-4 font-weight-bold">
             Reschedule Appointment
           </v-card-title>
 
@@ -90,16 +90,18 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
+            
+            <v-btn text @click="close" class="text-capitalize">
+              Cancel
+            </v-btn>
+
             <v-btn
               depressed
               color="primary"
               type="submit"
-              class="text-capitalize"
+              class="text-capitalize px-12 py-5"
             >
-              Confirm
-            </v-btn>
-            <v-btn depressed @click="close" class="text-capitalize">
-              Cancel
+              Reschedule
             </v-btn>
           </v-card-actions>
         </v-form>
