@@ -24,7 +24,7 @@
             </td>
           </tr>
 
-          <v-simple-table dense>
+          <v-simple-table dense v-if="item.questionnaire">
             <thead>
               <tr>
                 <th></th>
@@ -34,73 +34,120 @@
             <tbody>
               <tr>
                 <td>What brought you to visit us?</td>
-                <td><h5 class="blue--text">Constant Feeling Low</h5></td>
+                <td>
+                  <h5 class="blue--text">{{ item.questionnaire.visitUs }}</h5>
+                </td>
               </tr>
 
               <tr>
                 <td>
-                  What do you expect from your interactions with the
-                  therapist?
+                  What do you expect from your interactions with the therapist?
                 </td>
-                <td><h5 class="blue--text">Just Good listening</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.expectFromTherapist }}
+                  </h5>
+                </td>
               </tr>
 
               <tr>
                 <td>Eating Habits:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.eatingHabits }}
+                  </h5>
+                </td>
               </tr>
 
               <tr>
                 <td>Your understanding of your physical health:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.physicalHealth }}
+                  </h5>
+                </td>
               </tr>
 
               <tr>
                 <td>Your daily eating habits:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.dailyEatingHabits }}
+                  </h5>
+                </td>
               </tr>
 
               <tr>
                 <td>The current state of mind:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">{{ item.questionnaire.mindSet }}</h5>
+                </td>
               </tr>
               <tr>
                 <td>Urge to Live:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.urgeToLive }}
+                  </h5>
+                </td>
               </tr>
               <tr>
                 <td>Social Interactions:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.socialInteractions }}
+                  </h5>
+                </td>
               </tr>
               <tr>
                 <td>Dependency on Addictions, if any:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.addictions }}
+                  </h5>
+                </td>
               </tr>
               <tr>
                 <td>Fear of the unknown:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.fearOfUnknown }}
+                  </h5>
+                </td>
               </tr>
               <tr>
                 <td>The physical feeling of pain or illness:</td>
-                <td><h5 class="blue--text">5</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.physicalFeeling }}
+                  </h5>
+                </td>
               </tr>
               <tr>
                 <td>
-                  Are you already on any medication? If Yes, please mention
-                  the name.
+                  Are you already on any medication? If Yes, please mention the
+                  name.
                 </td>
                 <td><h5 class="blue--text">Antibiotic</h5></td>
               </tr>
               <tr>
                 <td>What is your preferred mode of communication name.</td>
-                <td><h5 class="blue--text">Whatsapp</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.preferredModeOfCommunication }}
+                  </h5>
+                </td>
               </tr>
               <tr>
                 <td>
                   How should we get in touch with the person requiring
                   counseling name.
                 </td>
-                <td><h5 class="blue--text">Whatsapp</h5></td>
+                <td>
+                  <h5 class="blue--text">
+                    {{ item.questionnaire.getInTouch }}
+                  </h5>
+                </td>
               </tr>
               <tr>
                 <td>
@@ -177,20 +224,20 @@ export default class ClientDetails extends BaseComponent {
       sortable: false,
       value: "PhoneNumber",
     },
-    {
-      text: "About",
-      sortable: false,
-      value: "About",
-    },
+    // {
+    //   text: "About",
+    //   sortable: false,
+    //   value: "About",
+    // },
     {
       text: "Counseling Program",
       sortable: false,
-      value: "CounselingType",
+      value: "CounselingTypeName",
     },
     {
       text: "Summary",
       sortable: false,
-      value: "CounselingType",
+      value: "summary",
     },
     { text: "", value: "data-table-expand" },
   ];

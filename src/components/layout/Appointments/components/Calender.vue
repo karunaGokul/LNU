@@ -104,12 +104,20 @@
                     <h4>{{ this.selectedEvent.name }}</h4>
                   </v-col>
                 </v-row>
-                <v-row v-if="this.selectedEvent.coachName">
+                <v-row v-if="(this.selectedEvent.coachName) && (User != 'Coach')">
                   <v-col>
                     <v-label>Coach Name:</v-label>
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.coachName }}</h4>
+                  </v-col>
+                </v-row>
+                <v-row v-if="(this.selectedEvent.clientName) && (User == 'Coach')">
+                  <v-col>
+                    <v-label>Client Name:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{ this.selectedEvent.clientName }}</h4>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -126,6 +134,14 @@
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.tellAboutYourSelf }}</h4>
+                  </v-col>
+                </v-row>
+                <v-row v-if="User == 'Coach'">
+                  <v-col>
+                    <v-label>Summary:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{ this.selectedEvent.clientSummary }}</h4>
                   </v-col>
                 </v-row>
                 <v-row  v-if="(this.selectedEvent.status === 'Pending') || (this.selectedEvent.status === 'Confirmed')">

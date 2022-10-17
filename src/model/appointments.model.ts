@@ -63,7 +63,7 @@ export class AppointmentResponseModel {
   payment: string;
   id: string;
   tellAboutYourSelf: string;
-
+  clientSummary: string;
   // appointmentStartTime: string;
   // appointmentEndTime: string;
   // status: Array<AppointmentStatusModel>;
@@ -84,6 +84,7 @@ export class EventsModel {
   counselingTypeId: number;
   status: string;
   tellAboutYourSelf: string;
+  clientSummary: string;
 }
 
 export class AppointmentByStatusRequestModel {

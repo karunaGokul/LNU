@@ -83,6 +83,7 @@ export default class AppointmentsLayout extends Vue {
           event.id = item.id;
           event.counselingTypeId = item.counselingType.Id;
           event.tellAboutYourSelf = item.tellAboutYourSelf;
+          event.clientSummary = item.clientSummary;
 
           if (event.status == "Confirmed") event.color = "#408D43";
           else if (event.status == "Completed") event.color = "#5e5c57";
