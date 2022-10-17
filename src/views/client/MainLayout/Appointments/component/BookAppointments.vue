@@ -11,8 +11,6 @@
         <h1 class="pa-0 text-center mb-4">Book Appointment</h1>
         <v-form @submit.prevent="bookNow">
           <v-container class="pa-0">
-            <h4 class="text-h6 font-weight-bold">Counseling Program</h4>
-
             <div class="row pa-2">
               <div
                 v-for="(item, index) in CounselingColumn"
@@ -129,7 +127,7 @@
 
             <v-textarea
               filled
-              label="Tell About Yourself"
+              label="Notes to coach"
               v-model="request.TellAboutYourSelf"
               @change="$v.request.TellAboutYourSelf.$touch()"
               @blur="$v.request.TellAboutYourSelf.$touch()"
@@ -179,7 +177,7 @@
               style="width: 100%"
               class="text-capitalize"
             >
-              Make payment
+              Continue
             </v-btn>
           </v-container>
         </v-form>

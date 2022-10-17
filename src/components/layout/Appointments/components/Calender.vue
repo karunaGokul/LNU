@@ -1,8 +1,8 @@
 <template>
-  <v-row class="fill-height">
+  <v-row class="fill-height mt-3">
     <v-col>
-      <v-sheet height="64">
-        <v-toolbar flat>
+      <v-sheet height="70" color="transparent">
+        <v-toolbar flat color="transparent">
           <div
             class="d-flex align-center justify-space-between"
             style="width: 100%"
@@ -52,11 +52,10 @@
           </div>
         </v-toolbar>
       </v-sheet>
-      <v-sheet height="480">
+      <v-sheet height="680" color="transparent">
         <v-calendar
           ref="calendar"
           v-model="focus"
-          color="primary"
           :events="events"
           :event-color="getEventColor"
           :event-more="eventMore"
@@ -67,7 +66,7 @@
           @change="updateCalender"
         >
           <template v-slot:events="{ events }">
-            <div class="pl-5">
+            <div class="pl-1">
               {{ events }}
             </div>
           </template>
@@ -123,7 +122,7 @@
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-label>Comments:</v-label>
+                    <v-label>Notes:</v-label>
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.tellAboutYourSelf }}</h4>
@@ -321,7 +320,7 @@ export default class Calendar extends BaseComponent {
   }
 
   get eventMore() {
-    return false;
+    return true;
   }
 }
 </script>

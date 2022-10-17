@@ -119,7 +119,7 @@
           :error-messages="$v.request.Email | errorMessages('Email')"
         ></v-text-field>
         <v-textarea
-          label="Queries"
+          label="Tell me about yourself"
           type="text"
           color="#FCB258"
           filled
