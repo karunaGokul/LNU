@@ -32,3 +32,8 @@ export class CancelAppointmentModel extends ConfirmAppointmentModel {
 export class AssignCoachModel extends ConfirmAppointmentModel {
   coachId: string;
 }
+
+export class UpdateSummaryRequestModel {
+  clientId: string;
+  Summary: string;
+}

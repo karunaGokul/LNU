@@ -72,6 +72,20 @@
             <v-btn @click="navigateExplore" color="orange" text>
               Explore
             </v-btn>
+            =======
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
+              Book Appointment
+            </v-btn>
+
+            <v-btn color="primary" class="text-capitalize" text>
+              Explore
+            </v-btn>
+            >>>>>>> 68af840b4eb68f0db4dcd21dd1a1299a1e4a5ee7
           </v-card-actions>
         </v-card>
       </v-col>
@@ -101,6 +115,20 @@
             <v-btn color="orange" @click="navigateExplore" text>
               Explore
             </v-btn>
+            =======
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
+              Book Appointment
+            </v-btn>
+
+            <v-btn color="primary" class="text-capitalize" text>
+              Explore
+            </v-btn>
+            >>>>>>> 68af840b4eb68f0db4dcd21dd1a1299a1e4a5ee7
           </v-card-actions>
         </v-card>
       </v-col>
@@ -123,11 +151,16 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="orange" @click="navigateBookAppointment" text>
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
               Book Appointment
             </v-btn>
 
-            <v-btn color="orange" @click="navigateExplore" text>
+            <v-btn color="primary" class="text-capitalize" text>
               Explore
             </v-btn>
           </v-card-actions>
@@ -141,7 +174,10 @@
             src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fG1lbnRhbCUyMGhlYWx0aHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
           >
           </v-img>
+
           <v-card-title>Mental Health Counseling</v-card-title>
+
+          <v-card-title>MentalHealth Counseling</v-card-title>
 
           <v-card-text class="text--primary">
             <div>
@@ -159,6 +195,20 @@
             <v-btn @click="navigateExplore" color="orange" text>
               Explore
             </v-btn>
+            =======
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
+              Book Appointment
+            </v-btn>
+
+            <v-btn color="primary" class="text-capitalize" text>
+              Explore
+            </v-btn>
+            >>>>>>> 68af840b4eb68f0db4dcd21dd1a1299a1e4a5ee7
           </v-card-actions>
         </v-card>
       </v-col>
@@ -186,6 +236,19 @@
             </v-btn>
 
             <v-btn color="orange" @click="navigateExplore" text>
+              Explore
+            </v-btn>
+
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
+              Book Appointment
+            </v-btn>
+
+            <v-btn color="primary" class="text-capitalize" text>
               Explore
             </v-btn>
           </v-card-actions>

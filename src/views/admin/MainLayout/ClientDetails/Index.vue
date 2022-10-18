@@ -15,6 +15,7 @@
       :expanded.sync="expanded"
       item-key="Id"
       show-expand
+      @click:row="getItem"
     >
       <template v-slot:expanded-item="{ headers, item }">
         <td :colspan="headers.length">
@@ -157,6 +158,26 @@
                 </td>
                 <td><h5 class="blue--text">test@mail.com</h5></td>
               </tr>
+              <tr>
+                <td>
+                  <v-text-field
+                    outlined
+                    dense
+                    label="Summary"
+                    class="mt-6"
+                    v-model="requestSummary.Summary"
+                  ></v-text-field>
+                </td>
+                <td>
+                  <v-btn
+                    color="primary"
+                    class="text-capitalize"
+                    depressed
+                    @click="updateSummary"
+                    >save</v-btn
+                  >
+                </td>
+              </tr>
             </tbody>
           </v-simple-table>
         </td>
@@ -193,7 +214,7 @@
 <script lang="ts">
 import { Component, Vue, Inject } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
-import { GetClientsModel } from "@/model";
+import { GetClientsModel, UpdateSummaryRequestModel } from "@/model";
 import { IAdminService } from "@/service";
 @Component({
   components: {},
@@ -201,13 +222,18 @@ import { IAdminService } from "@/service";
 export default class ClientDetails extends BaseComponent {
   @Inject("adminService") service: IAdminService;
   public response: Array<GetClientsModel> = [];
+  public requestSummary: UpdateSummaryRequestModel = new UpdateSummaryRequestModel();
 
   public expanded: any = [];
+  public clientId: string;
 
   created() {
     this.getClient();
   }
-
+  public getItem(data: any) {
+    this.clientId = data.Id;
+    console.log(this.clientId);
+  }
   public headers = [
     {
       text: "Name",
@@ -245,6 +271,13 @@ export default class ClientDetails extends BaseComponent {
     this.loadingSpinner("show");
     this.service.getClient().then((response: Array<GetClientsModel>) => {
       this.response = response;
+      this.loadingSpinner("hide");
+    });
+  }
+  public updateSummary() {
+    this.loadingSpinner("show");
+    this.requestSummary.clientId = this.clientId;
+    this.service.updateSummary(this.requestSummary).then((response: any) => {
       this.loadingSpinner("hide");
     });
   }
