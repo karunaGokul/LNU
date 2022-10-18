@@ -65,14 +65,6 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="orange" text @click="navigateBookAppointment">
-              Book Appointment
-            </v-btn>
-
-            <v-btn @click="navigateExplore" color="orange" text>
-              Explore
-            </v-btn>
-
             <v-btn
               color="primary"
               class="text-capitalize"
@@ -82,7 +74,12 @@
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
               Explore
             </v-btn>
           </v-card-actions>
@@ -107,14 +104,6 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="orange" text @click="navigateBookAppointment">
-              Book Appointment
-            </v-btn>
-
-            <v-btn color="orange" @click="navigateExplore" text>
-              Explore
-            </v-btn>
-
             <v-btn
               color="primary"
               class="text-capitalize"
@@ -124,7 +113,12 @@
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
               Explore
             </v-btn>
           </v-card-actions>
@@ -158,7 +152,12 @@
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
               Explore
             </v-btn>
           </v-card-actions>
@@ -173,8 +172,6 @@
           >
           </v-img>
 
-          <v-card-title>Mental Health Counseling</v-card-title>
-
           <v-card-title>MentalHealth Counseling</v-card-title>
 
           <v-card-text class="text--primary">
@@ -186,14 +183,6 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="orange" text @click="navigateBookAppointment">
-              Book Appointment
-            </v-btn>
-
-            <v-btn @click="navigateExplore" color="orange" text>
-              Explore
-            </v-btn>
-
             <v-btn
               color="primary"
               class="text-capitalize"
@@ -203,7 +192,12 @@
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
               Explore
             </v-btn>
           </v-card-actions>
@@ -228,14 +222,6 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="orange" text @click="navigateBookAppointment">
-              Book Appointment
-            </v-btn>
-
-            <v-btn color="orange" @click="navigateExplore" text>
-              Explore
-            </v-btn>
-
             <v-btn
               color="primary"
               class="text-capitalize"
@@ -245,7 +231,12 @@
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
               Explore
             </v-btn>
           </v-card-actions>
