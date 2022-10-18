@@ -1,7 +1,12 @@
 <template>
   <div class="pa-4">
     <div class="text-left mb-4">
-      <v-btn depressed color="#1867c0" class="white--text text-capitalize" @click="back">
+      <v-btn
+        depressed
+        color="#1867c0"
+        class="white--text text-capitalize"
+        @click="back"
+      >
         <v-icon class="pr-2">keyboard_backspace</v-icon>
         Back
       </v-btn>
@@ -328,7 +333,7 @@ export default class BookAppointments extends BaseComponent {
       request.AppointmentTime = this.request.AppointmentTime;
       request.CounselingType = this.request.CounselingType;
       request.CoachDetails = this.request.CoachDetails;
-      request.TellAboutYourSelf  = this.request.TellAboutYourSelf;
+      request.TellAboutYourSelf = this.request.TellAboutYourSelf;
 
       this.service
         .bookAppointments(request)

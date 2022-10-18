@@ -1,14 +1,10 @@
 <template>
   <v-container fluid class="pa-0">
     <v-row no-gutters>
-      <v-col cols="2" sm="2" md="2" v-if="page != 'book-appointment'">
+      <v-col cols="2" sm="2" md="2" v-if="page">
         <side-bar />
       </v-col>
-      <v-col
-        :cols="page != 'book-appointment' ? 10 : 12"
-        :sm="page != 'book-appointment' ? 10 : 12"
-        :md="page != 'book-appointment' ? 10 : 12"
-      >
+      <v-col :cols="page ? 10 : 12" :sm="page ? 10 : 12" :md="page ? 10 : 12">
         <div class="primary-linear">
           <router-view />
         </div>
@@ -33,7 +29,15 @@ export default class MainLayout extends Vue {
   }
 
   get page() {
-    return this.$route.path.split("/")[4];
+    let page = this.$route.path.split("/")[4];
+
+    if (page === "book-appointment") {
+      return false;
+    } else if (page === "client-explore") {
+      return false;
+    }
+
+    return true;
   }
 }
 </script>
