@@ -72,7 +72,7 @@
             <v-btn @click="navigateExplore" color="orange" text>
               Explore
             </v-btn>
-            =======
+
             <v-btn
               color="primary"
               class="text-capitalize"
@@ -85,7 +85,6 @@
             <v-btn color="primary" class="text-capitalize" text>
               Explore
             </v-btn>
-            >>>>>>> 68af840b4eb68f0db4dcd21dd1a1299a1e4a5ee7
           </v-card-actions>
         </v-card>
       </v-col>
@@ -115,7 +114,7 @@
             <v-btn color="orange" @click="navigateExplore" text>
               Explore
             </v-btn>
-            =======
+
             <v-btn
               color="primary"
               class="text-capitalize"
@@ -128,7 +127,6 @@
             <v-btn color="primary" class="text-capitalize" text>
               Explore
             </v-btn>
-            >>>>>>> 68af840b4eb68f0db4dcd21dd1a1299a1e4a5ee7
           </v-card-actions>
         </v-card>
       </v-col>
@@ -195,7 +193,7 @@
             <v-btn @click="navigateExplore" color="orange" text>
               Explore
             </v-btn>
-            =======
+
             <v-btn
               color="primary"
               class="text-capitalize"
@@ -208,7 +206,6 @@
             <v-btn color="primary" class="text-capitalize" text>
               Explore
             </v-btn>
-            >>>>>>> 68af840b4eb68f0db4dcd21dd1a1299a1e4a5ee7
           </v-card-actions>
         </v-card>
       </v-col>
