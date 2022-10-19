@@ -77,10 +77,14 @@ export class AdminService
   // }
 
   public updateSummary(request: UpdateSummaryRequestModel): Promise<any> {
-      return this.httpPost("Admin/UpdateClientSummary?clientId=" + request.clientId, request).then(
-        (response) => {
-          return response.data;
-        }
-      );
-    }
+    return this.httpPost(
+      "Admin/UpdateClientSummary?clientId=" +
+        request.clientId +
+        "&summary=" +
+        request.Summary,
+      null
+    ).then((response) => {
+      return response.data;
+    });
+  }
 }
