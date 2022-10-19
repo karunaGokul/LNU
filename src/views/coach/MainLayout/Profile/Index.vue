@@ -124,6 +124,7 @@
           </v-col>
           <v-col>
             <v-file-input
+              :prepend-icon="null"
               label="Ceritifications"
               prepend-inner-icon="upload"
               chips
@@ -266,8 +267,7 @@ export default class Profile extends BaseComponent {
   }
 
   public selectFiles(file: any) {
-    if (file)
-    {
+    if (file) {
       this.certificates.push(file[0]);
     } else {
       this.certificates.splice(file[0]);

@@ -65,11 +65,23 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="primary" class="text-capitalize" text @click="navigateBookAppointment">
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text> Explore </v-btn>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
+              Explore
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -92,11 +104,23 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="primary" class="text-capitalize" text @click="navigateBookAppointment">
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text> Explore </v-btn>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
+              Explore
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -119,11 +143,23 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="primary" class="text-capitalize" text @click="navigateBookAppointment">
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text> Explore </v-btn>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
+              Explore
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -135,6 +171,7 @@
             src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fG1lbnRhbCUyMGhlYWx0aHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
           >
           </v-img>
+
           <v-card-title>MentalHealth Counseling</v-card-title>
 
           <v-card-text class="text--primary">
@@ -146,11 +183,23 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="primary" class="text-capitalize" text @click="navigateBookAppointment">
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text> Explore </v-btn>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
+              Explore
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -173,11 +222,23 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="primary" class="text-capitalize" text @click="navigateBookAppointment">
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment"
+            >
               Book Appointment
             </v-btn>
 
-            <v-btn color="primary" class="text-capitalize" text> Explore </v-btn>
+            <v-btn
+              color="primary"
+              @click="navigateExplore"
+              class="text-capitalize"
+              text
+            >
+              Explore
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -279,6 +340,13 @@ export default class DashboardLayout extends Vue {
     this.$router.push({
       name: "Book Appointment",
       params: { id: "book-appointment" },
+    });
+  }
+  public navigateExplore() {
+    this.$router.push({
+      name: "Client Explore",
+      params: { id: "client-explore" },
+      // path: "explore",
     });
   }
 }
