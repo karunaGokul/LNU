@@ -19,32 +19,23 @@
     >
       <template v-slot:expanded-item="{ headers, item }">
         <td :colspan="headers.length">
-          <tr>
-            <td class="pt-2">
-              <h4>Myself {{ item.Username }}</h4>
-            </td>
-          </tr>
+
+          <h4 class="pa-4 text-h5">Myself {{ item.Username }}</h4>
 
           <v-simple-table dense v-if="item.questionnaire">
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
             <tbody>
               <tr>
-                <td>What brought you to visit us?</td>
-                <td>
+                <td class="pa-4">What brought you to visit us?</td>
+                <td class="pa-4">
                   <h5 class="blue--text">{{ item.questionnaire.visitUs }}</h5>
                 </td>
               </tr>
 
               <tr>
-                <td>
+                <td class="pa-4">
                   What do you expect from your interactions with the therapist?
                 </td>
-                <td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.expectFromTherapist }}
                   </h5>
@@ -52,8 +43,8 @@
               </tr>
 
               <tr>
-                <td>Eating Habits:</td>
-                <td>
+                <td class="pa-4">Eating Habits:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.eatingHabits }}
                   </h5>
@@ -61,8 +52,8 @@
               </tr>
 
               <tr>
-                <td>Your understanding of your physical health:</td>
-                <td>
+                <td class="pa-4">Your understanding of your physical health:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.physicalHealth }}
                   </h5>
@@ -70,8 +61,8 @@
               </tr>
 
               <tr>
-                <td>Your daily eating habits:</td>
-                <td>
+                <td class="pa-4">Your daily eating habits:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.dailyEatingHabits }}
                   </h5>
@@ -79,84 +70,84 @@
               </tr>
 
               <tr>
-                <td>The current state of mind:</td>
-                <td>
+                <td class="pa-4">The current state of mind:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">{{ item.questionnaire.mindSet }}</h5>
                 </td>
               </tr>
               <tr>
-                <td>Urge to Live:</td>
-                <td>
+                <td class="pa-4">Urge to Live:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.urgeToLive }}
                   </h5>
                 </td>
               </tr>
               <tr>
-                <td>Social Interactions:</td>
-                <td>
+                <td class="pa-4">Social Interactions:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.socialInteractions }}
                   </h5>
                 </td>
               </tr>
               <tr>
-                <td>Dependency on Addictions, if any:</td>
-                <td>
+                <td class="pa-4">Dependency on Addictions, if any:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.addictions }}
                   </h5>
                 </td>
               </tr>
               <tr>
-                <td>Fear of the unknown:</td>
-                <td>
+                <td class="pa-4">Fear of the unknown:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.fearOfUnknown }}
                   </h5>
                 </td>
               </tr>
               <tr>
-                <td>The physical feeling of pain or illness:</td>
-                <td>
+                <td class="pa-4">The physical feeling of pain or illness:</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.physicalFeeling }}
                   </h5>
                 </td>
               </tr>
               <tr>
-                <td>
+                <td class="pa-4">
                   Are you already on any medication? If Yes, please mention the
                   name.
                 </td>
-                <td><h5 class="blue--text">Antibiotic</h5></td>
+                <td class="pa-4"><h5 class="blue--text">Antibiotic</h5></td>
               </tr>
               <tr>
-                <td>What is your preferred mode of communication name.</td>
-                <td>
+                <td class="pa-4">What is your preferred mode of communication name.</td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.preferredModeOfCommunication }}
                   </h5>
                 </td>
               </tr>
               <tr>
-                <td>
+                <td class="pa-4">
                   How should we get in touch with the person requiring
                   counseling name.
                 </td>
-                <td>
+                <td class="pa-4">
                   <h5 class="blue--text">
                     {{ item.questionnaire.getInTouch }}
                   </h5>
                 </td>
               </tr>
               <tr>
-                <td>
+                <td class="pa-4">
                   The details about the preferred mode of communication to
                   collect the data (like Mobile No./Whatsapp number/ e-mail ID
                   etc.)
                 </td>
-                <td><h5 class="blue--text">test@mail.com</h5></td>
+                <td class="pa-4"><h5 class="blue--text">test@mail.com</h5></td>
               </tr>
               <tr>
                 <td>
@@ -184,7 +175,7 @@
       </template>
 
       <template v-slot:[`item.ProfileImage`]="{ item }">
-        <div>
+        <div class="pa-4">
           <div v-if="item.ProfileImage" class="d-flex align-center">
             <v-avatar size="35">
               <img
