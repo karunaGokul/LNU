@@ -11,8 +11,11 @@
     </v-dialog>
     <v-dialog v-model="dialog" width="500" persistent v-else>
       <v-card class="pt-10">
-        <v-card-text class="text-center red--text"
+        <v-card-text class="text-center red--text" v-if="!(user == 'Admin')"
           >Are you sure you want to cancel the appointments</v-card-text
+        >
+        <v-card-text class="text-center red--text" v-if="user == 'Admin'"
+          >Are you sure you want to delete the counselling type</v-card-text
         >
         <v-card-actions class="justify-center">
           <v-btn
@@ -41,6 +44,7 @@ export default class AppAlert extends Vue {
 
   @Prop() response: string;
   @Prop() selectedEvent: EventsModel;
+  @Prop() user: string;
 
   public dialog: boolean = true;
   public request: CancelAppointmentModel = new CancelAppointmentModel();
