@@ -98,13 +98,13 @@
 
                 <v-row>
                   <v-col>
-                    <v-label >Counseling Program:</v-label>
+                    <v-label>Counseling Program:</v-label>
                   </v-col>
                   <v-col>
                     <h4>{{ this.selectedEvent.name }}</h4>
                   </v-col>
                 </v-row>
-                <v-row v-if="(this.selectedEvent.coachName) && (User != 'Coach')">
+                <v-row v-if="this.selectedEvent.coachName && User != 'Coach'">
                   <v-col>
                     <v-label>Coach Name:</v-label>
                   </v-col>
@@ -112,7 +112,7 @@
                     <h4>{{ this.selectedEvent.coachName }}</h4>
                   </v-col>
                 </v-row>
-                <v-row v-if="(this.selectedEvent.clientName) && (User == 'Coach')">
+                <v-row v-if="this.selectedEvent.clientName && User == 'Coach'">
                   <v-col>
                     <v-label>Client Name:</v-label>
                   </v-col>
@@ -144,7 +144,12 @@
                     <h4>{{ this.selectedEvent.clientSummary }}</h4>
                   </v-col>
                 </v-row>
-                <v-row  v-if="(this.selectedEvent.status === 'Pending') || (this.selectedEvent.status === 'Confirmed')">
+                <v-row
+                  v-if="
+                    this.selectedEvent.status === 'Pending' ||
+                    this.selectedEvent.status === 'Confirmed'
+                  "
+                >
                   <v-col cols="5" md="5">
                     <v-btn
                       plain
@@ -251,7 +256,7 @@ export default class Calendar extends BaseComponent {
   ];
 
   public showAlert: boolean = false;
-  
+
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();

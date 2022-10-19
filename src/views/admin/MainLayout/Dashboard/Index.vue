@@ -60,7 +60,9 @@
     </v-container> -->
     <v-container fluid class="pa-16">
       <div class="d-flex justify-end">
-        <v-btn class="text-capitalize" color="primary">add program</v-btn>
+        <v-btn class="text-capitalize" color="primary" @click="edit"
+          >add program</v-btn
+        >
       </div>
 
       <v-row class="my-5">
@@ -79,8 +81,16 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize">edit</v-btn>
-              <v-btn text color="primary" class="text-capitalize">delete</v-btn>
+              <v-btn text color="primary" class="text-capitalize" @click="edit"
+                >edit</v-btn
+              >
+              <v-btn
+                text
+                color="primary"
+                class="text-capitalize"
+                @click="deleteCounselling"
+                >delete</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-col>
@@ -99,8 +109,16 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize">edit</v-btn>
-              <v-btn text color="primary" class="text-capitalize">delete</v-btn>
+              <v-btn text color="primary" class="text-capitalize" @click="edit"
+                >edit</v-btn
+              >
+              <v-btn
+                text
+                color="primary"
+                class="text-capitalize"
+                @click="deleteCounselling"
+                >delete</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-col>
@@ -119,8 +137,16 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize">edit</v-btn>
-              <v-btn text color="primary" class="text-capitalize">delete</v-btn>
+              <v-btn text color="primary" class="text-capitalize" @click="edit"
+                >edit</v-btn
+              >
+              <v-btn
+                text
+                color="primary"
+                class="text-capitalize"
+                @click="deleteCounselling"
+                >delete</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-col>
@@ -139,8 +165,16 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize">edit</v-btn>
-              <v-btn text color="primary" class="text-capitalize">delete</v-btn>
+              <v-btn text color="primary" class="text-capitalize" @click="edit"
+                >edit</v-btn
+              >
+              <v-btn
+                text
+                color="primary"
+                class="text-capitalize"
+                @click="deleteCounselling"
+                >delete</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-col>
@@ -159,11 +193,77 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize">edit</v-btn>
-              <v-btn text color="primary" class="text-capitalize">delete</v-btn>
+              <v-btn text color="primary" class="text-capitalize" @click="edit"
+                >edit</v-btn
+              >
+              <v-btn
+                text
+                color="primary"
+                class="text-capitalize"
+                @click="deleteCounselling"
+                >delete</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-col>
+      </v-row>
+      <div class="text-center">
+        <v-dialog v-model="dialog" width="500">
+          <v-card class="pa-5">
+            <v-file-input
+              label="Add a image"
+              filled
+              dense
+              :prepend-icon="null"
+              prepend-inner-icon="add_a_photo"
+            ></v-file-input>
+
+            <v-text-field
+              label="Title"
+              color="primary"
+              filled
+              dense
+              required
+            ></v-text-field>
+            <v-textarea
+              filled
+              dense
+              name="input-7-4"
+              label="Description"
+            ></v-textarea>
+            <v-card-actions class="pa-0">
+              <v-spacer></v-spacer>
+              <v-btn color="rgba(0, 0, 0, 0.87" text @click="dialog = false">
+                Close
+              </v-btn>
+              <v-btn color="primary" text @click="dialog = false"> Save </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
+      <v-row justify="center">
+        <v-dialog v-model="deleteDialog" persistent max-width="490">
+          <v-card>
+            <v-card-title class="text-body-1">
+              Are you sure you want to delete the Counselling?</v-card-title
+            >
+            <!-- <v-card-text> </v-card-text> -->
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" text @click="deleteDialog = false">
+                Yes
+              </v-btn>
+              <v-btn
+                color="rgba(0, 0, 0, 0.87"
+                text
+                @click="deleteDialog = false"
+              >
+                No
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-row>
     </v-container>
   </div>
@@ -176,9 +276,17 @@ import { Component, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class AdminDashboardLayout extends Vue {
+  public dialog = false;
+  public deleteDialog = false;
   public img: string = "";
   public handleimage(e: File) {
     this.img = URL.createObjectURL(e);
+  }
+  public edit() {
+    this.dialog = true;
+  }
+  public deleteCounselling() {
+    this.deleteDialog = true;
   }
 }
 </script>

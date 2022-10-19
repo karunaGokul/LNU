@@ -270,6 +270,7 @@ export default class ClientDetails extends BaseComponent {
     this.requestSummary.clientId = this.clientId;
     this.service.updateSummary(this.requestSummary).then((response: any) => {
       this.loadingSpinner("hide");
+      this.getClient();
     });
   }
 }
