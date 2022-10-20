@@ -33,7 +33,7 @@ export default class MainLayout extends Vue {
 
     if (page === "book-appointment") {
       return false;
-    } else if (page === "client-explore") {
+    } else if (page === 'client-explore') {
       return false;
     }
 

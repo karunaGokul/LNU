@@ -164,7 +164,7 @@ const clientRoutes: Array<RouteConfig> = [
             path: "/client/home/dashboard/:id",
             name: "Client Explore",
             component: () =>
-              import("@/views/client/MainLayout/Dashboard/Explore.vue"),
+              import("@/views/client/MainLayout/Dashboard/components/Explore.vue"),
           },
           {
             path: "profile",
