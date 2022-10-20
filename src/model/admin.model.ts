@@ -1,3 +1,4 @@
+import { classToClassFromExist } from "class-transformer";
 import { CertificationModel } from "./registration.model";
 
 export class GetCoachesModel {
@@ -37,4 +38,25 @@ export class AssignCoachModel extends ConfirmAppointmentModel {
 export class UpdateSummaryRequestModel {
   clientId: string;
   Summary: string;
+}
+
+export class AdminCounselingTypeModel {
+  Id: string;
+  Image: string;
+  Title: string;
+  Discription: string;
+}
+
+export class AdminEditCounsellingModel {
+  Id: string;
+  Image: string;
+  Title: string;
+  Summary: string;
+  Discription: string;
+  Duration: number;
+  Cost: number;
+}
+
+export class AdminDeleteCouselling {
+  id: string;
 }

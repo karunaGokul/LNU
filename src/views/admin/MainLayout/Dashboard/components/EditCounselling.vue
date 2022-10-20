@@ -2,15 +2,15 @@
   <div>
     <v-dialog v-model="dialog" width="500">
       <v-card class="px-5 pb-2">
-        
         <v-card-title class="mb-n1 ml-n3">
           <v-icon class="mr-1">edit</v-icon>
           <h4>counselling</h4>
           <v-spacer></v-spacer>
           <v-icon class="mr-n3" @click="close">close</v-icon>
-          </v-card-title>
+        </v-card-title>
         <v-divider></v-divider>
         <v-file-input
+          v-model="request.Image"
           label="Add an image"
           outlined
           dense
@@ -20,6 +20,7 @@
         ></v-file-input>
 
         <v-text-field
+          v-model="request.Title"
           label="Title"
           color="primary"
           dense
@@ -27,24 +28,28 @@
           outlined
         ></v-text-field>
         <v-textarea
+          v-model="request.Discription"
           dense
           name="input-7-4"
           label="Description"
           outlined
         ></v-textarea>
         <v-textarea
+          v-model="request.Summary"
           dense
           name="input-7-4"
           label="Summary"
           outlined
         ></v-textarea>
         <v-text-field
+          v-model="request.Duration"
           label="Duration"
           outlined
           dense
           prepend-inner-icon="schedule"
         ></v-text-field>
         <v-text-field
+          v-model="request.Cost"
           label="Cost"
           outlined
           dense
@@ -89,7 +94,7 @@
             depressed
             color="primary"
             class="text-capitalize"
-            @click="save"
+            @click="save(counsellingId)"
           >
             Edit
           </v-btn>
@@ -100,18 +105,29 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop, Inject } from "vue-property-decorator";
 
+import { AdminEditCounsellingModel } from "@/model";
+import { IAdminService } from "@/service";
 @Component({
   components: {},
 })
 export default class EditCounselling extends Vue {
+  @Inject("adminService") adminService: IAdminService;
+  @Prop() counsellingId: string;
   public dialog: boolean = true;
   public time: number = null;
   public menu2: boolean = false;
+  public request: AdminEditCounsellingModel = new AdminEditCounsellingModel();
 
-  public save() {
+  public save(id: string) {
+    this.request.Id = id;
+    this.request.Duration = +this.request.Duration;
+    this.request.Cost = +this.request.Cost;
     this.$emit("save");
+    this.adminService.EditCounsellingType(this.request).then((res) => {
+      console.log(res);
+    });
   }
 
   public close() {
