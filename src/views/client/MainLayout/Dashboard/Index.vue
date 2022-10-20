@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-16">
-    <h1 class="text-h4 font-weight-bold">Welcome Back Vignesh!</h1>
+    <h1 class="text-h4 font-weight-bold">Welcome Back {{userName}}!</h1>
     <!-- <v-container>
       <v-row class="mt-5">
         <v-col>
@@ -69,7 +69,7 @@
               color="primary"
               class="text-capitalize"
               text
-              @click="navigateBookAppointment"
+              @click="navigateBookAppointment('Behavioural Counseling')"
             >
               Book Appointment
             </v-btn>
@@ -108,7 +108,7 @@
               color="primary"
               class="text-capitalize"
               text
-              @click="navigateBookAppointment"
+              @click="navigateBookAppointment('Marriage Counseling')"
             >
               Book Appointment
             </v-btn>
@@ -147,7 +147,7 @@
               color="primary"
               class="text-capitalize"
               text
-              @click="navigateBookAppointment"
+              @click="navigateBookAppointment('Child Counseling')"
             >
               Book Appointment
             </v-btn>
@@ -187,7 +187,7 @@
               color="primary"
               class="text-capitalize"
               text
-              @click="navigateBookAppointment"
+              @click="navigateBookAppointment('MentalHealth Counseling')"
             >
               Book Appointment
             </v-btn>
@@ -226,7 +226,7 @@
               color="primary"
               class="text-capitalize"
               text
-              @click="navigateBookAppointment"
+              @click="navigateBookAppointment('Career Counseling')"
             >
               Book Appointment
             </v-btn>
@@ -336,10 +336,11 @@ export default class DashboardLayout extends Vue {
     },
   ];
 
-  public navigateBookAppointment() {
+  public navigateBookAppointment(appointment: string) {
     this.$router.push({
       name: "Book Appointment",
       params: { id: "book-appointment" },
+      query: {appointment: appointment}
     });
   }
   public navigateExplore() {
@@ -348,6 +349,10 @@ export default class DashboardLayout extends Vue {
       params: { id: "client-explore" },
       // path: "explore",
     });
+  }
+
+  get userName() {
+    return this.$store.getters.username;
   }
 }
 </script>

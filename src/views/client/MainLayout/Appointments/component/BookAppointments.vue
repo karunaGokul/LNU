@@ -297,6 +297,15 @@ export default class BookAppointments extends BaseComponent {
     this.request.AppointmentTime = "9:00";
   }
 
+  mounted() {
+    let selectedAppointment = this.$route.query.appointment;
+    this.counselingProgram.forEach((item: any) => {
+      console.log(item.Name, selectedAppointment)
+      if (item.Name == selectedAppointment) this.request.CounselingType = item;
+      console.log(this.request.CounselingType);
+    });
+  }
+
   public back() {
     this.$router.push("/client/home/appointments");
   }

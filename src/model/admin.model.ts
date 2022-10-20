@@ -15,6 +15,7 @@ export class GetClientsModel {
   Id: string;
   Username: string;
   CounselingType: string;
+  CounselingTypeName: string;
   Email: string;
   PhoneNumber: number;
   ProfileImage: string;

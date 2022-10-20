@@ -1,229 +1,104 @@
 <template>
-  <div class="primary-linear px-8 pt-10">
-    <h1 class="mb-5">Client Details</h1>
-    <v-data-table
-      :headers="headers"
-      :items="response"
-      :items-per-page="10"
-      class="mx-8"
-      :footer-props="{
-        prevIcon: 'chevron_left',
-        nextIcon: 'chevron_right',
-      }"
-      expand-icon="keyboard_arrow_down"
-      single-expand
-      :expanded.sync="expanded"
-      item-key="Id"
-      show-expand
-      @click:row="getItem"
-    >
-      <template v-slot:expanded-item="{ headers, item }">
-        <td :colspan="headers.length">
+  <div class="primary-linear px-5 pt-10">
+    <h1 class="mb-5">All Clients</h1>
+    <div>
+      <v-card
+        v-for="(item, index) in pages"
+        :key="index"
+        elevation="0"
+        rounded="0"
+        outlined
+      >
+        <v-row dense>
+          <v-col cols="2">
+            <div class="d-flex align-center pa-4">
+              <v-avatar
+                rounded="0"
+                size="35"
+                :color="!item.ProfileImage ? avatarColors() : ''"
+                style="border-radius: 8px !important"
+              >
+                <img
+                  :src="`data:image/png;base64,${item.ProfileImage}`"
+                  alt="John"
+                  v-if="item.ProfileImage"
+                />
+                <span class="white--text" v-else>{{
+                  item.Username.charAt(0).toUpperCase()
+                }}</span>
+              </v-avatar>
+              <div>
+                <p class="ma-0 ml-2 font-weight-bold">{{ item.Username }}</p>
+                <p class="ma-0 ml-2 text-subtitle-2">{{ item.PhoneNumber }}</p>
+              </div>
+            </div>
+          </v-col>
+          <v-col cols="3" class="d-flex align-center text-subtitle-2">
+            {{ item.Email }}
+          </v-col>
+          <v-col cols="3" class="d-flex align-center text-subtitle-2">
+            {{ item.CounselingTypeName }}
+          </v-col>
+          <v-col cols="3" class="d-flex align-center text-subtitle-2">
+            {{ item.summary }}
+          </v-col>
+          <v-col cols="1" class="d-flex align-center text-subtitle-2">
+            <v-icon @click="openClientinfo(item)">open_in_new</v-icon>
+          </v-col>
+        </v-row>
+      </v-card>
+    </div>
+    <v-pagination
+      class="pa-4"
+      color="#7780D1"
+      next-icon="chevron_right"
+      prev-icon="chevron_left"
+      v-model="page"
+      :length="Math.ceil(response.length / perPage)"
+      v-if="response.length > 0"
+    ></v-pagination>
 
-          <h4 class="pa-4 text-h5">Myself {{ item.Username }}</h4>
-
-          <v-simple-table dense v-if="item.questionnaire">
-            <tbody>
-              <tr>
-                <td class="pa-4">What brought you to visit us?</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">{{ item.questionnaire.visitUs }}</h5>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="pa-4">
-                  What do you expect from your interactions with the therapist?
-                </td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.expectFromTherapist }}
-                  </h5>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="pa-4">Eating Habits:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.eatingHabits }}
-                  </h5>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="pa-4">Your understanding of your physical health:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.physicalHealth }}
-                  </h5>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="pa-4">Your daily eating habits:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.dailyEatingHabits }}
-                  </h5>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="pa-4">The current state of mind:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">{{ item.questionnaire.mindSet }}</h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="pa-4">Urge to Live:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.urgeToLive }}
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="pa-4">Social Interactions:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.socialInteractions }}
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="pa-4">Dependency on Addictions, if any:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.addictions }}
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="pa-4">Fear of the unknown:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.fearOfUnknown }}
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="pa-4">The physical feeling of pain or illness:</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.physicalFeeling }}
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="pa-4">
-                  Are you already on any medication? If Yes, please mention the
-                  name.
-                </td>
-                <td class="pa-4"><h5 class="blue--text">Antibiotic</h5></td>
-              </tr>
-              <tr>
-                <td class="pa-4">What is your preferred mode of communication name.</td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.preferredModeOfCommunication }}
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="pa-4">
-                  How should we get in touch with the person requiring
-                  counseling name.
-                </td>
-                <td class="pa-4">
-                  <h5 class="blue--text">
-                    {{ item.questionnaire.getInTouch }}
-                  </h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="pa-4">
-                  The details about the preferred mode of communication to
-                  collect the data (like Mobile No./Whatsapp number/ e-mail ID
-                  etc.)
-                </td>
-                <td class="pa-4"><h5 class="blue--text">test@mail.com</h5></td>
-              </tr>
-              <tr>
-                <td>
-                  <v-text-field
-                    outlined
-                    dense
-                    label="Summary"
-                    class="mt-6"
-                    v-model="requestSummary.Summary"
-                  ></v-text-field>
-                </td>
-                <td>
-                  <v-btn
-                    color="primary"
-                    class="text-capitalize"
-                    depressed
-                    @click="updateSummary"
-                    >save</v-btn
-                  >
-                </td>
-              </tr>
-            </tbody>
-          </v-simple-table>
-        </td>
-      </template>
-
-      <template v-slot:[`item.ProfileImage`]="{ item }">
-        <div class="pa-4">
-          <div v-if="item.ProfileImage" class="d-flex align-center">
-            <v-avatar size="35">
-              <img
-                :src="`data:image/png;base64,${item.ProfileImage}`"
-                alt="John"
-              />
-            </v-avatar>
-            <p class="ma-0 ml-2">{{ item.Username }}</p>
-          </div>
-          <div
-            v-if="!item.ProfileImage && item.Username"
-            class="d-flex align-center"
-          >
-            <v-avatar color="primary" size="35">
-              <span class="white--text">{{
-                item.Username.charAt(0).toUpperCase()
-              }}</span>
-            </v-avatar>
-            <p class="ma-0 ml-2">{{ item.Username }}</p>
-          </div>
-        </div>
-      </template>
-    </v-data-table>
+    <client-info
+      :item="clientInfo"
+      v-if="showClientInfo"
+      @close="showClientInfo = false"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Inject } from "vue-property-decorator";
+import { Component, Inject } from "vue-property-decorator";
+
 import BaseComponent from "@/components/base/BaseComponent";
+
 import { GetClientsModel, UpdateSummaryRequestModel } from "@/model";
 import { IAdminService } from "@/service";
+
+import ClientInfo from "./components/ClientInfo.vue";
+
 @Component({
-  components: {},
+  components: { ClientInfo },
 })
 export default class ClientDetails extends BaseComponent {
   @Inject("adminService") service: IAdminService;
   public response: Array<GetClientsModel> = [];
-  public requestSummary: UpdateSummaryRequestModel = new UpdateSummaryRequestModel();
+  public requestSummary: UpdateSummaryRequestModel =
+    new UpdateSummaryRequestModel();
 
   public expanded: any = [];
   public clientId: string;
+
+  public page: number = 1;
+  public perPage: number = 5;
+  public showClientInfo: boolean = false;
+
+  public clientInfo: GetClientsModel = new GetClientsModel();
 
   created() {
     this.getClient();
   }
   public getItem(data: any) {
     this.clientId = data.Id;
-    console.log(this.clientId);
   }
   public headers = [
     {
@@ -258,6 +133,7 @@ export default class ClientDetails extends BaseComponent {
     },
     { text: "", value: "data-table-expand" },
   ];
+
   private getClient() {
     this.loadingSpinner("show");
     this.service.getClient().then((response: Array<GetClientsModel>) => {
@@ -265,6 +141,7 @@ export default class ClientDetails extends BaseComponent {
       this.loadingSpinner("hide");
     });
   }
+
   public updateSummary() {
     this.loadingSpinner("show");
     this.requestSummary.clientId = this.clientId;
@@ -272,6 +149,32 @@ export default class ClientDetails extends BaseComponent {
       this.loadingSpinner("hide");
       this.getClient();
     });
+  }
+
+  public openClientinfo(info: GetClientsModel) {
+    this.clientInfo = info;
+    this.showClientInfo = true;
+  }
+
+  get pages() {
+    return this.response.slice(
+      (this.page - 1) * this.perPage,
+      this.page * this.perPage
+    );
+  }
+
+  avatarColors() {
+    let colorsList = [
+      "#D17777",
+      "#D1BE77",
+      "#77D1C1",
+      "#77A1D1",
+      "#D177AD",
+      "#7780D1",
+    ];
+    let randomColor = Math.floor(Math.random() * colorsList.length);
+
+    return colorsList[randomColor];
   }
 }
 </script>
