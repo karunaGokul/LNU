@@ -81,16 +81,24 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize" @click="edit"
+              <!-- <v-btn text color="primary" class="text-capitalize" @click="edit"
                 >edit</v-btn
-              >
-              <v-btn
+              > -->
+
+              <!-- <v-btn
                 text
                 color="primary"
                 class="text-capitalize"
                 @click="deleteCounselling"
                 >delete</v-btn
-              >
+              > -->
+              <v-btn icon color="primary" @click="edit">
+                <v-icon>edit</v-icon>
+              </v-btn>
+              <v-btn icon color="primary" @click="deleteCounselling">
+                <v-icon>delete</v-icon>
+              </v-btn>
+              
             </v-card-actions>
           </v-card>
         </v-col>
@@ -109,16 +117,12 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize" @click="edit"
-                >edit</v-btn
-              >
-              <v-btn
-                text
-                color="primary"
-                class="text-capitalize"
-                @click="deleteCounselling"
-                >delete</v-btn
-              >
+              <v-btn icon color="primary" @click="edit">
+                <v-icon>edit</v-icon>
+              </v-btn>
+              <v-btn icon color="primary" @click="deleteCounselling">
+                <v-icon>delete</v-icon>
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -137,16 +141,12 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize" @click="edit"
-                >edit</v-btn
-              >
-              <v-btn
-                text
-                color="primary"
-                class="text-capitalize"
-                @click="deleteCounselling"
-                >delete</v-btn
-              >
+              <v-btn icon color="primary" @click="edit">
+                <v-icon>edit</v-icon>
+              </v-btn>
+              <v-btn icon color="primary" @click="deleteCounselling">
+                <v-icon>delete</v-icon>
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -165,16 +165,12 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize" @click="edit"
-                >edit</v-btn
-              >
-              <v-btn
-                text
-                color="primary"
-                class="text-capitalize"
-                @click="deleteCounselling"
-                >delete</v-btn
-              >
+             <v-btn icon color="primary" @click="edit">
+                <v-icon>edit</v-icon>
+              </v-btn>
+              <v-btn icon color="primary" @click="deleteCounselling">
+                <v-icon>delete</v-icon>
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -193,16 +189,12 @@
               aspernatur! Sed aliquam modi ab.</v-card-text
             >
             <v-card-actions class="justify-end">
-              <v-btn text color="primary" class="text-capitalize" @click="edit"
-                >edit</v-btn
-              >
-              <v-btn
-                text
-                color="primary"
-                class="text-capitalize"
-                @click="deleteCounselling"
-                >delete</v-btn
-              >
+              <v-btn icon color="primary" @click="edit">
+                <v-icon>edit</v-icon>
+              </v-btn>
+              <v-btn icon color="primary" @click="deleteCounselling">
+                <v-icon>delete</v-icon>
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>

@@ -548,7 +548,8 @@
         </v-row>
 
         <div class="d-flex align-center justify-end">
-          <v-btn class="primary text-capitalize" @click="updateForm"
+          <v-btn text class="text-capitalize mr-3" @click="skipQuestionnaire">Skip</v-btn>
+          <v-btn depressed class="primary text-capitalize" @click="updateForm"
             >Done</v-btn
           >
         </div>
@@ -592,10 +593,7 @@ import { IRegistrationService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
-// const passwordRule = helpers.regex(
-//   "passwordRule",
-//   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]{8,}$/
-// );
+
 
 @Component({
   validations: {
@@ -713,6 +711,10 @@ export default class ClientRegistration extends BaseComponent {
         }
       );
     }
+  }
+
+  public skipQuestionnaire() {
+    this.$router.push("login");
   }
 
   public updateForm() {

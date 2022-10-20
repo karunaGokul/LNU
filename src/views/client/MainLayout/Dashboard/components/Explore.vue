@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="pa-4"
-    color="primary"
-    style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
-  >
+  <div class="pa-4" color="primary">
     <div class="text-left mb-4">
       <v-btn
         depressed
@@ -27,6 +23,7 @@
 
         <v-card-text class="text--primary ps-0">
           <div>
+            <v-label>Description :</v-label>
             <p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo
               adipisci aperiam non dicta animi expedita hic eligendi totam eaque
@@ -41,6 +38,15 @@
               1500s Lorem Ipsum is simply dummy text of the printing and
               typesetting industry. Lorem Ipsum has been the industry's standard
             </p>
+            <v-label>Summary</v-label>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam est
+              sit quisquam hic perspiciatis beatae nisi deleniti ipsam iure
+              repellendus, eligendi libero iste illum dignissimos cum
+              voluptatibus recusandae tempora! Voluptates.
+            </p>
+            <v-label>Cost: 100</v-label> <br />
+            <v-label>Duration: 30 minutes</v-label>
           </div>
         </v-card-text>
       </v-col>

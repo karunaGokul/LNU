@@ -15,16 +15,22 @@
           >Are you sure you want to cancel the appointments</v-card-text
         >
         <v-card-text class="text-center red--text" v-if="user == 'Admin'"
-          >Are you sure you want to delete the counselling type</v-card-text
+          >Are you sure you want to delete the counselling program</v-card-text
         >
-        <v-card-actions class="justify-center">
+        <v-card-actions class="justify-center pb-3">
           <v-btn
+            depressed
             color="primary"
             class="text-capitalize"
             @click="cancelAppointment"
             >yes</v-btn
           >
-          <v-btn dark color="red" class="text-capitalize" @click="close"
+          <v-btn
+            dark
+            depressed
+            color="red"
+            class="text-capitalize"
+            @click="close"
             >no</v-btn
           >
         </v-card-actions>

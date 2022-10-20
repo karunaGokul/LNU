@@ -68,14 +68,6 @@ export class AdminService
     });
   }
 
-  // public updateSummary(clientId: string, request: UpdateSummaryRequestModel): Promise<any> {
-  //   return this.httpPost("Admin/UpdateClientSummary", {
-  //     clientId: clientId,
-  //   }).then((response) => {
-  //     return response.data;
-  //   });
-  // }
-
   public updateSummary(request: UpdateSummaryRequestModel): Promise<any> {
     return this.httpPost(
       "Admin/UpdateClientSummary?clientId=" +
