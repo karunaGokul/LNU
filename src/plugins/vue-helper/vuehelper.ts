@@ -96,7 +96,7 @@ class ValHelper {
         Object.prototype.hasOwnProperty.call(evaluation, "special") &&
         !evaluation.special
       )
-        error = `Please enter atleast One SpecialCharacter`;
+        error = `Please enter atleast one special character`;
 
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "numeric") &&

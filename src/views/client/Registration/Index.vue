@@ -1,6 +1,6 @@
 <template>
   <v-row no-gutters class="primary-linear">
-    <v-col lg="6" md="6" sm="12">
+    <v-col lg="5" md="5" sm="12">
       <v-container fill-height fluid class="pa-0 position-relative">
         <v-img src="@/assets/client-registration.jpg" height="100vh" />
         <h4
@@ -17,7 +17,7 @@
         </h4>
       </v-container>
     </v-col>
-    <v-col lg="6" md="6" sm="12" v-if="!showQuestionaire">
+    <v-col lg="7" md="7" sm="12" v-if="!showQuestionaire">
       <v-container
         fill-height
         fluid
@@ -26,18 +26,11 @@
         align-center
         flex-column
       >
-        <h2 class="mb-3 px-8 text-h4 text-start font-weight-bold">
-          Create new account
-        </h2>
-        <div class="mb-4 px-8 text-h7 text-start">
-          Already have an account?
-          <router-link to="/client/login" class="text-decoration-none" tag="a"
-            >Sign In
-          </router-link>
-        </div>
-        <div style="width: 590px">
+        <h2 class="text-h4 text-start font-weight-bold">Create account</h2>
+
+        <div class="my-12">
           <v-form class="px-8" @submit.prevent="register" autocomplete="off">
-            <v-row>
+            <v-row class="mb-4">
               <v-col>
                 <v-text-field
                   label="First Name"
@@ -45,6 +38,7 @@
                   append-icon="person"
                   filled
                   dense
+                  hide-details
                   v-model="request.FirstName"
                   required
                   @input="$v.request.FirstName.$touch()"
@@ -61,6 +55,7 @@
                   append-icon="person"
                   filled
                   dense
+                  hide-details
                   v-model="request.LastName"
                   required
                   @input="$v.request.LastName.$touch()"
@@ -72,74 +67,73 @@
               </v-col>
             </v-row>
             <v-text-field
+              class="mb-8"
               label="User Name"
               color="primary"
               append-icon="person"
               filled
               dense
+              hide-details
               v-model="request.Username"
               required
               @input="$v.request.Username.$touch()"
               @blur="$v.request.Username.$touch()"
               :error-messages="$v.request.Username | errorMessages('Username')"
             ></v-text-field>
+
             <v-text-field
-              label="Email Id"
-              type="text"
-              name="email"
+              label="Password"
               color="primary"
-              append-icon="email"
+              class="mb-2"
               filled
               dense
-              v-model="request.Email"
+              v-model="request.Password"
               required
-              @input="$v.request.Email.$touch()"
-              @blur="$v.request.Email.$touch()"
-              :error-messages="$v.request.Email | errorMessages('Email')"
-              autocomplete="off"
+              @input="$v.request.Password.$touch()"
+              @blur="$v.request.Password.$touch()"
+              :error-messages="$v.request.Password | errorMessages('Password')"
+              :type="showPassword ? 'text' : 'password'"
+              :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+              @click:append="showPassword = !showPassword"
             ></v-text-field>
-            <v-row>
-              <v-col>
+            <v-text-field
+              class="mb-8"
+              hide-details
+              label="Confirm Password"
+              color="primary"
+              filled
+              dense
+              v-model="request.ConfirmPassword"
+              required
+              @input="$v.request.ConfirmPassword.$touch()"
+              @blur="$v.request.ConfirmPassword.$touch()"
+              :error-messages="
+                $v.request.ConfirmPassword | errorMessages('ConfirmPassword')
+              "
+              :type="showConfirmpassword ? 'text' : 'password'"
+              :append-icon="
+                showConfirmpassword ? 'visibility_off' : 'visibility'
+              "
+              @click:append="showConfirmpassword = !showConfirmpassword"
+            ></v-text-field>
+            <v-row class="mb-2">
+              <v-col lg="6" md="6">
                 <v-text-field
-                  label="Password"
+                  label="Email"
+                  type="text"
+                  name="email"
                   color="primary"
+                  append-icon="email"
                   filled
                   dense
-                  v-model="request.Password"
+                  v-model="request.Email"
                   required
-                  @input="$v.request.Password.$touch()"
-                  @blur="$v.request.Password.$touch()"
-                  :error-messages="
-                    $v.request.Password | errorMessages('Password')
-                  "
-                  :type="showPassword ? 'text' : 'password'"
-                  :append-icon="showPassword ? 'visibility_off' : 'visibility'"
-                  @click:append="showPassword = !showPassword"
+                  @input="$v.request.Email.$touch()"
+                  @blur="$v.request.Email.$touch()"
+                  :error-messages="$v.request.Email | errorMessages('Email')"
+                  autocomplete="off"
                 ></v-text-field>
               </v-col>
-              <v-col>
-                <v-text-field
-                  label="Confirm Password"
-                  color="primary"
-                  filled
-                  dense
-                  v-model="request.ConfirmPassword"
-                  required
-                  @input="$v.request.ConfirmPassword.$touch()"
-                  @blur="$v.request.ConfirmPassword.$touch()"
-                  :error-messages="
-                    $v.request.ConfirmPassword
-                      | errorMessages('ConfirmPassword')
-                  "
-                  :type="showConfirmpassword ? 'text' : 'password'"
-                  :append-icon="
-                    showConfirmpassword ? 'visibility_off' : 'visibility'
-                  "
-                  @click:append="showConfirmpassword = !showConfirmpassword"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
               <v-col lg="6" md="6">
                 <v-text-field
                   label="Phone number"
@@ -156,25 +150,6 @@
                   "
                 ></v-text-field>
               </v-col>
-              <v-col lg="6" md="6">
-                <v-select
-                  label="Counseling Program"
-                  color="primary"
-                  filled
-                  dense
-                  :items="counselingProgram"
-                  append-icon="arrow_drop_down"
-                  item-text="Name"
-                  item-value="Id"
-                  v-model="request.CounselingType"
-                  @change="$v.request.CounselingType.$touch()"
-                  @blur="$v.request.CounselingType.$touch()"
-                  required
-                  :error-messages="
-                    $v.request.CounselingType | errorMessages('CounselingType')
-                  "
-                ></v-select>
-              </v-col>
             </v-row>
             <div class="text-center">
               <v-btn
@@ -189,86 +164,25 @@
             </div>
           </v-form>
         </div>
+        <div class="text-h7 text-center">
+          Already have an account?
+          <router-link to="/client/login" class="text-decoration-none" tag="a"
+            >Sign In
+          </router-link>
+        </div>
       </v-container>
     </v-col>
-    <v-col lg="6" md="6" sm="12" v-if="showQuestionaire">
+    <v-col lg="7" md="7" sm="12" v-if="showQuestionaire">
       <v-container
         fluid
-        style="overflow: scroll; height: 100vh"
+        style="overflow-y: auto; height: 100vh"
         class="pt-4 pl-4 ml-4"
       >
-        <h2 class="mb-2 text-h4 font-weight-bold">Welcome Onboard!</h2>
-        <h4 class="text-h7 mb-2">
-          Whatever your requirement from us, we hope to deliver the best. So let
-          us do a few quick questions to get started.
-        </h4>
-
-        <v-row class="mt-2">
-          <v-col cols="6">
-            <v-text-field
-              placeholder="Your Name"
-              color="primary"
-              v-model="questionnaireRequest.Name"
-              dense
-              filled
-            ></v-text-field>
-          </v-col>
-        </v-row>
-
-        <h4>Are you looking for help for yourself or someone else?</h4>
-
-        <v-row class="mt-1">
-          <v-col cols="6">
-            <v-text-field
-              placeholder="Looking for help"
-              color="primary"
-              v-model="questionnaireRequest.Help"
-              filled
-              dense
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <div>
-          <p>
-            If for Yourself, Please fill in the following details, and one of
-            our experts will email you a questionnaire to collect further
-            information. You can also help fill in details of this questionnaire
-            for another person if you think you can answer them on their behalf;
-            else, go to the next set of questions.
-          </p>
-          <p class="red--text">
-            The link to the basic questionnaire is below (the first set of
-            questions)
-          </p>
-          <p>
-            If someone else, Please fill in the following basic details and
-            share the contact details of the person who should be contacted to
-            collect further details.
-          </p>
-          <p class="red--text">
-            Link to Basic questionnaire to talk to the person requiring
-            counseling (the one below the first questionnaire)
-          </p>
-        </div>
-        <h3 class="text-h7 mb-2">Basic Details Questionnaire</h3>
+        <h2 class="mb-4 text-h4 font-weight-bold">Welcome Onboard!</h2>
         <p>
           Help us know you better so we can design your personalized
           questionnaire to offer perfect solutions.
         </p>
-
-        <v-row class="mt-1">
-          <v-col cols="6">
-            <v-text-field
-              dense
-              placeholder="Your Email id"
-              v-model="questionnaireRequest.Email"
-              color="primary"
-              filled
-            >
-            </v-text-field>
-          </v-col>
-        </v-row>
-
         <h4>1. Who is the person who needs help</h4>
         <v-radio-group v-model="questionnaireRequest.WhoIsThePersonNeedHelp">
           <v-radio
@@ -279,7 +193,7 @@
           >
           </v-radio>
           <v-radio
-            label="Someone Else - Relationship with you"
+            label="Someone else - Relationship with you"
             value="Someone Else- Relationship with you"
             off-icon="radio_button_unchecked"
             on-icon="radio_button_checked"
