@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="pa-16">
-    <h1 class="text-h4 font-weight-bold">Welcome Back {{userName}}!</h1>
+    <h1 class="text-h4 font-weight-bold">Welcome Back {{ userName }}!</h1>
     <!-- <v-container>
       <v-row class="mt-5">
         <v-col>
@@ -73,15 +73,31 @@
             >
               Book Appointment
             </v-btn>
-
-            <v-btn
+            <router-link
+              class="text-decoration-none"
+              :to="{
+                name: 'Client Explore',
+                params: {
+                  id: 'client-explore',
+                  title: 'Behavioural Counselling',
+                  cost: 200,
+                  duration: 20,
+                  img: 'logo',
+                },
+              }"
+            >
+              <v-btn text color="primary" class="text-capitalize">
+                Explore
+              </v-btn>
+            </router-link>
+            <!-- <v-btn
               color="primary"
               @click="navigateExplore"
               class="text-capitalize"
               text
             >
               Explore
-            </v-btn>
+            </v-btn> -->
           </v-card-actions>
         </v-card>
       </v-col>
@@ -113,14 +129,22 @@
               Book Appointment
             </v-btn>
 
-            <v-btn
-              color="primary"
-              @click="navigateExplore"
-              class="text-capitalize"
-              text
+            <router-link
+              class="text-decoration-none"
+              :to="{
+                name: 'Client Explore',
+                params: {
+                  id: 'client-explore',
+                  title: 'Marriage Counselling',
+                  cost: 1750,
+                  duration: 40,
+                },
+              }"
             >
-              Explore
-            </v-btn>
+              <v-btn text color="primary" class="text-capitalize">
+                Explore
+              </v-btn>
+            </router-link>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -152,14 +176,22 @@
               Book Appointment
             </v-btn>
 
-            <v-btn
-              color="primary"
-              @click="navigateExplore"
-              class="text-capitalize"
-              text
+            <router-link
+              class="text-decoration-none"
+              :to="{
+                name: 'Client Explore',
+                params: {
+                  id: 'client-explore',
+                  title: 'Child Counselling',
+                  cost: 3000,
+                  duration: 60,
+                },
+              }"
             >
-              Explore
-            </v-btn>
+              <v-btn text color="primary" class="text-capitalize">
+                Explore
+              </v-btn>
+            </router-link>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -192,14 +224,22 @@
               Book Appointment
             </v-btn>
 
-            <v-btn
-              color="primary"
-              @click="navigateExplore"
-              class="text-capitalize"
-              text
+            <router-link
+              class="text-decoration-none"
+              :to="{
+                name: 'Client Explore',
+                params: {
+                  id: 'client-explore',
+                  title: 'Mental Health Counselling',
+                  cost: 1000,
+                  duration: 25,
+                },
+              }"
             >
-              Explore
-            </v-btn>
+              <v-btn text color="primary" class="text-capitalize">
+                Explore
+              </v-btn>
+            </router-link>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -231,14 +271,22 @@
               Book Appointment
             </v-btn>
 
-            <v-btn
-              color="primary"
-              @click="navigateExplore"
-              class="text-capitalize"
-              text
+            <router-link
+              class="text-decoration-none"
+              :to="{
+                name: 'Client Explore',
+                params: {
+                  id: 'client-explore',
+                  title: 'Career Counselling',
+                  cost: 1500,
+                  duration: 35,
+                },
+              }"
             >
-              Explore
-            </v-btn>
+              <v-btn text color="primary" class="text-capitalize">
+                Explore
+              </v-btn>
+            </router-link>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -340,13 +388,13 @@ export default class DashboardLayout extends Vue {
     this.$router.push({
       name: "Book Appointment",
       params: { id: "book-appointment" },
-      query: {appointment: appointment}
+      query: { appointment: appointment },
     });
   }
   public navigateExplore() {
     this.$router.push({
       name: "Client Explore",
-      params: { id: "client-explore" },
+      params: { id: "client-explore", cost: "200", duration: "20minutes" },
       // path: "explore",
     });
   }
