@@ -1,5 +1,4 @@
-import { classToClassFromExist } from "class-transformer";
-import { CertificationModel } from "./registration.model";
+import { CertificationModel, QuestionnaireModel } from "./registration.model";
 
 export class GetCoachesModel {
   Id: string;
@@ -21,6 +20,8 @@ export class GetClientsModel {
   PhoneNumber: number;
   ProfileImage: string;
   About: string;
+  Questionnaire: QuestionnaireModel = new QuestionnaireModel();
+  summary: string;
 }
 
 export class ConfirmAppointmentModel {
