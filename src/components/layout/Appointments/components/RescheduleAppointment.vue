@@ -82,6 +82,7 @@
                 v-model="request.AppointmentTime"
                 full-width
                 @click:minute="$refs.menu.save(time)"
+                ampm-in-title
               ></v-time-picker>
             </v-menu>
           </v-card-text>

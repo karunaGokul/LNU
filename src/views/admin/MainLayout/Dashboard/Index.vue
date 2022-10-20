@@ -207,7 +207,14 @@
           </v-card>
         </v-col>
       </v-row>
-      <div class="text-center">
+      <edit-counselling v-if="dialog" @save="OnClose" @close="OnClose" />
+      <app-alert
+        v-if="deleteDialog"
+        user="Admin"
+        @cancelAppointment="OnDelete"
+        @close="OnDelete"
+      />
+      <!-- <div class="text-center">
         <v-dialog v-model="dialog" width="500">
           <v-card class="pa-5">
             <v-file-input
@@ -247,7 +254,6 @@
             <v-card-title class="text-body-1">
               Are you sure you want to delete the Counselling?</v-card-title
             >
-            <!-- <v-card-text> </v-card-text> -->
 
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -264,23 +270,35 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-      </v-row>
+      </v-row> -->
     </v-container>
   </div>
 </template>
 
 <script lang="ts">
+import AppAlert from "@/components/layout/AppAlert.vue";
 import { Component, Vue } from "vue-property-decorator";
+import EditCounselling from "./components/EditCounselling.vue";
 
 @Component({
-  components: {},
+  components: {
+    EditCounselling,
+    AppAlert,
+  },
 })
 export default class AdminDashboardLayout extends Vue {
   public dialog = false;
   public deleteDialog = false;
   public img: string = "";
+
   public handleimage(e: File) {
     this.img = URL.createObjectURL(e);
+  }
+  public OnClose() {
+    this.dialog = false;
+  }
+  public OnDelete() {
+    this.deleteDialog = false;
   }
   public edit() {
     this.dialog = true;
