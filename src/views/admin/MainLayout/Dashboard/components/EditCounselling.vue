@@ -20,7 +20,7 @@
         ></v-file-input>
 
         <v-text-field
-          v-model="request.Title"
+          v-model="request.Name"
           label="Title"
           color="primary"
           dense
@@ -28,7 +28,7 @@
           outlined
         ></v-text-field>
         <v-textarea
-          v-model="request.Discription"
+          v-model="request.Description"
           dense
           name="input-7-4"
           label="Description"
@@ -122,8 +122,6 @@ export default class EditCounselling extends Vue {
 
   public save(id: string) {
     this.request.Id = id;
-    this.request.Duration = +this.request.Duration;
-    this.request.Cost = +this.request.Cost;
     this.$emit("save");
     this.adminService.EditCounsellingType(this.request).then((res) => {
       console.log(res);

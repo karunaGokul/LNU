@@ -50,9 +50,9 @@ export class AdminCounselingTypeModel {
 export class AdminEditCounsellingModel {
   Id: string;
   Image: string;
-  Title: string;
+  Name: string;
   Summary: string;
-  Discription: string;
+  Description: string;
   Duration: number;
   Cost: number;
 }

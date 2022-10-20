@@ -37,11 +37,14 @@ export class AdminService
       resolve(request);
     });
   }
-  public EditCounsellingType(request: AdminEditCounsellingModel): Promise<any> {
-    return new Promise((resolve, reject) => {
-      console.log(request);
-      resolve(request);
-    });
+  public EditCounsellingType(request: any): Promise<any> {
+    let formData = new FormData();
+    formData.append("EditCounselling", request);
+    return this.httpPost("Admin/EditCounsellingProgram", formData).then(
+      (response) => {
+        return response.data;
+      }
+    );
   }
   public getMockCounsellingType(
     request: AdminCounselingTypeModel
