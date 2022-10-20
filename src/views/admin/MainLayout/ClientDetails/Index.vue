@@ -43,7 +43,7 @@
             {{ item.summary }}
           </v-col>
           <v-col cols="1" class="d-flex align-center text-subtitle-2">
-            <v-icon @click="openClientinfo(item)">open_in_new</v-icon>
+            <v-icon @click="openClientinfo(item)" v-if="item.Questionnaire">open_in_new</v-icon>
           </v-col>
         </v-row>
       </v-card>
@@ -59,9 +59,10 @@
     ></v-pagination>
 
     <client-info
-      :item="clientInfo"
+      :items="clientInfo"
       v-if="showClientInfo"
       @close="showClientInfo = false"
+      @summaryUpdated="showClientInfo = false;getClient"
     />
   </div>
 </template>
@@ -81,58 +82,17 @@ import ClientInfo from "./components/ClientInfo.vue";
 })
 export default class ClientDetails extends BaseComponent {
   @Inject("adminService") service: IAdminService;
-  public response: Array<GetClientsModel> = [];
-  public requestSummary: UpdateSummaryRequestModel =
-    new UpdateSummaryRequestModel();
 
-  public expanded: any = [];
-  public clientId: string;
+  public response: Array<GetClientsModel> = [];
 
   public page: number = 1;
   public perPage: number = 5;
   public showClientInfo: boolean = false;
-
   public clientInfo: GetClientsModel = new GetClientsModel();
 
   created() {
     this.getClient();
   }
-  public getItem(data: any) {
-    this.clientId = data.Id;
-  }
-  public headers = [
-    {
-      text: "Name",
-      sortable: false,
-      value: "ProfileImage",
-    },
-    {
-      text: "Email",
-      sortable: false,
-      value: "Email",
-    },
-    {
-      text: "Phone",
-      sortable: false,
-      value: "PhoneNumber",
-    },
-    // {
-    //   text: "About",
-    //   sortable: false,
-    //   value: "About",
-    // },
-    {
-      text: "Counseling Program",
-      sortable: false,
-      value: "CounselingTypeName",
-    },
-    {
-      text: "Summary",
-      sortable: false,
-      value: "summary",
-    },
-    { text: "", value: "data-table-expand" },
-  ];
 
   private getClient() {
     this.loadingSpinner("show");
@@ -142,28 +102,13 @@ export default class ClientDetails extends BaseComponent {
     });
   }
 
-  public updateSummary() {
-    this.loadingSpinner("show");
-    this.requestSummary.clientId = this.clientId;
-    this.service.updateSummary(this.requestSummary).then((response: any) => {
-      this.loadingSpinner("hide");
-      this.getClient();
-    });
-  }
-
   public openClientinfo(info: GetClientsModel) {
+    this.clientInfo = new GetClientsModel();
     this.clientInfo = info;
     this.showClientInfo = true;
   }
 
-  get pages() {
-    return this.response.slice(
-      (this.page - 1) * this.perPage,
-      this.page * this.perPage
-    );
-  }
-
-  avatarColors() {
+  public avatarColors() {
     let colorsList = [
       "#D17777",
       "#D1BE77",
@@ -175,6 +120,13 @@ export default class ClientDetails extends BaseComponent {
     let randomColor = Math.floor(Math.random() * colorsList.length);
 
     return colorsList[randomColor];
+  }
+
+   get pages() {
+    return this.response.slice(
+      (this.page - 1) * this.perPage,
+      this.page * this.perPage
+    );
   }
 }
 </script>

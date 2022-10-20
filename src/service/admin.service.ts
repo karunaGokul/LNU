@@ -14,7 +14,7 @@ export interface IAdminService {
   confirmAppointment(request: ConfirmAppointmentModel): Promise<any>;
   cancelAppointment(request: CancelAppointmentModel): Promise<any>;
   assignCoach(request: AssignCoachModel): Promise<any>;
-  updateSummary(request: UpdateSummaryRequestModel): Promise<any>;
+  updateSummary(clientId: string, Summary: string): Promise<any>;
 }
 
 export class AdminService
@@ -68,20 +68,9 @@ export class AdminService
     });
   }
 
-  // public updateSummary(clientId: string, request: UpdateSummaryRequestModel): Promise<any> {
-  //   return this.httpPost("Admin/UpdateClientSummary", {
-  //     clientId: clientId,
-  //   }).then((response) => {
-  //     return response.data;
-  //   });
-  // }
-
-  public updateSummary(request: UpdateSummaryRequestModel): Promise<any> {
+  public updateSummary(clientId: string, Summary: string): Promise<any> {
     return this.httpPost(
-      "Admin/UpdateClientSummary?clientId=" +
-        request.clientId +
-        "&summary=" +
-        request.Summary,
+      "Admin/UpdateClientSummary?clientId=" + clientId + "&summary=" + Summary,
       null
     ).then((response) => {
       return response.data;
