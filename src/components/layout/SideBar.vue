@@ -58,7 +58,7 @@
             </div>
           </router-link>
         </div>
-        <div v-if="page == 'client' || page == 'coach'">
+        <div v-if="page == 'client1' || page == 'coach1'">
           <router-link
             to="messages"
             tag="div"
@@ -90,7 +90,7 @@
             </div>
           </router-link>
         </div>
-        <div v-if="page == 'client'">
+        <div v-if="page == 'client1'">
           <router-link
             to="newsletter"
             tag="div"

@@ -1,6 +1,6 @@
 <template>
   <v-row no-gutters class="primary-linear">
-    <v-col cols="12" md="6">
+    <v-col cols="12" md="5">
       <v-container fill-height fluid class="pa-0 position-relative">
         <h4 class="text-h4 white--text position-absolute logo">Life N You</h4>
 
@@ -43,7 +43,7 @@
       </v-container>
     </v-col>
 
-    <v-col cols="12" md="6">
+    <v-col cols="12" md="7">
       <v-container
         fill-height
         fluid
