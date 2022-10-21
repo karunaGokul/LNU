@@ -67,13 +67,14 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 import EditCounselling from "./components/EditCounselling.vue";
 import { AdminCounselingTypeModel } from "@/model";
 import { IDashboardService } from "@/service";
+import BaseComponent from "@/components/base/BaseComponent";
 @Component({
   components: {
     EditCounselling,
     AppAlert,
   },
 })
-export default class AdminDashboardLayout extends Vue {
+export default class AdminDashboardLayout extends BaseComponent {
   @Inject("dashboardService") dashboardService: IDashboardService;
   public request: AdminCounselingTypeModel = new AdminCounselingTypeModel();
   public response: Array<AdminCounselingTypeModel> = [];
@@ -107,7 +108,9 @@ export default class AdminDashboardLayout extends Vue {
   }
 
   public counsellingType() {
+    this.loadingSpinner("show");
     this.dashboardService.getCounsellingType(this.request).then((res) => {
+      this.loadingSpinner("hide");
       console.log(this.response);
       this.response = res.data;
       console.log(this.response);
