@@ -9,7 +9,7 @@
 
       <v-row class="my-5">
         <v-col cols="4" md="4" sm="12" v-for="data in response" :key="data.Id">
-          <v-card class="mx-auto">
+          <v-card class="mx-auto" >
             <v-img height="200px" :src="data.Image"> </v-img>
             <v-card-title>{{ data.Title }}</v-card-title>
             <v-card-text class="text--primary">{{

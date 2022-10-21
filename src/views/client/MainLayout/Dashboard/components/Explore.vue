@@ -76,24 +76,53 @@
               repellendus, eligendi libero iste illum dignissimos cum
               voluptatibus recusandae tempora! Voluptates.
             </p>
-            <h4 class="text-subtitle-1">Cost: 
-              <v-icon small>currency_rupee</v-icon>{{ $route.params.cost }}</h4> <br />
-            <h4 class="text-subtitle-1">Duration: {{ $route.params.duration }} minutes</h4>
+            <h4 class="text-subtitle-1">
+              Cost: <v-icon small>currency_rupee</v-icon
+              >{{ $route.params.cost }}
+            </h4>
+            <br />
+            <h4 class="text-subtitle-1">
+              Duration: {{ $route.params.duration }} minutes
+            </h4>
           </div>
         </v-card-text>
       </v-col>
     </v-row>
   </div>
 </template>
+
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import BaseComponent from "@/components/base/BaseComponent";
+import { ClientMockRequestModel, ClientMockResponseModel } from "@/model";
+import { IClientService } from "@/service";
+import { Component, Inject, Vue } from "vue-property-decorator";
+
 @Component
-export default class Explore extends Vue {
+export default class Explore extends BaseComponent {
+  @Inject("ClientService") ClientService: IClientService;
+
+  public request: ClientMockRequestModel = new ClientMockRequestModel();
+  public response: ClientMockResponseModel = new ClientMockResponseModel();
+
   created() {
     window.scrollTo(0, 0);
+    // this.clientDashboard();
   }
+
   public back() {
     this.$router.push("/client/home/dashboard");
+  }
+
+  public clientDashboard() {
+    this.request.ClientId = "id102"
+    this.loadingSpinner("show");
+    console.log(this.request);
+    this.ClientService
+      .clientMockDashboard(this.request)
+      .then((response: Array<ClientMockResponseModel>) => {
+        this.loadingSpinner("hide");
+        console.log(response);
+      });
   }
 }
 </script>

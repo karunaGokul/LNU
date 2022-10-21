@@ -391,13 +391,13 @@ export default class DashboardLayout extends Vue {
       query: { appointment: appointment },
     });
   }
-  public navigateExplore() {
-    this.$router.push({
-      name: "Client Explore",
-      params: { id: "client-explore", cost: "200", duration: "20minutes" },
-      // path: "explore",
-    });
-  }
+  // public navigateExplore() {
+  //   this.$router.push({
+  //     name: "Client Explore",
+  //     params: { id: "client-explore", },
+  //     // path: "explore",
+  //   });
+  // }
 
   get userName() {
     return this.$store.getters.username;
