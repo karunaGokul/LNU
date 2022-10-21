@@ -43,7 +43,7 @@
 import {
   CancelAppointmentModel,
   EventsModel,
-  AdminDeleteCouselling,
+  AdminDeleteCounselling,
 } from "@/model";
 import { IAdminService } from "@/service";
 import { Vue, Component, Prop, Inject } from "vue-property-decorator";

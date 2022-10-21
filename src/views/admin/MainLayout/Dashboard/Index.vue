@@ -14,7 +14,7 @@
             </v-img>
             <v-card-title>{{ data.Name }}</v-card-title>
             <v-card-text class="text--primary">{{
-              data.Description
+              data.description
             }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn icon color="primary" @click="edit(data.Id)">
