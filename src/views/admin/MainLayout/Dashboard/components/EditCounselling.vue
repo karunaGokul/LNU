@@ -91,12 +91,22 @@
             Close
           </v-btn>
           <v-btn
+            v-if="!add"
             depressed
             color="primary"
             class="text-capitalize"
             @click="save(counsellingId)"
           >
             Edit
+          </v-btn>
+          <v-btn
+            v-if="add"
+            depressed
+            color="primary"
+            class="text-capitalize"
+            @click="AddCounselling"
+          >
+            Add
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -107,7 +117,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Inject } from "vue-property-decorator";
 
-import { AdminEditCounsellingModel } from "@/model";
+import { AdminEditCounsellingModel, AdminAddCounsellingModel } from "@/model";
 import { IAdminService } from "@/service";
 @Component({
   components: {},
@@ -115,19 +125,27 @@ import { IAdminService } from "@/service";
 export default class EditCounselling extends Vue {
   @Inject("adminService") adminService: IAdminService;
   @Prop() counsellingId: string;
+  @Prop() add: string;
   public dialog: boolean = true;
   public time: number = null;
   public menu2: boolean = false;
   public request: AdminEditCounsellingModel = new AdminEditCounsellingModel();
+  public addRequest: AdminAddCounsellingModel = new AdminAddCounsellingModel();
 
   public save(id: string) {
     this.request.Id = id;
     this.$emit("save");
-    this.adminService.EditCounsellingType(this.request).then((res) => {
+    this.adminService.EditCounsellingType(this.request, id).then((res) => {
       console.log(res);
     });
   }
-
+  public AddCounselling() {
+    this.$emit("add");
+    this.addRequest = { ...this.request, ProductId: null };
+    this.adminService.AddCounsellingType(this.addRequest).then((res) => {
+      console.log(res);
+    });
+  }
   public close() {
     this.$emit("close");
   }
