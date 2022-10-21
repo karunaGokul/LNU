@@ -10,19 +10,33 @@
       <v-row class="my-5">
         <v-col cols="4" md="4" sm="12" v-for="data in response" :key="data.Id">
           <v-card class="mx-auto">
-            <v-img height="200px" :src="`data:image/png;base64,${data.image}`">
+            <v-img height="200px" :src="`data:image/png;base64,${data.Image}`">
             </v-img>
             <v-card-title>{{ data.Name }}</v-card-title>
             <v-card-text class="text--primary">{{
-              data.description
+              data.Description
             }}</v-card-text>
             <v-card-actions class="justify-end">
-              <v-btn icon color="primary" @click="edit(data.Id)">
-                <v-icon>edit</v-icon>
+              <v-btn
+                class="mx-2"
+                fab
+                dark
+                small
+                color="primary"
+                @click="edit(data.Id)"
+              >
+                <v-icon dark>edit</v-icon>
               </v-btn>
 
-              <v-btn icon color="primary" @click="deleteCounselling(data.Id)">
-                <v-icon>delete</v-icon>
+              <v-btn
+                class="mx-2"
+                fab
+                dark
+                small
+                color="primary"
+                @click="deleteCounselling(data.Id)"
+              >
+                <v-icon dark>delete</v-icon>
               </v-btn>
             </v-card-actions>
           </v-card>

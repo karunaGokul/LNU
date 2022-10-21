@@ -45,7 +45,7 @@ export class AdminCounselingTypeModel {
   Id: string;
   Image: string;
   Title: string;
-  Discription: string;
+  Description: string;
   ProductId: string;
 }
 
