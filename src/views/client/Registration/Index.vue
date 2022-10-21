@@ -30,7 +30,7 @@
 
         <div class="my-12">
           <v-form class="px-8" @submit.prevent="register" autocomplete="off">
-            <v-row class="mb-4">
+            <v-row class="mb-3">
               <v-col>
                 <v-text-field
                   label="First Name"
@@ -67,7 +67,7 @@
               </v-col>
             </v-row>
             <v-text-field
-              class="mb-8"
+              class="mb-6"
               label="User Name"
               color="primary"
               append-icon="person"
@@ -97,7 +97,7 @@
               @click:append="showPassword = !showPassword"
             ></v-text-field>
             <v-text-field
-              class="mb-8"
+              class="mb-6"
               hide-details
               label="Confirm Password"
               color="primary"

@@ -55,18 +55,18 @@ class ValHelper {
         Object.prototype.hasOwnProperty.call(evaluation, "required") &&
         !evaluation.required
       )
-        error = `Field is required`;
+        error = `* required`;
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "email") &&
         !evaluation.email
       )
-        error = `Please enter a valid email`;
+        error = `enter a valid email`;
 
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "alphaOnly") &&
         !evaluation.alphaOnly
       )
-        error = `Please enter a character`;
+        error = `enter a character`;
 
       // if (
       //   Object.prototype.hasOwnProperty.call(evaluation, "passwordRule") &&
@@ -78,31 +78,31 @@ class ValHelper {
         Object.prototype.hasOwnProperty.call(evaluation, "upperCaseLetter") &&
         !evaluation.upperCaseLetter
       )
-        error = `Please enter atleast One UpperCaseLetter`;
+        error = `enter atleast one upper case`;
 
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "lowerCaseLetter") &&
         !evaluation.lowerCaseLetter
       )
-        error = `Please enter atleast One LowerCaseLetter`;
+        error = `enter atleast one lower case`;
 
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "number") &&
         !evaluation.number
       )
-        error = `Please enter atleast One Number`;
+        error = `enter atleast one number`;
 
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "special") &&
         !evaluation.special
       )
-        error = `Please enter atleast one special character`;
+        error = `enter atleast one special character`;
 
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "numeric") &&
         !evaluation.numeric
       )
-        error = "Please enter valid number";
+        error = "enter valid number";
       if (
         Object.prototype.hasOwnProperty.call(evaluation, "minLength") &&
         !evaluation.minLength

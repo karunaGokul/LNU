@@ -1,6 +1,6 @@
 <template>
   <v-row no-gutters class="primary-linear">
-    <v-col lg="6" md="6" sm="12">
+    <v-col lg="5" md="5" sm="12">
       <v-container fill-height fluid class="pa-0 position-relative">
         <v-img src="@/assets/client-registration.jpg" height="100vh"></v-img>
         <h4
@@ -17,7 +17,7 @@
         </h4>
       </v-container>
     </v-col>
-    <v-col md="6" lg="6" sm="12">
+    <v-col md="7" lg="7" sm="12">
       <v-container
         fill-height
         fluid
@@ -26,7 +26,7 @@
         align-center
         flex-column
       >
-        <div style="width: 590px">
+        <div>
           <h2 class="mb-3 px-8 text-h4 text-start font-weight-bold">
             Create new account
           </h2>
@@ -38,7 +38,7 @@
           </div>
           <div>
             <v-form class="px-8" @submit.prevent="register">
-              <v-row>
+              <v-row class="mb-3">
                 <v-col>
                   <v-text-field
                     label="First Name"
@@ -46,6 +46,7 @@
                     append-icon="person"
                     filled
                     dense
+                    hide-details
                     required
                     v-model="request.FirstName"
                     @input="$v.request.FirstName.$touch()"
@@ -62,6 +63,7 @@
                     append-icon="person"
                     filled
                     dense
+                    hide-details
                     required
                     v-model="request.LastName"
                     @input="$v.request.LastName.$touch()"
@@ -79,6 +81,8 @@
                 filled
                 dense
                 required
+                hide-details
+                class="mb-6"
                 v-model="request.UserName"
                 @input="$v.request.UserName.$touch()"
                 @blur="$v.request.UserName.$touch()"
@@ -86,83 +90,85 @@
                   $v.request.UserName | errorMessages('UserName')
                 "
               ></v-text-field>
-
               <v-text-field
-                label="Email"
-                append-icon="email"
+                label="Password"
                 color="primary"
                 filled
                 dense
                 required
-                v-model="request.Email"
-                @input="$v.request.Email.$touch()"
-                @blur="$v.request.Email.$touch()"
-                :error-messages="$v.request.Email | errorMessages('Email')"
+                v-model="request.Password"
+                @input="$v.request.Password.$touch()"
+                @blur="$v.request.Password.$touch()"
+                :error-messages="
+                  $v.request.Password | errorMessages('Password')
+                "
+                :type="showPassword ? 'text' : 'password'"
+                :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                @click:append="showPassword = !showPassword"
+              ></v-text-field>
+              <v-text-field
+                label="Confirm Password"
+                color="primary"
+                filled
+                dense
+                required
+                hide-details
+                class="mb-6"
+                v-model="request.ConfirmPassword"
+                @input="$v.request.ConfirmPassword.$touch()"
+                @blur="$v.request.ConfirmPassword.$touch()"
+                :error-messages="
+                  $v.request.ConfirmPassword | errorMessages('ConfirmPassword')
+                "
+                :type="showConfirmpassword ? 'text' : 'password'"
+                :append-icon="
+                  showConfirmpassword ? 'visibility_off' : 'visibility'
+                "
+                @click:append="showConfirmpassword = !showConfirmpassword"
               ></v-text-field>
 
-              <v-row>
+              <v-row class="mb-3">
                 <v-col>
                   <v-text-field
-                    label="Password"
+                    label="Email"
+                    append-icon="email"
                     color="primary"
                     filled
                     dense
+                    hide-details
                     required
-                    v-model="request.Password"
-                    @input="$v.request.Password.$touch()"
-                    @blur="$v.request.Password.$touch()"
-                    :error-messages="
-                      $v.request.Password | errorMessages('Password')
-                    "
-                    :type="showPassword ? 'text' : 'password'"
-                    :append-icon="
-                      showPassword ? 'visibility_off' : 'visibility'
-                    "
-                    @click:append="showPassword = !showPassword"
+                    v-model="request.Email"
+                    @input="$v.request.Email.$touch()"
+                    @blur="$v.request.Email.$touch()"
+                    :error-messages="$v.request.Email | errorMessages('Email')"
                   ></v-text-field>
                 </v-col>
                 <v-col>
                   <v-text-field
-                    label="Confirm Password"
+                    label="Phone number"
+                    append-icon="call"
                     color="primary"
                     filled
                     dense
+                    hide-details
                     required
-                    v-model="request.ConfirmPassword"
-                    @input="$v.request.ConfirmPassword.$touch()"
-                    @blur="$v.request.ConfirmPassword.$touch()"
+                    v-model="request.PhoneNumber"
+                    @input="$v.request.PhoneNumber.$touch()"
+                    @blur="$v.request.PhoneNumber.$touch()"
                     :error-messages="
-                      $v.request.ConfirmPassword
-                        | errorMessages('ConfirmPassword')
+                      $v.request.PhoneNumber | errorMessages('PhoneNumber')
                     "
-                    :type="showConfirmpassword ? 'text' : 'password'"
-                    :append-icon="
-                      showConfirmpassword ? 'visibility_off' : 'visibility'
-                    "
-                    @click:append="showConfirmpassword = !showConfirmpassword"
                   ></v-text-field>
                 </v-col>
               </v-row>
 
-              <v-text-field
-                label="Phone number"
-                append-icon="call"
-                color="primary"
-                filled
-                dense
-                required
-                v-model="request.PhoneNumber"
-                @input="$v.request.PhoneNumber.$touch()"
-                @blur="$v.request.PhoneNumber.$touch()"
-                :error-messages="
-                  $v.request.PhoneNumber | errorMessages('PhoneNumber')
-                "
-              ></v-text-field>
               <v-select
                 label="Counseling Program"
                 color="primary"
                 filled
                 dense
+                hide-details
+                class="mb-6"
                 :items="counselingProgram"
                 append-icon="arrow_drop_down"
                 item-text="Name"
@@ -175,7 +181,7 @@
                   $v.request.CounselingType | errorMessages('CounselingType')
                 "
               ></v-select>
-              <v-row>
+              <v-row class="mb-3">
                 <v-col>
                   <v-select
                     label="Certification"
@@ -183,6 +189,7 @@
                     color="primary"
                     filled
                     dense
+                    hide-details
                     :items="certificationType"
                     item-text="name"
                     item-value="id"
@@ -203,6 +210,7 @@
                     color="primary"
                     filled
                     dense
+                    hide-details
                     required
                     v-model="request.Experience"
                     @input="$v.request.Experience.$touch()"
@@ -267,7 +275,6 @@ import { IRegistrationService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
-
 
 @Component({
   validations: {
