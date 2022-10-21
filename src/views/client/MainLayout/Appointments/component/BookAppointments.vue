@@ -295,14 +295,9 @@ export default class BookAppointments extends BaseComponent {
     this.successUrl = window.location.origin + "/client/home/success";
     this.cancelUrl = window.location.origin + "/client/home/cancel";
     this.request.AppointmentTime = "9:00";
-  }
 
-  mounted() {
-    let selectedAppointment = this.$route.query.appointment;
-    this.counselingProgram.forEach((item: any) => {
-      console.log(item.Name, selectedAppointment)
-      if (item.Name == selectedAppointment) this.request.CounselingType = item;
-      console.log(this.request.CounselingType);
+    this.request.CounselingType = this.counselingProgram.find((item: any) => {
+      return item.Name === this.$route.query.appointment;
     });
   }
 
