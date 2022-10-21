@@ -19,7 +19,7 @@
             :error-messages="$v.request.Name | errorMessages('Name')"
           ></v-text-field>
           <v-text-field
-            label="Email Id"
+            label="Email"
             type="text"
             name="email"
             color="primary"

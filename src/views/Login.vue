@@ -52,10 +52,12 @@
         align-center
         flex-column
       >
-        <h2 v-if="page == 'client'" class="mb-10 text-h4 font-weight-bold">
-          Feel stuck? We are here to help you!
+      <div v-if="page == 'client'" class="mb-10 text-center">
+        <h2 class="text-h3 font-weight-bold">
+          Feel struck? 
         </h2>
-
+        <h4 class="text-h5">We are here to help you!</h4>
+      </div>
         <div>
           <v-card
             elevation="3"
