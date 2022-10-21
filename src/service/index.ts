@@ -8,3 +8,4 @@ export * from "./coach-calendar.service";
 export * from "./appointments.service";
 export * from "./admin.service";
 export * from "./client.service";
+export * from "./dashboard.service";

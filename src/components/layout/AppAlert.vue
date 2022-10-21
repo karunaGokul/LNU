@@ -45,12 +45,12 @@ import {
   EventsModel,
   AdminDeleteCounselling,
 } from "@/model";
-import { IAdminService } from "@/service";
+import { IDashboardService } from "@/service";
 import { Vue, Component, Prop, Inject } from "vue-property-decorator";
 
 @Component
 export default class AppAlert extends Vue {
-  @Inject("adminService") adminService: IAdminService;
+  @Inject("dashboardService") dashboardService: IDashboardService;
   @Prop() counsellingId: string;
   @Prop() response: string;
   @Prop() selectedEvent: EventsModel;
@@ -71,7 +71,7 @@ export default class AppAlert extends Vue {
     this.$emit("cancelAppointment");
     this.dialog = false;
     if (id) {
-      this.adminService.DeleteCounsellingType(id).then((res) => {
+      this.dashboardService.DeleteCounsellingType(id).then((res) => {
         // console.log(res);
       });
     }

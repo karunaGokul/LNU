@@ -99,6 +99,7 @@
           >
             Edit
           </v-btn>
+
           <v-btn
             v-if="add"
             depressed
@@ -118,12 +119,12 @@
 import { Component, Vue, Prop, Inject } from "vue-property-decorator";
 
 import { AdminEditCounsellingModel, AdminAddCounsellingModel } from "@/model";
-import { IAdminService } from "@/service";
+import { IDashboardService } from "@/service";
 @Component({
   components: {},
 })
 export default class EditCounselling extends Vue {
-  @Inject("adminService") adminService: IAdminService;
+  @Inject("dashboardService") dashboardService: IDashboardService;
   @Prop() counsellingId: string;
   @Prop() add: string;
   public dialog: boolean = true;
@@ -135,14 +136,14 @@ export default class EditCounselling extends Vue {
   public save(id: string) {
     this.request.Id = id;
     this.$emit("save");
-    this.adminService.EditCounsellingType(this.request, id).then((res) => {
+    this.dashboardService.EditCounsellingType(this.request, id).then((res) => {
       console.log(res);
     });
   }
   public AddCounselling() {
     this.$emit("add");
     this.addRequest = { ...this.request, ProductId: null };
-    this.adminService.AddCounsellingType(this.addRequest).then((res) => {
+    this.dashboardService.AddCounsellingType(this.addRequest).then((res) => {
       console.log(res);
     });
   }

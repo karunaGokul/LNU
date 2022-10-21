@@ -20,6 +20,7 @@
               <v-btn icon color="primary" @click="edit(data.Id)">
                 <v-icon>edit</v-icon>
               </v-btn>
+
               <v-btn icon color="primary" @click="deleteCounselling(data.Id)">
                 <v-icon>delete</v-icon>
               </v-btn>
@@ -51,7 +52,7 @@ import AppAlert from "@/components/layout/AppAlert.vue";
 import { Component, Vue, Inject } from "vue-property-decorator";
 import EditCounselling from "./components/EditCounselling.vue";
 import { AdminCounselingTypeModel } from "@/model";
-import { IAdminService } from "@/service";
+import { IDashboardService } from "@/service";
 @Component({
   components: {
     EditCounselling,
@@ -59,7 +60,7 @@ import { IAdminService } from "@/service";
   },
 })
 export default class AdminDashboardLayout extends Vue {
-  @Inject("adminService") adminService: IAdminService;
+  @Inject("dashboardService") dashboardService: IDashboardService;
   public request: AdminCounselingTypeModel = new AdminCounselingTypeModel();
   public response: Array<AdminCounselingTypeModel> = [];
   public dialog = false;
@@ -92,7 +93,7 @@ export default class AdminDashboardLayout extends Vue {
   }
 
   public counsellingType() {
-    this.adminService.getMockCounsellingType(this.request).then((res) => {
+    this.dashboardService.getCounsellingType(this.request).then((res) => {
       console.log(this.response);
       this.response = res.data;
       console.log(this.response);
