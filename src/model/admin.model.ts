@@ -46,6 +46,7 @@ export class AdminCounselingTypeModel {
   Image: string;
   Title: string;
   Discription: string;
+  ProductId: string;
 }
 
 export class AdminEditCounsellingModel {
@@ -54,10 +55,20 @@ export class AdminEditCounsellingModel {
   Name: string;
   Summary: string;
   Description: string;
-  Duration: number;
-  Cost: number;
+  Duration: string;
+  Cost: string;
 }
 
-export class AdminDeleteCouselling {
+export class AdminAddCounsellingModel {
+  Image: string;
+  Name: string;
+  Summary: string;
+  Description: string;
+  Duration: string;
+  Cost: string;
+  ProductId: string;
+}
+
+export class AdminDeleteCounselling {
   id: string;
 }

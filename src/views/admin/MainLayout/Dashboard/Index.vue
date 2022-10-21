@@ -2,18 +2,19 @@
   <div class="primary-linear">
     <v-container fluid class="pa-16">
       <div class="d-flex justify-end">
-        <v-btn class="text-capitalize" color="primary" @click="edit"
+        <v-btn class="text-capitalize" color="primary" @click="edit('add')"
           >add program</v-btn
         >
       </div>
 
       <v-row class="my-5">
         <v-col cols="4" md="4" sm="12" v-for="data in response" :key="data.Id">
-          <v-card class="mx-auto" >
-            <v-img height="200px" :src="data.Image"> </v-img>
-            <v-card-title>{{ data.Title }}</v-card-title>
+          <v-card class="mx-auto">
+            <v-img height="200px" :src="`data:image/png;base64,${data.image}`">
+            </v-img>
+            <v-card-title>{{ data.Name }}</v-card-title>
             <v-card-text class="text--primary">{{
-              data.Discription
+              data.Description
             }}</v-card-text>
             <v-card-actions class="justify-end">
               <v-btn icon color="primary" @click="edit(data.Id)">
@@ -29,7 +30,9 @@
       <edit-counselling
         v-if="dialog"
         @save="OnClose"
+        @add="OnClose"
         :counsellingId="counsellingId"
+        :add="add"
         @close="OnClose"
       />
       <app-alert
@@ -63,11 +66,13 @@ export default class AdminDashboardLayout extends Vue {
   public deleteDialog = false;
   public img: string = "";
   public counsellingId: string;
+  public add = false;
   public handleimage(e: File) {
     this.img = URL.createObjectURL(e);
   }
   public OnClose() {
     this.dialog = false;
+    this.add = false;
   }
   public OnDelete() {
     this.deleteDialog = false;
@@ -75,6 +80,7 @@ export default class AdminDashboardLayout extends Vue {
   public edit(id: string) {
     this.counsellingId = id;
     this.dialog = true;
+    if (id === "add") this.add = true;
   }
   public deleteCounselling(id: string) {
     this.counsellingId = id;
@@ -87,7 +93,9 @@ export default class AdminDashboardLayout extends Vue {
 
   public counsellingType() {
     this.adminService.getMockCounsellingType(this.request).then((res) => {
-      this.response = res;
+      console.log(this.response);
+      this.response = res.data;
+      console.log(this.response);
     });
   }
 }
