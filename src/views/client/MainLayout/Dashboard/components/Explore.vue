@@ -1,7 +1,7 @@
 <template>
   <div class="pa-4" color="primary">
     <router-link to="/client/home/dashboard">
-      <v-btn depressed color="primary" class="white--text text-decoration-none">
+      <v-btn depressed color="primary" class="white--text text-decoration-none text-capitalize">
         <v-icon class="pr-2">keyboard_backspace</v-icon>
         Back
       </v-btn></router-link
