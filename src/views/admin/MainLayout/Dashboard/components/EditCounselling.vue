@@ -11,33 +11,30 @@
           <v-icon class="mr-n3" @click="close">close</v-icon>
         </v-card-title>
 
-        <v-card-text>
-          <div class="position-relative text-center pa-4">
+        <v-card-text class="pa-0 mb-5">
+          <div class="position-relative text-center pa-0">
             <img
               :src="viewImage"
               alt="Profile Image"
-              width="120"
-              height="130"
+              width="100%"
+              height="200"
               v-if="profilePhoto"
             />
 
-            <v-icon v-else x-large color="#E0E0E0" style="font-size: 12rem">
-              account_circle
-            </v-icon>
+            <v-card v-else outlined full-width height="200"> </v-card>
             <input
               type="file"
               ref="profileUpload"
               class="d-none"
               @change="uploadProfile"
             />
+
             <v-btn
-              color="primary"
-              fab
+              color="primary text-center"
               absolute
-              style="right: 130px; bottom: 60px"
+              style="right: 165px; bottom: 75px"
               @click.stop="openProfileUpload()"
-            >
-              <v-icon>photo_camera</v-icon>
+              >Upload File
             </v-btn>
           </div>
         </v-card-text>
