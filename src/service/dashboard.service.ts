@@ -6,7 +6,8 @@ import {
   AdminDeleteCounselling,
 } from "@/model";
 export interface IDashboardService extends IBaseService<any, any> {
-  getCounsellingType(request: any): Promise<any>;
+  getCounsellingType(): Promise<any>;
+  getDetailedCounsellingProgramById(Id: string): Promise<AdminCounselingTypeModel>;
   EditCounsellingType(
     request: AdminEditCounsellingModel,
     productId: string
@@ -21,6 +22,23 @@ export class DashboardService
   constructor() {
     super("");
   }
+
+  public getCounsellingType(): Promise<any> {
+    return this.httpGet("Admin/GetDetailedCounsellingPrograms", null).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  }
+
+  public getDetailedCounsellingProgramById(Id: string): Promise<AdminCounselingTypeModel> {
+    return this.httpGet("Admin/GetCounsellingProgramById?Id="+Id, null).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  }
+
   public AddCounsellingType(request: AdminAddCounsellingModel): Promise<any> {
     let formData = new FormData();
     formData.append("Name", request.Name);
@@ -53,12 +71,6 @@ export class DashboardService
     formData.append("Cost", request.Cost);
     return this.upload(formData, "Admin/EditCounsellingProgram");
   }
-  public getCounsellingType(request: any): Promise<any> {
-    return this.httpGet("Admin/GetDetailedCounsellingPrograms", request).then(
-      (response) => {
-        console.log(response);
-        return response;
-      }
-    );
-  }
+
+  
 }

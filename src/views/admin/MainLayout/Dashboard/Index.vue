@@ -93,10 +93,8 @@ export default class AdminDashboardLayout extends Vue {
   }
 
   public counsellingType() {
-    this.dashboardService.getCounsellingType(this.request).then((res) => {
-      console.log(this.response);
-      this.response = res.data;
-      console.log(this.response);
+    this.dashboardService.getCounsellingType().then((res) => {
+      this.response = res;
     });
   }
 }

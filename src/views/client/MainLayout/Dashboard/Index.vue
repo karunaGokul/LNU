@@ -1,51 +1,8 @@
 <template>
   <v-container fluid class="pa-16">
     <h1 class="text-h4 font-weight-bold">Welcome Back {{ userName }}!</h1>
-    <!-- <v-container>
-      <v-row class="mt-5">
-        <v-col>
-          <v-card
-            to="/client/home/profile"
-            height="150"
-            class="d-flex flex-column align-center justify-center rounded-lg"
-          >
-            <v-icon size="80px" color="primary">person</v-icon>
-            <v-card-title class="pa-0">Profile</v-card-title>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card
-            to="/client/home/appointments"
-            height="150"
-            class="d-flex flex-column align-center justify-center rounded-lg"
-          >
-            <v-icon size="80px" color="primary">book_online</v-icon>
-            <v-card-title class="pa-0">Appointments</v-card-title>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card
-            to="/client/home/messages"
-            height="150"
-            class="d-flex flex-column align-center justify-center rounded-lg"
-          >
-            <v-icon size="80px" color="primary">sms</v-icon>
-            <v-card-title class="pa-0">Messages</v-card-title>
-          </v-card>
-        </v-col>
-        <v-col class="mr-5">
-          <v-card
-            to="/client/home/payment"
-            height="150"
-            class="d-flex flex-column align-center justify-center rounded-lg"
-          >
-            <v-icon size="80px" color="primary">local_atm</v-icon>
-            <v-card-title class="pa-0">Payments</v-card-title>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container> -->
-    <v-row class="my-5">
+
+    <!--  <v-row class="my-5">
       <v-col lg="4" md="4" sm="12">
         <v-card class="mx-auto" max-width="400">
           <v-img
@@ -90,14 +47,6 @@
                 Explore
               </v-btn>
             </router-link>
-            <!-- <v-btn
-              color="primary"
-              @click="navigateExplore"
-              class="text-capitalize"
-              text
-            >
-              Explore
-            </v-btn> -->
           </v-card-actions>
         </v-card>
       </v-col>
@@ -290,9 +239,9 @@
           </v-card-actions>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row>-->
 
-    <v-row class="mt-6">
+    <!--<v-row class="mt-6">
       <v-col lg="6" md="6" sm="12">
         <v-card elevation="2" class="rounded">
           <v-card-title class="justify-space-between">
@@ -357,33 +306,65 @@
           </v-card-text>
         </v-card>
       </v-col>
+    </v-row>-->
+
+    <v-row class="my-5">
+      <v-col cols="4" md="4" sm="12" v-for="data in response" :key="data.Id">
+        <v-card class="mx-auto">
+          <v-img height="200px" :src="`data:image/png;base64,${data.image}`">
+          </v-img>
+          <v-card-title>{{ data.Name }}</v-card-title>
+          <v-card-text class="text--primary">{{
+            data.description
+          }}</v-card-text>
+          <v-card-actions class="justify-end">
+            <v-btn
+              color="primary"
+              class="text-capitalize"
+              text
+              @click="navigateBookAppointment('Behavioural Counseling')"
+            >
+              Book Appointment
+            </v-btn>
+            <router-link
+              class="text-decoration-none"
+              :to="{
+                name: 'Explore',
+                params: {
+                  id: data.Id,
+                },
+              }"
+            >
+              <v-btn text color="primary" class="text-capitalize">
+                Explore
+              </v-btn>
+            </router-link>
+          </v-card-actions>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Inject, Vue } from "vue-property-decorator";
+import { IDashboardService } from "@/service";
+import { AdminCounselingTypeModel } from "@/model";
 
 @Component
 export default class DashboardLayout extends Vue {
-  public appointments: Array<any> = [
-    {
-      date: "01/20/2021",
-      counselingType: "Behavioural Counseling",
-      status: "Completed",
-    },
-    {
-      date: "06/01/2022",
-      counselingType: "Behavioural Counseling",
-      status: "Completed",
-    },
-    {
-      date: "1/29/2022",
-      counselingType: "Behavioural Counseling",
-      status: "Pending",
-    },
-  ];
+  @Inject("dashboardService") dashboardService: IDashboardService;
+  public response: Array<AdminCounselingTypeModel> = [];
 
+  created() {
+    this.counsellingType();
+  }
+
+  public counsellingType() {
+    this.dashboardService.getCounsellingType().then((response) => {
+      this.response = response;
+    });
+  }
   public navigateBookAppointment(appointment: string) {
     this.$router.push({
       name: "Book Appointment",
@@ -391,13 +372,6 @@ export default class DashboardLayout extends Vue {
       query: { appointment: appointment },
     });
   }
-  // public navigateExplore() {
-  //   this.$router.push({
-  //     name: "Client Explore",
-  //     params: { id: "client-explore", },
-  //     // path: "explore",
-  //   });
-  // }
 
   get userName() {
     return this.$store.getters.username;

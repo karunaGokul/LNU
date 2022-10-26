@@ -29,15 +29,11 @@ export default class MainLayout extends Vue {
   }
 
   get page() {
-    let page = this.$route.path.split("/")[4];
+    let page: boolean = false,
+      name: string = this.$route.name;
+    if (name != "Book Appointment" && name != "Explore") page = true;
 
-    if (page === "book-appointment") {
-      return false;
-    } else if (page === 'client-explore') {
-      return false;
-    }
-
-    return true;
+    return page;
   }
 }
 </script>
