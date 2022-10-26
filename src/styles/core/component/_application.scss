@@ -19,3 +19,13 @@
 .v-input--reverse .v-input__slot {
   flex-direction: row-reverse;
 }
+.book-appointment__container {
+  .v-input--radio-group__input {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+
+    .v-radio.theme--light {
+      flex-basis: 240px;
+    }
+  }
+}

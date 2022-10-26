@@ -651,7 +651,7 @@ export default class ClientRegistration extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
   private UserId: any;
-  public showQuestionaire: boolean = true;
+  public showQuestionaire: boolean = false;
   public radios: number = 1;
 
   public IdentifyYourself: any = ["Man", "Woman", "Others"];

@@ -16,45 +16,30 @@
         <h1 class="pa-0 text-center mb-4">Book Appointment</h1>
         <v-form @submit.prevent="bookNow">
           <v-container class="pa-0">
-            <div class="row pa-2">
-              <div
-                v-for="(item, index) in CounselingColumn"
-                :key="index"
-                class="col-6"
-              >
-                <v-radio-group
-                  v-for="(program, i) in counselingProgram.slice(
-                    index * itemsPerRow,
-                    (index + 1) * itemsPerRow
-                  )"
-                  :key="i"
-                  v-model="request.CounselingType"
-                >
-                  <v-radio
-                    style="margin: -10px"
-                    off-icon="radio_button_unchecked"
-                    on-icon="radio_button_checked"
-                    :label="program.Name"
-                    :value="program"
-                    @click="
-                      $v.request.CounselingType.$touch();
-                      getExistingCoach();
-                    "
-                    @blur="$v.request.CounselingType.$touch()"
-                    required
-                    :error-messages="
-                      $v.request.CounselingType
-                        | errorMessages('CounselingType')
-                    "
-                  ></v-radio>
-                </v-radio-group>
-              </div>
-            </div>
+            <v-radio-group v-model="request.CounselingType" class="book-appointment__container">
+              <v-radio
+                v-for="(program, i) in counselingProgram"
+                :key="i"
+                off-icon="radio_button_unchecked"
+                on-icon="radio_button_checked"
+                :label="program.Name"
+                :value="program"
+                @click="
+                  $v.request.CounselingType.$touch();
+                  getExistingCoach();
+                "
+                @blur="$v.request.CounselingType.$touch()"
+                required
+                :error-messages="
+                  $v.request.CounselingType | errorMessages('CounselingType')
+                "
+              ></v-radio>
+            </v-radio-group>
             <div
               class="error-text text-start"
               v-if="
-                !$v.request.CounselingType.required &&
-                $v.request.CounselingType.$dirty
+              $v.request.CounselingType.$dirty &&
+                $v.request.CounselingType.$invalid
               "
             >
               Counseling Program is required
