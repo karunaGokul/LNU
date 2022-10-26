@@ -187,8 +187,9 @@ export default class EditCounselling extends Vue {
       this.counsellingType();
     }
   }
+  
   public counsellingType() {
-    this.dashboardService.getCounsellingType(this.request).then((res) => {
+    this.dashboardService.getCounsellingType().then((res) => {
       this.request = res.data.filter((a: any) => {
         return a.Id === this.counsellingId;
       })[0];
