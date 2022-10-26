@@ -181,13 +181,10 @@ export default class EditCounselling extends Vue {
   public profilePhoto: any = null;
 
   created() {
-    if (this.add) {
-      this.request = new AdminEditCounsellingModel();
-    } else {
-      this.counsellingType();
-    }
+    if (this.add) this.request = new AdminEditCounsellingModel();
+    else this.counsellingType();
   }
-  
+
   public counsellingType() {
     this.dashboardService.getCounsellingType().then((res) => {
       this.request = res.data.filter((a: any) => {
@@ -208,10 +205,16 @@ export default class EditCounselling extends Vue {
   public save(id: string) {
     this.request.Id = id;
     this.request.Image = this.profilePhoto;
-    this.$emit("save");
-    this.dashboardService.EditCounsellingType(this.request, id).then((res) => {
-      console.log(res);
-    });
+
+    this.dashboardService
+      .EditCounsellingType(this.request, id)
+      .then((res) => {
+        console.log(res);
+        this.$emit("save");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
   public AddCounselling() {
     this.$emit("add");
