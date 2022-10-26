@@ -3,10 +3,10 @@
     <v-dialog v-model="dialog" width="500">
       <v-card class="px-5 pb-2">
         <v-card-title class="mb-n1 ml-n3">
-          <v-icon class="mr-1" v-if="!add">edit</v-icon>
-          <v-icon class="mr-1" v-if="add" size="30px">add</v-icon>
-          <h4 v-if="!add">Update counselling</h4>
-          <h4 v-if="add">Add counselling</h4>
+          <v-icon class="mr-1" v-if="!addCounselling">edit</v-icon>
+          <v-icon class="mr-1" v-if="addCounselling" size="30px">add</v-icon>
+          <h4 v-if="!addCounselling">Update counselling</h4>
+          <h4 v-if="addCounselling">Add counselling</h4>
           <v-spacer></v-spacer>
           <v-icon class="mr-n3" @click="close">close</v-icon>
         </v-card-title>
@@ -41,15 +41,6 @@
             </v-btn>
           </div>
         </v-card-text>
-        <!-- <v-file-input
-          v-model="request.Image"
-          label="Add an image"
-          outlined
-          dense
-          :prepend-icon="null"
-          prepend-inner-icon="add_a_photo"
-          class="mt-5"
-        ></v-file-input> -->
 
         <v-text-field
           v-model="request.Name"
@@ -94,35 +85,6 @@
           </v-col>
         </v-row>
 
-        <!-- <v-menu
-          ref="menu"
-          v-model="menu2"
-          :close-on-content-click="false"
-          :return-value.sync="time"
-          transition="scale-transition"
-          max-width="290px"
-          min-width="290px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="time"
-              label="Select duration"
-              prepend-inner-icon="schedule"
-              readonly
-              outlined
-              dense
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-time-picker
-            v-if="menu2"
-            v-model="time"
-            full-width
-            @click:minute="$refs.menu.save(time)"
-            ampm-in-title
-          ></v-time-picker>
-        </v-menu> -->
         <v-divider></v-divider>
         <v-card-actions class="mt-3">
           <v-spacer></v-spacer>
@@ -130,17 +92,17 @@
             Close
           </v-btn>
           <v-btn
-            v-if="!add"
+            v-if="!addCounselling"
             depressed
             color="primary"
             class="text-capitalize"
-            @click="save(counsellingId)"
+            @click="save(counsellingProgramData.Id)"
           >
             Update
           </v-btn>
 
           <v-btn
-            v-if="add"
+            v-if="addCounselling"
             depressed
             color="primary"
             class="text-capitalize"
@@ -157,23 +119,19 @@
 <script lang="ts">
 import { Component, Vue, Prop, Inject } from "vue-property-decorator";
 
-import {
-  AdminEditCounsellingModel,
-  AdminAddCounsellingModel,
-  AdminCounselingTypeModel,
-} from "@/model";
+import { AdminCounselingTypeModel } from "@/model";
 import { IDashboardService } from "@/service";
+import BaseComponent from "@/components/base/BaseComponent";
 @Component({
   components: {},
 })
-export default class EditCounselling extends Vue {
+export default class EditCounselling extends BaseComponent {
   @Inject("dashboardService") dashboardService: IDashboardService;
 
-  @Prop() counsellingId: string;
-  @Prop() add: string;
+  @Prop() counsellingProgramData: AdminCounselingTypeModel;
+  @Prop() addCounselling: string;
 
-  public request: AdminEditCounsellingModel = new AdminEditCounsellingModel();
-  public addRequest: AdminAddCounsellingModel = new AdminAddCounsellingModel();
+  public request: AdminCounselingTypeModel = new AdminCounselingTypeModel();
 
   public dialog: boolean = true;
   public time: number = null;
@@ -181,48 +139,48 @@ export default class EditCounselling extends Vue {
   public profilePhoto: any = null;
 
   created() {
-    if (this.add) this.request = new AdminEditCounsellingModel();
-    else this.counsellingType();
+    if (!this.counsellingProgramData) return;
+    this.counsellingType();
   }
 
   public counsellingType() {
-    this.dashboardService.getCounsellingType().then((res) => {
-      this.request = res.data.filter((a: any) => {
-        return a.Id === this.counsellingId;
-      })[0];
-      console.log(this.request);
-      if (this.request.Image) {
-        fetch(this.$vuehelper.getImageUrl(this.request.Image))
-          .then((res) => res.blob())
-          .then((blob) => {
-            this.profilePhoto = new File([blob], this.request.Name, {
-              type: "image/png",
-            });
+    this.request = this.counsellingProgramData;
+    if (this.request.Image) {
+      fetch(this.$vuehelper.getImageUrl(this.request.Image))
+        .then((res) => res.blob())
+        .then((blob) => {
+          this.profilePhoto = new File([blob], this.request.Name, {
+            type: "image/png",
           });
-      }
-    });
+        });
+    }
   }
   public save(id: string) {
-    this.request.Id = id;
     this.request.Image = this.profilePhoto;
-
+    this.loadingSpinner("show");
     this.dashboardService
       .EditCounsellingType(this.request, id)
       .then((res) => {
-        console.log(res);
+        this.loadingSpinner("hide");
         this.$emit("save");
       })
       .catch((err) => {
         console.error(err);
       });
   }
+
   public AddCounselling() {
-    this.$emit("add");
     this.request.Image = this.profilePhoto;
-    this.addRequest = { ...this.request, ProductId: null };
-    this.dashboardService.AddCounsellingType(this.addRequest).then((res) => {
-      console.log(res);
-    });
+    this.loadingSpinner("show");
+    this.dashboardService
+      .AddCounsellingType(this.request)
+      .then((res) => {
+        this.loadingSpinner("hide");
+        this.$emit("addCounselling");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   public close() {
     this.$emit("close");

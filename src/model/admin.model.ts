@@ -44,31 +44,13 @@ export class UpdateSummaryRequestModel {
 export class AdminCounselingTypeModel {
   Id: string;
   Image: string;
-  Title: string;
-  Description: string;
-  ProductId: string;
-}
-
-export class AdminEditCounsellingModel {
-  Id: string;
-  Image: string;
   Name: string;
-  Summary: string;
   Description: string;
+  ProductId?: string;
   Duration: string;
   Cost: string;
-}
-
-export class AdminAddCounsellingModel {
-  Image: string;
-  Name: string;
   Summary: string;
-  Description: string;
-  Duration: string;
-  Cost: string;
-  ProductId: string;
 }
-
 export class AdminDeleteCounselling {
   id: string;
 }

@@ -1,19 +1,16 @@
 import { IBaseService, BaseService } from "./base.service";
-import {
-  AdminCounselingTypeModel,
-  AdminAddCounsellingModel,
-  AdminEditCounsellingModel,
-  AdminDeleteCounselling,
-} from "@/model";
+import { AdminCounselingTypeModel, AdminDeleteCounselling } from "@/model";
 export interface IDashboardService extends IBaseService<any, any> {
   getCounsellingType(): Promise<any>;
-  getDetailedCounsellingProgramById(Id: string): Promise<AdminCounselingTypeModel>;
+  getDetailedCounsellingProgramById(
+    Id: string
+  ): Promise<AdminCounselingTypeModel>;
   EditCounsellingType(
-    request: AdminEditCounsellingModel,
+    request: AdminCounselingTypeModel,
     productId: string
   ): Promise<any>;
   DeleteCounsellingType(request: AdminDeleteCounselling): Promise<any>;
-  AddCounsellingType(request: AdminAddCounsellingModel): Promise<any>;
+  AddCounsellingType(request: AdminCounselingTypeModel): Promise<any>;
 }
 export class DashboardService
   extends BaseService<any, any>
@@ -31,15 +28,17 @@ export class DashboardService
     );
   }
 
-  public getDetailedCounsellingProgramById(Id: string): Promise<AdminCounselingTypeModel> {
-    return this.httpGet("Admin/GetCounsellingProgramById?Id="+Id, null).then(
+  public getDetailedCounsellingProgramById(
+    Id: string
+  ): Promise<AdminCounselingTypeModel> {
+    return this.httpGet("Admin/GetCounsellingProgramById?Id=" + Id, null).then(
       (response) => {
         return response.data;
       }
     );
   }
 
-  public AddCounsellingType(request: AdminAddCounsellingModel): Promise<any> {
+  public AddCounsellingType(request: AdminCounselingTypeModel): Promise<any> {
     let formData = new FormData();
     formData.append("Name", request.Name);
     formData.append("Image", request.Image);
@@ -71,6 +70,4 @@ export class DashboardService
     formData.append("Cost", request.Cost);
     return this.upload(formData, "Admin/EditCounsellingProgram");
   }
-
-  
 }

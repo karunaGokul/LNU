@@ -2,7 +2,10 @@
   <div class="primary-linear">
     <v-container fluid class="pa-16">
       <div class="d-flex justify-end">
-        <v-btn class="text-capitalize" color="primary" @click="edit('add')"
+        <v-btn
+          class="text-capitalize"
+          color="primary"
+          @click="edit('addCounselling')"
           >add program</v-btn
         >
       </div>
@@ -45,16 +48,16 @@
       <edit-counselling
         v-if="dialog"
         @save="OnClose"
-        @add="OnClose"
-        :counsellingId="counsellingId"
-        :add="add"
+        @addCounselling="OnClose"
+        :counsellingProgramData="counsellingProgramData"
+        :addCounselling="addCounselling"
         @close="OnClose"
       />
       <app-alert
         v-if="deleteDialog"
         user="Admin"
         @cancelAppointment="OnDelete"
-        :counsellingId="counsellingId"
+        :counsellingProgramData="counsellingProgramData"
         @close="OnDelete"
       />
     </v-container>
@@ -81,36 +84,47 @@ export default class AdminDashboardLayout extends BaseComponent {
   public dialog = false;
   public deleteDialog = false;
   public img: string = "";
-  public counsellingId: string;
-  public add = false;
-  public handleimage(e: File) {
-    this.img = URL.createObjectURL(e);
-  }
-  public OnClose() {
-    this.dialog = false;
-    this.add = false;
-  }
-  public OnDelete() {
-    this.deleteDialog = false;
-  }
-  public edit(id: string) {
-    this.counsellingId = id;
-    this.dialog = true;
-    if (id === "add") this.add = true;
-  }
-  public deleteCounselling(id: string) {
-    this.counsellingId = id;
-    this.deleteDialog = true;
-  }
+  public counsellingProgramData: any;
+  public addCounselling = false;
 
   created() {
     this.counsellingType();
   }
 
+  public handleimage(e: File) {
+    this.img = URL.createObjectURL(e);
+  }
+  public OnClose() {
+    this.dialog = false;
+    this.addCounselling = false;
+  }
+  public OnDelete() {
+    this.deleteDialog = false;
+  }
+  public edit(id: string) {
+    this.counsellingProgramData = this.response.filter((counsellingType) => {
+      return counsellingType.Id === id;
+    })[0];
+
+    this.dialog = true;
+    if (id === "addCounselling") this.addCounselling = true;
+  }
+  public deleteCounselling(id: string) {
+    this.counsellingProgramData = id;
+    this.deleteDialog = true;
+  }
+
   public counsellingType() {
-    this.dashboardService.getCounsellingType().then((res) => {
-      this.response = res;
-    });
+    this.loadingSpinner("show");
+    this.dashboardService
+      .getCounsellingType()
+      .then((res) => {
+        this.response = res;
+        this.loadingSpinner("hide");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 </script>
