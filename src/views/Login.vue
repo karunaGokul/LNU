@@ -56,7 +56,7 @@
         <h2 class="text-h3 font-weight-bold">
           Feel struck? 
         </h2>
-        <h4 class="text-h5">We are here to help you!</h4>
+        <h4 class="text-h6">We are here to help you!</h4>
       </div>
         <div>
           <v-card
