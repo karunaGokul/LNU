@@ -7,6 +7,7 @@
       @updateCalender="onUpdateCalender"
       @reschedule="rescheduleAppoinment"
       @cancelAppointment="cancelAppoinment"
+      @confirmAppointment="cancelAppoinment"
     />
 
     <reschedule-appointment

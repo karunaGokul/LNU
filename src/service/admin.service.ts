@@ -38,7 +38,7 @@ export class AdminService
 
   public confirmAppointment(request: ConfirmAppointmentModel): Promise<any> {
     return this.httpPost(
-      "Admin/ConfirmAppointment?appointmentId=" + request.appointmentId,
+      "Appointment/ConfirmAppointment?appointmentId=" + request.appointmentId,
       null
     ).then((response) => {
       return response.data;

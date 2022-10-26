@@ -161,6 +161,15 @@
                       >assign coach</v-btn
                     >
                     <v-btn
+                      plain
+                      dark
+                      class="text-capitalize"
+                      color="primary"
+                      v-if="User == 'Coach'"
+                      @click="confirmAppointment"
+                      >confirm</v-btn
+                    >
+                    <v-btn
                       class="text-capitalize"
                       plain
                       color="primary"
@@ -270,6 +279,15 @@ export default class Calendar extends BaseComponent {
   public deleteAppointment(value: boolean) {
     this.showAlert = true;
     this.selectedOpen = false;
+  }
+
+  public confirmAppointment() {
+    this.request.appointmentId = this.selectedEvent.id;
+    this.loadingSpinner("show");
+    this.service.confirmAppointment(this.request).then((response: any) => {
+      this.loadingSpinner("hide");
+      this.$emit("confirmAppointment");
+    });
   }
 
   public cancelAppointment() {
