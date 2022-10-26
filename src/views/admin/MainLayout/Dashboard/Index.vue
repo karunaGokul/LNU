@@ -71,6 +71,7 @@ import EditCounselling from "./components/EditCounselling.vue";
 import { AdminCounselingTypeModel } from "@/model";
 import { IDashboardService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
+import store from "@/store";
 @Component({
   components: {
     EditCounselling,
@@ -97,6 +98,10 @@ export default class AdminDashboardLayout extends BaseComponent {
   public OnClose() {
     this.dialog = false;
     this.addCounselling = false;
+    
+    this.counsellingType();
+    store.dispatch("removeCounselingProgram");
+    store.dispatch("counselingProgram");
   }
   public OnDelete() {
     this.deleteDialog = false;

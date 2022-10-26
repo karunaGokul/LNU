@@ -56,6 +56,10 @@ const actions: ActionTree<any, any> = {
   appointmentRequest(context, payload) {
     context.commit("onAppointmentRequest", payload);
   },
+
+  removeCounselingProgram(context) {
+    context.state.counselingProgram = [];
+  },
 };
 
 export const ContextModule = {
