@@ -8,7 +8,7 @@ export class RegisterModel {
   ConfirmPassword: string;
 }
 export class ClientRegistrationModel extends RegisterModel {
-  CounselingType: string;
+  CounselingType?: string;
   Role: string;
 }
 

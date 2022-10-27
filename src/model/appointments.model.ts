@@ -85,6 +85,10 @@ export class EventsModel {
   status: string;
   tellAboutYourSelf: string;
   clientSummary: string;
+  coachId: string;
+
+  appointmentDate: string;
+  appointmentTime: string;
 }
 
 export class AppointmentByStatusRequestModel {

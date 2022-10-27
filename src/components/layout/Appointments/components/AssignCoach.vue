@@ -53,17 +53,10 @@
           class="text-capitalize"
           color="primary"
           @click="assignCoach"
-          v-if="!coachAssigned && !selectedEvent.coachName"
+         
           >Assign</v-btn
         >
-        <v-btn
-          dark
-          class="text-capitalize"
-          color="primary"
-          v-if="coachAssigned || selectedEvent.coachName"
-          @click="confirmAppointment"
-          >Confirm</v-btn
-        >
+       
         <v-btn class="text-capitalize ml-3" color="red" dark @click="close"
           >cancel</v-btn
         >
@@ -95,39 +88,32 @@ export default class AssignCoach extends BaseComponent {
   public requestAssignCoach: AssignCoachModel = new AssignCoachModel();
   public responseCoach: Array<CoachDetailsModel> = [];
   public coachName: string;
-  public coachAssigned: boolean = false;
 
   public selectedCoachName: string = "";
 
   created() {
-    console.log(this.selectedEvent.counselingTypeId);
     this.getCoachesBySelection();
   }
 
-  public confirmAppointment() {
-    this.request.appointmentId = this.selectedEvent.id;
-    this.loadingSpinner("show");
-    this.adminService.confirmAppointment(this.request).then((response: any) => {
-      this.loadingSpinner("hide");
-      // this.dialog = false;
-      this.$emit("done");
-    });
-  }
-
   private close() {
-    // this.dialog = false;
     this.$emit("close");
   }
 
   private assignCoach() {
     this.requestAssignCoach.appointmentId = this.selectedEvent.id;
-    this.requestAssignCoach.coachId = this.selectedCoachName;
+
+    if(this.selectedCoachName) {
+      this.requestAssignCoach.coachId = this.selectedCoachName;
+    } else {
+      this.requestAssignCoach.coachId = this.selectedEvent.coachId;
+    }
+        
     this.loadingSpinner("show");
     this.adminService
       .assignCoach(this.requestAssignCoach)
       .then((response: any) => {
         this.loadingSpinner("hide");
-        this.coachAssigned = true;
+        this.$emit("done");
       });
   }
 
