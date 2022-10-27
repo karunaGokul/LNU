@@ -17,7 +17,6 @@
             </v-img>
             <v-card-title>{{ data.Name }}</v-card-title>
             <v-card-text class="text--primary">
-              {{ data.Description }} <br />
               {{ data.Summary }}
             </v-card-text>
             <v-card-actions class="justify-end">
@@ -75,7 +74,6 @@ import AppAlert from "@/components/layout/AppAlert.vue";
 import AddCounselingProgram from "./components/AddCounselingProgram.vue";
 import { DashboardResponseModel } from "@/model";
 import { IDashboardService } from "@/service";
-
 
 @Component({
   components: {
@@ -135,6 +133,7 @@ export default class AdminDashboardLayout extends BaseComponent {
   }
 
   public onClose() {
+    this.seletedCounselingProgram = new DashboardResponseModel();
     this.showAddProgramModel = false;
   }
   public OnDelete() {

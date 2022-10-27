@@ -3,10 +3,10 @@
     <v-dialog v-model="dialog" width="500">
       <v-card>
         <v-card-title class="text-h5 font-weight-bold">
-          <v-icon :size="modelType == 'Add' ? '30px' : ''">{{
-            modelType == 'Add' ? "add" : "edit"
+          <v-icon class="mr-2" :size="modelType == 'Add' ? '30px' : ''">{{
+            modelType == "Add" ? "add" : "edit"
           }}</v-icon>
-          {{ modelType == 'Add' ? "Add" : "Update" }} Counseling Program
+          {{ modelType == "Add" ? "Add" : "Update" }} Counseling Program
 
           <v-spacer></v-spacer>
           <v-icon class="mr-n3" @click="close">close</v-icon>
@@ -30,8 +30,14 @@
               class="d-none"
               @change="uploadProfile"
             />
-
+            <v-icon
+              style="left: 211px; bottom: 203px; cursor: pointer"
+              dark
+              @click="removeImage"
+              >close</v-icon
+            >
             <v-btn
+              v-if="!profilePhoto"
               color="primary text-center"
               absolute
               style="right: 165px; bottom: 75px"
@@ -39,21 +45,36 @@
               >Upload File
             </v-btn>
           </div>
+          <!-- <p
+            v-if="!request.Image"
+            class="red--text para text-caption"
+            style="margin-top: -25px !important"
+          >
+            *required
+          </p> -->
           <v-text-field
-            v-model="request.Name"
             label="Title"
             color="primary"
             dense
             required
             outlined
             class="mt-4"
+            v-model="request.Name"
+            @input="$v.request.Name.$touch()"
+            @blur="$v.request.Name.$touch()"
+            :error-messages="$v.request.Name | errorMessages('Name')"
           ></v-text-field>
           <v-textarea
-            v-model="request.Description"
             dense
             name="input-7-4"
             label="Description"
             outlined
+            v-model="request.Description"
+            @input="$v.request.Description.$touch()"
+            @blur="$v.request.Description.$touch()"
+            :error-messages="
+              $v.request.Description | errorMessages('Description')
+            "
           ></v-textarea>
           <v-textarea
             v-model="request.Summary"
@@ -61,24 +82,35 @@
             name="input-7-4"
             label="Summary"
             outlined
+            @input="$v.request.Summary.$touch()"
+            @blur="$v.request.Summary.$touch()"
+            :error-messages="$v.request.Summary | errorMessages('Summary')"
           ></v-textarea>
           <v-row>
             <v-col>
               <v-text-field
-                v-model="request.Duration"
                 label="Duration"
                 outlined
                 dense
                 prepend-inner-icon="schedule"
+                v-model="request.Duration"
+                @input="$v.request.Duration.$touch()"
+                @blur="$v.request.Duration.$touch()"
+                :error-messages="
+                  $v.request.Duration | errorMessages('Duration')
+                "
               ></v-text-field>
             </v-col>
             <v-col>
               <v-text-field
-                v-model="request.Cost"
                 label="Cost"
                 outlined
                 dense
                 prepend-inner-icon="currency_rupee"
+                v-model="request.Cost"
+                @input="$v.request.Cost.$touch()"
+                @blur="$v.request.Cost.$touch()"
+                :error-messages="$v.request.Cost | errorMessages('Cost')"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -97,7 +129,7 @@
             class="text-capitalize px-12 py-5"
             @click="AddCounsellingProgram"
           >
-            {{ modelType == 'Add' ? "Add Progam" : "Update Progam" }}
+            {{ modelType == "Add" ? "Add Progam" : "Update Progam" }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -107,12 +139,22 @@
 
 <script lang="ts">
 import { Component, Prop, Inject } from "vue-property-decorator";
-
+import { required, numeric } from "vuelidate/lib/validators";
 import { DashboardResponseModel } from "@/model";
 import { IDashboardService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 @Component({
   components: {},
+  validations: {
+    request: {
+      Image: { required },
+      Name: { required },
+      Description: { required },
+      Summary: { required },
+      Duration: { required, numeric },
+      Cost: { required, numeric },
+    },
+  },
 })
 export default class EditCounselling extends BaseComponent {
   @Inject("dashboardService") dashboardService: IDashboardService;
@@ -128,6 +170,7 @@ export default class EditCounselling extends BaseComponent {
 
   created() {
     if (!this.response) return;
+    console.log(this.response);
     this.request = this.$vuehelper.clone(this.response);
 
     if (this.request.Image) {
@@ -142,24 +185,34 @@ export default class EditCounselling extends BaseComponent {
   }
 
   public AddCounsellingProgram() {
-    let path = this.modelType == 'Add' ? 'AddCounsellingProgram' : 'EditCounsellingProgram';
-    this.request.Image = this.profilePhoto;
-    this.loadingSpinner("show");
-    this.dashboardService
-      .AddCounsellingProgram(path, this.request)
-      .then((res) => {
-        this.loadingSpinner("hide");
-        this.$emit("counselingProgamAdded");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.$v.$touch();
+    if (!this.$v.$invalid) {
+      let path =
+        this.modelType == "Add"
+          ? "AddCounsellingProgram"
+          : "EditCounsellingProgram";
+      this.request.Image = this.profilePhoto;
+      this.loadingSpinner("show");
+      this.dashboardService
+        .AddCounsellingProgram(path, this.request)
+        .then((res) => {
+          this.loadingSpinner("hide");
+          this.$emit("counselingProgamAdded");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   public close() {
     this.$emit("close");
   }
-
+  public removeImage() {
+    this.request.Image = null;
+    this.profilePhoto = this.request.Image;
+    console.log(this.request);
+  }
   public uploadProfile(event: any) {
     let file: File = event.target.files[0];
     if (!file) return;

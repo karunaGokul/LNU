@@ -155,7 +155,7 @@
                     <v-label>Review Notes:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{}}</h4>
+                    <h4>{{ reviewNotes }}</h4>
                   </v-col>
                 </v-row>
                 <v-row
@@ -168,7 +168,7 @@
                     <v-label>Link:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{}}</h4>
+                    <h4>{{ reviewLink }}</h4>
                   </v-col>
                 </v-row>
                 <v-row
@@ -183,7 +183,10 @@
                       dark
                       class="text-capitalize"
                       color="primary"
-                      v-if="(User == 'Admin') && (this.selectedEvent.status === 'Pending')"
+                      v-if="
+                        User == 'Admin' &&
+                        this.selectedEvent.status === 'Pending'
+                      "
                       @click="assignCoach"
                       >assign coach</v-btn
                     >
@@ -192,7 +195,10 @@
                       dark
                       class="text-capitalize"
                       color="primary"
-                      v-if="(User == 'Coach') && (this.selectedEvent.status === 'Pending')"
+                      v-if="
+                        User == 'Coach' &&
+                        this.selectedEvent.status === 'Pending'
+                      "
                       @click="confirmAppointment"
                       >confirm</v-btn
                     >
@@ -285,7 +291,8 @@ import { IAdminService } from "@/service";
 export default class Calendar extends BaseComponent {
   @Prop() events: Array<EventsModel>;
   @Prop() User: string;
-
+  @Prop() reviewNotes: string;
+  @Prop() reviewLink: string;
   @Inject("adminService") service: IAdminService;
 
   public request: CancelAppointmentModel = new CancelAppointmentModel();

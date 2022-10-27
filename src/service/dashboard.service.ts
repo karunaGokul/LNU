@@ -1,7 +1,6 @@
 import { IBaseService, BaseService } from "./base.service";
 import { AdminDeleteCounselling, DashboardResponseModel } from "@/model";
 export interface IDashboardService extends IBaseService<any, any> {
-
   getCounsellingProgram(): Promise<Array<DashboardResponseModel>>;
   getDetailedCounsellingProgramById(
     Id: string
@@ -56,9 +55,11 @@ export class DashboardService
   }
 
   public DeleteCounsellingType(request: AdminDeleteCounselling): Promise<any> {
-    return new Promise((resolve, reject) => {
-      console.log(request);
-      resolve(request);
+    return this.httpPost(
+      "Admin/DeleteCounsellingProgram?Id=" + request,
+      null
+    ).then((response) => {
+      return response.data;
     });
   }
 }

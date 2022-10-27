@@ -3,6 +3,8 @@
     <calendar
       :events="events"
       :User="User"
+      :reviewNotes="reviewNotes"
+      :reviewLink="reviewLink"
       @assignCoach="assignCoach"
       @updateCalender="onUpdateCalender"
       @reschedule="rescheduleAppoinment"
@@ -68,8 +70,8 @@ export default class AppointmentsLayout extends Vue {
   public selectedEvent: any;
   public appointmentId: string = "";
   public rescheduleDate: any;
-  public reviewNotes: string;
-  public reviewLink: string;
+  public reviewNotes: string = "";
+  public reviewLink: string = "";
 
   public request: AppoinmentRequestModel = new AppoinmentRequestModel();
   public response: Array<AppointmentResponseModel> = [];

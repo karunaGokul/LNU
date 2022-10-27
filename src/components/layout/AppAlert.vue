@@ -22,7 +22,7 @@
             depressed
             color="primary"
             class="text-capitalize"
-            @click="cancelAppointment(counsellingId)"
+            @click="cancelAppointment(counsellingProgramData)"
             >yes</v-btn
           >
           <v-btn
@@ -51,7 +51,7 @@ import { Vue, Component, Prop, Inject } from "vue-property-decorator";
 @Component
 export default class AppAlert extends Vue {
   @Inject("dashboardService") dashboardService: IDashboardService;
-  @Prop() counsellingId: string;
+  @Prop() counsellingProgramData: string;
   @Prop() response: string;
   @Prop() selectedEvent: EventsModel;
   @Prop() user: string;
@@ -69,6 +69,7 @@ export default class AppAlert extends Vue {
 
   public cancelAppointment(id: any) {
     this.$emit("cancelAppointment");
+    console.log(id, "id");
     this.dialog = false;
     if (id) {
       this.dashboardService.DeleteCounsellingType(id).then((res) => {
