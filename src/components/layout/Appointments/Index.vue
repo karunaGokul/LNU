@@ -6,6 +6,7 @@
       @assignCoach="assignCoach"
       @updateCalender="onUpdateCalender"
       @reschedule="rescheduleAppoinment"
+      @review="reviewAppoinment"
       @cancelAppointment="cancelAppoinment"
       @confirmAppointment="cancelAppoinment"
     />
@@ -23,6 +24,12 @@
       @done="updateAppointment"
       @close="onClose"
     />
+    <review-appointment
+      @close="onClose"
+      @review="onReviewAppointment"
+      v-if="showReviewAppoinment"
+      :appointmentId="appointmentId"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -31,7 +38,7 @@ import { Component, Vue, Inject, Prop } from "vue-property-decorator";
 import Calendar from "./components/Calender.vue";
 import RescheduleAppointment from "./components/RescheduleAppointment.vue";
 import AssignCoach from "./components/AssignCoach.vue";
-
+import ReviewAppointment from "./components/ReviewAppointment.vue";
 import { IAppointmentService } from "@/service";
 
 import {
@@ -45,6 +52,7 @@ import {
     RescheduleAppointment,
     Calendar,
     AssignCoach,
+    ReviewAppointment,
   },
 })
 export default class AppointmentsLayout extends Vue {
@@ -55,9 +63,12 @@ export default class AppointmentsLayout extends Vue {
 
   public showBookAppoinment: boolean = false;
   public showAssignCoach: boolean = false;
+  public showReviewAppoinment: boolean = false;
   public selectedEvent: any;
   public appointmentId: string = "";
   public rescheduleDate: any;
+  public reviewNotes: string;
+  public reviewLink: string;
 
   public request: AppoinmentRequestModel = new AppoinmentRequestModel();
   public response: Array<AppointmentResponseModel> = [];
@@ -133,11 +144,22 @@ export default class AppointmentsLayout extends Vue {
     this.showBookAppoinment = false;
     // location.reload();
     this.showAssignCoach = false;
+    this.showReviewAppoinment = false;
   }
 
+  public onReviewAppointment(notes: string, link: string) {
+    this.reviewNotes = notes;
+    this.reviewLink = link;
+    this.showReviewAppoinment = false;
+  }
   public rescheduleAppoinment(id: string) {
     this.appointmentId = id;
     this.showBookAppoinment = true;
+  }
+
+  public reviewAppoinment(id: string) {
+    this.appointmentId = id;
+    this.showReviewAppoinment = true;
   }
 
   public onAppointmentRescheduled() {

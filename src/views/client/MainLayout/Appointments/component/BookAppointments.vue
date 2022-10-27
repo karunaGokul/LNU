@@ -8,7 +8,7 @@
         @click="back"
       >
         <v-icon class="pr-2">keyboard_backspace</v-icon>
-        Back
+        Appoinments
       </v-btn>
     </div>
     <v-row class="px-15 mt-2" justify="center">
@@ -16,7 +16,10 @@
         <h1 class="pa-0 text-center mb-4">Book Appointment</h1>
         <v-form @submit.prevent="bookNow">
           <v-container class="pa-0">
-            <v-radio-group v-model="request.CounselingType" class="book-appointment__container">
+            <v-radio-group
+              v-model="request.CounselingType"
+              class="book-appointment__container"
+            >
               <v-radio
                 v-for="(program, i) in counselingProgram"
                 :key="i"
@@ -38,7 +41,7 @@
             <div
               class="error-text text-start"
               v-if="
-              $v.request.CounselingType.$dirty &&
+                $v.request.CounselingType.$dirty &&
                 $v.request.CounselingType.$invalid
               "
             >

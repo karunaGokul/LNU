@@ -146,6 +146,32 @@
                 </v-row>
                 <v-row
                   v-if="
+                    User !== 'Coach' ||
+                    this.selectedEvent.status === 'Confirmed'
+                  "
+                >
+                  <v-col>
+                    <v-label>Review Notes:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{}}</h4>
+                  </v-col>
+                </v-row>
+                <v-row
+                  v-if="
+                    User !== 'Coach' ||
+                    this.selectedEvent.status === 'Confirmed'
+                  "
+                >
+                  <v-col>
+                    <v-label>Link:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{}}</h4>
+                  </v-col>
+                </v-row>
+                <v-row
+                  v-if="
                     this.selectedEvent.status === 'Pending' ||
                     this.selectedEvent.status === 'Confirmed'
                   "
@@ -169,13 +195,6 @@
                       @click="confirmAppointment"
                       >confirm</v-btn
                     >
-                    <v-btn
-                      class="text-capitalize"
-                      plain
-                      color="primary"
-                      @click="reschedule"
-                      >Reschedule</v-btn
-                    >
                   </v-col>
 
                   <v-col>
@@ -185,6 +204,32 @@
                       color="red"
                       @click="deleteAppointment"
                       >Cancel Appointment</v-btn
+                    >
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col
+                    v-if="
+                      this.selectedEvent.status === 'Pending' ||
+                      this.selectedEvent.status === 'Confirmed'
+                    "
+                  >
+                    <v-btn
+                      class="text-capitalize"
+                      plain
+                      color="primary"
+                      @click="reschedule"
+                      >Reschedule</v-btn
+                    >
+                  </v-col>
+                  <v-col v-if="this.selectedEvent.status === 'Confirmed'">
+                    <v-btn
+                      v-if="User == 'Coach'"
+                      class="text-capitalize"
+                      plain
+                      color="primary"
+                      @click="review"
+                      >Review</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -306,6 +351,12 @@ export default class Calendar extends BaseComponent {
   public reschedule() {
     this.selectedOpen = false;
     this.$emit("reschedule", this.selectedEvent.id);
+  }
+
+  public review() {
+    this.selectedOpen = false;
+
+    this.$emit("review", this.selectedEvent.id);
   }
 
   public viewDay(data: any) {
