@@ -40,17 +40,6 @@ export class UpdateSummaryRequestModel {
   clientId: string;
   Summary: string;
 }
-
-export class AdminCounselingTypeModel {
-  Id: string;
-  Image: string;
-  Name: string;
-  Description: string;
-  ProductId?: string;
-  Duration: string;
-  Cost: string;
-  Summary: string;
-}
 export class AdminDeleteCounselling {
   id: string;
 }

@@ -276,8 +276,6 @@ export default class BookAppointments extends BaseComponent {
 
   public existingCoach: Array<CoachDetailsModel> = [];
 
-  public itemsPerRow: number = 3;
-
   created() {
     this.publishableKey = Settings.PublicKey;
     this.successUrl = window.location.origin + "/client/home/success";
@@ -355,12 +353,6 @@ export default class BookAppointments extends BaseComponent {
 
   get counselingProgram() {
     return this.$store.getters.counselingProgram;
-  }
-
-  get CounselingColumn() {
-    return Array.from(
-      Array(Math.ceil(this.counselingProgram.length / this.itemsPerRow)).keys()
-    );
   }
 }
 </script>

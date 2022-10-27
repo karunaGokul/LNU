@@ -7,9 +7,10 @@
           <v-img height="200px" :src="$vuehelper.getImageUrl(data.Image)">
           </v-img>
           <v-card-title>{{ data.Name }}</v-card-title>
-          <v-card-text class="text--primary">{{
-            data.description
-          }}</v-card-text>
+          <v-card-text class="text--primary">
+            {{ data.description }}
+            {{ data.Summary }}
+            </v-card-text>
           <v-card-actions class="justify-end">
             <v-btn
               color="primary"
@@ -42,20 +43,22 @@
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-property-decorator";
 import { IDashboardService } from "@/service";
-import { AdminCounselingTypeModel } from "@/model";
+import { DashboardResponseModel } from "@/model";
+import BaseComponent from "@/components/base/BaseComponent";
 
 @Component
-export default class DashboardLayout extends Vue {
+export default class DashboardLayout extends BaseComponent {
   @Inject("dashboardService") dashboardService: IDashboardService;
-  public response: Array<AdminCounselingTypeModel> = [];
+  public response: Array<DashboardResponseModel> = [];
 
   created() {
-    this.counsellingType();
+    this.getCounsellingProgram();
   }
 
-  public counsellingType() {
-    this.dashboardService.getCounsellingType().then((response) => {
+  public getCounsellingProgram() {
+    this.dashboardService.getCounsellingProgram().then((response) => {
       this.response = response;
+      this.loadingSpinner("hide");
     });
   }
   public navigateBookAppointment(appointment: string) {
