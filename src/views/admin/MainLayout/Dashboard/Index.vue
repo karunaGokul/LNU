@@ -66,13 +66,16 @@
 </template>
 
 <script lang="ts">
-import AppAlert from "@/components/layout/AppAlert.vue";
 import { Component, Inject } from "vue-property-decorator";
+import BaseComponent from "@/components/base/BaseComponent";
+import store from "@/store";
+
+import AppAlert from "@/components/layout/AppAlert.vue";
 import AddCounselingProgram from "./components/AddCounselingProgram.vue";
 import { DashboardResponseModel } from "@/model";
 import { IDashboardService } from "@/service";
-import BaseComponent from "@/components/base/BaseComponent";
-import store from "@/store";
+
+
 @Component({
   components: {
     AddCounselingProgram,

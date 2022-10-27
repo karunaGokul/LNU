@@ -95,7 +95,7 @@
             depressed
             color="primary"
             class="text-capitalize px-12 py-5"
-            @click="save"
+            @click="AddCounsellingProgram"
           >
             {{ modelType == 'Add' ? "Add Progam" : "Update Progam" }}
           </v-btn>

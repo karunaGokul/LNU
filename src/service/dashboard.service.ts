@@ -1,7 +1,7 @@
 import { IBaseService, BaseService } from "./base.service";
 import { AdminDeleteCounselling, DashboardResponseModel } from "@/model";
 export interface IDashboardService extends IBaseService<any, any> {
-  
+
   getCounsellingProgram(): Promise<Array<DashboardResponseModel>>;
   getDetailedCounsellingProgramById(
     Id: string
@@ -9,8 +9,7 @@ export interface IDashboardService extends IBaseService<any, any> {
   DeleteCounsellingType(request: AdminDeleteCounselling): Promise<any>;
   AddCounsellingProgram(
     path: string,
-    request: DashboardResponseModel,
-    productId?: string
+    request: DashboardResponseModel
   ): Promise<DashboardResponseModel>;
 }
 export class DashboardService
@@ -41,8 +40,7 @@ export class DashboardService
 
   public AddCounsellingProgram(
     path: string,
-    request: DashboardResponseModel,
-    productId?: string
+    request: DashboardResponseModel
   ): Promise<DashboardResponseModel> {
     let formData = new FormData();
     formData.append("Name", request.Name);
@@ -52,7 +50,7 @@ export class DashboardService
     formData.append("Duration", request.Duration);
     formData.append("Cost", request.Cost);
 
-    if (path == "EditCounsellingProgram") formData.append("Id", productId);
+    if (path == "EditCounsellingProgram") formData.append("Id", request.Id);
 
     return this.upload(formData, `Admin/${path}`);
   }
