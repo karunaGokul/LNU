@@ -122,10 +122,11 @@
                 </v-row>
                 <v-row>
                   <v-col>
-                    <v-label>Appointment Time:</v-label>
+                    <v-label>Appointment Date & Time:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{ this.selectedEvent.start }}</h4>
+                    <h4>{{ this.selectedEvent.appointmentDate }}</h4>
+                    <h4>{{ this.selectedEvent.appointmentTime }}</h4>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -156,7 +157,7 @@
                       dark
                       class="text-capitalize"
                       color="primary"
-                      v-if="User == 'Admin'"
+                      v-if="(User == 'Admin') && (this.selectedEvent.status === 'Pending')"
                       @click="assignCoach"
                       >assign coach</v-btn
                     >
@@ -165,7 +166,7 @@
                       dark
                       class="text-capitalize"
                       color="primary"
-                      v-if="User == 'Coach'"
+                      v-if="(User == 'Coach') && (this.selectedEvent.status === 'Pending')"
                       @click="confirmAppointment"
                       >confirm</v-btn
                     >
@@ -305,7 +306,7 @@ export default class Calendar extends BaseComponent {
 
   public reschedule() {
     this.selectedOpen = false;
-    this.$emit("reschedule", this.selectedEvent.id);
+    this.$emit("reschedule", this.selectedEvent.id, this.selectedEvent);
   }
 
   public viewDay(data: any) {

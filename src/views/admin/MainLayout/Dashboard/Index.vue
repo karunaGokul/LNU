@@ -16,9 +16,10 @@
             <v-img height="200px" :src="`data:image/png;base64,${data.Image}`">
             </v-img>
             <v-card-title>{{ data.Name }}</v-card-title>
-            <v-card-text class="text--primary">{{
-              data.Description
-            }}</v-card-text>
+            <v-card-text class="text--primary">
+              {{ data.Description }} <br />
+              {{ data.Summary }}
+            </v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
                 class="mx-2"

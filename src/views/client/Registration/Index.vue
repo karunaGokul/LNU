@@ -605,7 +605,6 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
       Password: {
         required,
         minLength: minLength(8),
-        // passwordRule,
         upperCaseLetter: (value: any) => {
           let validation = false;
           if (value && value != "") validation = /^(?=.*?[A-Z])/.test(value);
@@ -696,13 +695,11 @@ export default class ClientRegistration extends BaseComponent {
       this.loadingSpinner("show");
       this.registerService.clientRegister(this.request).then(
         (response: Array<ClientRegistrationModel>) => {
-          console.log(response);
           this.UserId = response;
           this.loadingSpinner("hide");
           this.showQuestionaire = true;
         },
         (err) => {
-          console.log(err.status);
           this.loadingSpinner("hide");
           if (err.response.status === 400) {
             this.snackbarText = err.response.data;

@@ -8,21 +8,13 @@
           </v-card-title>
 
           <v-card-text>
-            <v-select
+            <v-text-field
               label="Counseling Program"
               outlined
               dense
-              v-model="request.CounselingType"
-              :items="counselingProgram"
-              item-text="Name"
-              @change="$v.request.CounselingType.$touch()"
-              @blur="$v.request.CounselingType.$touch()"
-              required
-              :error-messages="
-                $v.request.CounselingType | errorMessages('CounselingType')
-              "
-              return-object
-            ></v-select>
+              readonly
+              v-model="selectedEvent.name"
+            ></v-text-field>
             <v-menu
               v-model="menu1"
               :close-on-content-click="false"
@@ -91,10 +83,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            
-            <v-btn text @click="close" class="text-capitalize">
-              Cancel
-            </v-btn>
+
+            <v-btn text @click="close" class="text-capitalize"> Cancel </v-btn>
 
             <v-btn
               depressed
@@ -114,7 +104,7 @@
 import { Vue, Component, Prop, Inject } from "vue-property-decorator";
 
 import { IAppointmentService, IRegistrationService } from "@/service";
-import { BookAppointmentRequestModel, CounselingModel } from "@/model";
+import { BookAppointmentRequestModel } from "@/model";
 
 import BaseComponent from "@/components/base/BaseComponent";
 import { required } from "vuelidate/lib/validators";
@@ -133,8 +123,7 @@ export default class RescheduleAppointment extends BaseComponent {
   @Inject("appointmentService") service: IAppointmentService;
 
   @Prop() appointmentId: string;
-
-  public CounselingTypes: Array<CounselingModel> = [];
+  @Prop() selectedEvent: any;
 
   public request: BookAppointmentRequestModel =
     new BookAppointmentRequestModel();
@@ -146,6 +135,11 @@ export default class RescheduleAppointment extends BaseComponent {
   public date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
     .toISOString()
     .substr(0, 10);
+
+  created() {
+    this.request.AppointmentDate = this.selectedEvent.appointmentDate;
+    this.request.AppointmentTime = this.selectedEvent.appointmentTime;
+  }
 
   public reschedule() {
     this.$v.$touch();
@@ -169,8 +163,8 @@ export default class RescheduleAppointment extends BaseComponent {
     this.$emit("close");
   }
 
-  get counselingProgram() {
-    return this.$store.getters.counselingProgram;
-  }
+  // get counselingProgram() {
+  //   return this.$store.getters.counselingProgram;
+  // }
 }
 </script>

@@ -15,6 +15,7 @@
       @appointmentRescheduled="onAppointmentRescheduled"
       @close="onClose"
       :appointmentId="appointmentId"
+      :selectedEvent="selectedEvent"
     />
 
     <assign-coach
@@ -82,9 +83,14 @@ export default class AppointmentsLayout extends Vue {
           event.clientName = item.clientName;
           event.coachName = item.coachName;
           event.id = item.id;
+          event.coachId = item.coachId;
           event.counselingTypeId = item.counselingType.Id;
           event.tellAboutYourSelf = item.tellAboutYourSelf;
           event.clientSummary = item.clientSummary;
+          event.appointmentDate = new Date(item.appointmentDate)
+            .toISOString()
+            .slice(0, 10);
+          event.appointmentTime = item.appointmentTime;
 
           if (event.status == "Confirmed") event.color = "#408D43";
           else if (event.status == "Completed") event.color = "#5e5c57";
@@ -135,9 +141,10 @@ export default class AppointmentsLayout extends Vue {
     this.showAssignCoach = false;
   }
 
-  public rescheduleAppoinment(id: string) {
+  public rescheduleAppoinment(id: string, event: any) {
     this.appointmentId = id;
     this.showBookAppoinment = true;
+    this.selectedEvent = event;
   }
 
   public onAppointmentRescheduled() {
