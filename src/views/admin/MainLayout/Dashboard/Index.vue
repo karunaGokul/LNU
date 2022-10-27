@@ -5,8 +5,8 @@
         <v-btn
           class="text-capitalize"
           color="primary"
-          @click="edit('addCounselling')"
-          >add program</v-btn
+          @click="addCounselingProgram"
+          >Add Program</v-btn
         >
       </div>
 
@@ -27,7 +27,7 @@
                 dark
                 small
                 color="primary"
-                @click="edit(data.Id)"
+                @click="updateCounselingProgram(data)"
               >
                 <v-icon dark>edit</v-icon>
               </v-btn>
@@ -46,14 +46,15 @@
           </v-card>
         </v-col>
       </v-row>
-      <edit-counselling
-        v-if="dialog"
-        @save="OnClose"
-        @addCounselling="OnClose"
-        :counsellingProgramData="counsellingProgramData"
-        :addCounselling="addCounselling"
-        @close="OnClose"
+
+      <add-counseling-program
+        v-if="showAddProgramModel"
+        :response="seletedCounselingProgram"
+        :modelType="modelType"
+        @counselingProgamAdded="onUpdateProgam"
+        @close="onClose"
       />
+
       <app-alert
         v-if="deleteDialog"
         user="Admin"
@@ -67,63 +68,39 @@
 
 <script lang="ts">
 import AppAlert from "@/components/layout/AppAlert.vue";
-import { Component, Vue, Inject } from "vue-property-decorator";
-import EditCounselling from "./components/EditCounselling.vue";
-import { AdminCounselingTypeModel } from "@/model";
+import { Component, Inject } from "vue-property-decorator";
+import AddCounselingProgram from "./components/AddCounselingProgram.vue";
+import { DashboardResponseModel } from "@/model";
 import { IDashboardService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 import store from "@/store";
 @Component({
   components: {
-    EditCounselling,
+    AddCounselingProgram,
     AppAlert,
   },
 })
 export default class AdminDashboardLayout extends BaseComponent {
   @Inject("dashboardService") dashboardService: IDashboardService;
-  public request: AdminCounselingTypeModel = new AdminCounselingTypeModel();
-  public response: Array<AdminCounselingTypeModel> = [];
-  public dialog = false;
+
+  public response: Array<DashboardResponseModel> = [];
+  public seletedCounselingProgram: DashboardResponseModel =
+    new DashboardResponseModel();
+  public showAddProgramModel = false;
+  public modelType: string = "Add";
+
   public deleteDialog = false;
   public img: string = "";
   public counsellingProgramData: any;
-  public addCounselling = false;
 
   created() {
-    this.counsellingType();
+    this.getCounsellingProgram();
   }
 
-  public handleimage(e: File) {
-    this.img = URL.createObjectURL(e);
-  }
-  public OnClose() {
-    this.dialog = false;
-    this.addCounselling = false;
-
-    // this.counsellingType();
-    // store.dispatch("removeCounselingProgram");
-    // store.dispatch("counselingProgram");
-  }
-  public OnDelete() {
-    this.deleteDialog = false;
-  }
-  public edit(id: string) {
-    this.counsellingProgramData = this.response.filter((counsellingType) => {
-      return counsellingType.Id === id;
-    })[0];
-
-    this.dialog = true;
-    if (id === "addCounselling") this.addCounselling = true;
-  }
-  public deleteCounselling(id: string) {
-    this.counsellingProgramData = id;
-    this.deleteDialog = true;
-  }
-
-  public counsellingType() {
+  public getCounsellingProgram() {
     this.loadingSpinner("show");
     this.dashboardService
-      .getCounsellingType()
+      .getCounsellingProgram()
       .then((res) => {
         this.response = res;
         this.loadingSpinner("hide");
@@ -131,6 +108,39 @@ export default class AdminDashboardLayout extends BaseComponent {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  public addCounselingProgram() {
+    this.modelType = "Add";
+    this.showAddProgramModel = true;
+  }
+
+  public updateCounselingProgram(
+    seletedCounselingProgram: DashboardResponseModel
+  ) {
+    this.seletedCounselingProgram = seletedCounselingProgram;
+    this.modelType = "Update";
+    this.showAddProgramModel = true;
+  }
+
+  public onUpdateProgam() {
+    this.seletedCounselingProgram = new DashboardResponseModel();
+    this.showAddProgramModel = false;
+    store.dispatch("removeCounselingProgram");
+    store.dispatch("counselingProgram");
+    this.getCounsellingProgram();
+  }
+
+  public onClose() {
+    this.showAddProgramModel = false;
+  }
+  public OnDelete() {
+    this.deleteDialog = false;
+  }
+
+  public deleteCounselling(id: string) {
+    this.counsellingProgramData = id;
+    this.deleteDialog = true;
   }
 }
 </script>

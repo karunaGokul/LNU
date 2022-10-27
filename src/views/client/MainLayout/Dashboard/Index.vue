@@ -43,21 +43,20 @@
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-property-decorator";
 import { IDashboardService } from "@/service";
-import { AdminCounselingTypeModel } from "@/model";
+import { DashboardResponseModel } from "@/model";
 import BaseComponent from "@/components/base/BaseComponent";
 
 @Component
 export default class DashboardLayout extends BaseComponent {
   @Inject("dashboardService") dashboardService: IDashboardService;
-  public response: Array<AdminCounselingTypeModel> = [];
+  public response: Array<DashboardResponseModel> = [];
 
   created() {
-    this.counsellingType();
+    this.getCounsellingProgram();
   }
 
-  public counsellingType() {
-    this.loadingSpinner("show");
-    this.dashboardService.getCounsellingType().then((response) => {
+  public getCounsellingProgram() {
+    this.dashboardService.getCounsellingProgram().then((response) => {
       this.response = response;
       this.loadingSpinner("hide");
     });

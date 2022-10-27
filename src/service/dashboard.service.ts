@@ -1,16 +1,17 @@
 import { IBaseService, BaseService } from "./base.service";
-import { AdminCounselingTypeModel, AdminDeleteCounselling } from "@/model";
+import { AdminDeleteCounselling, DashboardResponseModel } from "@/model";
 export interface IDashboardService extends IBaseService<any, any> {
-  getCounsellingType(): Promise<any>;
+  
+  getCounsellingProgram(): Promise<Array<DashboardResponseModel>>;
   getDetailedCounsellingProgramById(
     Id: string
-  ): Promise<AdminCounselingTypeModel>;
-  EditCounsellingType(
-    request: AdminCounselingTypeModel,
-    productId: string
-  ): Promise<any>;
+  ): Promise<DashboardResponseModel>;
   DeleteCounsellingType(request: AdminDeleteCounselling): Promise<any>;
-  AddCounsellingType(request: AdminCounselingTypeModel): Promise<any>;
+  AddCounsellingProgram(
+    path: string,
+    request: DashboardResponseModel,
+    productId?: string
+  ): Promise<DashboardResponseModel>;
 }
 export class DashboardService
   extends BaseService<any, any>
@@ -20,7 +21,7 @@ export class DashboardService
     super("");
   }
 
-  public getCounsellingType(): Promise<any> {
+  public getCounsellingProgram(): Promise<Array<DashboardResponseModel>> {
     return this.httpGet("Admin/GetDetailedCounsellingPrograms", null).then(
       (response) => {
         return response.data;
@@ -30,7 +31,7 @@ export class DashboardService
 
   public getDetailedCounsellingProgramById(
     Id: string
-  ): Promise<AdminCounselingTypeModel> {
+  ): Promise<DashboardResponseModel> {
     return this.httpGet("Admin/GetCounsellingProgramById?Id=" + Id, null).then(
       (response) => {
         return response.data;
@@ -38,7 +39,11 @@ export class DashboardService
     );
   }
 
-  public AddCounsellingType(request: AdminCounselingTypeModel): Promise<any> {
+  public AddCounsellingProgram(
+    path: string,
+    request: DashboardResponseModel,
+    productId?: string
+  ): Promise<DashboardResponseModel> {
     let formData = new FormData();
     formData.append("Name", request.Name);
     formData.append("Image", request.Image);
@@ -46,10 +51,10 @@ export class DashboardService
     formData.append("Description", request.Description);
     formData.append("Duration", request.Duration);
     formData.append("Cost", request.Cost);
-    console.log(request);
-    console.log(formData);
 
-    return this.upload(formData, "Admin/AddCounsellingProgram");
+    if (path == "EditCounsellingProgram") formData.append("Id", productId);
+
+    return this.upload(formData, `Admin/${path}`);
   }
 
   public DeleteCounsellingType(request: AdminDeleteCounselling): Promise<any> {
@@ -57,17 +62,5 @@ export class DashboardService
       console.log(request);
       resolve(request);
     });
-  }
-  public EditCounsellingType(request: any, productId: string): Promise<any> {
-    request.Id = productId;
-    let formData = new FormData();
-    formData.append("Id", request.Id);
-    formData.append("Name", request.Name);
-    formData.append("Image", request.Image);
-    formData.append("Summary", request.Summary);
-    formData.append("Description", request.Description);
-    formData.append("Duration", request.Duration);
-    formData.append("Cost", request.Cost);
-    return this.upload(formData, "Admin/EditCounsellingProgram");
   }
 }
