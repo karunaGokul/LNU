@@ -147,8 +147,8 @@
                 </v-row>
                 <v-row
                   v-if="
-                    User !== 'Coach' ||
-                    this.selectedEvent.status === 'Confirmed'
+                    this.selectedEvent.status === 'Confirmed' &&
+                    User !== 'Coach'
                   "
                 >
                   <v-col>
@@ -160,8 +160,8 @@
                 </v-row>
                 <v-row
                   v-if="
-                    User !== 'Coach' ||
-                    this.selectedEvent.status === 'Confirmed'
+                    this.selectedEvent.status === 'Confirmed' &&
+                    User !== 'Coach'
                   "
                 >
                   <v-col>
