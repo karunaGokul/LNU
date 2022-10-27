@@ -50,13 +50,13 @@ import { Component, Inject } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
 
 import { IDashboardService } from "@/service";
-import { AdminCounselingTypeModel } from "@/model";
+import { DashboardResponseModel } from "@/model";
 
 @Component
 export default class Explore extends BaseComponent {
   @Inject("dashboardService") service: IDashboardService;
 
-  public response: AdminCounselingTypeModel = new AdminCounselingTypeModel();
+  public response: DashboardResponseModel = new DashboardResponseModel();
 
   mounted() {
     this.service
