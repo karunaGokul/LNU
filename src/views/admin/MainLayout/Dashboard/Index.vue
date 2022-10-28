@@ -5,28 +5,38 @@
         <v-btn
           class="text-capitalize"
           color="primary"
+          depressed
           @click="addCounselingProgram"
-          >Add Program</v-btn
+          >
+            <v-icon class="pr-2">add_box</v-icon>
+          Add Program</v-btn
         >
       </div>
 
       <v-row class="my-5">
-        <v-col cols="4" md="4" sm="12" v-for="data in response" :key="data.Id">
+        <v-col
+          cols="4"
+          md="4"
+          sm="12"
+          v-for="(item, index) in response"
+          :key="index"
+        >
           <v-card class="mx-auto">
-            <v-img height="200px" :src="`data:image/png;base64,${data.Image}`">
+            <v-img height="200px" :src="`data:image/png;base64,${item.Image}`">
             </v-img>
-            <v-card-title>{{ data.Name }}</v-card-title>
+            <v-card-title>{{ item.Name }}</v-card-title>
             <v-card-text class="text--primary">
-              {{ data.Summary }}
+              {{ item.Summary }}
             </v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
                 class="mx-2"
                 fab
                 dark
+                depressed
                 small
                 color="primary"
-                @click="updateCounselingProgram(data)"
+                @click="updateCounselingProgram(item)"
               >
                 <v-icon dark>edit</v-icon>
               </v-btn>
@@ -35,9 +45,10 @@
                 class="mx-2"
                 fab
                 dark
+                depressed
                 small
-                color="primary"
-                @click="deleteCounselling(data.Id)"
+                color="red"
+                @click="confimProgram(item)"
               >
                 <v-icon dark>delete</v-icon>
               </v-btn>
@@ -55,11 +66,10 @@
       />
 
       <app-alert
-        v-if="deleteDialog"
-        user="Admin"
-        @cancelAppointment="OnDelete"
-        :counsellingProgramData="counsellingProgramData"
-        @close="OnDelete"
+        message="Are you sure you want to delete Counseling progam"
+        @No="cancelDeleteProgram"
+        @Yes="deleteProgram"
+        v-if="showDeleteModel"
       />
     </v-container>
   </div>
@@ -90,8 +100,7 @@ export default class AdminDashboardLayout extends BaseComponent {
   public showAddProgramModel = false;
   public modelType: string = "Add";
 
-  public deleteDialog = false;
-  public img: string = "";
+  public showDeleteModel = false;
   public counsellingProgramData: any;
 
   created() {
@@ -136,13 +145,27 @@ export default class AdminDashboardLayout extends BaseComponent {
     this.seletedCounselingProgram = new DashboardResponseModel();
     this.showAddProgramModel = false;
   }
-  public OnDelete() {
-    this.deleteDialog = false;
+
+  public confimProgram(seletedCounselingProgram: DashboardResponseModel) {
+    this.seletedCounselingProgram = seletedCounselingProgram;
+    this.showDeleteModel = true;
   }
 
-  public deleteCounselling(id: string) {
-    this.counsellingProgramData = id;
-    this.deleteDialog = true;
+  public cancelDeleteProgram() {
+    this.seletedCounselingProgram = new DashboardResponseModel();
+    this.showDeleteModel = false;
+  }
+
+  public deleteProgram() {
+    this.dashboardService
+      .deleteProgam(this.seletedCounselingProgram.Id)
+      .then((response) => {
+        this.cancelDeleteProgram();
+        this.getCounsellingProgram();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 }
 </script>

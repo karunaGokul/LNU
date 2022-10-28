@@ -1,15 +1,15 @@
 import { IBaseService, BaseService } from "./base.service";
-import { AdminDeleteCounselling, DashboardResponseModel } from "@/model";
+import { DashboardResponseModel } from "@/model";
 export interface IDashboardService extends IBaseService<any, any> {
   getCounsellingProgram(): Promise<Array<DashboardResponseModel>>;
   getDetailedCounsellingProgramById(
     Id: string
   ): Promise<DashboardResponseModel>;
-  DeleteCounsellingType(request: AdminDeleteCounselling): Promise<any>;
   AddCounsellingProgram(
     path: string,
     request: DashboardResponseModel
   ): Promise<DashboardResponseModel>;
+  deleteProgam(id: string): Promise<any>;
 }
 export class DashboardService
   extends BaseService<any, any>
@@ -54,12 +54,11 @@ export class DashboardService
     return this.upload(formData, `Admin/${path}`);
   }
 
-  public DeleteCounsellingType(request: AdminDeleteCounselling): Promise<any> {
-    return this.httpPost(
-      "Admin/DeleteCounsellingProgram?Id=" + request,
-      null
-    ).then((response) => {
-      return response.data;
-    });
+  public deleteProgam(id: string): Promise<any> {
+    return this.httpPost("Admin/DeleteCounsellingProgram?Id=" + id, null).then(
+      (response) => {
+        return response.data;
+      }
+    );
   }
 }

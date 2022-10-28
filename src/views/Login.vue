@@ -169,15 +169,15 @@
           <v-snackbar
             v-model="snackbar"
             :timeout="2000"
-            color="deep-orange lighten-5 pink--text"
+            color="red white--text"
             right
             top
           >
-            <v-icon color="pink">priority_high </v-icon>
+            <v-icon color="white">priority_high </v-icon>
             {{ snackbarText }}
 
             <template v-slot:action="{ attrs }">
-              <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+              <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
                 <v-icon> close</v-icon>
               </v-btn>
             </template>

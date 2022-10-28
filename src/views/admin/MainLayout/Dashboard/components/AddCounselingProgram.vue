@@ -1,140 +1,132 @@
 <template>
-  <div>
-    <v-dialog v-model="dialog" width="500">
-      <v-card>
-        <v-card-title class="text-h5 font-weight-bold">
-          <v-icon class="mr-2" :size="modelType == 'Add' ? '30px' : ''">{{
-            modelType == "Add" ? "add" : "edit"
-          }}</v-icon>
-          {{ modelType == "Add" ? "Add" : "Update" }} Counseling Program
+  <v-dialog v-model="dialog" persistent width="500">
+    <v-card>
+      <v-card-title class="text-h6 font-weight-bold">
+        <v-icon class="mr-2" :size="modelType == 'Add' ? '30px' : ''">{{
+          modelType == "Add" ? "add" : "edit"
+        }}</v-icon>
+        {{ modelType == "Add" ? "Add" : "Update" }} Counseling Program
 
-          <v-spacer></v-spacer>
-          <v-icon class="mr-n3" @click="close">close</v-icon>
-        </v-card-title>
-        <v-divider></v-divider>
+        <v-spacer></v-spacer>
+        <v-icon class="mr-n3" @click="close">close</v-icon>
+      </v-card-title>
+      <v-divider></v-divider>
 
-        <v-card-text class="pa-4">
-          <div class="position-relative text-center pa-0">
-            <img
-              :src="viewImage"
-              alt="Profile Image"
-              width="100%"
-              height="200"
-              v-if="profilePhoto"
-            />
-
-            <v-card v-else outlined full-width height="200"> </v-card>
-            <input
-              type="file"
-              ref="profileUpload"
-              class="d-none"
-              @change="uploadProfile"
-            />
-            <v-icon
-              style="left: 211px; bottom: 203px; cursor: pointer"
-              dark
-              @click="removeImage"
-              >close</v-icon
-            >
-            <v-btn
-              v-if="!profilePhoto"
-              color="primary text-center"
-              absolute
-              style="right: 165px; bottom: 75px"
-              @click.stop="openProfileUpload()"
-              >Upload File
-            </v-btn>
-          </div>
-          <!-- <p
-            v-if="!request.Image"
-            class="red--text para text-caption"
-            style="margin-top: -25px !important"
-          >
-            *required
-          </p> -->
-          <v-text-field
-            label="Title"
-            color="primary"
-            dense
-            required
-            outlined
-            class="mt-4"
-            v-model="request.Name"
-            @input="$v.request.Name.$touch()"
-            @blur="$v.request.Name.$touch()"
-            :error-messages="$v.request.Name | errorMessages('Name')"
-          ></v-text-field>
-          <v-textarea
-            dense
-            name="input-7-4"
-            label="Description"
-            outlined
-            v-model="request.Description"
-            @input="$v.request.Description.$touch()"
-            @blur="$v.request.Description.$touch()"
-            :error-messages="
-              $v.request.Description | errorMessages('Description')
-            "
-          ></v-textarea>
-          <v-textarea
-            v-model="request.Summary"
-            dense
-            name="input-7-4"
-            label="Summary"
-            outlined
-            @input="$v.request.Summary.$touch()"
-            @blur="$v.request.Summary.$touch()"
-            :error-messages="$v.request.Summary | errorMessages('Summary')"
-          ></v-textarea>
-          <v-row>
-            <v-col>
-              <v-text-field
-                label="Duration"
-                outlined
-                dense
-                prepend-inner-icon="schedule"
-                v-model="request.Duration"
-                @input="$v.request.Duration.$touch()"
-                @blur="$v.request.Duration.$touch()"
-                :error-messages="
-                  $v.request.Duration | errorMessages('Duration')
-                "
-              ></v-text-field>
-            </v-col>
-            <v-col>
-              <v-text-field
-                label="Cost"
-                outlined
-                dense
-                prepend-inner-icon="currency_rupee"
-                v-model="request.Cost"
-                @input="$v.request.Cost.$touch()"
-                @blur="$v.request.Cost.$touch()"
-                :error-messages="$v.request.Cost | errorMessages('Cost')"
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </v-card-text>
-
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn text class="text-capitalize mr-2" @click="close">
-            Close
-          </v-btn>
-
+      <v-card-text class="pa-4 overflow-auto" style="height: 500px">
+        <v-card class="position-relative" height="200" elevation="1">
+          <img
+            :src="viewImage"
+            alt="Profile Image"
+            width="100%"
+            height="200"
+            v-if="profilePhoto"
+          />
+          <input
+            type="file"
+            ref="profileUpload"
+            class="d-none"
+            @change="uploadProfile"
+          />
           <v-btn
-            depressed
-            color="primary"
-            class="text-capitalize px-12 py-5"
-            @click="AddCounsellingProgram"
+            absolute
+            class="position-right"
+            dark
+            @click="removeImage"
+            icon
+            color="black"
+            v-if="profilePhoto"
           >
-            {{ modelType == "Add" ? "Add Progam" : "Update Progam" }}
+            <v-icon>close</v-icon>
           </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
+          <v-btn
+            v-else
+            absolute
+            class="position-center"
+            color="primary"
+            outlined
+            @click.stop="openProfileUpload()"
+            >Upload File
+          </v-btn>
+        </v-card>
+
+        <v-text-field
+          label="Title"
+          color="primary"
+          dense
+          required
+          outlined
+          class="mt-4"
+          v-model="request.Name"
+          @input="$v.request.Name.$touch()"
+          @blur="$v.request.Name.$touch()"
+          :error-messages="$v.request.Name | errorMessages('Name')"
+        ></v-text-field>
+        <v-textarea
+          dense
+          name="input-7-4"
+          label="Description"
+          outlined
+          v-model="request.Description"
+          @input="$v.request.Description.$touch()"
+          @blur="$v.request.Description.$touch()"
+          :error-messages="
+            $v.request.Description | errorMessages('Description')
+          "
+        ></v-textarea>
+        <v-textarea
+          v-model="request.Summary"
+          dense
+          name="input-7-4"
+          label="Summary"
+          outlined
+          @input="$v.request.Summary.$touch()"
+          @blur="$v.request.Summary.$touch()"
+          :error-messages="$v.request.Summary | errorMessages('Summary')"
+        ></v-textarea>
+        <v-row>
+          <v-col>
+            <v-text-field
+              label="Duration"
+              outlined
+              dense
+              prepend-inner-icon="schedule"
+              v-model="request.Duration"
+              @input="$v.request.Duration.$touch()"
+              @blur="$v.request.Duration.$touch()"
+              :error-messages="$v.request.Duration | errorMessages('Duration')"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              label="Cost"
+              outlined
+              dense
+              prepend-inner-icon="currency_rupee"
+              v-model="request.Cost"
+              @input="$v.request.Cost.$touch()"
+              @blur="$v.request.Cost.$touch()"
+              :error-messages="$v.request.Cost | errorMessages('Cost')"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card-text>
+
+      <v-divider></v-divider>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn text class="text-capitalize mr-2" @click="close"> Close </v-btn>
+
+        <v-btn
+          depressed
+          color="primary"
+          class="text-capitalize px-12 py-5"
+          @click="AddCounsellingProgram"
+        >
+          {{ modelType == "Add" ? "Add Progam" : "Update Progam" }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script lang="ts">
@@ -144,7 +136,6 @@ import { DashboardResponseModel } from "@/model";
 import { IDashboardService } from "@/service";
 import BaseComponent from "@/components/base/BaseComponent";
 @Component({
-  components: {},
   validations: {
     request: {
       Image: { required },
@@ -170,7 +161,6 @@ export default class EditCounselling extends BaseComponent {
 
   created() {
     if (!this.response) return;
-    console.log(this.response);
     this.request = this.$vuehelper.clone(this.response);
 
     if (this.request.Image) {
@@ -208,11 +198,13 @@ export default class EditCounselling extends BaseComponent {
   public close() {
     this.$emit("close");
   }
+
   public removeImage() {
     this.request.Image = null;
     this.profilePhoto = this.request.Image;
     console.log(this.request);
   }
+
   public uploadProfile(event: any) {
     let file: File = event.target.files[0];
     if (!file) return;
