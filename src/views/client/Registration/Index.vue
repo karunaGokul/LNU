@@ -633,8 +633,7 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
         numeric,
         minLength: minLength(10),
         maxLength: maxLength(10),
-      },
-      CounselingType: { required },
+      }
     },
   },
 })
@@ -642,7 +641,6 @@ export default class ClientRegistration extends BaseComponent {
   @Inject("registerService") registerService: IRegistrationService;
 
   public request: ClientRegistrationModel = new ClientRegistrationModel();
-
   public questionnaireRequest: QuestionnaireModel = new QuestionnaireModel();
 
   public showPassword: boolean = false;
