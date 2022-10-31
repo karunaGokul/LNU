@@ -104,7 +104,9 @@ export default class AppointmentsLayout extends Vue {
             .toISOString()
             .slice(0, 10);
           event.appointmentTime = item.appointmentTime;
-
+          event.canConfirm = item.canConfirm;
+          event.canReschedule = item.canReschedule;
+          
           if (event.status == "Confirmed") event.color = "#408D43";
           else if (event.status == "Completed") event.color = "#5e5c57";
           else if (event.status == "Pending") event.color = "#cfa532";

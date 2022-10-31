@@ -173,20 +173,21 @@
                 </v-row>
                 <v-row
                   v-if="
-                    this.selectedEvent.status === 'Pending' ||
-                    this.selectedEvent.status === 'Confirmed'
+                    selectedEvent.status === 'Pending' ||
+                    selectedEvent.status === 'Confirmed'
                   "
                 >
-                  <v-col cols="5" md="5">
+                  <v-col
+                    cols="5"
+                    md="5"
+                    v-if="selectedEvent.status === 'Pending'"
+                  >
                     <v-btn
                       plain
                       dark
                       class="text-capitalize"
                       color="primary"
-                      v-if="
-                        User == 'Admin' &&
-                        this.selectedEvent.status === 'Pending'
-                      "
+                      v-if="User == 'Admin'"
                       @click="assignCoach"
                       >assign coach</v-btn
                     >
@@ -195,10 +196,7 @@
                       dark
                       class="text-capitalize"
                       color="primary"
-                      v-if="
-                        User == 'Coach' &&
-                        this.selectedEvent.status === 'Pending'
-                      "
+                      v-if="User != 'Admin' && selectedEvent.canConfirm"
                       @click="confirmAppointment"
                       >confirm</v-btn
                     >
@@ -217,8 +215,8 @@
                 <v-row>
                   <v-col
                     v-if="
-                      this.selectedEvent.status === 'Pending' ||
-                      this.selectedEvent.status === 'Confirmed'
+                      selectedEvent.status === 'Pending' ||
+                      selectedEvent.status === 'Confirmed'
                     "
                   >
                     <v-btn
@@ -226,6 +224,7 @@
                       plain
                       color="primary"
                       @click="reschedule"
+                      v-if="selectedEvent.canReschedule"
                       >Reschedule</v-btn
                     >
                   </v-col>

@@ -64,12 +64,14 @@ export class AppointmentResponseModel {
   id: string;
   tellAboutYourSelf: string;
   clientSummary: string;
+  canConfirm: boolean;
+  canReschedule: boolean;
+  
   // appointmentStartTime: string;
   // appointmentEndTime: string;
   // status: Array<AppointmentStatusModel>;
   // createdDate: string;
   // updatedDate: string;
- 
 }
 export class EventsModel {
   name: string;
@@ -89,6 +91,8 @@ export class EventsModel {
 
   appointmentDate: string;
   appointmentTime: string;
+  canConfirm: boolean;
+  canReschedule: boolean;
 }
 
 export class AppointmentByStatusRequestModel {
