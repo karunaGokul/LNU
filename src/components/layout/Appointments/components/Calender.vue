@@ -180,7 +180,7 @@
                   <v-col
                     cols="5"
                     md="5"
-                    v-if="selectedEvent.status === 'Pending'"
+                    v-if="selectedEvent.status === 'Pending' && User == 'Admin'"
                   >
                     <v-btn
                       plain
@@ -191,6 +191,16 @@
                       @click="assignCoach"
                       >assign coach</v-btn
                     >
+                  </v-col>
+                  <v-col
+                    cols="5"
+                    md="5"
+                    v-if="
+                      selectedEvent.status === 'Pending' &&
+                      User != 'Admin' &&
+                      selectedEvent.canConfirm
+                    "
+                  >
                     <v-btn
                       plain
                       dark
@@ -201,19 +211,19 @@
                       >confirm</v-btn
                     >
                   </v-col>
-
                   <v-col>
                     <v-btn
                       class="text-capitalize text-wrap"
                       plain
                       color="red"
                       @click="deleteAppointment"
-                      >Cancel Appointment</v-btn
+                      >Cancel</v-btn
                     >
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col
+                    class="pt-0"
                     v-if="
                       selectedEvent.status === 'Pending' ||
                       selectedEvent.status === 'Confirmed'
@@ -228,7 +238,10 @@
                       >Reschedule</v-btn
                     >
                   </v-col>
-                  <v-col v-if="this.selectedEvent.status === 'Confirmed'">
+                  <v-col
+                    v-if="this.selectedEvent.status === 'Confirmed'"
+                    class="pt-0"
+                  >
                     <v-btn
                       v-if="User == 'Coach'"
                       class="text-capitalize"
