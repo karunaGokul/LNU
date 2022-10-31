@@ -25,7 +25,6 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="request.AppointmentDate"
                   label="Select Date"
                   prepend-inner-icon="calendar_month"
                   readonly
@@ -34,6 +33,9 @@
                   v-bind="attrs"
                   v-on="on"
                   required
+                  @input="$v.request.AppointmentDate.$touch()"
+                  @blur="$v.request.AppointmentDate.$touch()"
+                  v-model="request.AppointmentDate"
                   :error-messages="
                     $v.request.AppointmentDate
                       | errorMessages('AppointmentDate')
@@ -54,7 +56,6 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="request.AppointmentTime"
                   outlined
                   dense
                   label="Select Time"
@@ -63,6 +64,9 @@
                   v-bind="attrs"
                   v-on="on"
                   required
+                  @input="$v.request.AppointmentTime.$touch()"
+                  @blur="$v.request.AppointmentTime.$touch()"
+                  v-model="request.AppointmentTime"
                   :error-messages="
                     $v.request.AppointmentTime
                       | errorMessages('AppointmentTime')
@@ -87,8 +91,7 @@
             <v-btn text @click="close" class="text-capitalize"> Cancel </v-btn>
 
             <v-btn
-              depressed
-              color="primary"
+              color="primary depressed"
               type="submit"
               class="text-capitalize px-12 py-5"
             >
@@ -112,7 +115,6 @@ import { required } from "vuelidate/lib/validators";
 @Component({
   validations: {
     request: {
-      CounselingType: { required },
       AppointmentDate: { required },
       AppointmentTime: { required },
     },
@@ -145,6 +147,7 @@ export default class RescheduleAppointment extends BaseComponent {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       this.request.AppointmentId = this.appointmentId;
+
       this.service
         .rescheduleAppointments(this.request)
         .then((response) => {
@@ -159,7 +162,6 @@ export default class RescheduleAppointment extends BaseComponent {
   }
 
   public close() {
-    this.dialog = false;
     this.$emit("close");
   }
 

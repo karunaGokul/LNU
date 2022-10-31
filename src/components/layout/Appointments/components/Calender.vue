@@ -246,8 +246,9 @@
         </v-menu>
         <app-alert
           v-if="showAlert"
-          @cancelAppointment="cancelAppointment"
-          @close="onClose"
+          message="Are you sure you want to cancel the Appointment"
+          @No="onClose"
+          @Yes="cancelAppointment"
         ></app-alert>
       </v-sheet>
       <v-sheet height="40">
