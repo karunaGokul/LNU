@@ -100,13 +100,22 @@ export default class AppointmentsLayout extends Vue {
           event.counselingTypeId = item.counselingType.Id;
           event.tellAboutYourSelf = item.tellAboutYourSelf;
           event.clientSummary = item.clientSummary;
-          event.appointmentDate = new Date(item.appointmentDate)
-            .toISOString()
-            .slice(0, 10);
+
+          let date = new Date(item.appointmentDate).getDate();
+          let month = new Date(item.appointmentDate).getMonth() + 1;
+          let year = new Date(item.appointmentDate).getFullYear();
+
+          event.appointmentDate =
+            year +
+            "-" +
+            (month <= 9 ? "0" + month : month) +
+            "-" +
+            (date <= 9 ? "0" + date : date);
+          
           event.appointmentTime = item.appointmentTime;
           event.canConfirm = item.canConfirm;
           event.canReschedule = item.canReschedule;
-          
+
           if (event.status == "Confirmed") event.color = "#408D43";
           else if (event.status == "Completed") event.color = "#5e5c57";
           else if (event.status == "Pending") event.color = "#cfa532";
