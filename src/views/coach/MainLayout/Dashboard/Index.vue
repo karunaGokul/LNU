@@ -7,7 +7,7 @@
     class="d-flex flex-column justify-center align-center"
   >
     <div class="mb-8">
-      <h1>Good Day Coach, ABC!</h1>
+      <h1>Good Day Coach, {{ userName }}!</h1>
     </div>
     <v-container>
       <v-row class="mx-10">
@@ -51,5 +51,9 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class DashboardLayout extends Vue {}
+export default class DashboardLayout extends Vue {
+  get userName() {
+    return this.$store.getters.username;
+  }
+}
 </script>

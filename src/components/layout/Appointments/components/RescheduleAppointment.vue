@@ -99,7 +99,7 @@
             </v-btn>
           </v-card-actions>
           <snack-bar
-            :snackbar="snackbar"
+            v-if="snackbar"
             :snackbarText="snackbarText"
             :snackBarStatus="snackBarStatus"
           />

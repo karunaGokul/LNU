@@ -28,8 +28,10 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 })
 export default class CoachDetails extends Vue {
   @Prop() snackbarText: string;
-  @Prop() snackbar: boolean;
+  // @Prop() snackbar: boolean;
   @Prop() snackBarStatus: string;
+
+  public snackbar: boolean = true;
 
   public snackBar() {
     this.$emit("close");

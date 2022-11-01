@@ -172,7 +172,7 @@
           </div>
         </div>
         <snack-bar
-          :snackbar="snackbar"
+          v-if="snackbar"
           :snackbarText="snackbarText"
           :snackBarStatus="snackBarStatus"
         />
