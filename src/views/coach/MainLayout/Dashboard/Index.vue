@@ -31,7 +31,7 @@
             <v-card-title class="pa-0">Appointments</v-card-title>
           </v-card>
         </v-col>
-        <v-col class="mr-5">
+        <!-- <v-col class="mr-5">
           <v-card
             to="/coach/home/messages"
             height="150"
@@ -40,7 +40,7 @@
             <v-icon size="80px" color="primary">sms</v-icon>
             <v-card-title class="pa-0">Messages</v-card-title>
           </v-card>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
     <router-view />

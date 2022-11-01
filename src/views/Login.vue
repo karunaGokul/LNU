@@ -165,8 +165,8 @@
               >
             </div>
           </div>
-
-          <v-snackbar
+          <snack-bar :snackbar="snackbar" :snackbarText="snackbarText" />
+          <!-- <v-snackbar
             v-model="snackbar"
             :timeout="2000"
             color="red white--text"
@@ -181,7 +181,7 @@
                 <v-icon> close</v-icon>
               </v-btn>
             </template>
-          </v-snackbar>
+          </v-snackbar> -->
         </div>
       </v-container>
     </v-col>
@@ -198,7 +198,12 @@ import { IAuthenticationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
+import SnackBar from "@/components/layout/SnackBar.vue";
+
 @Component({
+  components: {
+    SnackBar,
+  },
   validations: {
     request: {
       Email: { required },

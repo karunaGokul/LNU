@@ -80,18 +80,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <!-- <v-text-field
-          label="Name"
-          type="text"
-          color="#FCB258"
-          filled
-          dense
-          required
-          v-model="request.Name"
-          @input="$v.request.Name.$touch()"
-          @blur="$v.request.Name.$touch()"
-          :error-messages="$v.request.Name | errorMessages('Name')"
-        ></v-text-field> -->
+
         <v-text-field
           label="Phone Number"
           type="text"
@@ -135,6 +124,11 @@
             Save
           </v-btn>
         </div>
+        <snack-bar
+          :snackbar="snackbar"
+          :snackbarText="snackbarText"
+          :snackBarStatus="snackBarStatus"
+        />
       </v-form>
     </v-col>
   </v-row>
@@ -151,20 +145,24 @@ import {
   helpers,
   minLength,
 } from "vuelidate/lib/validators";
-
-import { ClientRequestModel, ClientResponseModel } from "@/model";
 import BaseComponent from "@/components/base/BaseComponent";
 
+import { ClientRequestModel, ClientResponseModel } from "@/model";
+
 import { IProfileService } from "@/service";
+
+import SnackBar from "@/components/layout/SnackBar.vue";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-z A-Z]*$/i);
 
 @Component({
+  components: {
+    SnackBar,
+  },
   validations: {
     request: {
       FirstName: { required, alphaOnly },
       LastName: { required, alphaOnly },
-      // Name: { required, alphaOnly },
       PhoneNumber: {
         required,
         maxLength: maxLength(10),
@@ -181,6 +179,9 @@ export default class ClientProfileLayout extends BaseComponent {
 
   public request: ClientResponseModel = new ClientResponseModel();
   public profilePhoto: any = null;
+  public snackbar: boolean = false;
+  public snackbarText: any;
+  public snackBarStatus: string = "";
 
   mounted() {
     this.getProfile();
@@ -229,18 +230,20 @@ export default class ClientProfileLayout extends BaseComponent {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       this.request.Id = this.userInfo.Id;
-      // console.log(this.request);
       this.loadingSpinner("show");
       this.profileService.updateProfile(this.profilePhoto, this.request).then(
         (response: ClientResponseModel) => {
           this.loadingSpinner("hide");
+
+          this.snackbarText = response;
+          this.snackbar = true;
+          this.snackBarStatus = "Success";
           this.getProfile();
         },
         (err) => {
           this.loadingSpinner("hide");
           if (err.response.status === 400) {
-            // this.snackbarText = err.response.data;
-            // this.snackbar = true;
+            console.log(err);
           }
         }
       );

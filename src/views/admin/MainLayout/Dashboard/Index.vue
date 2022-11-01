@@ -7,8 +7,8 @@
           color="primary"
           depressed
           @click="addCounselingProgram"
-          >
-            <v-icon class="pr-2">add_box</v-icon>
+        >
+          <v-icon class="pr-2">add_box</v-icon>
           Add Program</v-btn
         >
       </div>

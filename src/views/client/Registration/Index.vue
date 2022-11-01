@@ -548,7 +548,9 @@
         </v-row>
 
         <div class="d-flex align-center justify-end">
-          <v-btn text class="text-capitalize mr-3" @click="skipQuestionnaire">Skip</v-btn>
+          <v-btn text class="text-capitalize mr-3" @click="skipQuestionnaire"
+            >Skip</v-btn
+          >
           <v-btn depressed class="primary text-capitalize" @click="updateForm"
             >Done</v-btn
           >
@@ -556,22 +558,7 @@
       </v-container>
     </v-col>
 
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="2000"
-      color="deep-orange lighten-5 pink--text"
-      right
-      top
-    >
-      <v-icon color="pink">mdi-exclamation-thick </v-icon>
-      {{ snackbarText }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
-          <v-icon> mdi-close-box</v-icon>
-        </v-btn>
-      </template>
-    </v-snackbar>
+    <snack-bar :snackbar="snackbar" :snackbarText="snackbarText" />
   </v-row>
 </template>
 
@@ -591,11 +578,14 @@ import { ClientRegistrationModel, QuestionnaireModel } from "@/model";
 import { IRegistrationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
+import SnackBar from "@/components/layout/SnackBar.vue";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
 
-
 @Component({
+  components: {
+    SnackBar,
+  },
   validations: {
     request: {
       FirstName: { required, alphaOnly },
@@ -633,7 +623,7 @@ const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
         numeric,
         minLength: minLength(10),
         maxLength: maxLength(10),
-      }
+      },
     },
   },
 })
