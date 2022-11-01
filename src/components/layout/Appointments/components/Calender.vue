@@ -220,15 +220,19 @@
                       >Cancel</v-btn
                     >
                   </v-col>
+                  <v-col v-if="this.selectedEvent.status === 'Confirmed'">
+                    <v-btn
+                      v-if="User == 'Coach'"
+                      class="text-capitalize"
+                      plain
+                      color="primary"
+                      @click="review('invite')"
+                      >Invite Link</v-btn
+                    >
+                  </v-col>
                 </v-row>
                 <v-row>
-                  <v-col
-                    class="pt-0"
-                    v-if="
-                      selectedEvent.status === 'Pending' ||
-                      selectedEvent.status === 'Confirmed'
-                    "
-                  >
+                  <v-col class="pt-0" v-if="selectedEvent.status === 'Pending'">
                     <v-btn
                       class="text-capitalize"
                       plain
@@ -248,7 +252,7 @@
                       plain
                       color="primary"
                       @click="review"
-                      >Review</v-btn
+                      >Complete</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -374,10 +378,10 @@ export default class Calendar extends BaseComponent {
     this.$emit("reschedule", this.selectedEvent.id, this.selectedEvent);
   }
 
-  public review() {
+  public review(inviteLink: string) {
     this.selectedOpen = false;
 
-    this.$emit("review", this.selectedEvent.id);
+    this.$emit("review", this.selectedEvent.id, inviteLink);
   }
 
   public viewDay(data: any) {
