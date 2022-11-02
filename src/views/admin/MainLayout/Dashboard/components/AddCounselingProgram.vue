@@ -138,7 +138,6 @@ import BaseComponent from "@/components/base/BaseComponent";
 @Component({
   validations: {
     request: {
-      Image: { required },
       Name: { required },
       Description: { required },
       Summary: { required },
@@ -176,7 +175,7 @@ export default class EditCounselling extends BaseComponent {
 
   public AddCounsellingProgram() {
     this.$v.$touch();
-    if (!this.$v.$invalid) {
+    if (!this.$v.$invalid && this.profilePhoto) {
       let path =
         this.modelType == "Add"
           ? "AddCounsellingProgram"
