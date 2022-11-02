@@ -558,7 +558,11 @@
       </v-container>
     </v-col>
 
-    <snack-bar v-if="snackbar" :snackbarText="snackbarText" />
+    <snack-bar
+      v-if="snackbar"
+      :snackbarText="snackbarText"
+      @close="OnSnackBarClose"
+    />
   </v-row>
 </template>
 
@@ -722,6 +726,10 @@ export default class ClientRegistration extends BaseComponent {
 
   get counselingProgram() {
     return this.$store.getters.counselingProgram;
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 }
 </script>

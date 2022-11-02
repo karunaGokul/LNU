@@ -61,6 +61,7 @@
       v-if="snackbar"
       :snackbarText="snackbarText"
       :snackBarStatus="snackBarStatus"
+      @close="OnSnackBarClose"
     />
   </v-dialog>
 </template>
@@ -69,6 +70,8 @@
 import { Component, Inject, Prop } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
 
+import SnackBar from "@/components/layout/SnackBar.vue";
+
 import { IAdminService, IAppointmentService } from "@/service";
 import {
   AssignCoachModel,
@@ -76,7 +79,7 @@ import {
   ConfirmAppointmentModel,
 } from "@/model";
 
-import SnackBar from "@/components/layout/SnackBar.vue";
+
 
 @Component({
   components: { SnackBar },
@@ -142,5 +145,10 @@ export default class AssignCoach extends BaseComponent {
         this.loadingSpinner("hide");
       });
   }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
+  }
+  
 }
 </script>

@@ -157,7 +157,11 @@
               >
             </div>
           </div>
-          <snack-bar v-if="snackbar" :snackbarText="snackbarText" />
+          <snack-bar
+            v-if="snackbar"
+            :snackbarText="snackbarText"
+            @close="OnSnackBarClose"
+          />
           <!-- <v-snackbar
             v-model="snackbar"
             :timeout="2000"
@@ -236,6 +240,10 @@ export default class Login extends BaseComponent {
 
   get page() {
     return this.$route.path.split("/")[1];
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 }
 </script>
