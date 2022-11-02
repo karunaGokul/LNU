@@ -4,7 +4,10 @@ import {
   BookAppointmentRequestModel,
   CoachDetailsModel,
   UpdatePaymentRequestModel,
+  InviteLinkModel,
+  CompleteAppoinmentModel,
 } from "@/model";
+import { compile } from "vue/types/umd";
 import { IBaseService, BaseService } from "./base.service";
 
 export interface IAppointmentService
@@ -19,6 +22,8 @@ export interface IAppointmentService
   ): Promise<Array<CoachDetailsModel>>;
   updatePayment(request: UpdatePaymentRequestModel): Promise<any>;
   // getPendingAppointment(request: AppointmentByStatusRequestModel): Promise<Array<AppointmentByStatusResponseModel>>;
+  AppoinmentInviteLink(request: InviteLinkModel): Promise<any>;
+  CompleteAppoinment(request: CompleteAppoinmentModel): Promise<any>;
 }
 
 export class AppointmentService
@@ -27,6 +32,29 @@ export class AppointmentService
 {
   constructor() {
     super("");
+  }
+
+  public AppoinmentInviteLink(request: InviteLinkModel): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let items = new InviteLinkModel();
+      items.Id = "1";
+      items.Link = "https://vuejs.org/";
+      resolve(items);
+      console.log(items);
+      return resolve;
+    });
+  }
+
+  public CompleteAppoinment(request: CompleteAppoinmentModel): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let items = new CompleteAppoinmentModel();
+      items.Id = "1";
+      items.Link = "https://vuejs.org/";
+      items.Notes = "none";
+      resolve(items);
+      console.log(items);
+      return resolve;
+    });
   }
 
   public getAppointments(

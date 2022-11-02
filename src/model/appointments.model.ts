@@ -10,6 +10,16 @@ export class CoachDetailsModel {
   Id: string = null;
   Name: string = null;
 }
+
+export class InviteLinkModel {
+  Id: string;
+  Link: string;
+}
+export class CompleteAppoinmentModel {
+  Id: string;
+  Link: string;
+  Notes: string;
+}
 export class BookAppointmentRequestModel {
   AppointmentDate: string;
   AppointmentTime: string;
