@@ -1,5 +1,6 @@
 import { IBaseService, BaseService } from "./base.service";
 import { DashboardResponseModel } from "@/model";
+
 export interface IDashboardService extends IBaseService<any, any> {
   getCounsellingProgram(): Promise<Array<DashboardResponseModel>>;
   getDetailedCounsellingProgramById(

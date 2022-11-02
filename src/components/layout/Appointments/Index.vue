@@ -38,12 +38,14 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Inject, Prop } from "vue-property-decorator";
+import { Component, Inject, Prop } from "vue-property-decorator";
+import BaseComponent from "@/components/base/BaseComponent";
 
 import Calendar from "./components/Calender.vue";
 import RescheduleAppointment from "./components/RescheduleAppointment.vue";
 import AssignCoach from "./components/AssignCoach.vue";
 import ReviewAppointment from "./components/ReviewAppointment.vue";
+
 import { IAppointmentService } from "@/service";
 
 import {
@@ -51,6 +53,7 @@ import {
   EventsModel,
   AppointmentResponseModel,
 } from "@/model";
+
 
 @Component({
   components: {
@@ -60,7 +63,7 @@ import {
     ReviewAppointment,
   },
 })
-export default class AppointmentsLayout extends Vue {
+export default class AppointmentsLayout extends BaseComponent {
   @Prop() User: string;
   @Inject("appointmentService") service: IAppointmentService;
 
@@ -87,10 +90,12 @@ export default class AppointmentsLayout extends Vue {
     this.request.dateRange = date;
     this.events = [];
     this.response = [];
+    this.loadingSpinner("show");
     this.service
       .getAppointments(this.request)
       .then((response: Array<AppointmentResponseModel>) => {
         this.response = response;
+        this.loadingSpinner("hide");
 
         response.forEach((item) => {
           let event: EventsModel = new EventsModel();
@@ -135,6 +140,7 @@ export default class AppointmentsLayout extends Vue {
         });
       })
       .catch((err) => {
+        this.loadingSpinner("hide");
         console.log(err);
       });
   }
