@@ -48,35 +48,38 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions class="ml-5 justify-end">
-        <v-btn
-          dark
-          class="text-capitalize"
-          color="primary"
-          @click="assignCoach"
-         
+        <v-btn dark class="text-capitalize" color="primary" @click="assignCoach"
           >Assign</v-btn
         >
-       
+
         <v-btn class="text-capitalize ml-3" color="red" dark @click="close"
           >cancel</v-btn
         >
       </v-card-actions>
     </v-card>
+    <snack-bar
+      v-if="snackbar"
+      :snackbarText="snackbarText"
+      :snackBarStatus="snackBarStatus"
+    />
   </v-dialog>
 </template>
 
 <script lang="ts">
+import { Component, Inject, Prop } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
+
+import { IAdminService, IAppointmentService } from "@/service";
 import {
   AssignCoachModel,
   CoachDetailsModel,
   ConfirmAppointmentModel,
 } from "@/model";
-import { IAdminService, IAppointmentService } from "@/service";
-import { Component, Inject, Prop } from "vue-property-decorator";
+
+import SnackBar from "@/components/layout/SnackBar.vue";
 
 @Component({
-  components: {},
+  components: { SnackBar },
 })
 export default class AssignCoach extends BaseComponent {
   @Inject("adminService") adminService: IAdminService;
@@ -88,8 +91,11 @@ export default class AssignCoach extends BaseComponent {
   public requestAssignCoach: AssignCoachModel = new AssignCoachModel();
   public responseCoach: Array<CoachDetailsModel> = [];
   public coachName: string;
-
   public selectedCoachName: string = "";
+
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
+  public snackBarStatus: string = "";
 
   created() {
     this.getCoachesBySelection();
@@ -102,19 +108,29 @@ export default class AssignCoach extends BaseComponent {
   private assignCoach() {
     this.requestAssignCoach.appointmentId = this.selectedEvent.id;
 
-    if(this.selectedCoachName) {
+    if (this.selectedCoachName) {
       this.requestAssignCoach.coachId = this.selectedCoachName;
     } else {
       this.requestAssignCoach.coachId = this.selectedEvent.coachId;
     }
-        
+
     this.loadingSpinner("show");
-    this.adminService
-      .assignCoach(this.requestAssignCoach)
-      .then((response: any) => {
+    this.adminService.assignCoach(this.requestAssignCoach).then(
+      (response: any) => {
         this.loadingSpinner("hide");
+        this.snackbarText = response;
+        this.snackbar = true;
+        this.snackBarStatus = "Success";
         this.$emit("done");
-      });
+      },
+      (err) => {
+        this.loadingSpinner("hide");
+        if (err.response.status === 400) {
+          this.snackbarText = err.response.data;
+          this.snackbar = true;
+        }
+      }
+    );
   }
 
   private getCoachesBySelection() {

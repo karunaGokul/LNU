@@ -283,20 +283,27 @@
         </ul>
       </v-sheet>
     </v-col>
+    <snack-bar
+      v-if="snackbar"
+      :snackbarText="snackbarText"
+      :snackBarStatus="snackBarStatus"
+    />
   </v-row>
 </template>
 <script lang="ts">
 import { Component, Prop, Inject } from "vue-property-decorator";
-
-import { EventsModel, CancelAppointmentModel } from "@/model";
-
 import BaseComponent from "@/components/base/BaseComponent";
+
 import AppAlert from "@/components/layout/AppAlert.vue";
+import SnackBar from "@/components/layout/SnackBar.vue";
+
 import { IAdminService } from "@/service";
+import { EventsModel, CancelAppointmentModel } from "@/model";
 
 @Component({
   components: {
     AppAlert,
+    SnackBar,
   },
 })
 export default class Calendar extends BaseComponent {
@@ -329,6 +336,9 @@ export default class Calendar extends BaseComponent {
   ];
 
   public showAlert: boolean = false;
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
+  public snackBarStatus: string = "";
 
   mounted() {
     let calendar: any = this.$refs.calendar;
@@ -348,10 +358,22 @@ export default class Calendar extends BaseComponent {
   public confirmAppointment() {
     this.request.appointmentId = this.selectedEvent.id;
     this.loadingSpinner("show");
-    this.service.confirmAppointment(this.request).then((response: any) => {
-      this.loadingSpinner("hide");
-      this.$emit("confirmAppointment");
-    });
+    this.service.confirmAppointment(this.request).then(
+      (response: any) => {
+        this.loadingSpinner("hide");
+        this.snackbarText = response;
+        this.snackbar = true;
+        this.snackBarStatus = "Success";
+        this.$emit("confirmAppointment");
+      },
+      (err) => {
+        this.loadingSpinner("hide");
+        if (err.response.status === 400) {
+          this.snackbarText = err.response.data;
+          this.snackbar = true;
+        }
+      }
+    );
   }
 
   public cancelAppointment() {

@@ -37,6 +37,7 @@ export default class Success extends BaseComponent {
     request.Status = "Success";
     localStorage.removeItem("appointmentId");
 
+    this.loadingSpinner("show");
     this.service.updatePayment(request).then((response) => {
       this.message = response;
       this.loadingSpinner("hide");
