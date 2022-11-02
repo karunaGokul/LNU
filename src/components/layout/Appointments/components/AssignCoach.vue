@@ -69,6 +69,8 @@
 import { Component, Inject, Prop } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
 
+import SnackBar from "@/components/layout/SnackBar.vue";
+
 import { IAdminService, IAppointmentService } from "@/service";
 import {
   AssignCoachModel,
@@ -76,7 +78,7 @@ import {
   ConfirmAppointmentModel,
 } from "@/model";
 
-import SnackBar from "@/components/layout/SnackBar.vue";
+
 
 @Component({
   components: { SnackBar },

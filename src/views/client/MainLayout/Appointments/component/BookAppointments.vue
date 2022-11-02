@@ -188,10 +188,24 @@
       v-if="showCheckOut"
     />
     <!-- <payment-card @update="onUpdate" v-if="showCheckOut" /> -->
+    <snack-bar
+      v-if="snackbar"
+      :snackbarText="snackbarText"
+      :snackBarStatus="snackBarStatus"
+    />
   </div>
 </template>
 <script lang="ts">
 import { Component, Inject } from "vue-property-decorator";
+import BaseComponent from "@/components/base/BaseComponent";
+import { required } from "vuelidate/lib/validators";
+import { Settings } from "@/config";
+
+import { StripeCheckout } from "@vue-stripe/vue-stripe";
+
+import AppAlert from "@/components/layout/AppAlert.vue";
+import SnackBar from "@/components/layout/SnackBar.vue";
+import PaymentCard from "./PaymentCard.vue";
 
 import { IAppointmentService, IProfileService } from "@/service";
 import {
@@ -201,16 +215,6 @@ import {
   PreviousCoachRequestModel,
   UpdatePaymentRequestModel,
 } from "@/model";
-
-import BaseComponent from "@/components/base/BaseComponent";
-import AppAlert from "@/components/layout/AppAlert.vue";
-import { required } from "vuelidate/lib/validators";
-
-import { Settings } from "@/config";
-
-import { StripeCheckout } from "@vue-stripe/vue-stripe";
-
-import PaymentCard from "./PaymentCard.vue";
 
 let validations = {
   request: {
@@ -247,6 +251,7 @@ let validations = {
     StripeCheckout,
     AppAlert,
     PaymentCard,
+    SnackBar,
   },
 })
 export default class BookAppointments extends BaseComponent {
@@ -276,6 +281,9 @@ export default class BookAppointments extends BaseComponent {
     .substr(0, 10);
 
   public existingCoach: Array<CoachDetailsModel> = [];
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
+  public snackBarStatus: string = "";
 
   created() {
     this.publishableKey = Settings.PublicKey;
@@ -304,12 +312,15 @@ export default class BookAppointments extends BaseComponent {
       Object.entries(this.request.CounselingType).length > 0 &&
       this.request.ExistingCoach
     ) {
+      this.loadingSpinner("show");
       this.profileService
         .getPreviousCoaches(request)
         .then((response) => {
+          this.loadingSpinner("hide");
           this.existingCoach = response;
         })
         .catch((err) => {
+          this.loadingSpinner("hide");
           console.log(err);
         });
     }
@@ -326,10 +337,14 @@ export default class BookAppointments extends BaseComponent {
       request.CoachDetails = this.request.CoachDetails;
       request.TellAboutYourSelf = this.request.TellAboutYourSelf;
 
+      this.loadingSpinner("show");
       this.service
         .bookAppointments(request)
         .then((response) => {
           this.loadingSpinner("hide");
+          this.snackbarText = response;
+          this.snackbar = true;
+          this.snackBarStatus = "Success";
 
           localStorage.setItem("appointmentId", response);
           this.showCheckOut = true;
@@ -342,7 +357,8 @@ export default class BookAppointments extends BaseComponent {
         })
         .catch((err) => {
           this.loadingSpinner("hide");
-          console.log(err);
+          this.snackbarText = err.response.data;
+          this.snackbar = true;
         });
     }
   }
