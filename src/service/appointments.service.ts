@@ -75,14 +75,6 @@ export class AppointmentService
     );
   }
 
-  // public getPendingAppointment(request: AppointmentByStatusRequestModel): Promise<Array<AppointmentByStatusResponseModel>> {
-  //   return this.httpGet("Appointment/GetAllAppointmentsByStatus?status=" + request.status, null).then(
-  //     (response) => {
-  //       return response.data;
-  //     }
-  //   );
-  // }
-
   public updatePayment(request: UpdatePaymentRequestModel): Promise<any> {
     return this.httpPost(
       "Appointment/UpdatePayment?appointmentId=" + request.AppointmentId,

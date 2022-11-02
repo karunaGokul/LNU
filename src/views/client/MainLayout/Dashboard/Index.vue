@@ -56,6 +56,7 @@ export default class DashboardLayout extends BaseComponent {
   }
 
   public getCounsellingProgram() {
+    this.loadingSpinner("show");
     this.dashboardService.getCounsellingProgram().then((response) => {
       this.response = response;
       this.loadingSpinner("hide");

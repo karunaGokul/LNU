@@ -558,7 +558,7 @@
       </v-container>
     </v-col>
 
-    <snack-bar :snackbar="snackbar" :snackbarText="snackbarText" />
+    <snack-bar v-if="snackbar" :snackbarText="snackbarText" />
   </v-row>
 </template>
 

@@ -99,7 +99,7 @@
             </v-btn>
           </v-card-actions>
           <snack-bar
-            :snackbar="snackbar"
+            v-if="snackbar"
             :snackbarText="snackbarText"
             :snackBarStatus="snackBarStatus"
           />
@@ -109,14 +109,17 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Inject } from "vue-property-decorator";
+import { Component, Prop, Inject } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
+import { required } from "vuelidate/lib/validators";
+
+import SnackBar from "@/components/layout/SnackBar.vue";
 
 import { IAppointmentService, IRegistrationService } from "@/service";
 import { BookAppointmentRequestModel } from "@/model";
 
-import SnackBar from "@/components/layout/SnackBar.vue";
-import { required } from "vuelidate/lib/validators";
+
+
 
 @Component({
   components: {
@@ -160,11 +163,12 @@ export default class RescheduleAppointment extends BaseComponent {
     this.$v.$touch();
     if (!this.$v.$invalid) {
       this.request.AppointmentId = this.appointmentId;
-
+      this.loadingSpinner("show");
       this.service
         .rescheduleAppointments(this.request)
         .then((response) => {
           this.$emit("appointmentRescheduled");
+          this.loadingSpinner("hide");
 
           this.snackbarText = response;
           this.snackbar = true;
@@ -172,6 +176,7 @@ export default class RescheduleAppointment extends BaseComponent {
           this.dialog = false;
         })
         .catch((err) => {
+          this.loadingSpinner("hide");
           console.log(err);
         });
     }

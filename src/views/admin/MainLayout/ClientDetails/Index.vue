@@ -62,7 +62,7 @@
       :items="clientInfo"
       v-if="showClientInfo"
       @close="showClientInfo = false"
-      @summaryUpdated="showClientInfo = false;getClient"
+      @summaryUpdated="onUpdateSummary"
     />
   </div>
 </template>
@@ -106,6 +106,11 @@ export default class ClientDetails extends BaseComponent {
     this.clientInfo = new GetClientsModel();
     this.clientInfo = info;
     this.showClientInfo = true;
+  }
+
+  public onUpdateSummary() {
+    this.showClientInfo = false;
+    this.getClient();
   }
 
   public avatarColors() {
