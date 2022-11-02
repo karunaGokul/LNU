@@ -283,6 +283,7 @@ export default class Profile extends BaseComponent {
   }
 
   public selectFiles(file: any) {
+    this.chip1 = true;
     this.certificates.push(file[0]);
   }
 
