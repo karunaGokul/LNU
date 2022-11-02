@@ -3,16 +3,16 @@
     <v-snackbar
       v-model="snackbar"
       :timeout="2000"
-      light
       right
       top
-      class="snackbar"
+      dark
+      :color="snackBarStatus == 'Success' ? 'green' : 'red'"
     >
-      <v-icon color="$snackText-color">priority_high </v-icon>
+      <v-icon color="white">priority_high </v-icon>
       {{ snackbarText }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn color="red" text v-bind="attrs" @click=snackBar>
+        <v-btn color="white" text v-bind="attrs" @click="snackBar">
           <v-icon>close</v-icon>
         </v-btn>
       </template>
@@ -27,12 +27,14 @@ import { Component, Prop, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class CoachDetails extends Vue {
- @Prop() snackbarText: string;
- @Prop() snackbar: boolean;
+  @Prop() snackbarText: string;
+  // @Prop() snackbar: boolean;
+  @Prop() snackBarStatus: string;
 
- public snackBar() {
-  this.$emit("close");
- }
+  public snackbar: boolean = true;
 
+  public snackBar() {
+    this.$emit("close");
+  }
 }
 </script>

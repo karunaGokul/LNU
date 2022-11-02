@@ -171,6 +171,11 @@
             </v-btn>
           </div>
         </div>
+        <snack-bar
+          v-if="snackbar"
+          :snackbarText="snackbarText"
+          :snackBarStatus="snackBarStatus"
+        />
       </v-form>
     </v-col>
   </v-row>
@@ -196,10 +201,14 @@ import {
 } from "@/model";
 
 import { IProfileService } from "@/service";
+import SnackBar from "@/components/layout/SnackBar.vue";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-z A-Z]*$/i);
 
 @Component({
+  components: {
+    SnackBar,
+  },
   validations: {
     request: {
       FirstName: { required, alphaOnly },
@@ -225,6 +234,9 @@ export default class Profile extends BaseComponent {
   chip1 = true;
 
   private certificates: Array<File> = [];
+  public snackbar: boolean = false;
+  public snackbarText: any;
+  public snackBarStatus: string = "";
 
   mounted() {
     this.getProfile();
@@ -283,6 +295,10 @@ export default class Profile extends BaseComponent {
       .editCertificates(this.certificates, this.requestCertificate)
       .then((response: any) => {
         this.loadingSpinner("hide");
+
+        this.snackbarText = response;
+        this.snackbar = true;
+        this.snackBarStatus = "Success";
         this.getProfile();
       });
   }
@@ -301,8 +317,7 @@ export default class Profile extends BaseComponent {
           (err) => {
             this.loadingSpinner("hide");
             if (err.response.status === 400) {
-              // this.snackbarText = err.response.data;
-              // this.snackbar = true;
+              console.log(err);
             }
           }
         );

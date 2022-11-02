@@ -66,7 +66,6 @@ export class AppointmentResponseModel {
   clientSummary: string;
   canConfirm: boolean;
   canReschedule: boolean;
-  
   // appointmentStartTime: string;
   // appointmentEndTime: string;
   // status: Array<AppointmentStatusModel>;
@@ -89,7 +88,7 @@ export class EventsModel {
   clientSummary: string;
   coachId: string;
 
-  appointmentDate: string;
+  appointmentDate: any;
   appointmentTime: string;
   canConfirm: boolean;
   canReschedule: boolean;

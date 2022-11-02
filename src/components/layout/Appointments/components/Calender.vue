@@ -79,17 +79,8 @@
         >
           <v-card color="grey lighten-4" width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
-              <!-- <v-btn icon>
-                <v-icon>edit</v-icon>
-              </v-btn> -->
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <!-- <v-btn icon>
-                <v-icon>favorite</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>more_vert</v-icon>
-              </v-btn> -->
             </v-toolbar>
             <v-card-text>
               <div>
@@ -104,7 +95,7 @@
                     <h4>{{ this.selectedEvent.name }}</h4>
                   </v-col>
                 </v-row>
-                <v-row v-if="this.selectedEvent.coachName && User != 'Coach'">
+                <v-row v-if="selectedEvent.coachName && User != 'Coach'">
                   <v-col>
                     <v-label>Coach Name:</v-label>
                   </v-col>
@@ -112,7 +103,7 @@
                     <h4>{{ this.selectedEvent.coachName }}</h4>
                   </v-col>
                 </v-row>
-                <v-row v-if="this.selectedEvent.clientName && User == 'Coach'">
+                <v-row v-if="selectedEvent.clientName && User == 'Coach'">
                   <v-col>
                     <v-label>Client Name:</v-label>
                   </v-col>
@@ -145,78 +136,94 @@
                     <h4>{{ this.selectedEvent.clientSummary }}</h4>
                   </v-col>
                 </v-row>
-                <v-row
-                  v-if="
-                    this.selectedEvent.status === 'Confirmed' &&
-                    User !== 'Coach'
-                  "
+                <div
+                  v-if="selectedEvent.status == 'Confirmed' && User != 'Coach'"
                 >
-                  <v-col>
-                    <v-label>Review Notes:</v-label>
-                  </v-col>
-                  <v-col>
-                    <h4>{{ reviewNotes }}</h4>
-                  </v-col>
-                </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-label>Review Notes:</v-label>
+                    </v-col>
+                    <v-col>
+                      <h4>{{ reviewNotes }}</h4>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-label>Link:</v-label>
+                    </v-col>
+                    <v-col>
+                      <h4>{{ reviewLink }}</h4>
+                    </v-col>
+                  </v-row>
+                </div>
+
                 <v-row
                   v-if="
-                    this.selectedEvent.status === 'Confirmed' &&
-                    User !== 'Coach'
-                  "
-                >
-                  <v-col>
-                    <v-label>Link:</v-label>
-                  </v-col>
-                  <v-col>
-                    <h4>{{ reviewLink }}</h4>
-                  </v-col>
-                </v-row>
-                <v-row
-                  v-if="
-                    selectedEvent.status === 'Pending' ||
-                    selectedEvent.status === 'Confirmed'
+                    selectedEvent.status == 'Pending' ||
+                    selectedEvent.status == 'Confirmed'
                   "
                 >
                   <v-col
                     cols="5"
                     md="5"
-                    v-if="selectedEvent.status === 'Pending'"
+                    v-if="selectedEvent.status == 'Pending' && User == 'Admin'"
                   >
                     <v-btn
                       plain
                       dark
                       class="text-capitalize"
                       color="primary"
-                      v-if="User == 'Admin'"
                       @click="assignCoach"
                       >assign coach</v-btn
                     >
+                  </v-col>
+                  <v-col
+                    cols="5"
+                    md="5"
+                    v-if="
+                      selectedEvent.status == 'Pending' &&
+                      User != 'Admin' &&
+                      selectedEvent.canConfirm
+                    "
+                  >
                     <v-btn
                       plain
                       dark
                       class="text-capitalize"
                       color="primary"
-                      v-if="User != 'Admin' && selectedEvent.canConfirm"
                       @click="confirmAppointment"
                       >confirm</v-btn
                     >
                   </v-col>
-
                   <v-col>
                     <v-btn
                       class="text-capitalize text-wrap"
                       plain
                       color="red"
                       @click="deleteAppointment"
-                      >Cancel Appointment</v-btn
+                      >Cancel</v-btn
+                    >
+                  </v-col>
+                  <v-col
+                    v-if="
+                      selectedEvent.status == 'Confirmed' && User == 'Coach'
+                    "
+                  >
+                    <v-btn
+                      class="text-capitalize"
+                      plain
+                      color="primary"
+                      @click="review('invite')"
+                      >Invite Link</v-btn
                     >
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col
+                    class="pt-0"
                     v-if="
-                      selectedEvent.status === 'Pending' ||
-                      selectedEvent.status === 'Confirmed'
+                      selectedEvent.status == 'Pending' &&
+                      selectedEvent.canReschedule
                     "
                   >
                     <v-btn
@@ -224,18 +231,22 @@
                       plain
                       color="primary"
                       @click="reschedule"
-                      v-if="selectedEvent.canReschedule"
                       >Reschedule</v-btn
                     >
                   </v-col>
-                  <v-col v-if="this.selectedEvent.status === 'Confirmed'">
+                  <v-col
+                    v-if="
+                      this.selectedEvent.status == 'Confirmed' &&
+                      User == 'Coach'
+                    "
+                    class="pt-0"
+                  >
                     <v-btn
-                      v-if="User == 'Coach'"
                       class="text-capitalize"
                       plain
                       color="primary"
                       @click="review"
-                      >Review</v-btn
+                      >Complete</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -361,10 +372,10 @@ export default class Calendar extends BaseComponent {
     this.$emit("reschedule", this.selectedEvent.id, this.selectedEvent);
   }
 
-  public review() {
+  public review(inviteLink: string) {
     this.selectedOpen = false;
 
-    this.$emit("review", this.selectedEvent.id);
+    this.$emit("review", this.selectedEvent.id, inviteLink);
   }
 
   public viewDay(data: any) {

@@ -329,7 +329,7 @@ export default class BookAppointments extends BaseComponent {
         .bookAppointments(request)
         .then((response) => {
           this.loadingSpinner("hide");
-          console.log(response);
+
           localStorage.setItem("appointmentId", response);
           this.showCheckOut = true;
           this.lineItems = [

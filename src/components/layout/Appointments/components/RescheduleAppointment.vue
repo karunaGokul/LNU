@@ -98,6 +98,11 @@
               Reschedule
             </v-btn>
           </v-card-actions>
+          <snack-bar
+            v-if="snackbar"
+            :snackbarText="snackbarText"
+            :snackBarStatus="snackBarStatus"
+          />
         </v-form>
       </v-card>
     </v-dialog>
@@ -105,14 +110,18 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Inject } from "vue-property-decorator";
+import BaseComponent from "@/components/base/BaseComponent";
 
 import { IAppointmentService, IRegistrationService } from "@/service";
 import { BookAppointmentRequestModel } from "@/model";
 
-import BaseComponent from "@/components/base/BaseComponent";
+import SnackBar from "@/components/layout/SnackBar.vue";
 import { required } from "vuelidate/lib/validators";
 
 @Component({
+  components: {
+    SnackBar,
+  },
   validations: {
     request: {
       AppointmentDate: { required },
@@ -138,6 +147,10 @@ export default class RescheduleAppointment extends BaseComponent {
     .toISOString()
     .substr(0, 10);
 
+  public snackbar: boolean = false;
+  public snackbarText: any;
+  public snackBarStatus: string = "";
+
   created() {
     this.request.AppointmentDate = this.selectedEvent.appointmentDate;
     this.request.AppointmentTime = this.selectedEvent.appointmentTime;
@@ -151,8 +164,11 @@ export default class RescheduleAppointment extends BaseComponent {
       this.service
         .rescheduleAppointments(this.request)
         .then((response) => {
-          console.log(response);
           this.$emit("appointmentRescheduled");
+
+          this.snackbarText = response;
+          this.snackbar = true;
+          this.snackBarStatus = "Success";
           this.dialog = false;
         })
         .catch((err) => {
@@ -165,8 +181,5 @@ export default class RescheduleAppointment extends BaseComponent {
     this.$emit("close");
   }
 
-  // get counselingProgram() {
-  //   return this.$store.getters.counselingProgram;
-  // }
 }
 </script>

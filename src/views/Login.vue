@@ -14,11 +14,7 @@
           src="@/assets/coachLogin.jpg"
           height="100vh"
         />
-        <v-img
-          v-else
-          src="@/assets/adminLogin.jpg"
-          height="100vh"
-        />
+        <v-img v-else src="@/assets/adminLogin.jpg" height="100vh" />
         <div
           v-if="page == 'client'"
           class="white--text position-absolute description"
@@ -52,12 +48,10 @@
         align-center
         flex-column
       >
-      <div v-if="page == 'client'" class="mb-10 text-center">
-        <h2 class="text-h3 font-weight-bold">
-          Feel struck? 
-        </h2>
-        <h4 class="text-h6">We are here to help you!</h4>
-      </div>
+        <div v-if="page == 'client'" class="mb-10 text-center">
+          <h2 class="text-h3 font-weight-bold">Feel struck?</h2>
+          <h4 class="text-h6">We are here to help you!</h4>
+        </div>
         <div>
           <v-card
             elevation="3"
@@ -81,7 +75,6 @@
                   >LOGIN</v-card-title
                 >
               </v-col>
-
             </v-row>
 
             <v-form class="px-8" @submit.prevent="login">
@@ -144,8 +137,7 @@
               >sign up</router-link
             >
           </div>
-          <div v-if="page == 'client'">            
-
+          <div v-if="page == 'client'">
             <div class="text-center mb-4">
               If you are a coach,
               <router-link
@@ -165,8 +157,8 @@
               >
             </div>
           </div>
-
-          <v-snackbar
+          <snack-bar v-if="snackbar" :snackbarText="snackbarText" />
+          <!-- <v-snackbar
             v-model="snackbar"
             :timeout="2000"
             color="red white--text"
@@ -181,7 +173,7 @@
                 <v-icon> close</v-icon>
               </v-btn>
             </template>
-          </v-snackbar>
+          </v-snackbar> -->
         </div>
       </v-container>
     </v-col>
@@ -198,7 +190,12 @@ import { IAuthenticationService } from "@/service";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
+import SnackBar from "@/components/layout/SnackBar.vue";
+
 @Component({
+  components: {
+    SnackBar,
+  },
   validations: {
     request: {
       Email: { required },

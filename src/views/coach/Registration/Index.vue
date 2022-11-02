@@ -235,22 +235,7 @@
             </v-form>
           </div>
         </div>
-        <v-snackbar
-          v-model="snackbar"
-          :timeout="2000"
-          color="deep-orange lighten-5 pink--text"
-          right
-          top
-        >
-          <v-icon color="pink">mdi-exclamation-thick </v-icon>
-          {{ snackbarText }}
-
-          <template v-slot:action="{ attrs }">
-            <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
-              <v-icon> mdi-close-box</v-icon>
-            </v-btn>
-          </template>
-        </v-snackbar>
+        <snack-bar v-if="snackbar" :snackbarText="snackbarText" />
       </v-container>
     </v-col>
   </v-row>
@@ -272,11 +257,16 @@ import {
 import { CoachRegistrationModel, CertificationModel } from "@/model";
 
 import { IRegistrationService } from "@/service";
+
 import BaseComponent from "@/components/base/BaseComponent";
+import SnackBar from "@/components/layout/SnackBar.vue";
 
 const alphaOnly = helpers.regex("alphaOnly", /^[a-zA-Z]*$/i);
 
 @Component({
+  components: {
+    SnackBar,
+  },
   validations: {
     request: {
       FirstName: { required, alphaOnly },

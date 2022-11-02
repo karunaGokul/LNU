@@ -7,7 +7,7 @@
     class="d-flex flex-column justify-center align-center"
   >
     <div class="mb-8">
-      <h1>Good Day Coach, ABC!</h1>
+      <h1>Good Day Coach, {{ userName }}!</h1>
     </div>
     <v-container>
       <v-row class="mx-10">
@@ -31,7 +31,7 @@
             <v-card-title class="pa-0">Appointments</v-card-title>
           </v-card>
         </v-col>
-        <v-col class="mr-5">
+        <!-- <v-col class="mr-5">
           <v-card
             to="/coach/home/messages"
             height="150"
@@ -40,7 +40,7 @@
             <v-icon size="80px" color="primary">sms</v-icon>
             <v-card-title class="pa-0">Messages</v-card-title>
           </v-card>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
     <router-view />
@@ -51,5 +51,9 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class DashboardLayout extends Vue {}
+export default class DashboardLayout extends Vue {
+  get userName() {
+    return this.$store.getters.username;
+  }
+}
 </script>
