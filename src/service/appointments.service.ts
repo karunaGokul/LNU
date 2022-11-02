@@ -46,14 +46,11 @@ export class AppointmentService
   }
 
   public CompleteAppoinment(request: CompleteAppoinmentModel): Promise<any> {
-    return new Promise((resolve, reject) => {
-      let items = new CompleteAppoinmentModel();
-      items.Id = "1";
-      items.Link = "https://vuejs.org/";
-      items.Notes = "none";
-      resolve(items);
-      console.log(items);
-      return resolve;
+    return this.httpPost(
+      "Appointment/CompleteAppointment?appointmentId=" + request.Id,
+      request
+    ).then((res) => {
+      return res.data;
     });
   }
 

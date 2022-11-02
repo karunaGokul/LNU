@@ -115,6 +115,7 @@ export default class ReviewAppointment extends BaseComponent {
 
   public review() {
     this.$v.completeRequest.$touch();
+    this.completeRequest.Id = this.appointmentId;
     if (!this.$v.completeRequest.$invalid) {
       this.loadingSpinner("show");
       this.appointmentService
