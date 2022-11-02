@@ -29,6 +29,7 @@ export default class Cancel extends BaseComponent {
     request.Status = "Cancel";
     localStorage.removeItem("appointmentId");
 
+    this.loadingSpinner("show");
     this.service.updatePayment(request).then((response) => {
       this.message = response;
       this.loadingSpinner("hide");

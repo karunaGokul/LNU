@@ -44,6 +44,7 @@
               </template>
               <v-date-picker
                 v-model="request.AppointmentDate"
+                :min="new Date().toISOString().substr(0, 10)"
                 @input="menu1 = false"
               ></v-date-picker>
             </v-menu>
@@ -177,7 +178,10 @@ export default class RescheduleAppointment extends BaseComponent {
         })
         .catch((err) => {
           this.loadingSpinner("hide");
-          console.log(err);
+          if (err.response.status === 400) {
+            this.snackbarText = err.response.data;
+            this.snackbar = true;
+          }
         });
     }
   }
