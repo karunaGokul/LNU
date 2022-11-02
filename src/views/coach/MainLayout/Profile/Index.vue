@@ -179,6 +179,7 @@
           v-if="snackbar"
           :snackbarText="snackbarText"
           :snackBarStatus="snackBarStatus"
+          @close="OnSnackBarClose"
         />
       </v-form>
     </v-col>
@@ -352,6 +353,10 @@ export default class Profile extends BaseComponent {
     return this.profilePhoto
       ? window.URL.createObjectURL(this.profilePhoto)
       : null;
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 }
 </script>

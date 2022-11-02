@@ -128,6 +128,7 @@
           v-if="snackbar"
           :snackbarText="snackbarText"
           :snackBarStatus="snackBarStatus"
+          @close="OnSnackBarClose"
         />
       </v-form>
     </v-col>
@@ -258,6 +259,10 @@ export default class ClientProfileLayout extends BaseComponent {
 
   get userInfo() {
     return this.$store.getters.userInfo;
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 }
 </script>

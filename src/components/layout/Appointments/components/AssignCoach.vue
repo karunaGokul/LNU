@@ -61,6 +61,7 @@
       v-if="snackbar"
       :snackbarText="snackbarText"
       :snackBarStatus="snackBarStatus"
+      @close="OnSnackBarClose"
     />
   </v-dialog>
 </template>
@@ -144,5 +145,10 @@ export default class AssignCoach extends BaseComponent {
         this.loadingSpinner("hide");
       });
   }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
+  }
+  
 }
 </script>

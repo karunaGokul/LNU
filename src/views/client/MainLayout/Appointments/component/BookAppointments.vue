@@ -192,6 +192,7 @@
       v-if="snackbar"
       :snackbarText="snackbarText"
       :snackBarStatus="snackBarStatus"
+      @close="OnSnackBarClose"
     />
   </div>
 </template>
@@ -370,6 +371,10 @@ export default class BookAppointments extends BaseComponent {
 
   get counselingProgram() {
     return this.$store.getters.counselingProgram;
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 }
 </script>

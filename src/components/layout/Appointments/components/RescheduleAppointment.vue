@@ -103,6 +103,7 @@
             v-if="snackbar"
             :snackbarText="snackbarText"
             :snackBarStatus="snackBarStatus"
+            @close="OnSnackBarClose"
           />
         </v-form>
       </v-card>
@@ -190,5 +191,8 @@ export default class RescheduleAppointment extends BaseComponent {
     this.$emit("close");
   }
 
+  public OnSnackBarClose() {
+    this.snackbar = false;
+  }
 }
 </script>

@@ -235,7 +235,11 @@
             </v-form>
           </div>
         </div>
-        <snack-bar v-if="snackbar" :snackbarText="snackbarText" />
+        <snack-bar
+          v-if="snackbar"
+          :snackbarText="snackbarText"
+          @close="OnSnackBarClose"
+        />
       </v-container>
     </v-col>
   </v-row>
@@ -356,6 +360,10 @@ export default class CoachRegistration extends BaseComponent {
 
   get counselingProgram() {
     return this.$store.getters.counselingProgram;
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 }
 </script>

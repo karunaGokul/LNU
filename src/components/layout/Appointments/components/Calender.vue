@@ -287,6 +287,7 @@
       v-if="snackbar"
       :snackbarText="snackbarText"
       :snackBarStatus="snackBarStatus"
+      @close="OnSnackBarClose"
     />
   </v-row>
 </template>
@@ -464,6 +465,10 @@ export default class Calendar extends BaseComponent {
 
   get eventMore() {
     return true;
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 }
 </script>
