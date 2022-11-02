@@ -380,9 +380,21 @@ export default class Calendar extends BaseComponent {
     this.showAlert = false;
     this.request.appointmentId = this.selectedEvent.id;
     this.request.reason = "change the counselling";
-    this.service.cancelAppointment(this.request).then((response: any) => {
-      this.$emit("cancelAppointment");
-    });
+    this.service.cancelAppointment(this.request).then(
+      (response: any) => {
+        this.snackbarText = response;
+        this.snackbar = true;
+        this.snackBarStatus = "Success";
+        this.$emit("cancelAppointment");
+      },
+      (err) => {
+        this.loadingSpinner("hide");
+        if (err.response.status === 400) {
+          this.snackbarText = err.response.data;
+          this.snackbar = true;
+        }
+      }
+    );
   }
 
   onClose() {
