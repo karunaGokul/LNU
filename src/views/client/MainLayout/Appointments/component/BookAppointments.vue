@@ -350,7 +350,7 @@ export default class BookAppointments extends BaseComponent {
           localStorage.setItem("appointmentId", response);
           this.showCheckOut = true;
           this.lineItems = [
-            { price: this.request.CounselingType.ProductId, quantity: 1 },
+            { price: this.request.CounselingType.PriceId, quantity: 1 },
           ];
           setTimeout(() => {
             (this.$refs.checkoutRef as any).redirectToCheckout();
@@ -362,6 +362,11 @@ export default class BookAppointments extends BaseComponent {
           this.snackbar = true;
         });
     }
+  }
+
+  public allowedMinutes(m: number) {
+    console.log((m: number) => m % 10 === 0);
+    return (m: number) => m % 10 === 0;
   }
 
   onUpdate(token: any) {
