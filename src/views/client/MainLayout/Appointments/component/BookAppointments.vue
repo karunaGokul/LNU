@@ -112,6 +112,7 @@
                   <v-time-picker
                     v-if="menu2"
                     v-model="request.AppointmentTime"
+                    :allowed-minutes="allowedMinutes"
                     full-width
                     @click:minute="$refs.menu.save(time)"
                   ></v-time-picker>
@@ -365,8 +366,7 @@ export default class BookAppointments extends BaseComponent {
   }
 
   public allowedMinutes(m: number) {
-    console.log((m: number) => m % 10 === 0);
-    return (m: number) => m % 10 === 0;
+    return m % 15 === 0;
   }
 
   onUpdate(token: any) {
