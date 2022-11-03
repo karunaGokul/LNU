@@ -1,6 +1,6 @@
 <template>
   <div
-    style="background: linear-gradient(180deg, #fca744 -60.28%, #ffffff 26.8%)"
+    class="primary-linear"
   >
     <v-row class="align-center mx-15" style="height: 80vh">
       <v-col>

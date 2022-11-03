@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Client Layout -->
     <router-view />
   </div>
 </template>

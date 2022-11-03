@@ -59,13 +59,6 @@ export default class Payment extends BaseComponent {
     this.paymentService.payment(this.request).then(
       (response: Array<PaymentResponseModel>) => {
         this.loadingSpinner("hide");
-      },
-      (err) => {
-        this.loadingSpinner("hide");
-        if (err.response.status === 400) {
-          // this.snackbarText = err.response.data;
-          // this.snackbar = true;
-        }
       }
     );
   }

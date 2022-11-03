@@ -344,10 +344,7 @@ export default class BookAppointments extends BaseComponent {
         .bookAppointments(request)
         .then((response) => {
           this.loadingSpinner("hide");
-          this.snackbarText = response;
-          this.snackbar = true;
-          this.snackBarStatus = "Success";
-
+          
           localStorage.setItem("appointmentId", response);
           this.showCheckOut = true;
           this.lineItems = [

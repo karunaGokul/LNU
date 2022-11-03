@@ -170,7 +170,6 @@ export default class AppointmentsLayout extends BaseComponent {
 
   onClose() {
     this.showBookAppoinment = false;
-    // location.reload();
     this.showAssignCoach = false;
     this.showReviewAppoinment = false;
   }
@@ -197,13 +196,11 @@ export default class AppointmentsLayout extends BaseComponent {
   public onAppointmentRescheduled() {
     this.showBookAppoinment = false;
     this.getAppointments();
-    // location.reload();
   }
 
   // Reschedule Appoinment Method End
 
   public cancelAppoinment() {
-    // this.getAppointments();
     location.reload();
   }
 

@@ -124,7 +124,7 @@ export default class AssignCoach extends BaseComponent {
         this.snackbarText = response;
         this.snackbar = true;
         this.snackBarStatus = "Success";
-        this.$emit("done");
+        // this.$emit("done");
       },
       (err) => {
         this.loadingSpinner("hide");
@@ -148,6 +148,7 @@ export default class AssignCoach extends BaseComponent {
 
   public OnSnackBarClose() {
     this.snackbar = false;
+    this.$emit("done");
   }
   
 }

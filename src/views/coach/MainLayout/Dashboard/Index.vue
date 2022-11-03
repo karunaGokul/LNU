@@ -1,11 +1,5 @@
 <template>
-  <div
-    style="
-      background: linear-gradient(180deg, #5949b8 -60.28%, #ffffff 26.8%);
-      height: 50vh;
-    "
-    class="d-flex flex-column justify-center align-center"
-  >
+  <div class="d-flex flex-column justify-center align-center primary-linear">
     <div class="mb-8">
       <h1>Good Day Coach, {{ userName }}!</h1>
     </div>

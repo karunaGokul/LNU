@@ -162,22 +162,6 @@
             :snackbarText="snackbarText"
             @close="OnSnackBarClose"
           />
-          <!-- <v-snackbar
-            v-model="snackbar"
-            :timeout="2000"
-            color="red white--text"
-            right
-            top
-          >
-            <v-icon color="white">priority_high </v-icon>
-            {{ snackbarText }}
-
-            <template v-slot:action="{ attrs }">
-              <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
-                <v-icon> close</v-icon>
-              </v-btn>
-            </template>
-          </v-snackbar> -->
         </div>
       </v-container>
     </v-col>

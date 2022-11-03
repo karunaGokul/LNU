@@ -127,16 +127,14 @@
               :prepend-icon="null"
               label="Ceritifications"
               prepend-inner-icon="upload"
-              append-icon="close"
               chips
               multiple
               small-chips
               filled
               dense
               @change="selectFiles"
-              @click:append = "removeFile"
               >
-              <template v-slot:selection="{ text }">
+              <template v-slot:selection="{ index,text }">
                 <v-chip
                   small
                   label
@@ -144,7 +142,7 @@
                   v-if="chip1"
                   close
                   close-icon="cancel"
-                  @click:close="chip1 = false"
+                  @click:close="removeFile(index, text)"
                 >
                   {{ text }}
                 </v-chip>
@@ -288,8 +286,8 @@ export default class Profile extends BaseComponent {
     this.certificates.push(file[0]);
   }
 
-  public removeFile() {
-    this.certificates.pop();
+  public removeFile(index: any, text: any) {
+    this.certificates.splice(index-1, 1)
     this.chip1 = false;
   }
 
