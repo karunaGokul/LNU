@@ -77,6 +77,7 @@
               <v-time-picker
                 v-if="menu2"
                 v-model="request.AppointmentTime"
+                :allowed-minutes="allowedMinutes"
                 full-width
                 @click:minute="$refs.menu.save(time)"
                 ampm-in-title
@@ -185,6 +186,10 @@ export default class RescheduleAppointment extends BaseComponent {
           }
         });
     }
+  }
+
+  public allowedMinutes(m: number) {
+    return m % 15 === 0;
   }
 
   public close() {
