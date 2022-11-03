@@ -16,6 +16,7 @@ export class CounselingModel {
   Id: string;
   Name: string;
   ProductId: string;
+  PriceId: string;
 }
 
 export class CertificationModel {

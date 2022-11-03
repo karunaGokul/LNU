@@ -112,6 +112,7 @@
                   <v-time-picker
                     v-if="menu2"
                     v-model="request.AppointmentTime"
+                    :allowed-minutes="allowedMinutes"
                     full-width
                     @click:minute="$refs.menu.save(time)"
                   ></v-time-picker>
@@ -350,7 +351,7 @@ export default class BookAppointments extends BaseComponent {
           localStorage.setItem("appointmentId", response);
           this.showCheckOut = true;
           this.lineItems = [
-            { price: this.request.CounselingType.ProductId, quantity: 1 },
+            { price: this.request.CounselingType.PriceId, quantity: 1 },
           ];
           setTimeout(() => {
             (this.$refs.checkoutRef as any).redirectToCheckout();
@@ -362,6 +363,10 @@ export default class BookAppointments extends BaseComponent {
           this.snackbar = true;
         });
     }
+  }
+
+  public allowedMinutes(m: number) {
+    return m % 15 === 0;
   }
 
   onUpdate(token: any) {
