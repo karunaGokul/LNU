@@ -6,11 +6,13 @@
         <v-card class="mx-auto d-flex flex-column" height="100%">
           <v-img height="200px" :src="$vuehelper.getImageUrl(data.Image)">
           </v-img>
-          <v-card-title>{{ data.Name }}</v-card-title>
+          <v-card-title class="text-subtitle-1 font-weight-bold">{{
+            data.Name
+          }}</v-card-title>
           <v-card-text class="text--primary">
             {{ data.description }}
             {{ data.Summary }}
-            </v-card-text>
+          </v-card-text>
           <v-card-actions class="justify-end mt-auto">
             <v-btn
               color="primary"

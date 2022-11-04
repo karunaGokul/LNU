@@ -24,7 +24,9 @@
           <v-card class="mx-auto d-flex flex-column" height="100%">
             <v-img height="200px" :src="`data:image/png;base64,${item.Image}`">
             </v-img>
-            <v-card-title>{{ item.Name }}</v-card-title>
+            <v-card-title class="text-subtitle-1 font-weight-bold">{{
+              item.Name
+            }}</v-card-title>
             <v-card-text class="text--primary">
               {{ item.Summary }}
             </v-card-text>
