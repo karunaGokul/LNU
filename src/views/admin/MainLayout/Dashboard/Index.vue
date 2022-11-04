@@ -21,14 +21,14 @@
           v-for="(item, index) in response"
           :key="index"
         >
-          <v-card class="mx-auto">
+          <v-card class="mx-auto d-flex flex-column" height="100%">
             <v-img height="200px" :src="`data:image/png;base64,${item.Image}`">
             </v-img>
             <v-card-title>{{ item.Name }}</v-card-title>
             <v-card-text class="text--primary">
               {{ item.Summary }}
             </v-card-text>
-            <v-card-actions class="justify-end">
+            <v-card-actions class="justify-end mt-auto">
               <v-btn
                 class="mx-2"
                 fab

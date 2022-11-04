@@ -3,7 +3,7 @@
     <h1 class="text-h4 font-weight-bold">Welcome Back {{ userName }}!</h1>
     <v-row class="my-5">
       <v-col cols="4" md="4" sm="12" v-for="data in response" :key="data.Id">
-        <v-card class="mx-auto">
+        <v-card class="mx-auto d-flex flex-column" height="100%">
           <v-img height="200px" :src="$vuehelper.getImageUrl(data.Image)">
           </v-img>
           <v-card-title>{{ data.Name }}</v-card-title>
@@ -11,7 +11,7 @@
             {{ data.description }}
             {{ data.Summary }}
             </v-card-text>
-          <v-card-actions class="justify-end">
+          <v-card-actions class="justify-end mt-auto">
             <v-btn
               color="primary"
               class="text-capitalize"
