@@ -170,15 +170,13 @@
 
 <script lang="ts">
 import { Component, Inject } from "vue-property-decorator";
-
 import { required } from "vuelidate/lib/validators";
+
+import BaseComponent from "@/components/base/BaseComponent";
+import SnackBar from "@/components/layout/SnackBar.vue";
 
 import { LoginRequestModel, LoginResponseModel } from "@/model";
 import { IAuthenticationService } from "@/service";
-
-import BaseComponent from "@/components/base/BaseComponent";
-
-import SnackBar from "@/components/layout/SnackBar.vue";
 
 @Component({
   components: {

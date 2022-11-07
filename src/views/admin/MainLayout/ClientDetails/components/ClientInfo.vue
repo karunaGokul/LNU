@@ -412,7 +412,12 @@
                 v-model="clientInfo.summary"
               ></v-textarea>
               <div class="d-flex justify-end">
-                <v-btn depressed color="primary" @click="updateSummary">
+                <v-btn
+                  depressed
+                  color="primary"
+                  @click="updateSummary"
+                  class="text-capitalize"
+                >
                   Save
                 </v-btn>
               </div>
@@ -452,7 +457,7 @@ export default class ClientInfo extends BaseComponent {
       .updateSummary(this.clientInfo.Id, this.clientInfo.summary)
       .then((response: any) => {
         this.loadingSpinner("hide");
-        this.$emit("summaryUpdated");
+        this.$emit("summaryUpdated", response);
       });
   }
 }

@@ -9,6 +9,7 @@
           depressed
           color="primary"
           @click="close('Yes')"
+          class="text-capitalize"
           >Yes</v-btn
         >
         <v-btn
@@ -16,6 +17,7 @@
           depressed
           color="red"
           @click="close('No')"
+          class="text-capitalize"
           >No</v-btn
         >
       </v-card-actions>

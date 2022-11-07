@@ -43,7 +43,9 @@
             {{ item.summary }}
           </v-col>
           <v-col cols="1" class="d-flex align-center text-subtitle-2">
-            <v-icon @click="openClientinfo(item)" v-if="item.Questionnaire">open_in_new</v-icon>
+            <v-icon @click="openClientinfo(item)" v-if="item.Questionnaire"
+              >open_in_new</v-icon
+            >
           </v-col>
         </v-row>
       </v-card>
@@ -64,6 +66,13 @@
       @close="showClientInfo = false"
       @summaryUpdated="onUpdateSummary"
     />
+
+    <snack-bar
+      v-if="snackbar"
+      :snackbarText="snackbarText"
+      :snackBarStatus="snackBarStatus"
+      @close="OnSnackBarClose"
+    />
   </div>
 </template>
 
@@ -72,13 +81,14 @@ import { Component, Inject } from "vue-property-decorator";
 
 import BaseComponent from "@/components/base/BaseComponent";
 
-import { GetClientsModel, UpdateSummaryRequestModel } from "@/model";
+import ClientInfo from "./components/ClientInfo.vue";
+import SnackBar from "@/components/layout/SnackBar.vue";
+
+import { GetClientsModel } from "@/model";
 import { IAdminService } from "@/service";
 
-import ClientInfo from "./components/ClientInfo.vue";
-
 @Component({
-  components: { ClientInfo },
+  components: { ClientInfo, SnackBar },
 })
 export default class ClientDetails extends BaseComponent {
   @Inject("adminService") service: IAdminService;
@@ -89,6 +99,10 @@ export default class ClientDetails extends BaseComponent {
   public perPage: number = 5;
   public showClientInfo: boolean = false;
   public clientInfo: GetClientsModel = new GetClientsModel();
+
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
+  public snackBarStatus: string = "";
 
   created() {
     this.getClient();
@@ -108,9 +122,18 @@ export default class ClientDetails extends BaseComponent {
     this.showClientInfo = true;
   }
 
-  public onUpdateSummary() {
+  public onUpdateSummary(responseSummary: any) {
     this.showClientInfo = false;
+
+    this.snackbarText = responseSummary;
+    this.snackbar = true;
+    this.snackBarStatus = "Success";
+
     this.getClient();
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 
   public avatarColors() {
@@ -127,7 +150,7 @@ export default class ClientDetails extends BaseComponent {
     return colorsList[randomColor];
   }
 
-   get pages() {
+  get pages() {
     return this.response.slice(
       (this.page - 1) * this.perPage,
       this.page * this.perPage

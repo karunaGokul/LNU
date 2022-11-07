@@ -73,17 +73,26 @@
         @Yes="deleteProgram"
         v-if="showDeleteModel"
       />
+      <snack-bar
+        v-if="snackbar"
+        :snackbarText="snackbarText"
+        :snackBarStatus="snackBarStatus"
+        @close="OnSnackBarClose"
+      />
     </v-container>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Inject } from "vue-property-decorator";
-import BaseComponent from "@/components/base/BaseComponent";
 import store from "@/store";
+
+import BaseComponent from "@/components/base/BaseComponent";
 
 import AppAlert from "@/components/layout/AppAlert.vue";
 import AddCounselingProgram from "./components/AddCounselingProgram.vue";
+import SnackBar from "@/components/layout/SnackBar.vue";
+
 import { DashboardResponseModel } from "@/model";
 import { IDashboardService } from "@/service";
 
@@ -91,6 +100,7 @@ import { IDashboardService } from "@/service";
   components: {
     AddCounselingProgram,
     AppAlert,
+    SnackBar,
   },
 })
 export default class AdminDashboardLayout extends BaseComponent {
@@ -101,9 +111,11 @@ export default class AdminDashboardLayout extends BaseComponent {
     new DashboardResponseModel();
   public showAddProgramModel = false;
   public modelType: string = "Add";
-
   public showDeleteModel = false;
-  public counsellingProgramData: any;
+
+  public snackbar: boolean = false;
+  public snackbarText: any;
+  public snackBarStatus: string = "";
 
   created() {
     this.getCounsellingProgram();
@@ -135,12 +147,21 @@ export default class AdminDashboardLayout extends BaseComponent {
     this.showAddProgramModel = true;
   }
 
-  public onUpdateProgam() {
+  public onUpdateProgam(responseAddCounselingProgram: any) {
     this.seletedCounselingProgram = new DashboardResponseModel();
     this.showAddProgramModel = false;
+
+    this.snackbarText = responseAddCounselingProgram;
+    this.snackbar = true;
+    this.snackBarStatus = "Success";
+
     store.dispatch("removeCounselingProgram");
     store.dispatch("counselingProgram");
     this.getCounsellingProgram();
+  }
+
+  public OnSnackBarClose() {
+    this.snackbar = false;
   }
 
   public onClose() {
@@ -163,6 +184,11 @@ export default class AdminDashboardLayout extends BaseComponent {
       .deleteProgam(this.seletedCounselingProgram.Id)
       .then((response) => {
         this.cancelDeleteProgram();
+
+        this.snackbarText = response;
+        this.snackbar = true;
+        this.snackBarStatus = "Success";
+        
         this.getCounsellingProgram();
       })
       .catch((err) => {

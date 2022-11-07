@@ -184,9 +184,9 @@ export default class EditCounselling extends BaseComponent {
       this.loadingSpinner("show");
       this.dashboardService
         .AddCounsellingProgram(path, this.request)
-        .then((res) => {
+        .then((response) => {
           this.loadingSpinner("hide");
-          this.$emit("counselingProgamAdded");
+          this.$emit("counselingProgamAdded", response);
         })
         .catch((err) => {
           console.log(err);
