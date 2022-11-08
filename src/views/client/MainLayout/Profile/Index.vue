@@ -120,7 +120,12 @@
           :error-messages="$v.request.Queries | errorMessages('Queries')"
         ></v-textarea>
         <div class="text-end">
-          <v-btn color="primary" class="text-capitalize" rounded type="submit">
+          <v-btn
+            color="primary"
+            class="text-capitalize rounded-lg"
+            type="submit"
+          >
+            <v-icon class="mr-2">edit_note</v-icon>
             Save
           </v-btn>
         </div>
