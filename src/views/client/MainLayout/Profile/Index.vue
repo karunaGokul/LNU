@@ -249,7 +249,8 @@ export default class ClientProfileLayout extends BaseComponent {
         (err) => {
           this.loadingSpinner("hide");
           if (err.response.status === 400) {
-            console.log(err);
+            this.snackbarText = err.response.data;
+            this.snackbar = true;
           }
         }
       );
