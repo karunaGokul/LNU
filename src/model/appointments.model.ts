@@ -12,13 +12,13 @@ export class CoachDetailsModel {
 }
 
 export class InviteLinkModel {
-  Id: string;
-  Link: string;
+  appointmentId: string;
+  inviteLink: string;
 }
 export class CompleteAppoinmentModel {
-  Id: string;
-  Link: string;
-  Notes: string;
+  appointmentId: string;
+  link: string;
+  notes: string;
 }
 export class BookAppointmentRequestModel {
   AppointmentDate: string;
@@ -76,11 +76,9 @@ export class AppointmentResponseModel {
   clientSummary: string;
   canConfirm: boolean;
   canReschedule: boolean;
-  // appointmentStartTime: string;
-  // appointmentEndTime: string;
-  // status: Array<AppointmentStatusModel>;
-  // createdDate: string;
-  // updatedDate: string;
+  recordingLink: string;
+  invitationLink: string;
+  coachNotes: string;
 }
 export class EventsModel {
   name: string;
@@ -102,6 +100,10 @@ export class EventsModel {
   appointmentTime: string;
   canConfirm: boolean;
   canReschedule: boolean;
+
+  recordingLink: string;
+  invitationLink: string;
+  coachNotes: string;
 }
 
 export class AppointmentByStatusRequestModel {

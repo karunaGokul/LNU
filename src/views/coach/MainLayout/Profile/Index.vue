@@ -133,8 +133,8 @@
               filled
               dense
               @change="selectFiles"
-              >
-              <template v-slot:selection="{ index,text }">
+            >
+              <template v-slot:selection="{ index, text }">
                 <v-chip
                   small
                   label
@@ -147,9 +147,8 @@
                   {{ text }}
                 </v-chip>
               </template>
-              </v-file-input>
+            </v-file-input>
           </v-col>
-          
         </v-row>
         <div v-if="certificates.length" class="d-flex justify-space-between">
           <div>
@@ -165,10 +164,11 @@
           <div class="align-self-end">
             <v-btn
               color="primary"
-              class="text-capitalize"
+              class="text-capitalize rounded-lg"
               rounded
               type="submit"
             >
+              <v-icon class="mr-2">edit_note</v-icon>
               Save
             </v-btn>
           </div>
@@ -287,7 +287,7 @@ export default class Profile extends BaseComponent {
   }
 
   public removeFile(index: any, text: any) {
-    this.certificates.splice(index-1, 1)
+    this.certificates.splice(index - 1, 1);
     this.chip1 = false;
   }
 
@@ -322,7 +322,8 @@ export default class Profile extends BaseComponent {
           (err) => {
             this.loadingSpinner("hide");
             if (err.response.status === 400) {
-              console.log(err);
+              this.snackbarText = err.response.data;
+              this.snackbar = true;
             }
           }
         );

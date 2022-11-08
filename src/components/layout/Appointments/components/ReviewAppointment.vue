@@ -40,10 +40,12 @@
             color="primary"
             filled
             dense
-            v-model="inviteRequest.Link"
-            @input="$v.inviteRequest.Link.$touch()"
-            @blur="$v.inviteRequest.Link.$touch()"
-            :error-messages="$v.inviteRequest.Link | errorMessages('Link')"
+            v-model="inviteRequest.inviteLink"
+            @input="$v.inviteRequest.inviteLink.$touch()"
+            @blur="$v.inviteRequest.inviteLink.$touch()"
+            :error-messages="
+              $v.inviteRequest.inviteLink | errorMessages('inviteLink')
+            "
           ></v-text-field>
         </v-card-text>
 
@@ -93,7 +95,7 @@ import { required } from "vuelidate/lib/validators";
       Notes: { required },
     },
     inviteRequest: {
-      Link: { required },
+      inviteLink: { required },
     },
   },
 })
@@ -115,14 +117,15 @@ export default class ReviewAppointment extends BaseComponent {
 
   public review() {
     this.$v.completeRequest.$touch();
-    this.completeRequest.Id = this.appointmentId;
+
     if (!this.$v.completeRequest.$invalid) {
       this.loadingSpinner("show");
+      this.completeRequest.appointmentId = this.appointmentId;
       this.appointmentService
         .CompleteAppoinment(this.completeRequest)
         .then((response) => {
           this.loadingSpinner("hide");
-          this.$emit("review");
+          this.$emit("review", response);
         })
         .catch((err) => {
           console.log(err);
@@ -134,11 +137,12 @@ export default class ReviewAppointment extends BaseComponent {
 
     if (!this.$v.inviteRequest.$invalid) {
       this.loadingSpinner("show");
+      this.inviteRequest.appointmentId = this.appointmentId;
       this.appointmentService
         .AppoinmentInviteLink(this.inviteRequest)
         .then((response) => {
           this.loadingSpinner("hide");
-          this.$emit("invite");
+          this.$emit("invite", response);
         })
         .catch((err) => {
           console.log(err);
