@@ -179,7 +179,8 @@ export default class AppointmentsLayout extends BaseComponent {
 
   public updateAppointment(date: string) {
     this.showAssignCoach = false;
-    this.getAppointments();
+    console.log(date);
+    this.getAppointments(date);
   }
 
   // Reschedule Appoinment Method Start
@@ -207,6 +208,7 @@ export default class AppointmentsLayout extends BaseComponent {
     this.snackbarText = responseCompleteAppointment;
     this.snackbar = true;
     this.snackBarStatus = "Success";
+    this.getAppointments();
   }
 
   public OnSnackBarClose() {
@@ -220,15 +222,16 @@ export default class AppointmentsLayout extends BaseComponent {
     this.snackBarStatus = "Success";
   }
 
-  public onAppointmentRescheduled() {
+  public onAppointmentRescheduled(date: any) {
     this.showBookAppoinment = false;
-    this.getAppointments();
+    console.log(date);
+    this.getAppointments(date);
   }
 
   // Reschedule Appoinment Method End
 
-  public cancelAppoinment() {
-    location.reload();
+  public cancelAppoinment(date: any) {
+    this.getAppointments(date);
   }
 
   private getDate(date: string, time: string) {

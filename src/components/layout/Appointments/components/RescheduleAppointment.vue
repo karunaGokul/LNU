@@ -170,13 +170,12 @@ export default class RescheduleAppointment extends BaseComponent {
       this.service
         .rescheduleAppointments(this.request)
         .then((response) => {
-          this.$emit("appointmentRescheduled");
           this.loadingSpinner("hide");
 
           this.snackbarText = response;
           this.snackbar = true;
           this.snackBarStatus = "Success";
-          this.dialog = false;
+          
         })
         .catch((err) => {
           this.loadingSpinner("hide");
@@ -198,6 +197,7 @@ export default class RescheduleAppointment extends BaseComponent {
 
   public OnSnackBarClose() {
     this.snackbar = false;
+    this.$emit("appointmentRescheduled", this.selectedEvent.appointmentDate);
   }
 }
 </script>

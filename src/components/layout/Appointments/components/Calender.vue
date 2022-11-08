@@ -378,7 +378,7 @@ export default class Calendar extends BaseComponent {
         this.snackbarText = response;
         this.snackbar = true;
         this.snackBarStatus = "Success";
-        this.$emit("confirmAppointment");
+        this.$emit("confirmAppointment", this.selectedEvent.appointmentDate);
       },
       (err) => {
         this.loadingSpinner("hide");
@@ -394,12 +394,14 @@ export default class Calendar extends BaseComponent {
     this.showAlert = false;
     this.request.appointmentId = this.selectedEvent.id;
     this.request.reason = "change the counselling";
+    this.loadingSpinner("show");
     this.service.cancelAppointment(this.request).then(
       (response: any) => {
+        this.loadingSpinner("hide");
         this.snackbarText = response;
         this.snackbar = true;
         this.snackBarStatus = "Success";
-        this.$emit("cancelAppointment");
+        this.$emit("cancelAppointment", this.selectedEvent.appointmentDate);
       },
       (err) => {
         this.loadingSpinner("hide");
