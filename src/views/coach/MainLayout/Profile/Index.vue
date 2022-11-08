@@ -159,7 +159,7 @@
               :key="index"
               class="mr-1"
             >
-              {{ index }}
+              {{ file.name }}
             </v-chip>
           </div>
           <div class="align-self-end">
@@ -291,8 +291,12 @@ export default class Profile extends BaseComponent {
     });
   }
 
-  public removeFile(index: any, text: any) {
-    this.certificates.splice(index - 1, 1);
+  public removeFile() {
+    this.files = [];
+    this.certificates.splice(
+      this.editCertificates.length - this.removeCertificate,
+      this.removeCertificate
+    );
     this.chip1 = false;
   }
 
