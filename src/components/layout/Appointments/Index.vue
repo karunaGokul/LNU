@@ -179,7 +179,6 @@ export default class AppointmentsLayout extends BaseComponent {
 
   public updateAppointment(date: string) {
     this.showAssignCoach = false;
-    console.log(date);
     this.getAppointments(date);
   }
 
@@ -224,7 +223,6 @@ export default class AppointmentsLayout extends BaseComponent {
 
   public onAppointmentRescheduled(date: any) {
     this.showBookAppoinment = false;
-    console.log(date);
     this.getAppointments(date);
   }
 

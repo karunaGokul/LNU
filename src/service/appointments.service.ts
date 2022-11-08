@@ -94,7 +94,6 @@ export class AppointmentService
         request.AppointmentId,
       request
     ).then((response) => {
-      console.log(response);
       return response.data;
     });
   }

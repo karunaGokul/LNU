@@ -201,7 +201,6 @@ export default class EditCounselling extends BaseComponent {
   public removeImage() {
     this.request.Image = null;
     this.profilePhoto = this.request.Image;
-    console.log(this.request);
   }
 
   public uploadProfile(event: any) {

@@ -80,8 +80,6 @@ export class ProfileService
     });
     formData.append("Id", request.Id);
 
-    console.log(formData);
-
     return this.upload(formData, `profile/EditCertificates?id=${request.id}`);
   }
 
