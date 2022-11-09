@@ -18,10 +18,10 @@
             color="#FCB258"
             filled
             dense
-            v-model="completeRequest.Notes"
-            @input="$v.completeRequest.Notes.$touch()"
-            @blur="$v.completeRequest.Notes.$touch()"
-            :error-messages="$v.completeRequest.Notes | errorMessages('Notes')"
+            v-model="completeRequest.notes"
+            @input="$v.completeRequest.notes.$touch()"
+            @blur="$v.completeRequest.notes.$touch()"
+            :error-messages="$v.completeRequest.notes | errorMessages('Notes')"
           ></v-textarea>
           <v-text-field
             v-if="inviteLink !== 'invite'"
@@ -29,10 +29,10 @@
             color="primary"
             filled
             dense
-            v-model="completeRequest.Link"
-            @input="$v.completeRequest.Link.$touch()"
-            @blur="$v.completeRequest.Link.$touch()"
-            :error-messages="$v.completeRequest.Link | errorMessages('Link')"
+            v-model="completeRequest.link"
+            @input="$v.completeRequest.link.$touch()"
+            @blur="$v.completeRequest.link.$touch()"
+            :error-messages="$v.completeRequest.link | errorMessages('Link')"
           ></v-text-field>
           <v-text-field
             v-if="inviteLink === 'invite'"
@@ -40,10 +40,12 @@
             color="primary"
             filled
             dense
-            v-model="inviteRequest.Link"
-            @input="$v.inviteRequest.Link.$touch()"
-            @blur="$v.inviteRequest.Link.$touch()"
-            :error-messages="$v.inviteRequest.Link | errorMessages('Link')"
+            v-model="inviteRequest.inviteLink"
+            @input="$v.inviteRequest.inviteLink.$touch()"
+            @blur="$v.inviteRequest.inviteLink.$touch()"
+            :error-messages="
+              $v.inviteRequest.inviteLink | errorMessages('inviteLink')
+            "
           ></v-text-field>
         </v-card-text>
 
@@ -89,11 +91,11 @@ import { required } from "vuelidate/lib/validators";
 @Component({
   validations: {
     completeRequest: {
-      Link: { required },
-      Notes: { required },
+      link: { required },
+      notes: { required },
     },
     inviteRequest: {
-      Link: { required },
+      inviteLink: { required },
     },
   },
 })
@@ -115,14 +117,15 @@ export default class ReviewAppointment extends BaseComponent {
 
   public review() {
     this.$v.completeRequest.$touch();
-    this.completeRequest.Id = this.appointmentId;
+
     if (!this.$v.completeRequest.$invalid) {
       this.loadingSpinner("show");
+      this.completeRequest.appointmentId = this.appointmentId;
       this.appointmentService
         .CompleteAppoinment(this.completeRequest)
         .then((response) => {
           this.loadingSpinner("hide");
-          this.$emit("review");
+          this.$emit("review", response);
         })
         .catch((err) => {
           console.log(err);
@@ -134,11 +137,12 @@ export default class ReviewAppointment extends BaseComponent {
 
     if (!this.$v.inviteRequest.$invalid) {
       this.loadingSpinner("show");
+      this.inviteRequest.appointmentId = this.appointmentId;
       this.appointmentService
         .AppoinmentInviteLink(this.inviteRequest)
         .then((response) => {
           this.loadingSpinner("hide");
-          this.$emit("invite");
+          this.$emit("invite", response);
         })
         .catch((err) => {
           console.log(err);

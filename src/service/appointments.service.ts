@@ -21,7 +21,6 @@ export interface IAppointmentService
     councelingTypeId: number
   ): Promise<Array<CoachDetailsModel>>;
   updatePayment(request: UpdatePaymentRequestModel): Promise<any>;
-  // getPendingAppointment(request: AppointmentByStatusRequestModel): Promise<Array<AppointmentByStatusResponseModel>>;
   AppoinmentInviteLink(request: InviteLinkModel): Promise<any>;
   CompleteAppoinment(request: CompleteAppoinmentModel): Promise<any>;
 }
@@ -35,20 +34,26 @@ export class AppointmentService
   }
 
   public AppoinmentInviteLink(request: InviteLinkModel): Promise<any> {
-    return new Promise((resolve, reject) => {
-      let items = new InviteLinkModel();
-      items.Id = "1";
-      items.Link = "https://vuejs.org/";
-      resolve(items);
-      console.log(items);
-      return resolve;
+    return this.httpPost(
+      "Appointment/InviteLink?appointmentId=" +
+        request.appointmentId +
+        "&inviteLink=" +
+        request.inviteLink,
+      null
+    ).then((response) => {
+      return response.data;
     });
   }
 
   public CompleteAppoinment(request: CompleteAppoinmentModel): Promise<any> {
     return this.httpPost(
-      "Appointment/CompleteAppointment?appointmentId=" + request.Id,
-      request
+      "Appointment/CompleteAppointment?appointmentId=" +
+        request.appointmentId +
+        "&notes=" +
+        request.notes +
+        "&link=" +
+        request.link,
+      null
     ).then((res) => {
       return res.data;
     });
@@ -89,7 +94,6 @@ export class AppointmentService
         request.AppointmentId,
       request
     ).then((response) => {
-      console.log(response);
       return response.data;
     });
   }

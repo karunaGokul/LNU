@@ -92,7 +92,7 @@
                     <v-label>Counseling Program:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{ this.selectedEvent.name }}</h4>
+                    <h4>{{ selectedEvent.name }}</h4>
                   </v-col>
                 </v-row>
                 <v-row v-if="selectedEvent.coachName && User != 'Coach'">
@@ -100,7 +100,7 @@
                     <v-label>Coach Name:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{ this.selectedEvent.coachName }}</h4>
+                    <h4>{{ selectedEvent.coachName }}</h4>
                   </v-col>
                 </v-row>
                 <v-row v-if="selectedEvent.clientName && User == 'Coach'">
@@ -108,7 +108,7 @@
                     <v-label>Client Name:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{ this.selectedEvent.clientName }}</h4>
+                    <h4>{{ selectedEvent.clientName }}</h4>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -116,8 +116,8 @@
                     <v-label>Appointment Date & Time:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{ this.selectedEvent.appointmentDate }}</h4>
-                    <h4>{{ this.selectedEvent.appointmentTime }}</h4>
+                    <h4>{{ selectedEvent.appointmentDate }}</h4>
+                    <h4>{{ selectedEvent.appointmentTime }}</h4>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -125,37 +125,50 @@
                     <v-label>Notes:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{ this.selectedEvent.tellAboutYourSelf }}</h4>
+                    <h4>{{ selectedEvent.tellAboutYourSelf }}</h4>
                   </v-col>
                 </v-row>
-                <v-row v-if="User == 'Coach'">
+                <v-row v-if="User == 'Coach' && selectedEvent.clientSummary">
                   <v-col>
                     <v-label>Summary:</v-label>
                   </v-col>
                   <v-col>
-                    <h4>{{ this.selectedEvent.clientSummary }}</h4>
+                    <h4>{{ selectedEvent.clientSummary }}</h4>
                   </v-col>
                 </v-row>
-                <div
-                  v-if="selectedEvent.status == 'Confirmed' && User != 'Coach'"
-                >
-                  <v-row>
+                <div v-if="selectedEvent.status == 'Completed'">
+                  <v-row v-if="selectedEvent.coachNotes">
                     <v-col>
                       <v-label>Review Notes:</v-label>
                     </v-col>
                     <v-col>
-                      <h4>{{ reviewNotes }}</h4>
+                      <h4>{{ selectedEvent.coachNotes }}</h4>
                     </v-col>
                   </v-row>
-                  <v-row>
+                  <v-row v-if="selectedEvent.recordingLink">
                     <v-col>
-                      <v-label>Link:</v-label>
+                      <v-label>Recording Link:</v-label>
                     </v-col>
                     <v-col>
-                      <h4>{{ reviewLink }}</h4>
+                      <h4>{{ selectedEvent.recordingLink }}</h4>
                     </v-col>
                   </v-row>
                 </div>
+
+                <v-row
+                  v-if="
+                    selectedEvent.status == 'Confirmed' &&
+                    User != 'Coach' &&
+                    selectedEvent.invitationLink
+                  "
+                >
+                  <v-col>
+                    <v-label>Link:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{ selectedEvent.invitationLink }}</h4>
+                  </v-col>
+                </v-row>
 
                 <v-row
                   v-if="
@@ -365,7 +378,7 @@ export default class Calendar extends BaseComponent {
         this.snackbarText = response;
         this.snackbar = true;
         this.snackBarStatus = "Success";
-        this.$emit("confirmAppointment");
+        this.$emit("confirmAppointment", this.selectedEvent.appointmentDate);
       },
       (err) => {
         this.loadingSpinner("hide");
@@ -381,12 +394,14 @@ export default class Calendar extends BaseComponent {
     this.showAlert = false;
     this.request.appointmentId = this.selectedEvent.id;
     this.request.reason = "change the counselling";
+    this.loadingSpinner("show");
     this.service.cancelAppointment(this.request).then(
       (response: any) => {
+        this.loadingSpinner("hide");
         this.snackbarText = response;
         this.snackbar = true;
         this.snackBarStatus = "Success";
-        this.$emit("cancelAppointment");
+        this.$emit("cancelAppointment", this.selectedEvent.appointmentDate);
       },
       (err) => {
         this.loadingSpinner("hide");

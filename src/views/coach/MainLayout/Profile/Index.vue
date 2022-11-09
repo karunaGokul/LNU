@@ -124,6 +124,7 @@
           </v-col>
           <v-col>
             <v-file-input
+              v-model="files"
               :prepend-icon="null"
               label="Ceritifications"
               prepend-inner-icon="upload"
@@ -133,8 +134,8 @@
               filled
               dense
               @change="selectFiles"
-              >
-              <template v-slot:selection="{ index,text }">
+            >
+              <template v-slot:selection="{ index, text }">
                 <v-chip
                   small
                   label
@@ -142,14 +143,13 @@
                   v-if="chip1"
                   close
                   close-icon="cancel"
-                  @click:close="removeFile(index, text)"
+                  @click:close="removeFile(index)"
                 >
                   {{ text }}
                 </v-chip>
               </template>
-              </v-file-input>
+            </v-file-input>
           </v-col>
-          
         </v-row>
         <div v-if="certificates.length" class="d-flex justify-space-between">
           <div>
@@ -165,10 +165,11 @@
           <div class="align-self-end">
             <v-btn
               color="primary"
-              class="text-capitalize"
+              class="text-capitalize rounded-lg"
               rounded
               type="submit"
             >
+              <v-icon class="mr-2">edit_note</v-icon>
               Save
             </v-btn>
           </div>
@@ -234,13 +235,14 @@ export default class Profile extends BaseComponent {
   public requestCertificate: CertificateModel = new CertificateModel();
   public profilePhoto: any = null;
   public certificate: File;
-  chip1 = true;
+  public chip1 = true;
 
   private certificates: Array<File> = [];
   public snackbar: boolean = false;
   public snackbarText: any;
   public snackBarStatus: string = "";
-
+  public removeCertificate: number = 1;
+  public files: Array<any> = [];
   mounted() {
     this.getProfile();
   }
@@ -283,11 +285,18 @@ export default class Profile extends BaseComponent {
 
   public selectFiles(file: any) {
     this.chip1 = true;
-    this.certificates.push(file[0]);
+    file.forEach((a: any, index: number) => {
+      this.removeCertificate = ++index;
+      this.certificates.push(a);
+    });
   }
 
-  public removeFile(index: any, text: any) {
-    this.certificates.splice(index-1, 1)
+  public removeFile() {
+    this.files = [];
+    this.certificates.splice(
+      this.editCertificates.length - this.removeCertificate,
+      this.removeCertificate
+    );
     this.chip1 = false;
   }
 
@@ -322,7 +331,8 @@ export default class Profile extends BaseComponent {
           (err) => {
             this.loadingSpinner("hide");
             if (err.response.status === 400) {
-              console.log(err);
+              this.snackbarText = err.response.data;
+              this.snackbar = true;
             }
           }
         );

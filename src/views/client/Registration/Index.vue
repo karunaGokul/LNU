@@ -714,7 +714,6 @@ export default class ClientRegistration extends BaseComponent {
           this.$router.push("login");
         },
         (err) => {
-          console.log(err.status);
           this.loadingSpinner("hide");
           if (err.response.status === 400) {
             this.snackbarText = err.response.data;

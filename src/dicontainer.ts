@@ -9,10 +9,6 @@ import {
   RegistrationService,
   IPaymentService,
   PaymentService,
-  // CoachProfileService,
-  // ICoachProfileService,
-  ICoachCalendarService,
-  CoachCalendarService,
   IAppointmentService,
   AppointmentService,
   AdminService,
@@ -30,10 +26,6 @@ export class DIContainer extends Vue {
     new RegistrationService();
   @Provide("paymentService") paymentService: IPaymentService =
     new PaymentService();
-  // @Provide("coachProfileService") coachProfileService: ICoachProfileService =
-  //   new CoachProfileService();
-  @Provide("coachCalendarService") coachCalenderService: ICoachCalendarService =
-    new CoachCalendarService();
   @Provide("appointmentService") appointmentService: IAppointmentService =
     new AppointmentService();
   @Provide("adminService") adminService: IAdminService = new AdminService();

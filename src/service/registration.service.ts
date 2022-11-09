@@ -42,7 +42,6 @@ export class RegistrationService
   }
   public coachRegister(request: CoachRegistrationModel): Promise<any> {
     return this.httpPost("Register", request).then((response) => {
-      console.log(response);
       return response.data;
     });
   }

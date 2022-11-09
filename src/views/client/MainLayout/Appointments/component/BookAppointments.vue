@@ -367,7 +367,6 @@ export default class BookAppointments extends BaseComponent {
   }
 
   onUpdate(token: any) {
-    console.log(token);
     this.showCheckOut = false;
   }
 

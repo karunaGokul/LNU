@@ -35,6 +35,13 @@
       :appointmentId="appointmentId"
       :inviteLink="inviteLink"
     />
+
+    <snack-bar
+      v-if="snackbar"
+      :snackbarText="snackbarText"
+      :snackBarStatus="snackBarStatus"
+      @close="OnSnackBarClose"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -45,6 +52,7 @@ import Calendar from "./components/Calender.vue";
 import RescheduleAppointment from "./components/RescheduleAppointment.vue";
 import AssignCoach from "./components/AssignCoach.vue";
 import ReviewAppointment from "./components/ReviewAppointment.vue";
+import SnackBar from "@/components/layout/SnackBar.vue";
 
 import { IAppointmentService } from "@/service";
 
@@ -54,13 +62,13 @@ import {
   AppointmentResponseModel,
 } from "@/model";
 
-
 @Component({
   components: {
     RescheduleAppointment,
     Calendar,
     AssignCoach,
     ReviewAppointment,
+    SnackBar,
   },
 })
 export default class AppointmentsLayout extends BaseComponent {
@@ -83,6 +91,10 @@ export default class AppointmentsLayout extends BaseComponent {
   public response: Array<AppointmentResponseModel> = [];
 
   public events: Array<EventsModel> = [];
+
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
+  public snackBarStatus: string = "";
 
   public getAppointments(date?: any) {
     if (!date) date = this.$vuehelper.date.format(new Date(), "YYYY-MM-DD");
@@ -108,6 +120,10 @@ export default class AppointmentsLayout extends BaseComponent {
           event.counselingTypeId = item.counselingType.Id;
           event.tellAboutYourSelf = item.tellAboutYourSelf;
           event.clientSummary = item.clientSummary;
+
+          event.coachNotes = item.coachNotes;
+          event.recordingLink = item.recordingLink;
+          event.invitationLink = item.invitationLink;
 
           let date = new Date(item.appointmentDate).getDate();
           let month = new Date(item.appointmentDate).getMonth() + 1;
@@ -163,7 +179,7 @@ export default class AppointmentsLayout extends BaseComponent {
 
   public updateAppointment(date: string) {
     this.showAssignCoach = false;
-    this.getAppointments();
+    this.getAppointments(date);
   }
 
   // Reschedule Appoinment Method Start
@@ -186,22 +202,34 @@ export default class AppointmentsLayout extends BaseComponent {
     this.inviteLink = inviteLink;
   }
 
-  public onReviewAppointment() {
+  public onReviewAppointment(responseCompleteAppointment: any) {
     this.showReviewAppoinment = false;
-  }
-  public oninvite() {
-    this.showReviewAppoinment = false;
+    this.snackbarText = responseCompleteAppointment;
+    this.snackbar = true;
+    this.snackBarStatus = "Success";
+    this.getAppointments();
   }
 
-  public onAppointmentRescheduled() {
+  public OnSnackBarClose() {
+    this.snackbar = false;
+  }
+
+  public oninvite(responseInviteLink: any) {
+    this.showReviewAppoinment = false;
+    this.snackbarText = responseInviteLink;
+    this.snackbar = true;
+    this.snackBarStatus = "Success";
+  }
+
+  public onAppointmentRescheduled(date: any) {
     this.showBookAppoinment = false;
-    this.getAppointments();
+    this.getAppointments(date);
   }
 
   // Reschedule Appoinment Method End
 
-  public cancelAppoinment() {
-    location.reload();
+  public cancelAppoinment(date: any) {
+    this.getAppointments(date);
   }
 
   private getDate(date: string, time: string) {
