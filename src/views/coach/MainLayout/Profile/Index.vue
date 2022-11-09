@@ -326,8 +326,15 @@ export default class Profile extends BaseComponent {
         .updateProfileCoach(this.profilePhoto, this.request)
         .then(
           (response: CoachResponseModel) => {
+            if (this.files.length) {
+              this.editCertificates();
+            } else {
+              this.snackbarText = response;
+              this.snackbar = true;
+              this.snackBarStatus = "Success";
+              this.getProfile();
+            }
             this.files = [];
-            this.editCertificates();
           },
           (err) => {
             this.loadingSpinner("hide");
