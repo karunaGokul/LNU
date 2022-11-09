@@ -425,7 +425,7 @@ export default class Calendar extends BaseComponent {
   public review(inviteLink: string) {
     this.selectedOpen = false;
 
-    this.$emit("review", this.selectedEvent.id, inviteLink);
+    this.$emit("review", this.selectedEvent, inviteLink);
   }
 
   public viewDay(data: any) {
@@ -473,7 +473,7 @@ export default class Calendar extends BaseComponent {
 
     nativeEvent.stopPropagation();
   }
-
+  
   updateCalender(data: any) {
     if (this.type == "month") this.$emit("updateCalender", data.start.date);
   }

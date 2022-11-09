@@ -103,6 +103,7 @@ export default class ReviewAppointment extends BaseComponent {
   @Inject("appointmentService") appointmentService: IAppointmentService;
 
   @Prop() appointmentId: string;
+  @Prop() selectedEvent: any;
   @Prop() inviteLink: string;
 
   public inviteRequest: InviteLinkModel = new InviteLinkModel();
@@ -125,7 +126,7 @@ export default class ReviewAppointment extends BaseComponent {
         .CompleteAppoinment(this.completeRequest)
         .then((response) => {
           this.loadingSpinner("hide");
-          this.$emit("review", response);
+          this.$emit("review", response, this.selectedEvent.appointmentDate);
         })
         .catch((err) => {
           console.log(err);

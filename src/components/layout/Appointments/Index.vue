@@ -34,6 +34,7 @@
       v-if="showReviewAppoinment"
       :appointmentId="appointmentId"
       :inviteLink="inviteLink"
+      :selectedEvent="selectedEvent"
     />
 
     <snack-bar
@@ -196,18 +197,19 @@ export default class AppointmentsLayout extends BaseComponent {
     this.selectedEvent = event;
   }
 
-  public reviewAppoinment(id: string, inviteLink: string) {
-    this.appointmentId = id;
+  public reviewAppoinment(event: any, inviteLink: string) {
+    this.appointmentId = event.id;
     this.showReviewAppoinment = true;
     this.inviteLink = inviteLink;
+    this.selectedEvent = event;
   }
 
-  public onReviewAppointment(responseCompleteAppointment: any) {
+  public onReviewAppointment(responseCompleteAppointment: any, date: any) {
     this.showReviewAppoinment = false;
     this.snackbarText = responseCompleteAppointment;
     this.snackbar = true;
     this.snackBarStatus = "Success";
-    this.getAppointments();
+    this.getAppointments(date);
   }
 
   public OnSnackBarClose() {
