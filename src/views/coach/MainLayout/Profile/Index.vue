@@ -326,6 +326,7 @@ export default class Profile extends BaseComponent {
         .updateProfileCoach(this.profilePhoto, this.request)
         .then(
           (response: CoachResponseModel) => {
+            this.files = [];
             this.editCertificates();
           },
           (err) => {
