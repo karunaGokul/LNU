@@ -353,7 +353,8 @@ export default class Calendar extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
   public snackBarStatus: string = "";
-  public PreventCallingmonth: number = 1;
+  public PreventCallingMonth: number = 1;
+  public callingMonth = "";
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
@@ -445,12 +446,14 @@ export default class Calendar extends BaseComponent {
     let calendar: any = this.$refs.calendar;
     calendar.prev();
     this.type = "month";
+    this.callingMonth = "pre";
   }
 
   next() {
     let calendar: any = this.$refs.calendar;
     calendar.next();
     this.type = "month";
+    this.callingMonth = "next";
   }
 
   showEvent(data: any) {
@@ -473,11 +476,17 @@ export default class Calendar extends BaseComponent {
 
     nativeEvent.stopPropagation();
   }
-  
+
   updateCalender(data: any) {
-    if (this.type == "month" && this.PreventCallingmonth === 1) {
+    if (
+      (this.type == "month" && this.callingMonth == "pre") ||
+      this.callingMonth == "next"
+    ) {
       this.$emit("updateCalender", data.start.date);
-      this.PreventCallingmonth = 0;
+      this.callingMonth = "";
+    } else if (this.type == "month" && this.PreventCallingMonth === 1) {
+      this.$emit("updateCalender", data.start.date);
+      this.PreventCallingMonth = 0;
     }
   }
 
