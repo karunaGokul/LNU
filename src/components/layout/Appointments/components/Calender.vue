@@ -353,7 +353,7 @@ export default class Calendar extends BaseComponent {
   public snackbar: boolean = false;
   public snackbarText: string = "";
   public snackBarStatus: string = "";
-
+  public PreventCallingmonth: number = 1;
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
@@ -475,7 +475,10 @@ export default class Calendar extends BaseComponent {
   }
 
   updateCalender(data: any) {
-    if (this.type == "month") this.$emit("updateCalender", data.start.date);
+    if (this.type == "month" && this.PreventCallingmonth === 1) {
+      this.$emit("updateCalender", data.start.date);
+      this.PreventCallingmonth = 0;
+    }
   }
 
   get eventMore() {
