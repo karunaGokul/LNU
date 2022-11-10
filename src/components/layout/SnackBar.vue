@@ -5,14 +5,13 @@
       :timeout="2000"
       right
       top
-      dark
       :color="snackBarStatus == 'Success' ? 'green' : 'red'"
     >
-      <v-icon color="white">priority_high </v-icon>
+      <v-icon>priority_high </v-icon>
       {{ snackbarText }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn color="white" text v-bind="attrs" @click="snackBar">
+        <v-btn text v-bind="attrs" @click="snackBar">
           <v-icon>close</v-icon>
         </v-btn>
       </template>
