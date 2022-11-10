@@ -440,6 +440,11 @@ export default class Calendar extends BaseComponent {
 
   setToday() {
     this.focus = "";
+    let calendar: any = this.$refs.calendar;
+    console.log(calendar);
+    calendar.setPresent();
+    this.type = "month";
+    this.callingMonth = "today";
   }
 
   prev() {
@@ -480,7 +485,8 @@ export default class Calendar extends BaseComponent {
   updateCalender(data: any) {
     if (
       (this.type == "month" && this.callingMonth == "pre") ||
-      this.callingMonth == "next"
+      this.callingMonth == "next" ||
+      this.callingMonth == "today"
     ) {
       this.$emit("updateCalender", data.start.date);
       this.callingMonth = "";
