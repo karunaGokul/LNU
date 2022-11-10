@@ -375,6 +375,7 @@ export default class Calendar extends BaseComponent {
     this.loadingSpinner("show");
     this.service.confirmAppointment(this.request).then(
       (response: any) => {
+        this.selectedOpen = false;
         this.loadingSpinner("hide");
         this.snackbarText = response;
         this.snackbar = true;
