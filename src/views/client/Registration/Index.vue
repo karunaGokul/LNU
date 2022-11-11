@@ -561,6 +561,7 @@
     <snack-bar
       v-if="snackbar"
       :snackbarText="snackbarText"
+      :snackBarStatus="snackBarStatus"
       @close="OnSnackBarClose"
     />
   </v-row>
@@ -639,8 +640,11 @@ export default class ClientRegistration extends BaseComponent {
 
   public showPassword: boolean = false;
   public showConfirmpassword: boolean = false;
+
   public snackbar: boolean = false;
   public snackbarText: string = "";
+  public snackBarStatus: string = "";
+
   private UserId: any;
   public showQuestionaire: boolean = false;
   public radios: number = 1;
@@ -703,6 +707,9 @@ export default class ClientRegistration extends BaseComponent {
   }
 
   public skipQuestionnaire() {
+    this.snackbarText = "Registered Successfully";
+    this.snackbar = true;
+    this.snackBarStatus = "Success";
     this.$router.push("login");
   }
 
@@ -711,6 +718,9 @@ export default class ClientRegistration extends BaseComponent {
       .saveQuestionnaire(this.questionnaireRequest, this.UserId)
       .then(
         (response: Array<QuestionnaireModel>) => {
+          this.snackbarText = "Registered Successfully";
+          this.snackbar = true;
+          this.snackBarStatus = "Success";
           this.$router.push("login");
         },
         (err) => {

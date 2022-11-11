@@ -238,6 +238,7 @@
         <snack-bar
           v-if="snackbar"
           :snackbarText="snackbarText"
+          :snackBarStatus="snackBarStatus"
           @close="OnSnackBarClose"
         />
       </v-container>
@@ -323,6 +324,7 @@ export default class CoachRegistration extends BaseComponent {
   public showConfirmpassword: boolean = false;
   public snackbar: boolean = false;
   public snackbarText: string = "";
+  public snackBarStatus: string = "";
 
   created() {
     this.getCertificationType();
@@ -345,6 +347,9 @@ export default class CoachRegistration extends BaseComponent {
       this.registerService.coachRegister(this.request).then(
         (response: Array<CoachRegistrationModel>) => {
           this.loadingSpinner("hide");
+          this.snackbarText = "Registered Successfully";
+          this.snackbar = true;
+          this.snackBarStatus = "Success";
           this.$router.push("login");
         },
         (err) => {

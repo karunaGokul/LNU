@@ -355,6 +355,7 @@ export default class Calendar extends BaseComponent {
   public snackBarStatus: string = "";
   public PreventCallingMonth: number = 1;
   public callingMonth = "";
+  
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
