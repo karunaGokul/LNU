@@ -710,7 +710,6 @@ export default class ClientRegistration extends BaseComponent {
     this.snackbarText = "Registered Successfully";
     this.snackbar = true;
     this.snackBarStatus = "Success";
-    this.$router.push("login");
   }
 
   public updateForm() {
@@ -718,10 +717,11 @@ export default class ClientRegistration extends BaseComponent {
       .saveQuestionnaire(this.questionnaireRequest, this.UserId)
       .then(
         (response: Array<QuestionnaireModel>) => {
+
           this.snackbarText = "Registered Successfully";
           this.snackbar = true;
           this.snackBarStatus = "Success";
-          this.$router.push("login");
+
         },
         (err) => {
           this.loadingSpinner("hide");
@@ -739,6 +739,7 @@ export default class ClientRegistration extends BaseComponent {
 
   public OnSnackBarClose() {
     this.snackbar = false;
+    this.$router.push("login");
   }
 }
 </script>

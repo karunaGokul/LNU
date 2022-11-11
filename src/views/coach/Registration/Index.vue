@@ -347,10 +347,11 @@ export default class CoachRegistration extends BaseComponent {
       this.registerService.coachRegister(this.request).then(
         (response: Array<CoachRegistrationModel>) => {
           this.loadingSpinner("hide");
+
           this.snackbarText = "Registered Successfully";
           this.snackbar = true;
           this.snackBarStatus = "Success";
-          this.$router.push("login");
+
         },
         (err) => {
           this.loadingSpinner("hide");
@@ -369,6 +370,7 @@ export default class CoachRegistration extends BaseComponent {
 
   public OnSnackBarClose() {
     this.snackbar = false;
+    this.$router.push("login");
   }
 }
 </script>
