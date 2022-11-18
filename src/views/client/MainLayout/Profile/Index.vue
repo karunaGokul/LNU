@@ -3,7 +3,7 @@
     <v-col cols="4" sm="12" md="5">
       <v-card width="608" elevation="0" color="transparent">
         <v-card-title class="justify-center">
-          <h4 class="text-h4 font-weight-bold pa-4">Hey, {{ request.FirstName }}!</h4>
+          <h4 class="text-h4 font-weight-bold pa-4">Hey, {{ firstName }}!</h4>
         </v-card-title>
         <v-card-text>
           <div class="position-relative text-center pa-4">
@@ -189,6 +189,8 @@ export default class ClientProfileLayout extends BaseComponent {
   public snackbarText: any;
   public snackBarStatus: string = "";
 
+  public firstName: string = "";
+
   mounted() {
     this.getProfile();
   }
@@ -202,6 +204,7 @@ export default class ClientProfileLayout extends BaseComponent {
       .then((response) => {
         this.loadingSpinner("hide");
         this.request = response;
+        this.firstName = response.FirstName;
 
         if (this.request.Image) {
           fetch(this.$vuehelper.getImageUrl(this.request.Image))

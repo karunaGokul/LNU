@@ -3,7 +3,7 @@
     <v-col cols="4" sm="12" md="5">
       <v-card width="608" elevation="0" color="transparent">
         <v-card-title class="justify-center">
-          <h4 class="text-h4 font-weight-bold pa-4">Hey, {{ request.FirstName }}!</h4>
+          <h4 class="text-h4 font-weight-bold pa-4">Hey, {{ firstName }}!</h4>
         </v-card-title>
 
         <v-card-text>
@@ -243,6 +243,8 @@ export default class Profile extends BaseComponent {
   public snackBarStatus: string = "";
   public removeCertificate: number = 1;
   public files: Array<any> = [];
+  public firstName: string = "";
+
   mounted() {
     this.getProfile();
   }
@@ -257,6 +259,7 @@ export default class Profile extends BaseComponent {
       .then((response) => {
         this.loadingSpinner("hide");
         this.request = response;
+        this.firstName = response.FirstName;
 
         for (let i in response.Certificates) {
           let blob = new Blob([JSON.stringify(response.Certificates[i])], {
