@@ -95,6 +95,14 @@
                     <h4>{{ selectedEvent.name }}</h4>
                   </v-col>
                 </v-row>
+                <v-row v-if="selectedEvent.clientName && User == 'Admin'">
+                  <v-col>
+                    <v-label>Client Name:</v-label>
+                  </v-col>
+                  <v-col>
+                    <h4>{{ selectedEvent.clientName }}</h4>
+                  </v-col>
+                </v-row>
                 <v-row v-if="selectedEvent.coachName && User != 'Coach'">
                   <v-col>
                     <v-label>Coach Name:</v-label>
