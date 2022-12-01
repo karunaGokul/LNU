@@ -66,11 +66,11 @@ export default class CoachDetails extends BaseComponent {
       sortable: false,
       value: "PhoneNumber",
     },
-    {
-      text: "About",
-      sortable: false,
-      value: "About",
-    },
+    // {
+    //   text: "About",
+    //   sortable: false,
+    //   value: "About",
+    // },
     {
       text: "Experience",
       sortable: false,
