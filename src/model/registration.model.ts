@@ -55,3 +55,14 @@ export class QuestionnaireModel {
   FearOfUnknown: number;
   PhysicalFeeling: number;
 }
+
+export class QuestionModel {
+  WhoIsThePersonNeedHelp: string;
+  IdentifyYourSelf: string;
+  age: string;
+  whatLedYouToConsiderTherapyToday: Array<string>;
+}
+
+export class QuestionnaireStatusModel {
+  status: string;
+}

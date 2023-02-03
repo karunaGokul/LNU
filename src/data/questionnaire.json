@@ -1,0 +1,468 @@
+[
+  {
+    "title": "Welcome Onboard!",
+    "description": "Help us know you better so we can design your personalized questionnaire to offer perfect solutions.",
+    "maxSteps": 10,
+    "steps": [
+      {
+        "id": 1,
+        "title": "What type of therapy are you looking of?",
+        "path": [""],
+        "controls": [
+          {
+            "id": "WhoIsThePersonNeedHelp",
+            "label": "PersonNeedsHelp",
+            "type": "radio-button",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opIndividual",
+                "data_id": "Individual",
+                "text": "Individual (for myself)",
+                "selected": false
+              },
+              {
+                "id": "opCouples",
+                "data_id": "Couples",
+                "text": "Couples (for myself and my partner)",
+                "selected": false
+              },
+              {
+                "id": "opTeen",
+                "data_id": "Teen",
+                "text": "Teen (for my child)",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "What is your gender indentity?",
+        "path": [""],
+        "controls": [
+          {
+            "id": "IdentifyYourSelf",
+            "label": "IdentifyYourself",
+            "type": "radio-button",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opMan",
+                "data_id": "Man",
+                "text": "Man",
+                "selected": false
+              },
+              {
+                "id": "opWoman",
+                "data_id": "Woman",
+                "text": "Woman",
+                "selected": false
+              },
+              {
+                "id": "opNonBinary",
+                "data_id": "NonBinary",
+                "text": "NonBinary",
+                "selected": false
+              },
+              {
+                "id": "opTransfeminine",
+                "data_id": "Transfeminine",
+                "text": "Transfeminine",
+                "selected": false
+              },
+              {
+                "id": "opTransmasculine",
+                "data_id": "Transmasculine",
+                "text": "Transmasculine",
+                "selected": false
+              },
+              {
+                "id": "opAgender",
+                "data_id": "Agender",
+                "text": "Agender",
+                "selected": false
+              },
+              {
+                "id": "opIdontknow",
+                "data_id": "Idontknow",
+                "text": "I don’t know",
+                "selected": false
+              },
+              {
+                "id": "opPreferNotToSay",
+                "data_id": "PreferNotToSay",
+                "text": "Prefer not to say",
+                "selected": false
+              },
+              {
+                "id": "opOthers",
+                "data_id": "Others",
+                "text": "Others",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "How old are you?",
+        "path": [""],
+        "controls": [{}]
+      },
+      {
+        "id": 4,
+        "title": "How do you identify?",
+        "path": [""],
+        "controls": [
+          {
+            "id": "Identity",
+            "label": "Identity",
+            "type": "radio-button",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opStraight",
+                "data_id": "Straight",
+                "text": "Straight",
+                "selected": false
+              },
+              {
+                "id": "opGay",
+                "data_id": "Gay",
+                "text": "Gay",
+                "selected": false
+              },
+              {
+                "id": "opLesbian",
+                "data_id": "Lesbian",
+                "text": "Lesbian",
+                "selected": false
+              },
+              {
+                "id": "opBi/Pan",
+                "data_id": "Bi/Pan",
+                "text": "Bi/Pan",
+                "selected": false
+              },
+              {
+                "id": "opPreferNotToSay",
+                "data_id": "PreferNotToSay",
+                "text": "Prefer not to say",
+                "selected": false
+              },
+              {
+                "id": "opQuestioning",
+                "data_id": "Questioning",
+                "text": "Questioning",
+                "selected": false
+              },
+              {
+                "id": "opQueer",
+                "data_id": "Queer",
+                "text": "Queer",
+                "selected": false
+              },
+              {
+                "id": "opAsexual",
+                "data_id": "Asexual",
+                "text": "Asexual",
+                "selected": false
+              },
+              {
+                "id": "opIDontKnow",
+                "data_id": "IDontKnow",
+                "text": "I do not know",
+                "selected": false
+              },
+              {
+                "id": "opOther",
+                "data_id": "Other",
+                "text": "Other",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "How is your relationship status?",
+        "path": [""],
+        "controls": [
+          {
+            "id": "Status",
+            "label": "Status",
+            "type": "radio-button",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opSingle",
+                "data_id": "Single",
+                "text": "Single",
+                "selected": false
+              },
+              {
+                "id": "opRelationship",
+                "data_id": "Relationship",
+                "text": "In a relationship",
+                "selected": false
+              },
+              {
+                "id": "opMarried",
+                "data_id": "Married",
+                "text": "Married",
+                "selected": false
+              },
+              {
+                "id": "opDivorced",
+                "data_id": "Divorced",
+                "text": "Divorced",
+                "selected": false
+              },
+              {
+                "id": "opWidowed",
+                "data_id": "Widowed",
+                "text": "Widowed",
+                "selected": false
+              },
+
+              {
+                "id": "opOther",
+                "data_id": "Other",
+                "text": "Other",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": 6,
+        "title": "Do you consider yourself to be religious?",
+        "path": [""],
+        "controls": [
+          {
+            "id": "Religious",
+            "label": "Religious",
+            "type": "radio-button",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opNo",
+                "data_id": "No",
+                "text": "No",
+                "selected": false
+              },
+              {
+                "id": "opYes",
+                "data_id": "Yes",
+                "text": "Yes",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": 7,
+        "title": "Which religion do you identify with",
+        "path": [""],
+        "controls": [
+          {
+            "id": "Religion",
+            "label": "Religion",
+            "type": "radio-button",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opChristianity",
+                "data_id": "Christianity",
+                "text": "Christianity",
+                "selected": false
+              },
+              {
+                "id": "opJudaism",
+                "data_id": "Judaism",
+                "text": "Judaism",
+                "selected": false
+              },
+              {
+                "id": "opIslam",
+                "data_id": "Islam",
+                "text": "Islam",
+                "selected": false
+              },
+              {
+                "id": "opOther",
+                "data_id": "Other",
+                "text": "Other",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Do you consider yourself to be spiritual?",
+        "path": [""],
+        "controls": [
+          {
+            "id": "Spiritual",
+            "label": "Spiritual",
+            "type": "radio-button",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opNo",
+                "data_id": "No",
+                "text": "No",
+                "selected": false
+              },
+              {
+                "id": "opYes",
+                "data_id": "Yes",
+                "text": "Yes",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Have you ever been in therapy before",
+        "path": [""],
+        "controls": [
+          {
+            "id": "Therapy",
+            "label": "Therapy",
+            "type": "radio-button",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opNo",
+                "data_id": "No",
+                "text": "No",
+                "selected": false
+              },
+              {
+                "id": "opYes",
+                "data_id": "Yes",
+                "text": "Yes",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "What led you to consider therapy today?",
+        "path": [""],
+        "controls": [
+          {
+            "id": "Consideration",
+            "label": "Consideration",
+            "type": "check-box",
+            "selector": true,
+            "data_path": "",
+            "options": [
+              {
+                "id": "opDepressed",
+                "data_id": "Depressed",
+                "text": "I've been feeling depressed",
+                "selected": false
+              },
+              {
+                "id": "opAnxious",
+                "data_id": "Anxious",
+                "text": "I feel anxious or overwhelmed",
+                "selected": false
+              },
+              {
+                "id": "opInterference",
+                "data_id": "Interference",
+                "text": "My mood is interfering with my job/school performance",
+                "selected": false
+              },
+              {
+                "id": "opMaintainingRelations",
+                "data_id": "MaintainingRelations",
+                "text": "I struggle with building or maintaining relationships",
+                "selected": false
+              },
+              {
+                "id": "opPurpose",
+                "data_id": "Purpose",
+                "text": "I can't find meaning and purpose in my life",
+                "selected": false
+              },
+              {
+                "id": "opGrieving",
+                "data_id": "Grieving",
+                "text": "I am grieving",
+                "selected": false
+              },
+              {
+                "id": "opTrauma",
+                "data_id": "Trauma",
+                "text": "I have experienced trauma",
+                "selected": false
+              },
+              {
+                "id": "opChallenge",
+                "data_id": "Challenge",
+                "text": "I need to talk through a specific challenge",
+                "selected": false
+              },
+              {
+                "id": "opSelfConfidence",
+                "data_id": "SelfConfidence",
+                "text": "I want to gain self confidence",
+                "selected": false
+              },
+              {
+                "id": "opImprovement",
+                "data_id": "Improvement",
+                "text": "I want to improve myself but I don't know where to start",
+                "selected": false
+              },
+              {
+                "id": "opRecommended",
+                "data_id": "Recommended",
+                "text": "Recommended to me (friend, family, doctor)",
+                "selected": false
+              },
+              {
+                "id": "opExploring",
+                "data_id": "Exploring",
+                "text": "Just Exploring",
+                "selected": false
+              },
+              {
+                "id": "opOther",
+                "data_id": "Other",
+                "text": "Other",
+                "selected": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

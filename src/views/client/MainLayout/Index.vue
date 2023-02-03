@@ -31,7 +31,12 @@ export default class MainLayout extends Vue {
   get page() {
     let page: boolean = false,
       name: string = this.$route.name;
-    if (name != "Book Appointment" && name != "Explore") page = true;
+    if (
+      name != "Book Appointment" &&
+      name != "Explore" &&
+      name != "Questionnaire"
+    )
+      page = true;
 
     return page;
   }

@@ -15,6 +15,8 @@ import {
   IAdminService,
   IDashboardService,
   DashboardService,
+  QuestionnaireService,
+  IQuestionnaireService,
 } from "@/service";
 
 export class DIContainer extends Vue {
@@ -31,4 +33,6 @@ export class DIContainer extends Vue {
   @Provide("adminService") adminService: IAdminService = new AdminService();
   @Provide("dashboardService") dashboardService: IDashboardService =
     new DashboardService();
+    @Provide("questionnaireService") questionnaireService: IQuestionnaireService =
+    new QuestionnaireService();
 }

@@ -7,9 +7,10 @@
       </v-btn></router-link
     >
 
-    <v-card class="mt-10" width="500px" style="margin:0 auto">
+    <v-card class="mt-10">
       <v-img
         class="white--text align-end"
+        height="200px"
         :src="`data:image/png;base64,${response.Image}`"
       >
       </v-img>
