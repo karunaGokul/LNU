@@ -155,12 +155,21 @@ export default class Question extends BaseComponent {
         this.steps = true;
       });
   }
+  public updateQuestionnaire() {
+    this.questionRequest.id = this.userId;
+    this.questionnaireService
+      .updateQuestionnaire(this.questionRequest)
+      .then((response: any) => {
+        console.log(response);
+      });
+  }
 
   public changeQuestion(item: QuestionnaireResponseModel) {
     this.questionRequest[item.label] = item.selected;
 
     if (this.currentQuestion === this.question.length - 1) {
       console.log(this.questionRequest);
+      this.updateQuestionnaire();
       this.$router.push("dashboard");
     } else {
       this.currentQuestion++;
@@ -179,6 +188,10 @@ export default class Question extends BaseComponent {
       a.push(i);
     }
     return a;
+  }
+
+  get userId() {
+    return this.$store.getters.id;
   }
 }
 </script>

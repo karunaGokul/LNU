@@ -1,3 +1,5 @@
+import { LoginResponseModel } from "./login.model";
+
 export class RegisterModel {
   Username: string;
   FirstName: string;
@@ -56,7 +58,7 @@ export class QuestionnaireModel {
   PhysicalFeeling: number;
 }
 
-export class QuestionRequestModel {
+export class QuestionRequestModel extends LoginResponseModel {
   WhatTypeOfTherapyAreYouLookingfor: string;
   IdentifyGender: string;
   HowOldAreYou: string;

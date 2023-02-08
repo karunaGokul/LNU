@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-system-bar window v-if="dialog" height="30" class="mx-10 systemBar">
+    <v-system-bar height="40" v-if="questionStatus" class="mx-10 systemBar">
       <v-icon class="primary--text">priority_high</v-icon>
       <!-- <span v-if="questionStatus == 'Pending'" class="primary--text">
         Few questions are incomplete in Questionnaire. Would you like to
@@ -22,7 +22,6 @@
         <v-btn
           text
           class="text-capitalize blue--text"
-          v-if="questionStatus != 'Completed'"
         >
           click here
         </v-btn>
@@ -95,15 +94,14 @@ export default class DashboardLayout extends BaseComponent {
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
 
   public response: Array<DashboardResponseModel> = [];
-  // public questionStatus: Array<QuestionnaireStatusModel> = [];
-  public questionStatus: string = "We are Happy to help you as per your need.";
+  public questionStatus: string = "";
 
   public dialog: boolean = false;
 
   created() {
     this.questionnaireStatus();
     this.dialog = true;
-    // this.getCounsellingProgram();
+    this.getCounsellingProgram();
   }
 
   public questionnaireStatus() {
