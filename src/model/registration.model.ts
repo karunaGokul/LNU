@@ -56,13 +56,64 @@ export class QuestionnaireModel {
   PhysicalFeeling: number;
 }
 
-export class QuestionModel {
-  WhoIsThePersonNeedHelp: string;
-  IdentifyYourSelf: string;
-  age: string;
-  whatLedYouToConsiderTherapyToday: Array<string>;
+export class QuestionRequestModel {
+  WhatTypeOfTherapyAreYouLookingfor: string;
+  IdentifyGender: string;
+  HowOldAreYou: string;
+  IdentifyYourself: string;
+  RelationshipStatus: string;
+  Religious: string;
+  IdentifyReligion: string;
+  IdentifySpiritual: string;
+  InTherapy: string;
+  CurrentPhysicalHealth: string;
+  CurrentEatingHabits: string;
+  CurrentExperience: string;
+  DifferenceInSpeaking: string;
+  PastTweeksProblems: string;
+  FeelingLow: string;
+  TroubleInSleep: string;
+  FeelingTired: string;
+  PoorAppetite: string;
+  FeelingBadOfYourself: string;
+  TroubleInConcentration: string;
+  DeadlyThoughts: string;
+  DifficultiesFaced: string;
+  Employeement: string;
+  ProblemOfWorry: string;
+  AlcoholDrinking: string;
+  ThoughtOfSuicide: string;
+  PlansForSuicide: string;
+  CurrentlyExperiencingAnxiety: string;
+  CurrentlyTakingMedication: string;
+  CurrentlyExperiencingChronicPain: string;
+  CurrentFinancialStatus: string;
+  CurrentSleepingHabits: string;
+  CommunicateWithTherapist: string;
+  ReferredForBetterhelp: string;
+  CountryIn: string;
+  PreferredLanguage: string;
+  WhatLedYouToConsiderTherapyToday: Array<string>;
+  ExpectationFromTherapist: Array<string>;
+  ResourcesUsefulForYou: Array<string>;
+  PreferenceOfTherapist: Array<string>;
 }
 
 export class QuestionnaireStatusModel {
   status: string;
+}
+
+export class QuestionnaireResponseModel {
+  id: number;
+  title: string;
+  additionalTitle?: string;
+  type: string;
+  options: Array<string | number | OptionsModel>;
+  label: string;
+  selected: string;
+}
+
+export class OptionsModel {
+  value: string;
+  selected: boolean;
 }

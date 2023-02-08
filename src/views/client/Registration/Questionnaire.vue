@@ -1,5 +1,9 @@
 <template>
-  <v-container class="primary-linear pa-0" fluid style="width: 100%">
+  <v-container
+    class="primary-linear card-container pa-0"
+    fluid
+    style="width: 100%"
+  >
     <nav>
       <div class="px-5 d-flex align-center nav">
         <h3>Life N you</h3>
@@ -29,91 +33,87 @@
         getting to know you.
       </p>
     </div>
-    <div class="card">
+    <div class="card" v-if="steps">
       <v-card
-        class="card-item pa-5"
-        v-for="(item, index) in question[0].steps"
+        class="card__item pa-5"
+        v-for="(item, index) in question"
         :key="index"
         :style="{
           transform: ` translateX(${200 * (index - currentQuestion)}%) `,
         }"
       >
-        <div>
-          <h3 class="px-5">{{ item.title }}</h3>
-          <div class="card-item-option" v-if="item.type === 'radio'">
-            <v-btn-toggle
-              v-model="questionRequest[item.label]"
-              class="d-flex flex-column"
-              style="width: 100%"
-            >
-              <div v-for="(b, i) in item.options" :key="i" class="mb-5 box">
-                <v-btn
-                  @click="changeQuestion(item)"
-                  :value="b"
-                  block
-                  class="rounded-pill btn d-flex justify-start text-capitalize"
-                >
-                  {{ b }}
-                </v-btn>
-              </div>
-            </v-btn-toggle>
-          </div>
-
-          <div v-if="item.type === 'select'">
-            <v-select
-              v-if="item.label === 'HowOldAreYou'"
-              v-model="questionRequest.age"
-              :items="age"
-              filled
-              label="Filled style"
-            ></v-select>
-            <v-select
-              v-if="item.label !== 'HowOldAreYou'"
-              v-model="questionRequest.age"
-              :items="item.options"
-              filled
-              label="Filled style"
-            ></v-select>
-          </div>
-
-          <div v-if="item.type === 'checkbox'">
-            <span v-for="(b, i) in item.options" :key="i" class="d-flex ma-4">
-              <div class="mr-5 input-box mt-1">
-                <input
-                  type="checkbox"
-                  :id="b.value"
-                  :value="b.value"
-                  v-model="checkedNames"
-                  class="checkbox"
-                />
-              </div>
-              <label class="" :for="b.value">{{ b.value }}</label>
-            </span>
-            <span>Checked names: {{ checkedNames }}</span>
-          </div>
-
-          <div class="d-flex justify-space-between">
-            <div>
+        <h3 class="px-5 mb-4">{{ item.title }}</h3>
+        <div class="card__item--optionn" v-if="item.type === 'radio'">
+          <v-btn-toggle
+            v-model="questionRequest[item.label]"
+            class="d-flex flex-column"
+            style="width: 100%"
+          >
+            <div v-for="(b, i) in item.options" :key="i" class="mb-5 box">
               <v-btn
-                class="primary mt-2 text-capitalize"
-                @click="changeQuestion"
-              >
-                Skip
-              </v-btn>
-            </div>
-            <div
-              v-if="
-                (item.id !== 1 && item.type === 'select') ||
-                item.type === 'checkbox'
-              "
-            >
-              <v-btn
-                class="primary mt-2 text-capitalize"
                 @click="changeQuestion(item)"
+                :value="b"
+                block
+                class="rounded-pill card__item--btn d-flex justify-start text-capitalize"
               >
-                Next
+                {{ b }}
               </v-btn>
             </div>
+          </v-btn-toggle>
+        </div>
+        <div v-if="item.type === 'select'">
+          <v-select
+            v-if="item.label === 'HowOldAreYou'"
+            v-model="questionRequest.HowOldAreYou"
+            :items="age"
+            filled
+            label="Filled style"
+          ></v-select>
+          <v-select
+            v-if="item.label !== 'HowOldAreYou'"
+            v-model="questionRequest.HowOldAreYou"
+            :items="item.options"
+            filled
+            label="Filled style"
+          ></v-select>
+        </div>
+        <div
+          v-if="item.type === 'checkbox'"
+          class="card__item-checkbox--container"
+        >
+          <span v-for="(b, i) in item.options" :key="i" class="d-flex ma-4">
+            <div class="mr-5 input-box mt-1">
+              <input
+                type="checkbox"
+                :id="b.value"
+                :value="b.value"
+                v-model="item.selected"
+                class="card__item--checkbox"
+              />
+            </div>
+            <label class="card__item--checkbox-label" :for="b.value">{{
+              b.value
+            }}</label>
+          </span>
+        </div>
+        <div class="d-flex justify-space-between">
+          <div>
+            <v-btn class="primary mt-2 text-capitalize" @click="changeQuestion">
+              Skip
+            </v-btn>
+          </div>
+          <div
+            v-if="
+              (item.id !== 1 && item.type === 'select') ||
+              item.type === 'checkbox'
+            "
+          >
+            <v-btn
+              class="primary mt-2 text-capitalize"
+              @click="changeQuestion(item)"
+            >
+              Next
+            </v-btn>
           </div>
         </div>
       </v-card>
@@ -127,36 +127,41 @@ import { Component, Inject } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
 import { IQuestionnaireService } from "@/service";
 
-import { QuestionModel } from "@/model";
+import { QuestionRequestModel, QuestionnaireResponseModel } from "@/model";
 
 @Component({})
 export default class Question extends BaseComponent {
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
-  public questionRequest: QuestionModel = new QuestionModel();
-  public question: Array<any> = [];
+  public questionRequest: QuestionRequestModel = new QuestionRequestModel();
+  public question: Array<QuestionnaireResponseModel> = [];
 
   public currentQuestion = 0;
+  public steps = false;
 
-  public dashBar: number;
+  public dashBar: number = 0;
   public dashCount: number = 0;
   public dashBarColor: number = 0;
 
-  public checkedNames: any = [];
-
   created() {
-    this.question = this.questionnaireService.getQuestion();
-    console.log(this.questionRequest);
-    this.dashBar = Math.round(this.question[0].steps.length / 4);
+    this.getQuestionnaire();
   }
 
-  public changeQuestion(item: any) {
-    if (item.type === "checkbox") {
-      const label = item.label;
-      // this.questionRequest.label = item.selected;
-    }
-    console.log(this.questionRequest);
-    if (this.currentQuestion === this.question[0].steps.length - 1) {
-      return;
+  public getQuestionnaire() {
+    this.questionnaireService
+      .getQuestionnaire()
+      .then((response: Array<any>) => {
+        this.dashBar = Math.round(response.length / 4.5);
+        this.question = this.$vuehelper.clone(response);
+        this.steps = true;
+      });
+  }
+
+  public changeQuestion(item: QuestionnaireResponseModel) {
+    this.questionRequest[item.label] = item.selected;
+
+    if (this.currentQuestion === this.question.length - 1) {
+      console.log(this.questionRequest);
+      this.$router.push("dashboard");
     } else {
       this.currentQuestion++;
       this.dashCount++;
@@ -177,66 +182,3 @@ export default class Question extends BaseComponent {
   }
 }
 </script>
-
-<style scoped>
-.nav {
-  height: 52px;
-  margin-bottom: 40px;
-  box-shadow: -1px 0 20px rgb(37 38 37 / 5%), 0 1px 5px rgb(37 38 37 / 10%);
-}
-.card {
-  width: 50%;
-  margin: 10px auto;
-  position: relative;
-}
-.dash {
-  background-color: #fcb258 !important;
-}
-.card-item {
-  width: 100%;
-  margin-top: 1px;
-  position: absolute;
-  transition: all 0.34s;
-}
-.card-item-option {
-  width: 90%;
-  margin: 0 auto;
-  margin-top: 20px;
-}
-.btn {
-  background-color: #fcb25890 !important;
-}
-
-.checkbox[type="checkbox"] {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 1.5px solid #fcb258;
-  border-radius: 2px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.checkbox[type="checkbox"]::after {
-  font-family: "Material Icons";
-  content: "done";
-  font-size: 18px;
-  display: none;
-}
-
-.checkbox[type="checkbox"]:checked {
-  border: 1.5px solid transparent;
-  background-color: #fcb25890;
-}
-
-.checkbox[type="checkbox"]:checked::after {
-  display: block;
-}
-
-.input-box + label {
-  cursor: pointer;
-  user-select: none;
-}
-</style>

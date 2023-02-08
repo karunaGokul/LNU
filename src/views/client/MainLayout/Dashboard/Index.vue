@@ -2,7 +2,7 @@
   <v-container>
     <v-system-bar window v-if="dialog" height="30" class="mx-10 systemBar">
       <v-icon class="primary--text">priority_high</v-icon>
-      <span v-if="questionStatus == 'Pending'" class="primary--text">
+      <!-- <span v-if="questionStatus == 'Pending'" class="primary--text">
         Few questions are incomplete in Questionnaire. Would you like to
         complete it now?
       </span>
@@ -11,7 +11,12 @@
       </span>
       <span v-if="questionStatus == 'UnStarted'" class="primary--text">
         Questionnaire is not yet started. Would you like to do it now?
+      </span> -->
+
+      <span class="primary--text">
+        {{ questionStatus }}
       </span>
+
       <v-spacer></v-spacer>
       <router-link to="questionnaire" class="text-decoration-none">
         <v-btn
@@ -22,8 +27,6 @@
           click here
         </v-btn>
       </router-link>
-
-      <!-- <v-icon @click="dialog = false" class="primary--text">close</v-icon> -->
     </v-system-bar>
 
     <v-container fluid class="pa-16">
@@ -93,24 +96,23 @@ export default class DashboardLayout extends BaseComponent {
 
   public response: Array<DashboardResponseModel> = [];
   // public questionStatus: Array<QuestionnaireStatusModel> = [];
-  public questionStatus: string = "";
+  public questionStatus: string = "We are Happy to help you as per your need.";
 
   public dialog: boolean = false;
 
   created() {
     this.questionnaireStatus();
     this.dialog = true;
-    this.getCounsellingProgram();
+    // this.getCounsellingProgram();
   }
 
   public questionnaireStatus() {
-    this.questionnaireService
-      .questionnaireStatus()
-      .then((response: Array<QuestionnaireStatusModel>) => {
-        console.log(response);
-        // this.questionStatus = response;
-        this.questionStatus = "UnStarted";
-      });
+    this.questionnaireService.isQuestionsPresent().then((response: any) => {
+      console.log(response);
+      this.questionStatus = response
+        ? "Few questions are incomplete in Questionnaire. Would you like to complete it now?"
+        : "We are Happy to help you as per your need.";
+    });
   }
 
   public getCounsellingProgram() {

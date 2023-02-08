@@ -1,27 +1,37 @@
 import { BaseService } from "./base.service";
 
-import questionDetails from "@/data/first10.json";
+import questionDetails from "@/data/questionnaire.json";
 
-import { QuestionnaireStatusModel } from "@/model";
+import { QuestionnaireResponseModel, QuestionnaireStatusModel } from "@/model";
 
 export interface IQuestionnaireService {
-  getQuestion(): any;
+  // getQuestion(): any;
 
-  questionnaireStatus(): Promise<Array<QuestionnaireStatusModel>>;
+  getQuestionnaire(): Promise<Array<QuestionnaireResponseModel>>;
+  isQuestionsPresent(): Promise<any>;
 }
 
-export class QuestionnaireService implements IQuestionnaireService {
-  getQuestion(): any {
-    return questionDetails;
+export class QuestionnaireService
+  extends BaseService<any, any>
+  implements IQuestionnaireService
+{
+  constructor() {
+    super("");
   }
 
-  public questionnaireStatus(): Promise<Array<QuestionnaireStatusModel>> {
-    return new Promise((resolve, reject) => {
-      let items = new Array<QuestionnaireStatusModel>();
-      items.push({ status: "Pending" });
-      items.push({ status: "Completed" });
-      items.push({ status: "UnStarted" });
-      resolve(items);
+  // getQuestion(): any {
+  //   return questionDetails;
+  // }
+
+  public getQuestionnaire(): Promise<Array<QuestionnaireResponseModel>> {
+    return this.httpGet("profile/GetQuestionnaire", null).then((response) => {
+      return response.data;
+    });
+  }
+
+  public isQuestionsPresent(): Promise<any> {
+    return this.httpGet("profile/IsQuestionsPresent", null).then((response) => {
+      return response.data;
     });
   }
 }
