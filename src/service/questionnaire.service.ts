@@ -31,7 +31,7 @@ export class QuestionnaireService
   }
 
   public updateQuestionnaire(request: QuestionRequestModel): Promise<any> {
-    return this.httpPost("UpdateQuestionnaire?UserId=" + request.id, request).then((response) => {
+    return this.httpPost("UpdateQuestionnaire?UserId=" + request.userId, request).then((response) => {
       return response.data;
     });
   }

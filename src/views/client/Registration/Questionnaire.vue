@@ -44,14 +44,10 @@
       >
         <h3 class="px-5 mb-4">{{ item.title }}</h3>
         <div class="card__item--optionn" v-if="item.type === 'radio'">
-          <v-btn-toggle
-            v-model="questionRequest[item.label]"
-            class="d-flex flex-column"
-            style="width: 100%"
-          >
+          <v-btn-toggle class="d-flex flex-column" style="width: 100%">
             <div v-for="(b, i) in item.options" :key="i" class="mb-5 box">
               <v-btn
-                @click="changeQuestion(item)"
+                @click="changeQuestion(item, b)"
                 :value="b"
                 block
                 class="rounded-pill card__item--btn d-flex justify-start text-capitalize"
@@ -64,14 +60,14 @@
         <div v-if="item.type === 'select'">
           <v-select
             v-if="item.label === 'HowOldAreYou'"
-            v-model="questionRequest.HowOldAreYou"
+            v-model="item.selected"
             :items="age"
             filled
             label="Filled style"
           ></v-select>
           <v-select
             v-if="item.label !== 'HowOldAreYou'"
-            v-model="questionRequest.HowOldAreYou"
+            v-model="item.selected"
             :items="item.options"
             filled
             label="Filled style"
@@ -98,7 +94,7 @@
         </div>
         <div class="d-flex justify-space-between">
           <div>
-            <v-btn class="primary mt-2 text-capitalize" @click="changeQuestion">
+            <v-btn class="primary mt-2 text-capitalize" @click="changeQuestion(item)">
               Skip
             </v-btn>
           </div>
@@ -132,7 +128,7 @@ import { QuestionRequestModel, QuestionnaireResponseModel } from "@/model";
 @Component({})
 export default class Question extends BaseComponent {
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
-  public questionRequest: QuestionRequestModel = new QuestionRequestModel();
+  public questionRequest: Array<QuestionRequestModel> = [];
   public question: Array<QuestionnaireResponseModel> = [];
 
   public currentQuestion = 0;
@@ -155,21 +151,41 @@ export default class Question extends BaseComponent {
         this.steps = true;
       });
   }
-  public updateQuestionnaire() {
-    this.questionRequest.id = this.userId;
-    this.questionnaireService
-      .updateQuestionnaire(this.questionRequest)
-      .then((response: any) => {
-        console.log(response);
-      });
-  }
+  // public updateQuestionnaire() {
+  //   this.questionRequest.userId = this.userId;
+  //   this.questionnaireService
+  //     .updateQuestionnaire(this.questionRequest)
+  //     .then((response: any) => {
+  //       console.log(response);
+  //     });
+  // }
 
-  public changeQuestion(item: QuestionnaireResponseModel) {
-    this.questionRequest[item.label] = item.selected;
+  public changeQuestion(item: QuestionnaireResponseModel, value: string) {
+    // this.questionRequest[index][item.label].value = item.selected;
+    let questions = new QuestionRequestModel();
+
+    questions.label = item.label;
+
+    if (item.type == "radio") {
+      questions.value = value;
+    } else {
+      questions.value = item.selected;
+    }
+
+    if(questions.value) {
+      questions.isSkipped = true;
+    } else {
+      questions.isSkipped = false;
+      questions.value = "";
+    }
+    
+    this.questionRequest.push(questions);
+
+    console.log(this.questionRequest);
 
     if (this.currentQuestion === this.question.length - 1) {
       console.log(this.questionRequest);
-      this.updateQuestionnaire();
+      // this.updateQuestionnaire();
       this.$router.push("dashboard");
     } else {
       this.currentQuestion++;

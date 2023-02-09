@@ -58,47 +58,57 @@ export class QuestionnaireModel {
   PhysicalFeeling: number;
 }
 
-export class QuestionRequestModel extends LoginResponseModel {
-  WhatTypeOfTherapyAreYouLookingfor: string;
-  IdentifyGender: string;
-  HowOldAreYou: string;
-  IdentifyYourself: string;
-  RelationshipStatus: string;
-  Religious: string;
-  IdentifyReligion: string;
-  IdentifySpiritual: string;
-  InTherapy: string;
-  CurrentPhysicalHealth: string;
-  CurrentEatingHabits: string;
-  CurrentExperience: string;
-  DifferenceInSpeaking: string;
-  PastTweeksProblems: string;
-  FeelingLow: string;
-  TroubleInSleep: string;
-  FeelingTired: string;
-  PoorAppetite: string;
-  FeelingBadOfYourself: string;
-  TroubleInConcentration: string;
-  DeadlyThoughts: string;
-  DifficultiesFaced: string;
-  Employeement: string;
-  ProblemOfWorry: string;
-  AlcoholDrinking: string;
-  ThoughtOfSuicide: string;
-  PlansForSuicide: string;
-  CurrentlyExperiencingAnxiety: string;
-  CurrentlyTakingMedication: string;
-  CurrentlyExperiencingChronicPain: string;
-  CurrentFinancialStatus: string;
-  CurrentSleepingHabits: string;
-  CommunicateWithTherapist: string;
-  ReferredForBetterhelp: string;
-  CountryIn: string;
-  PreferredLanguage: string;
-  WhatLedYouToConsiderTherapyToday: Array<string>;
-  ExpectationFromTherapist: Array<string>;
-  ResourcesUsefulForYou: Array<string>;
-  PreferenceOfTherapist: Array<string>;
+// export class QuestionRequestModel {
+//   whatTypeOfTherapyAreYouLookingfor: QuestionsModel;
+//   identifyGender: QuestionsModel;
+//   howOldAreYou: QuestionsModel;
+//   identifyYourself: QuestionsModel;
+//   relationshipStatus: QuestionsModel;
+//   religious: QuestionsModel;
+//   identifyReligion: QuestionsModel;
+//   identifySpiritual: QuestionsModel;
+//   inTherapy: QuestionsModel;
+//   currentPhysicalHealth: QuestionsModel;
+//   currentEatingHabits: QuestionsModel;
+//   currentExperience: QuestionsModel;
+//   differenceInSpeaking: QuestionsModel;
+//   pastTweeksProblems: QuestionsModel;
+//   feelingLow: QuestionsModel;
+//   troubleInSleep: QuestionsModel;
+//   feelingTired: QuestionsModel;
+//   poorAppetite: QuestionsModel;
+//   feelingBadOfYourself: QuestionsModel;
+//   troubleInConcentration: QuestionsModel;
+//   deadlyThoughts: QuestionsModel;
+//   difficultiesFaced: QuestionsModel;
+//   employeement: QuestionsModel;
+//   problemOfWorry: QuestionsModel;
+//   alcoholDrinking: QuestionsModel;
+//   thoughtOfSuicide: QuestionsModel;
+//   plansForSuicide: QuestionsModel;
+//   currentlyExperiencingAnxiety: QuestionsModel;
+//   currentlyTakingMedication: QuestionsModel;
+//   currentlyExperiencingChronicPain: QuestionsModel;
+//   currentFinancialStatus: QuestionsModel;
+//   currentSleepingHabits: QuestionsModel;
+//   communicateWithTherapist: QuestionsModel;
+//   referredForBetterhelp: QuestionsModel;
+//   countryIn: QuestionsModel;
+//   preferredLanguage: QuestionsModel;
+//   whatLedYouToConsiderTherapyToday: QuestionsModel;
+//   expectationFromTherapist: QuestionsModel;
+//   resourcesUsefulForYou: QuestionsModel;
+//   preferenceOfTherapist: QuestionsModel;
+//   userId: string;
+// }
+
+
+
+export class QuestionRequestModel {
+  label: string;
+  value: string;
+  isSkipped: boolean;
+  userId: string;
 }
 
 export class QuestionnaireStatusModel {
