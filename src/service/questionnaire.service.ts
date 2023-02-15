@@ -2,12 +2,16 @@ import { BaseService } from "./base.service";
 
 import questionDetails from "@/data/questionnaire.json";
 
-import { QuestionnaireResponseModel, QuestionnaireStatusModel, QuestionRequestModel } from "@/model";
+import {
+  QuestionnaireResponseModel,
+  QuestionnaireStatusModel,
+  QuestionRequestModel,
+} from "@/model";
 
 export interface IQuestionnaireService {
   getQuestionnaire(): Promise<Array<QuestionnaireResponseModel>>;
   isQuestionsPresent(): Promise<any>;
-  updateQuestionnaire(request: QuestionRequestModel): Promise<any>;
+  updateQuestionnaire(request: QuestionRequestModel, userId: any): Promise<any>;
 }
 
 export class QuestionnaireService
@@ -30,9 +34,16 @@ export class QuestionnaireService
     });
   }
 
-  public updateQuestionnaire(request: QuestionRequestModel): Promise<any> {
-    return this.httpPost("UpdateQuestionnaire?UserId=" + request.userId, request).then((response) => {
-      return response.data;
-    });
+  public updateQuestionnaire(
+    request: QuestionRequestModel,
+    userId: any
+  ): Promise<any> {
+    console.log(request.userId, request);
+
+    return this.httpPost("UpdateQuestionnaire?UserId=" + userId, request).then(
+      (response) => {
+        return response.data;
+      }
+    );
   }
 }

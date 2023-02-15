@@ -94,7 +94,10 @@
         </div>
         <div class="d-flex justify-space-between">
           <div>
-            <v-btn class="primary mt-2 text-capitalize" @click="changeQuestion(item)">
+            <v-btn
+              class="primary mt-2 text-capitalize"
+              @click="changeQuestion(item)"
+            >
               Skip
             </v-btn>
           </div>
@@ -151,14 +154,15 @@ export default class Question extends BaseComponent {
         this.steps = true;
       });
   }
-  // public updateQuestionnaire() {
-  //   this.questionRequest.userId = this.userId;
-  //   this.questionnaireService
-  //     .updateQuestionnaire(this.questionRequest)
-  //     .then((response: any) => {
-  //       console.log(response);
-  //     });
-  // }
+  public updateQuestionnaire(allQuestionAnswer: any) {
+    // let questions = new QuestionRequestModel();
+    // questions.userId = this.userId;
+    this.questionnaireService
+      .updateQuestionnaire(allQuestionAnswer, this.userId)
+      .then((response: any) => {
+        console.log(response);
+      });
+  }
 
   public changeQuestion(item: QuestionnaireResponseModel, value: string) {
     // this.questionRequest[index][item.label].value = item.selected;
@@ -172,20 +176,18 @@ export default class Question extends BaseComponent {
       questions.value = item.selected;
     }
 
-    if(questions.value) {
-      questions.isSkipped = true;
-    } else {
+    if (questions.value) {
       questions.isSkipped = false;
+    } else {
+      questions.isSkipped = true;
       questions.value = "";
     }
-    
-    this.questionRequest.push(questions);
 
     console.log(this.questionRequest);
+    this.questionRequest.push(questions);
 
     if (this.currentQuestion === this.question.length - 1) {
-      console.log(this.questionRequest);
-      // this.updateQuestionnaire();
+      this.updateQuestionnaire(this.questionRequest);
       this.$router.push("dashboard");
     } else {
       this.currentQuestion++;
