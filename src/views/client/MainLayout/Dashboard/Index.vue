@@ -2,29 +2,13 @@
   <v-container>
     <v-system-bar height="40" v-if="questionStatus" class="mx-10 systemBar">
       <v-icon class="primary--text">priority_high</v-icon>
-      <!-- <span v-if="questionStatus == 'Pending'" class="primary--text">
-        Few questions are incomplete in Questionnaire. Would you like to
-        complete it now?
-      </span>
-      <span v-if="questionStatus == 'Completed'">
-        We are Happy to help you as per your need.
-      </span>
-      <span v-if="questionStatus == 'UnStarted'" class="primary--text">
-        Questionnaire is not yet started. Would you like to do it now?
-      </span> -->
-
       <span class="primary--text">
         {{ questionStatus }}
       </span>
 
       <v-spacer></v-spacer>
       <router-link to="questionnaire" class="text-decoration-none">
-        <v-btn
-          text
-          class="text-capitalize blue--text"
-        >
-          click here
-        </v-btn>
+        <v-btn text class="text-capitalize blue--text"> click here </v-btn>
       </router-link>
     </v-system-bar>
 
@@ -77,6 +61,9 @@
         </v-row>
       </div>
     </v-container>
+    <div>
+      <new-user v-if="dialog" @close="closeDialog" />
+    </div>
   </v-container>
 </template>
 
@@ -88,7 +75,13 @@ import { IDashboardService, IQuestionnaireService } from "@/service";
 
 import { DashboardResponseModel, QuestionnaireStatusModel } from "@/model";
 
-@Component
+import NewUser from "./components/NewUser.vue";
+
+@Component({
+  components: {
+    NewUser,
+  },
+})
 export default class DashboardLayout extends BaseComponent {
   @Inject("dashboardService") dashboardService: IDashboardService;
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
@@ -99,14 +92,29 @@ export default class DashboardLayout extends BaseComponent {
   public dialog: boolean = false;
 
   created() {
+    this.isFirstTimeUser();
+    // this.questionnaireStatus();
+    // this.getCounsellingProgram();
+  }
+
+  public closeDialog() {
+    this.dialog = false;
     this.questionnaireStatus();
-    this.dialog = true;
     this.getCounsellingProgram();
   }
 
+  public isFirstTimeUser() {
+    this.dashboardService.IsUserFirstTimeLogin().then((response: any) => {
+      if (response) {
+        this.dialog = true;
+      } else {
+        this.questionnaireStatus();
+        this.getCounsellingProgram();
+      }
+    });
+  }
   public questionnaireStatus() {
     this.questionnaireService.isQuestionsPresent().then((response: any) => {
-      console.log(response);
       this.questionStatus = response
         ? "Few questions are incomplete in Questionnaire. Would you like to complete it now?"
         : "We are Happy to help you as per your need.";

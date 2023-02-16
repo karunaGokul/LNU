@@ -3,7 +3,6 @@ import { BaseService } from "./base.service";
 
 export interface IAuthenticationService {
   login(request: LoginRequestModel): Promise<LoginResponseModel>;
-  IsUserFirstTimeLogin(): Promise<any>;
 }
 
 export class AuthenticationService
@@ -20,11 +19,4 @@ export class AuthenticationService
     });
   }
 
-  public IsUserFirstTimeLogin(): Promise<any> {
-    return this.httpGet("profile/IsUserFirstTimeLogin", null).then(
-      (response) => {
-        return response.data;
-      }
-    );
-  }
 }

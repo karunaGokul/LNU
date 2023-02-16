@@ -11,6 +11,7 @@ export interface IDashboardService extends IBaseService<any, any> {
     request: DashboardResponseModel
   ): Promise<DashboardResponseModel>;
   deleteProgam(id: string): Promise<any>;
+  IsUserFirstTimeLogin(): Promise<any>;
 }
 export class DashboardService
   extends BaseService<any, any>
@@ -20,6 +21,13 @@ export class DashboardService
     super("");
   }
 
+  public IsUserFirstTimeLogin(): Promise<any> {
+    return this.httpGet("profile/IsUserFirstTimeLogin", null).then(
+      (response) => {
+        return response.data;
+      }
+    );
+  }
   public getCounsellingProgram(): Promise<Array<DashboardResponseModel>> {
     return this.httpGet("Admin/GetDetailedCounsellingPrograms", null).then(
       (response) => {
