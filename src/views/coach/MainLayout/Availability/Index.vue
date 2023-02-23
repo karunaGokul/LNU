@@ -19,25 +19,13 @@
     <v-toolbar flat color="transparent">
       <div class="d-flex align-center justify-center" style="width: 100%">
         <div class="d-flex align-center">
-          <v-btn
-            fab
-            text
-            small
-            color="grey darken-2"
-            @click="$refs.calendar.prev()"
-          >
+          <v-btn fab text small color="grey darken-2" @click="prev">
             <v-icon small> chevron_left </v-icon>
           </v-btn>
           <v-toolbar-title>
             {{ currentWeek }}
           </v-toolbar-title>
-          <v-btn
-            fab
-            text
-            small
-            color="grey darken-2"
-            @click="$refs.calendar.next()"
-          >
+          <v-btn fab text small color="grey darken-2" @click="next">
             <v-icon small> chevron_right </v-icon>
           </v-btn>
         </div>
@@ -164,13 +152,12 @@ export default class Availability extends Vue {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
     this.currentWeek = `${calendar.$data.lastStart.date} to ${calendar.$data.lastEnd.date} `;
-    console.log(this.currentWeek);
   }
   public viewDay(e: any) {
     if (e.future) {
       this.currentDate = e.date;
       this.mettingStartTime = e.time;
-      console.log(e);
+
       this.selectedOpen = true;
       this.selectedElement = e.nativeEvent.target;
       requestAnimationFrame(() =>
@@ -193,7 +180,7 @@ export default class Availability extends Vue {
     if (e.future) {
       this.currentDate = e.date;
       this.mettingStartTime = e.time;
-      console.log(e);
+
       this.selectedOpen = true;
       this.selectedElement = e.nativeEvent.target;
       requestAnimationFrame(() =>
@@ -203,12 +190,19 @@ export default class Availability extends Vue {
   }
   prev() {
     let calendar: any = this.$refs.calendar;
-    console.log(calendar.prev);
+
     calendar.prev();
+
+    setTimeout(() => {
+      this.currentWeek = `${calendar.$data.lastStart.date} to ${calendar.$data.lastEnd.date} `;
+    }, 100);
   }
   next() {
     let calendar: any = this.$refs.calendar;
-    console.log(calendar.next);
+    setTimeout(() => {
+      this.currentWeek = `${calendar.$data.lastStart.date} to ${calendar.$data.lastEnd.date} `;
+    }, 100);
+
     calendar.next();
   }
 }
