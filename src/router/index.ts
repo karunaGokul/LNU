@@ -149,12 +149,7 @@ const clientRoutes: Array<RouteConfig> = [
         component: () => import("@/views/client/Registration/Index.vue"),
         meta: { anonymous: true },
       },
-      // {
-      //   path: "questionnaire",
-      //   name: "Questionnaire",
-      //   component: () => import("@/views/client/Registration/Questionnaire.vue"),
-      //   meta: { anonymous: true },
-      // },
+      
       {
         path: "home",
         name: "Client Main Layout",

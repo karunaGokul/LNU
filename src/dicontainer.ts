@@ -33,6 +33,6 @@ export class DIContainer extends Vue {
   @Provide("adminService") adminService: IAdminService = new AdminService();
   @Provide("dashboardService") dashboardService: IDashboardService =
     new DashboardService();
-    @Provide("questionnaireService") questionnaireService: IQuestionnaireService =
+  @Provide("questionnaireService") questionnaireService: IQuestionnaireService =
     new QuestionnaireService();
 }

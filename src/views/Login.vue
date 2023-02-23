@@ -207,9 +207,6 @@ export default class Login extends BaseComponent {
         (response: LoginResponseModel) => {
           this.$store.dispatch("login", response);
           this.loadingSpinner("hide");
-          this.authService.IsUserFirstTimeLogin().then((response: any) => {
-            console.log(response);
-          });
           this.$router.push("home/dashboard");
         },
         (err) => {
