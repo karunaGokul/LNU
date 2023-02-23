@@ -344,7 +344,7 @@ export default class BookAppointments extends BaseComponent {
         .bookAppointments(request)
         .then((response) => {
           this.loadingSpinner("hide");
-          
+
           localStorage.setItem("appointmentId", response);
           this.showCheckOut = true;
           this.lineItems = [
@@ -365,7 +365,9 @@ export default class BookAppointments extends BaseComponent {
   public allowedMinutes(m: number) {
     return m % 15 === 0;
   }
-
+  updated() {
+    console.log(this.menu2);
+  }
   onUpdate(token: any) {
     this.showCheckOut = false;
   }

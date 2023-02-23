@@ -55,6 +55,12 @@ const coachRoutes: Array<RouteConfig> = [
               import("@/views/coach/MainLayout/Message/Index.vue"),
           },
           {
+            path: "availability",
+            name: "Coach Availability",
+            component: () =>
+              import("@/views/coach/MainLayout/Availability/Index.vue"),
+          },
+          {
             path: "support",
             name: "coach support",
             component: () =>
@@ -164,12 +170,15 @@ const clientRoutes: Array<RouteConfig> = [
             path: "/client/home/dashboard/:id",
             name: "Explore",
             component: () =>
-              import("@/views/client/MainLayout/Dashboard/components/Explore.vue"),
+              import(
+                "@/views/client/MainLayout/Dashboard/components/Explore.vue"
+              ),
           },
           {
             path: "questionnaire",
             name: "Questionnaire",
-            component: () => import("@/views/client/Registration/Questionnaire.vue"),
+            component: () =>
+              import("@/views/client/Registration/Questionnaire.vue"),
             meta: { anonymous: true },
           },
           {

@@ -1,6 +1,10 @@
 <template>
   <v-card height="100vh" width="100%" elevation="0">
-    <v-navigation-drawer permanent class="pa-4 none" style="box-shadow: 10px 0px 5px 0px rgb(62 62 62 / 5%)">
+    <v-navigation-drawer
+      permanent
+      class="pa-4 none"
+      style="box-shadow: 10px 0px 5px 0px rgb(62 62 62 / 5%)"
+    >
       <v-list-item class="pa-0">
         <v-list-item-content>
           <v-list-item-title class="text-h6 font-weight-bold py-4">
@@ -138,6 +142,22 @@
             </div>
           </router-link>
         </div>
+        <div v-if="page == 'coach'">
+          <router-link
+            to="availability"
+            tag="div"
+            class="my-4 v-list-item v-list-item--link px-4"
+            active-class="primary v-list-item__active"
+            exact
+          >
+            <div class="v-list-item__icon">
+              <v-icon> event_available</v-icon>
+            </div>
+            <div class="v-list-item__content">
+              <div class="v-list-item__title">Availability</div>
+            </div>
+          </router-link>
+        </div>
       </v-list>
 
       <div class="pa-4 btn">
@@ -170,7 +190,6 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class SideBar extends Vue {
-
   public logout() {
     this.$store.dispatch("logout");
     this.$router.push("/");

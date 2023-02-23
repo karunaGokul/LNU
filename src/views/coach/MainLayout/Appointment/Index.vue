@@ -17,7 +17,6 @@ import AppointmentsLayout from "@/components/layout/Appointments/Index.vue";
   },
 })
 export default class Appointments extends Vue {
-  
   public navigateBookAppointment() {
     this.$router.push({
       name: "Book Appointment",
