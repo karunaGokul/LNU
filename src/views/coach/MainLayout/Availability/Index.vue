@@ -38,7 +38,6 @@
         :events="events"
         color="primary"
         type="week"
-        :weekday="weekday"
         @click:date="viewDay"
         @click:time="viewTime"
       ></v-calendar>
@@ -60,7 +59,6 @@
               transition="scale-transition"
               min-width="300"
               :close-on-content-click="false"
-              :return-value.sync="time"
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
@@ -91,7 +89,6 @@
               transition="scale-transition"
               min-width="300"
               :close-on-content-click="false"
-              :return-value.sync="time"
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
@@ -114,8 +111,9 @@
               ></v-time-picker>
             </v-menu>
           </v-list-item>
-          <v-list-item-action class="d-flex justify-end">
-            <v-btn color="primary" @click="ScheduleTime">Save</v-btn>
+          <v-list-item-action class="d-flex flex-row justify-end">
+            <v-btn color="primary mr-8" @click="ScheduleTime">Save</v-btn>
+            <v-btn @click="selectedOpen = false">No</v-btn>
           </v-list-item-action>
         </v-list>
       </v-menu>
@@ -130,7 +128,6 @@ import { Component, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class Availability extends Vue {
-  public weekday = [0, 1, 2, 3, 4, 5, 6];
   public value = "";
   public selectedOpen: boolean = false;
   public selectedElement: any = null;
@@ -148,13 +145,15 @@ export default class Availability extends Vue {
       end: "2023-02-23 4:00",
     },
   ];
+
   mounted() {
     let calendar: any = this.$refs.calendar;
     calendar.checkChange();
     this.currentWeek = `${calendar.$data.lastStart.date} to ${calendar.$data.lastEnd.date} `;
   }
   public viewDay(e: any) {
-    if (e.future) {
+    console.log(e);
+    if (e.future || e.present) {
       this.currentDate = e.date;
       this.mettingStartTime = e.time;
 
@@ -166,7 +165,7 @@ export default class Availability extends Vue {
     }
   }
   public ScheduleTime() {
-    if (this.mettingEndTime || this.mettingStartTime) {
+    if (this.mettingEndTime && this.mettingStartTime) {
       this.events.push({
         name: "Available Time",
         start: this.currentDate + "-" + this.mettingStartTime,
@@ -218,4 +217,9 @@ export default class Availability extends Vue {
   display: flex;
   justify-content: center;
 }
+/* .action {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+} */
 </style>
