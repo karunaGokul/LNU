@@ -126,7 +126,12 @@ import { Component, Inject } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
 import { IQuestionnaireService } from "@/service";
 
-import { QuestionRequestModel, QuestionnaireResponseModel } from "@/model";
+import {
+  QuestionRequestModel,
+  QuestionnaireResponseModel,
+  QuestionnaireRequestModel,
+  SkippedQuestionsModel,
+} from "@/model";
 
 @Component({})
 export default class Question extends BaseComponent {
@@ -154,20 +159,46 @@ export default class Question extends BaseComponent {
         this.steps = true;
       });
   }
-  public updateQuestionnaire(allQuestionAnswer: any) {
-    // let questions = new QuestionRequestModel();
-    // questions.userId = this.userId;
+
+  public skippedQuestions() {
     this.questionnaireService
-      .updateQuestionnaire(allQuestionAnswer, this.userId)
-      .then((response: any) => {
+      .skippedQuestions()
+      .then((response: Array<SkippedQuestionsModel>) => {
         console.log(response);
       });
   }
 
+  public updateQuestionnaire(allQuestionAnswer: any, data: QuestionnaireResponseModel) {
+    let request: Array<QuestionnaireRequestModel> = [];
+
+    for (let i in allQuestionAnswer) {
+      let obj = new QuestionnaireRequestModel();
+      let item = allQuestionAnswer[i];
+
+      obj.id = item.id;
+      obj.label = item.label;
+      obj.isSkipped = item.isSkipped;
+      obj.value.push(item.value);
+       console.log(obj.isSkipped);
+
+      request.push(obj);
+    }
+
+    console.log(request);
+
+   /*  this.questionnaireService
+      .updateQuestionnaire(request, this.userId)
+      .then((response: any) => {
+        console.log(response);
+      }); */
+
+    this.skippedQuestions();
+  }
+
   public changeQuestion(item: QuestionnaireResponseModel, value: string) {
-    // this.questionRequest[index][item.label].value = item.selected;
     let questions = new QuestionRequestModel();
 
+    questions.id = item.id;
     questions.label = item.label;
 
     if (item.type == "radio") {
@@ -182,12 +213,11 @@ export default class Question extends BaseComponent {
       questions.isSkipped = true;
       questions.value = "";
     }
-
-    console.log(this.questionRequest);
+  console.log(questions.isSkipped);
     this.questionRequest.push(questions);
-
+    
     if (this.currentQuestion === this.question.length - 1) {
-      this.updateQuestionnaire(this.questionRequest);
+      this.updateQuestionnaire(this.questionRequest,item);
       this.$router.push("dashboard");
     } else {
       this.currentQuestion++;

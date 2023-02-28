@@ -2,8 +2,15 @@
   <v-container>
     <v-system-bar height="40" v-if="questionStatus" class="mx-10 systemBar">
       <v-icon class="primary--text">priority_high</v-icon>
-      <span class="primary--text">
-        {{ questionStatus }}
+      <span v-if="questionStatus == 'Pending'" class="primary--text">
+        Few questions are incomplete in Questionnaire. Would you like to
+        complete it now?
+      </span>
+      <span v-if="questionStatus == 'Completed'">
+        We are Happy to help you as per your need.
+      </span>
+      <span v-if="questionStatus == 'Not Started'" class="primary--text">
+        Questionnaire is not yet started. Would you like to do it now?
       </span>
 
       <v-spacer></v-spacer>
@@ -87,14 +94,12 @@ export default class DashboardLayout extends BaseComponent {
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
 
   public response: Array<DashboardResponseModel> = [];
-  public questionStatus: string = "";
+  public questionStatus = new QuestionnaireStatusModel();
 
   public dialog: boolean = false;
 
   created() {
     this.isFirstTimeUser();
-    // this.questionnaireStatus();
-    // this.getCounsellingProgram();
   }
 
   public closeDialog() {
@@ -114,10 +119,8 @@ export default class DashboardLayout extends BaseComponent {
     });
   }
   public questionnaireStatus() {
-    this.questionnaireService.isQuestionsPresent().then((response: any) => {
-      this.questionStatus = response
-        ? "Few questions are incomplete in Questionnaire. Would you like to complete it now?"
-        : "We are Happy to help you as per your need.";
+    this.questionnaireService.isQuestionsPresent().then((response: QuestionnaireStatusModel) => {
+      this.questionStatus = response;
     });
   }
 

@@ -3,15 +3,18 @@ import { BaseService } from "./base.service";
 import questionDetails from "@/data/questionnaire.json";
 
 import {
+  QuestionnaireRequestModel,
   QuestionnaireResponseModel,
   QuestionnaireStatusModel,
   QuestionRequestModel,
+  SkippedQuestionsModel,
 } from "@/model";
 
 export interface IQuestionnaireService {
   getQuestionnaire(): Promise<Array<QuestionnaireResponseModel>>;
-  isQuestionsPresent(): Promise<any>;
-  updateQuestionnaire(request: QuestionRequestModel, userId: any): Promise<any>;
+  isQuestionsPresent(): Promise<QuestionnaireStatusModel>;
+  updateQuestionnaire(request: QuestionnaireRequestModel, userId: any): Promise<any>;
+  skippedQuestions(): Promise<Array<SkippedQuestionsModel>>;
 }
 
 export class QuestionnaireService
@@ -28,22 +31,26 @@ export class QuestionnaireService
     });
   }
 
-  public isQuestionsPresent(): Promise<any> {
+  public isQuestionsPresent(): Promise<QuestionnaireStatusModel> {
     return this.httpGet("profile/IsQuestionsPresent", null).then((response) => {
       return response.data;
     });
   }
 
   public updateQuestionnaire(
-    request: QuestionRequestModel,
+    request: QuestionnaireRequestModel,
     userId: any
   ): Promise<any> {
-    console.log(request.userId, request);
-
     return this.httpPost("UpdateQuestionnaire?UserId=" + userId, request).then(
       (response) => {
         return response.data;
       }
     );
+  }
+
+  public skippedQuestions(): Promise<Array<SkippedQuestionsModel>> {
+    return this.httpGet("profile/SkippedQuestions", null).then((response) => {
+      return response.data;
+    });
   }
 }

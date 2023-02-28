@@ -109,6 +109,15 @@ export class QuestionRequestModel {
   value: string;
   isSkipped: boolean;
   userId: string;
+  id: number;
+}
+
+export class QuestionnaireRequestModel {
+  label: string;
+  value: Array<string> = [];
+  isSkipped: boolean;
+  userId: string;
+  id: number;
 }
 
 export class QuestionnaireStatusModel {
@@ -128,4 +137,8 @@ export class QuestionnaireResponseModel {
 export class OptionsModel {
   value: string;
   selected: boolean;
+}
+
+export class SkippedQuestionsModel {
+  id: number;
 }
