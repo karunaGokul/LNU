@@ -6,7 +6,7 @@
         Few questions are incomplete in Questionnaire. Would you like to
         complete it now?
       </span>
-      <span v-if="questionStatus == 'Completed'">
+      <span v-if="questionStatus == 'Completed'" class="primary--text">
         We are Happy to help you as per your need.
       </span>
       <span v-if="questionStatus == 'Not Started'" class="primary--text">
@@ -14,7 +14,15 @@
       </span>
 
       <v-spacer></v-spacer>
-      <router-link to="questionnaire" class="text-decoration-none">
+      <router-link
+        :to="{
+          name: 'Questionnaire',
+          params: {
+            status: questionStatus,
+          },
+        }"
+        class="text-decoration-none"
+      >
         <v-btn text class="text-capitalize blue--text"> click here </v-btn>
       </router-link>
     </v-system-bar>
@@ -119,9 +127,11 @@ export default class DashboardLayout extends BaseComponent {
     });
   }
   public questionnaireStatus() {
-    this.questionnaireService.isQuestionsPresent().then((response: QuestionnaireStatusModel) => {
-      this.questionStatus = response;
-    });
+    this.questionnaireService
+      .isQuestionsPresent()
+      .then((response: QuestionnaireStatusModel) => {
+        this.questionStatus = response;
+      });
   }
 
   public getCounsellingProgram() {
@@ -144,10 +154,3 @@ export default class DashboardLayout extends BaseComponent {
   }
 }
 </script>
-
-<style scoped>
-.systemBar {
-  background-color: #ffffff !important;
-  border-left: 5px solid orange !important;
-}
-</style>

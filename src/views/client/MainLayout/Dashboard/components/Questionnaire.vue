@@ -37,7 +37,7 @@
       <v-card
         class="card__item pa-5"
         v-for="(item, index) in question"
-        :key="'questions-card--'+index"
+        :key="'questions-card--' + index"
         :style="{
           transform: ` translateX(${200 * (index - currentQuestion)}%) `,
         }"
@@ -124,7 +124,6 @@ import BaseComponent from "@/components/base/BaseComponent";
 import { IQuestionnaireService } from "@/service";
 
 import {
-  QuestionRequestModel,
   QuestionnaireResponseModel,
   QuestionnaireRequestModel,
   SkippedQuestionsModel,
@@ -132,7 +131,7 @@ import {
 @Component({})
 export default class Question extends BaseComponent {
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
-  public questionRequest: Array<QuestionRequestModel> = [];
+
   public question: Array<QuestionnaireResponseModel> = [];
 
   public currentQuestion = 0;
@@ -143,15 +142,21 @@ export default class Question extends BaseComponent {
   public dashBarColor: number = 0;
 
   created() {
+    if (this.$route.params.status == "Pending") {
+      this.skippedQuestions();
+    }
     this.getQuestionnaire();
   }
 
   public getQuestionnaire() {
     this.questionnaireService
       .getQuestionnaire()
-      .then((response: Array<any>) => {
+      .then((response: Array<QuestionnaireResponseModel>) => {
         let half_length = Math.ceil(response.length / 4);
         response = response.slice(0, half_length);
+
+        this.question = response;
+
         this.dashBar = Math.round(response.length / 4.5);
         this.question = this.$vuehelper.clone(response);
         this.steps = true;
@@ -163,6 +168,8 @@ export default class Question extends BaseComponent {
       .skippedQuestions()
       .then((response: Array<SkippedQuestionsModel>) => {
         // console.log(response);
+        console.log(this.question);
+        // let getQuestionnaireResponse = this.question.includes(response);
       });
   }
 
@@ -172,8 +179,6 @@ export default class Question extends BaseComponent {
       .then((response: any) => {
         console.log(response);
       });
-
-    //this.skippedQuestions();
   }
 
   public next() {
