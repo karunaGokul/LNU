@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-system-bar height="40" class="mx-10 systemBar">
+    <v-system-bar v-if="systemBar" class="mx-10 systemBar">
       <v-icon class="primary--text">priority_high</v-icon>
       <span v-if="questionStatus == 'Pending'" class="primary--text">
         Few questions are incomplete in Questionnaire. Would you like to
@@ -18,7 +18,7 @@
         :to="{
           name: 'Questionnaire',
           params: {
-            status: questionStatus,
+            status: questionStatus.replace(/\s+/g, ''),
           },
         }"
         class="text-decoration-none"
@@ -77,7 +77,13 @@
       </div>
     </v-container>
     <div>
-      <new-user v-if="dialog" @close="closeDialog" />
+      <app-alert
+        v-if="dialog"
+        :type="questionnaire"
+        @No="closeDialog"
+        @Yes="continueQuestionnaire"
+        message="Questionnaire is not yet started. Would you like to do it now?"
+      />
     </div>
   </v-container>
 </template>
@@ -90,11 +96,11 @@ import { IDashboardService, IQuestionnaireService } from "@/service";
 
 import { DashboardResponseModel, QuestionnaireStatusModel } from "@/model";
 
-import NewUser from "./components/NewUser.vue";
+import AppAlert from "@/components/layout/AppAlert.vue";
 
 @Component({
   components: {
-    NewUser,
+    AppAlert,
   },
 })
 export default class DashboardLayout extends BaseComponent {
@@ -104,6 +110,7 @@ export default class DashboardLayout extends BaseComponent {
   public response: Array<DashboardResponseModel> = [];
   public questionStatus = new QuestionnaireStatusModel();
 
+  public systemBar: boolean = false;
   public dialog: boolean = false;
 
   created() {
@@ -114,6 +121,13 @@ export default class DashboardLayout extends BaseComponent {
     this.dialog = false;
     this.questionnaireStatus();
     this.getCounsellingProgram();
+  }
+
+  public continueQuestionnaire() {
+    this.$router.push({
+      name: "Questionnaire",
+      params: { status: `${this.questionStatus}` },
+    });
   }
 
   public isFirstTimeUser() {
@@ -131,6 +145,7 @@ export default class DashboardLayout extends BaseComponent {
       .isQuestionsPresent()
       .then((response: QuestionnaireStatusModel) => {
         this.questionStatus = response;
+        this.systemBar = true;
       });
   }
 

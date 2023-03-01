@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    class="primary-linear card-container pa-0"
-    fluid
-    style="width: 100%"
-  >
+  <v-container class="primary-linear card-container pa-0" fluid>
     <nav>
       <div class="px-5 d-flex align-center nav">
         <h3>Life N you</h3>
@@ -11,10 +7,10 @@
     </nav>
     <div class="d-flex justify-center mt-5">
       <div
-        v-for="(dash, i) in dashBar"
+        v-for="(dash, i) in progressBar"
         :key="i"
         class="ms-5"
-        :class="dash === dashBarColor ? 'dash' : ''"
+        :class="dash === progressBarColor ? 'dash' : ''"
         style="
           width: 60px;
           height: 5px;
@@ -137,9 +133,9 @@ export default class Question extends BaseComponent {
   public currentQuestion = 0;
   public steps = false;
 
-  public dashBar: number = 0;
-  public dashCount: number = 0;
-  public dashBarColor: number = 0;
+  public progressBar: number = 0;
+  public progressBarCount: number = 0;
+  public progressBarColor: number = 0;
 
   created() {
     if (this.$route.params.status == "Pending") {
@@ -157,7 +153,7 @@ export default class Question extends BaseComponent {
 
         this.question = response;
 
-        this.dashBar = Math.round(response.length / 4.5);
+        this.progressBar = Math.round(response.length / 4.5);
         this.question = this.$vuehelper.clone(response);
         this.steps = true;
       });
@@ -204,10 +200,10 @@ export default class Question extends BaseComponent {
       this.updateQuestionnaire(request);
     } else {
       this.currentQuestion++;
-      this.dashCount++;
-      if (this.dashCount === 4) {
-        this.dashBarColor = this.dashBarColor + 1;
-        this.dashCount = 0;
+      this.progressBarCount++;
+      if (this.progressBarCount === 4) {
+        this.progressBarColor = this.progressBarColor + 1;
+        this.progressBarCount = 0;
       }
     }
   }
