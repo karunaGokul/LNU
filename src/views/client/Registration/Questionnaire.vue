@@ -164,13 +164,16 @@ export default class Question extends BaseComponent {
     this.questionnaireService
       .skippedQuestions()
       .then((response: Array<SkippedQuestionsModel>) => {
-        console.log(response);
+        // console.log(response);
       });
   }
 
-  public updateQuestionnaire(allQuestionAnswer: any, data: QuestionnaireResponseModel) {
+  public updateQuestionnaire(
+    allQuestionAnswer: any,
+    data: QuestionnaireResponseModel
+  ) {
     let request: Array<QuestionnaireRequestModel> = [];
-
+    console.log(allQuestionAnswer);
     for (let i in allQuestionAnswer) {
       let obj = new QuestionnaireRequestModel();
       let item = allQuestionAnswer[i];
@@ -178,20 +181,26 @@ export default class Question extends BaseComponent {
       obj.id = item.id;
       obj.label = item.label;
       obj.isSkipped = item.isSkipped;
-      obj.value.push(item.value);
-       console.log(obj.isSkipped);
+
+      if (data.type == "checkbox") {
+        obj.value = item.value;
+        console.log(obj.value);
+      } else {
+        obj.value.push(item.value);
+        // console.log(obj.value);
+      }
 
       request.push(obj);
     }
 
     console.log(request);
 
-   /*  this.questionnaireService
+    /*  this.questionnaireService
       .updateQuestionnaire(request, this.userId)
       .then((response: any) => {
         console.log(response);
-      }); */
-
+      });
+ */
     this.skippedQuestions();
   }
 
@@ -207,17 +216,26 @@ export default class Question extends BaseComponent {
       questions.value = item.selected;
     }
 
-    if (questions.value) {
-      questions.isSkipped = false;
+    if (item.type == "checkbox") {
+      if (questions.value.length != 0) {
+        questions.isSkipped = false;
+      } else {
+        questions.isSkipped = true;
+        questions.value = "";
+      }
     } else {
-      questions.isSkipped = true;
-      questions.value = "";
+      if (questions.value) {
+        questions.isSkipped = false;
+      } else {
+        questions.isSkipped = true;
+        questions.value = "";
+      }
     }
-  console.log(questions.isSkipped);
+
     this.questionRequest.push(questions);
-    
+
     if (this.currentQuestion === this.question.length - 1) {
-      this.updateQuestionnaire(this.questionRequest,item);
+      this.updateQuestionnaire(this.questionRequest, item);
       this.$router.push("dashboard");
     } else {
       this.currentQuestion++;
@@ -225,7 +243,6 @@ export default class Question extends BaseComponent {
       if (this.dashCount === 4) {
         this.dashBarColor = this.dashBarColor + 1;
         this.dashCount = 0;
-        console.log(this.dashBarColor);
       }
     }
   }

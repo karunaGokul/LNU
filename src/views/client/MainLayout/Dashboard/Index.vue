@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-system-bar height="40" v-if="questionStatus" class="mx-10 systemBar">
+    <v-system-bar height="40" class="mx-10 systemBar">
       <v-icon class="primary--text">priority_high</v-icon>
       <span v-if="questionStatus == 'Pending'" class="primary--text">
         Few questions are incomplete in Questionnaire. Would you like to
