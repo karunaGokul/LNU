@@ -37,7 +37,7 @@
       <v-card
         class="card__item pa-5"
         v-for="(item, index) in question"
-        :key="index"
+        :key="'questions-card--'+index"
         :style="{
           transform: ` translateX(${200 * (index - currentQuestion)}%) `,
         }"
@@ -47,7 +47,10 @@
           <v-btn-toggle class="d-flex flex-column" style="width: 100%">
             <div v-for="(b, i) in item.options" :key="i" class="mb-5 box">
               <v-btn
-                @click="changeQuestion(item, b)"
+                @click="
+                  item.selected = b;
+                  next();
+                "
                 :value="b"
                 block
                 class="rounded-pill card__item--btn d-flex justify-start text-capitalize"
@@ -94,10 +97,7 @@
         </div>
         <div class="d-flex justify-space-between">
           <div>
-            <v-btn
-              class="primary mt-2 text-capitalize"
-              @click="changeQuestion(item)"
-            >
+            <v-btn class="primary mt-2 text-capitalize" @click="next">
               Skip
             </v-btn>
           </div>
@@ -107,10 +107,7 @@
               item.type === 'checkbox'
             "
           >
-            <v-btn
-              class="primary mt-2 text-capitalize"
-              @click="changeQuestion(item)"
-            >
+            <v-btn class="primary mt-2 text-capitalize" @click="next">
               Next
             </v-btn>
           </div>
@@ -132,7 +129,6 @@ import {
   QuestionnaireRequestModel,
   SkippedQuestionsModel,
 } from "@/model";
-
 @Component({})
 export default class Question extends BaseComponent {
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
@@ -154,6 +150,8 @@ export default class Question extends BaseComponent {
     this.questionnaireService
       .getQuestionnaire()
       .then((response: Array<any>) => {
+        let half_length = Math.ceil(response.length / 4);
+        response = response.slice(0, half_length);
         this.dashBar = Math.round(response.length / 4.5);
         this.question = this.$vuehelper.clone(response);
         this.steps = true;
@@ -168,44 +166,52 @@ export default class Question extends BaseComponent {
       });
   }
 
-  public updateQuestionnaire(
-    allQuestionAnswer: any,
-    data: QuestionnaireResponseModel
-  ) {
-    let request: Array<QuestionnaireRequestModel> = [];
-    console.log(allQuestionAnswer);
-    for (let i in allQuestionAnswer) {
-      let obj = new QuestionnaireRequestModel();
-      let item = allQuestionAnswer[i];
-
-      obj.id = item.id;
-      obj.label = item.label;
-      obj.isSkipped = item.isSkipped;
-
-      if (data.type == "checkbox") {
-        obj.value = item.value;
-        console.log(obj.value);
-      } else {
-        obj.value.push(item.value);
-        // console.log(obj.value);
-      }
-
-      request.push(obj);
-    }
-
-    console.log(request);
-
-    /*  this.questionnaireService
+  public updateQuestionnaire(request: QuestionnaireResponseModel) {
+    this.questionnaireService
       .updateQuestionnaire(request, this.userId)
       .then((response: any) => {
         console.log(response);
       });
- */
-    this.skippedQuestions();
+
+    //this.skippedQuestions();
+  }
+
+  public next() {
+    if (this.currentQuestion === this.question.length - 1) {
+      let request: Array<QuestionnaireRequestModel> = [];
+      for (let i in this.question) {
+        let obj = new QuestionnaireRequestModel();
+        let item = this.question[i];
+
+        obj.id = item.id;
+        obj.label = item.label;
+
+        if (item.type == "checkbox") {
+          obj.value = item.selected;
+          obj.isSkipped = obj.value ? false : true;
+        } else {
+          obj.value.push(item.selected);
+          obj.isSkipped = obj.value.length > 0 ? false : true;
+        }
+
+        request.push(obj);
+      }
+      this.updateQuestionnaire(request);
+    } else {
+      this.currentQuestion++;
+      this.dashCount++;
+      if (this.dashCount === 4) {
+        this.dashBarColor = this.dashBarColor + 1;
+        this.dashCount = 0;
+      }
+    }
   }
 
   public changeQuestion(item: QuestionnaireResponseModel, value: string) {
-    let questions = new QuestionRequestModel();
+    console.log({ item });
+    console.log({ value });
+
+    /*let questions = new QuestionRequestModel();
 
     questions.id = item.id;
     questions.label = item.label;
@@ -244,7 +250,7 @@ export default class Question extends BaseComponent {
         this.dashBarColor = this.dashBarColor + 1;
         this.dashCount = 0;
       }
-    }
+    }*/
   }
 
   get age() {

@@ -57,61 +57,6 @@ export class QuestionnaireModel {
   FearOfUnknown: number;
   PhysicalFeeling: number;
 }
-
-// export class QuestionRequestModel {
-//   whatTypeOfTherapyAreYouLookingfor: QuestionsModel;
-//   identifyGender: QuestionsModel;
-//   howOldAreYou: QuestionsModel;
-//   identifyYourself: QuestionsModel;
-//   relationshipStatus: QuestionsModel;
-//   religious: QuestionsModel;
-//   identifyReligion: QuestionsModel;
-//   identifySpiritual: QuestionsModel;
-//   inTherapy: QuestionsModel;
-//   currentPhysicalHealth: QuestionsModel;
-//   currentEatingHabits: QuestionsModel;
-//   currentExperience: QuestionsModel;
-//   differenceInSpeaking: QuestionsModel;
-//   pastTweeksProblems: QuestionsModel;
-//   feelingLow: QuestionsModel;
-//   troubleInSleep: QuestionsModel;
-//   feelingTired: QuestionsModel;
-//   poorAppetite: QuestionsModel;
-//   feelingBadOfYourself: QuestionsModel;
-//   troubleInConcentration: QuestionsModel;
-//   deadlyThoughts: QuestionsModel;
-//   difficultiesFaced: QuestionsModel;
-//   employeement: QuestionsModel;
-//   problemOfWorry: QuestionsModel;
-//   alcoholDrinking: QuestionsModel;
-//   thoughtOfSuicide: QuestionsModel;
-//   plansForSuicide: QuestionsModel;
-//   currentlyExperiencingAnxiety: QuestionsModel;
-//   currentlyTakingMedication: QuestionsModel;
-//   currentlyExperiencingChronicPain: QuestionsModel;
-//   currentFinancialStatus: QuestionsModel;
-//   currentSleepingHabits: QuestionsModel;
-//   communicateWithTherapist: QuestionsModel;
-//   referredForBetterhelp: QuestionsModel;
-//   countryIn: QuestionsModel;
-//   preferredLanguage: QuestionsModel;
-//   whatLedYouToConsiderTherapyToday: QuestionsModel;
-//   expectationFromTherapist: QuestionsModel;
-//   resourcesUsefulForYou: QuestionsModel;
-//   preferenceOfTherapist: QuestionsModel;
-//   userId: string;
-// }
-
-
-
-export class QuestionRequestModel {
-  label: string;
-  value: string;
-  isSkipped: boolean;
-  userId: string;
-  id: number;
-}
-
 export class QuestionnaireRequestModel {
   label: string;
   value: Array<string> = [];
@@ -119,11 +64,9 @@ export class QuestionnaireRequestModel {
   userId: string;
   id: number;
 }
-
 export class QuestionnaireStatusModel {
   status: string;
 }
-
 export class QuestionnaireResponseModel {
   id: number;
   title: string;

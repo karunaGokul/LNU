@@ -6,7 +6,6 @@ import {
   QuestionnaireRequestModel,
   QuestionnaireResponseModel,
   QuestionnaireStatusModel,
-  QuestionRequestModel,
   SkippedQuestionsModel,
 } from "@/model";
 
@@ -41,7 +40,7 @@ export class QuestionnaireService
     request: QuestionnaireRequestModel,
     userId: any
   ): Promise<any> {
-    return this.httpPost("UpdateQuestionnaire?UserId=" + userId, request).then(
+    return this.httpPost("profile/UpdateQuestionnaire?UserId=" + userId, request).then(
       (response) => {
         return response.data;
       }
