@@ -15,6 +15,7 @@
 
       <v-spacer></v-spacer>
       <router-link
+        v-if="questionStatus != 'Completed'"
         :to="{
           name: 'Questionnaire',
           params: {
@@ -131,10 +132,13 @@ export default class DashboardLayout extends BaseComponent {
   }
 
   public isFirstTimeUser() {
+    this.loadingSpinner("show");
     this.dashboardService.IsUserFirstTimeLogin().then((response: any) => {
       if (response) {
+        this.loadingSpinner("hide");
         this.dialog = true;
       } else {
+        this.loadingSpinner("hide");
         this.questionnaireStatus();
         this.getCounsellingProgram();
       }

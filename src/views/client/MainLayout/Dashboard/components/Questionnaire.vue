@@ -7,19 +7,13 @@
     </nav>
     <div class="d-flex justify-center mt-5">
       <div
-        v-for="(dash, i) in progressBar"
-        :key="i"
-        class="ms-5"
+        v-for="(dash, index) in progressBar"
+        :key="'progress-bar--' + index"
+        class="ms-5 progressBar"
         :class="dash === progressBarColor ? 'dash' : ''"
-        style="
-          width: 60px;
-          height: 5px;
-          margin-bottom: 20px;
-          background-color: rgba(0, 0, 0, 0.2);
-        "
       ></div>
     </div>
-    <div class="text-center mx-auto" style="width: 70%">
+    <div class="text-center mx-auto header">
       <h3 class="mb-4 text-h4">Help us match you to the right therapist</h3>
       <p class="text-h6 w-70">
         Please fill out this short questionnaire to provide some background
@@ -29,10 +23,10 @@
         getting to know you.
       </p>
     </div>
-    <div class="card" v-if="steps">
+    <div class="card">
       <v-card
         class="card__item pa-5"
-        v-for="(item, index) in question"
+        v-for="(item, index) in questions"
         :key="'questions-card--' + index"
         :style="{
           transform: ` translateX(${200 * (index - currentQuestion)}%) `,
@@ -41,17 +35,17 @@
         <h3 class="px-5 mb-4">{{ item.title }}</h3>
         <div class="card__item--optionn" v-if="item.type === 'radio'">
           <v-btn-toggle class="d-flex flex-column" style="width: 100%">
-            <div v-for="(b, i) in item.options" :key="i" class="mb-5 box">
+            <div v-for="(option, index) in item.options" :key="'questions-options--' + index" class="mb-5 box">
               <v-btn
                 @click="
-                  item.selected = b;
+                  item.selected = option;
                   next();
                 "
-                :value="b"
+                :value="option"
                 block
                 class="rounded-pill card__item--btn d-flex justify-start text-capitalize"
               >
-                {{ b }}
+                {{ option }}
               </v-btn>
             </div>
           </v-btn-toggle>
@@ -76,7 +70,7 @@
           v-if="item.type === 'checkbox'"
           class="card__item-checkbox--container"
         >
-          <span v-for="(b, i) in item.options" :key="i" class="d-flex ma-4">
+          <span v-for="(b, index) in item.options" :key="'questions-checkbox--' + index" class="d-flex ma-4">
             <div class="mr-5 input-box mt-1">
               <input
                 type="checkbox"
@@ -122,50 +116,55 @@ import { IQuestionnaireService } from "@/service";
 import {
   QuestionnaireResponseModel,
   QuestionnaireRequestModel,
-  SkippedQuestionsModel,
 } from "@/model";
 @Component({})
 export default class Question extends BaseComponent {
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
 
-  public question: Array<QuestionnaireResponseModel> = [];
+  public questions: Array<QuestionnaireResponseModel> = [];
 
   public currentQuestion = 0;
-  public steps = false;
 
   public progressBar: number = 0;
   public progressBarCount: number = 0;
   public progressBarColor: number = 0;
 
   created() {
+    this.getQuestionnaire();
     if (this.$route.params.status == "Pending") {
       this.skippedQuestions();
     }
-    this.getQuestionnaire();
   }
 
   public getQuestionnaire() {
+    this.loadingSpinner("show");
     this.questionnaireService
       .getQuestionnaire()
       .then((response: Array<QuestionnaireResponseModel>) => {
-        let half_length = Math.ceil(response.length / 4);
-        response = response.slice(0, half_length);
+        // let half_length = Math.ceil(response.length / 4);
+        // response = response.slice(0, half_length);
 
-        this.question = response;
-
+        this.loadingSpinner("hide");
         this.progressBar = Math.round(response.length / 4.5);
-        this.question = this.$vuehelper.clone(response);
-        this.steps = true;
+        this.questions = this.$vuehelper.clone(response);
       });
   }
 
   public skippedQuestions() {
+    this.loadingSpinner("show");
     this.questionnaireService
       .skippedQuestions()
-      .then((response: Array<SkippedQuestionsModel>) => {
-        // console.log(response);
-        console.log(this.question);
-        // let getQuestionnaireResponse = this.question.includes(response);
+      .then((response: Array<any>) => {
+        console.log(response);
+
+        let result: any;
+        for (let j in response) {
+          let id = response[j];
+          result = this.questions.find((element) => element.id == id);
+          console.log(result);
+        }
+        this.questions.splice(0,40,result);
+        this.loadingSpinner("hide");
       });
   }
 
@@ -174,25 +173,28 @@ export default class Question extends BaseComponent {
       .updateQuestionnaire(request, this.userId)
       .then((response: any) => {
         console.log(response);
+        this.$router.push("/client/home/dashboard")
       });
   }
 
   public next() {
-    if (this.currentQuestion === this.question.length - 1) {
+    if (this.currentQuestion === this.questions.length - 1) {
       let request: Array<QuestionnaireRequestModel> = [];
-      for (let i in this.question) {
+      for (let i in this.questions) {
         let obj = new QuestionnaireRequestModel();
-        let item = this.question[i];
+        let item = this.questions[i];
 
         obj.id = item.id;
         obj.label = item.label;
 
         if (item.type == "checkbox") {
           obj.value = item.selected;
-          obj.isSkipped = obj.value ? false : true;
+          obj.isSkipped = obj.value.length > 0 ? false : true;
+          console.log(obj);
         } else {
           obj.value.push(item.selected);
-          obj.isSkipped = obj.value.length > 0 ? false : true;
+          obj.isSkipped = obj.value ? false : true;
+          console.log(obj);
         }
 
         request.push(obj);
