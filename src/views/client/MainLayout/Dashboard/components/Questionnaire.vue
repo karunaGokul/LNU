@@ -35,7 +35,11 @@
         <h3 class="px-5 mb-4">{{ item.title }}</h3>
         <div class="card__item--optionn" v-if="item.type === 'radio'">
           <v-btn-toggle class="d-flex flex-column" style="width: 100%">
-            <div v-for="(option, index) in item.options" :key="'questions-options--' + index" class="mb-5 box">
+            <div
+              v-for="(option, index) in item.options"
+              :key="'questions-options--' + index"
+              class="mb-5 box"
+            >
               <v-btn
                 @click="
                   item.selected = option;
@@ -70,7 +74,11 @@
           v-if="item.type === 'checkbox'"
           class="card__item-checkbox--container"
         >
-          <span v-for="(b, index) in item.options" :key="'questions-checkbox--' + index" class="d-flex ma-4">
+          <span
+            v-for="(b, index) in item.options"
+            :key="'questions-checkbox--' + index"
+            class="d-flex ma-4"
+          >
             <div class="mr-5 input-box mt-1">
               <input
                 type="checkbox"
@@ -113,10 +121,7 @@ import { Component, Inject } from "vue-property-decorator";
 import BaseComponent from "@/components/base/BaseComponent";
 import { IQuestionnaireService } from "@/service";
 
-import {
-  QuestionnaireResponseModel,
-  QuestionnaireRequestModel,
-} from "@/model";
+import { QuestionnaireResponseModel, QuestionnaireRequestModel } from "@/model";
 @Component({})
 export default class Question extends BaseComponent {
   @Inject("questionnaireService") questionnaireService: IQuestionnaireService;
@@ -163,17 +168,17 @@ export default class Question extends BaseComponent {
           result = this.questions.find((element) => element.id == id);
           console.log(result);
         }
-        this.questions.splice(0,40,result);
+        this.questions.splice(0, 40, result);
         this.loadingSpinner("hide");
       });
   }
 
-  public updateQuestionnaire(request: QuestionnaireResponseModel) {
+  public updateQuestionnaire(request: Array<QuestionnaireRequestModel>) {
     this.questionnaireService
       .updateQuestionnaire(request, this.userId)
       .then((response: any) => {
         console.log(response);
-        this.$router.push("/client/home/dashboard")
+        this.$router.push("/client/home/dashboard");
       });
   }
 
@@ -193,12 +198,14 @@ export default class Question extends BaseComponent {
           console.log(obj);
         } else {
           obj.value.push(item.selected);
-          obj.isSkipped = obj.value ? false : true;
+          obj.isSkipped = obj.value.every((str) => str === "") ? true : false;
           console.log(obj);
         }
 
         request.push(obj);
       }
+      console.log(request);
+
       this.updateQuestionnaire(request);
     } else {
       this.currentQuestion++;

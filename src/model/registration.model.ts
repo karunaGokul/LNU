@@ -81,4 +81,3 @@ export class OptionsModel {
   value: string;
   selected: boolean;
 }
-

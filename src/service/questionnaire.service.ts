@@ -9,7 +9,10 @@ import {
 export interface IQuestionnaireService {
   getQuestionnaire(): Promise<Array<QuestionnaireResponseModel>>;
   isQuestionsPresent(): Promise<QuestionnaireStatusModel>;
-  updateQuestionnaire(request: QuestionnaireRequestModel, userId: any): Promise<any>;
+  updateQuestionnaire(
+    request: Array<QuestionnaireRequestModel>,
+    userId: any
+  ): Promise<any>;
   skippedQuestions(): Promise<Array<any>>;
 }
 
@@ -34,14 +37,15 @@ export class QuestionnaireService
   }
 
   public updateQuestionnaire(
-    request: QuestionnaireRequestModel,
+    request: Array<QuestionnaireRequestModel>,
     userId: any
   ): Promise<any> {
-    return this.httpPost("profile/UpdateQuestionnaire?UserId=" + userId, request).then(
-      (response) => {
-        return response.data;
-      }
-    );
+    return this.httpPost(
+      "profile/UpdateQuestionnaire?UserId=" + userId,
+      request
+    ).then((response) => {
+      return response.data;
+    });
   }
 
   public skippedQuestions(): Promise<Array<any>> {
