@@ -120,3 +120,15 @@ export class PaymentModel {
   paymentDate: string;
   paymentType: string;
 }
+
+export class AvailablityRequestModel {
+  coachId: number;
+  date: string;
+  times: Array<string>;
+}
+
+export class AvailablityResponseModel {
+  coachId: number;
+  date: string;
+  times: Array<string>;
+}
