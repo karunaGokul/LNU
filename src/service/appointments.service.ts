@@ -6,6 +6,8 @@ import {
   UpdatePaymentRequestModel,
   InviteLinkModel,
   CompleteAppoinmentModel,
+  AvailablityRequestModel,
+  AvailablityResponseModel,
 } from "@/model";
 import { compile } from "vue/types/umd";
 import { IBaseService, BaseService } from "./base.service";
@@ -23,6 +25,8 @@ export interface IAppointmentService
   updatePayment(request: UpdatePaymentRequestModel): Promise<any>;
   AppoinmentInviteLink(request: InviteLinkModel): Promise<any>;
   CompleteAppoinment(request: CompleteAppoinmentModel): Promise<any>;
+  getAvailablity(request: AvailablityResponseModel): Promise<any>;
+  updateAvailablity(request: AvailablityRequestModel): any;
 }
 
 export class AppointmentService
@@ -84,6 +88,16 @@ export class AppointmentService
     ).then((response) => {
       return response.data;
     });
+  }
+
+  getAvailablity(request: AvailablityResponseModel): Promise<any> {
+    return new Promise((resolve, reject) => {
+      console.log(request);
+    });
+  }
+
+  updateAvailablity(request: AvailablityRequestModel): any {
+    console.log(request);
   }
 
   public rescheduleAppointments(

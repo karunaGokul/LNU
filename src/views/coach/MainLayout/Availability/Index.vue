@@ -1,21 +1,5 @@
 <template>
   <div class="primary-linear pa-5">
-    <!-- <v-card
-      class="mt-2 pa-5 d-flex justify-space-between rounded-xl card"
-      width="70%"
-    >
-      <div class="text">
-        <h1 class="mb-2 mt-7">Hi Jack!</h1>
-        <p class="mb-10">
-          Welcome to your daily event calender. Here! you can add your available
-          time to set up meeting with clients.
-        </p>
-      </div>
-      <div class="img">
-        <img src="../../../../assets/Metting.png" />
-      </div>
-    </v-card> -->
-
     <v-toolbar flat color="transparent">
       <div class="d-flex align-center justify-center" style="width: 100%">
         <div class="d-flex align-center">
@@ -40,6 +24,7 @@
         type="week"
         @click:date="viewDay"
         @click:time="viewTime"
+        @click:event="event"
       ></v-calendar>
       <v-menu
         v-model="selectedOpen"
@@ -112,8 +97,15 @@
             </v-menu>
           </v-list-item>
           <v-list-item-action class="d-flex flex-row justify-end">
-            <v-btn color="primary mr-8" @click="ScheduleTime">Save</v-btn>
-            <v-btn @click="selectedOpen = false">No</v-btn>
+            <v-btn
+              color="primary mr-8"
+              class="text-capitalize"
+              @click="ScheduleTime"
+              >Save</v-btn
+            >
+            <v-btn @click="selectedOpen = false" class="text-capitalize"
+              >Cancel</v-btn
+            >
           </v-list-item-action>
         </v-list>
       </v-menu>
@@ -122,12 +114,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Inject } from "vue-property-decorator";
+
+import { AvailablityRequestModel, AvailablityResponseModel } from "@/model";
+import { IAppointmentService } from "@/service";
 
 @Component({
   components: {},
 })
 export default class Availability extends Vue {
+  @Inject("appointmentService") availablitySerive: IAppointmentService;
+  public request: AvailablityRequestModel = new AvailablityRequestModel();
+  public response: AvailablityResponseModel = new AvailablityResponseModel();
+
   public value = "";
   public selectedOpen: boolean = false;
   public selectedElement: any = null;
@@ -138,19 +137,27 @@ export default class Availability extends Vue {
   public mettingEndTime = "";
   public currentDate = "";
   public currentWeek = "";
+  public startDate = "";
+  public endDate = "";
   public events = [
     {
       name: "Available Time",
-      start: "2023-02-23 1:02",
+      start: "2023-02-23 1:00",
       end: "2023-02-23 4:00",
     },
   ];
 
+  public duplicateEvent = "";
+
   mounted() {
     let calendar: any = this.$refs.calendar;
-    calendar.checkChange();
-    this.currentWeek = `${calendar.$data.lastStart.date} to ${calendar.$data.lastEnd.date} `;
+    // calendar.checkChange();
+
+    this.setWeekDate(calendar.$data.lastStart.date, "start");
+    this.setWeekDate(calendar.$data.lastEnd.date, "end");
+    this.currentWeek = `${this.startDate} to ${this.endDate} `;
   }
+
   public viewDay(e: any) {
     console.log(e);
     if (e.future || e.present) {
@@ -164,17 +171,33 @@ export default class Availability extends Vue {
       );
     }
   }
+
+  public event(e: any) {
+    console.log(e.event.start);
+    this.duplicateEvent = e.event.start;
+  }
+
   public ScheduleTime() {
     if (this.mettingEndTime && this.mettingStartTime) {
-      this.events.push({
+      const updateEvent = {
         name: "Available Time",
-        start: this.currentDate + "-" + this.mettingStartTime,
-        end: this.currentDate + "-" + this.mettingEndTime,
-      });
+        start: this.currentDate + " " + this.mettingStartTime,
+        end: this.currentDate + " " + this.mettingEndTime,
+      };
+
+      const updateEventApi = {
+        date: this.currentDate,
+        coachId: +new Date(),
+        times: [this.mettingStartTime, this.mettingEndTime],
+      };
+
+      this.availablitySerive.updateAvailablity(updateEventApi);
+      this.events.push(updateEvent);
 
       this.selectedOpen = false;
     }
   }
+
   public viewTime(e: any) {
     if (e.future) {
       this.currentDate = e.date;
@@ -187,39 +210,47 @@ export default class Availability extends Vue {
       );
     }
   }
-  prev() {
-    let calendar: any = this.$refs.calendar;
 
+  public setWeekDate(date: string, type: string) {
+    let fullDate = new Date(date);
+    let dd: string | number = fullDate.getDate();
+    let mm: string | number = fullDate.getMonth();
+    let yyyy = fullDate.getFullYear();
+
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+
+    if (type === "start") {
+      this.startDate = `${dd}-${mm}-${yyyy}`;
+    } else {
+      this.endDate = `${dd}-${mm}-${yyyy}`;
+    }
+  }
+
+  public prev() {
+    let calendar: any = this.$refs.calendar;
     calendar.prev();
 
     setTimeout(() => {
-      this.currentWeek = `${calendar.$data.lastStart.date} to ${calendar.$data.lastEnd.date} `;
-    }, 100);
-  }
-  next() {
-    let calendar: any = this.$refs.calendar;
-    setTimeout(() => {
-      this.currentWeek = `${calendar.$data.lastStart.date} to ${calendar.$data.lastEnd.date} `;
-    }, 100);
+      this.setWeekDate(calendar.$data.lastStart.date, "start");
+      this.setWeekDate(calendar.$data.lastEnd.date, "end");
 
+      this.currentWeek = `${this.startDate} to ${this.endDate} `;
+    }, 10);
+  }
+  public next() {
+    let calendar: any = this.$refs.calendar;
     calendar.next();
+
+    setTimeout(() => {
+      this.setWeekDate(calendar.$data.lastStart.date, "start");
+      this.setWeekDate(calendar.$data.lastEnd.date, "end");
+      this.currentWeek = `${this.startDate} to ${this.endDate} `;
+    }, 10);
   }
 }
 </script>
-
-<style scoped>
-.text {
-  width: 60%;
-}
-.img {
-  width: 40%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-}
-/* .action {
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-} */
-</style>
