@@ -8,3 +8,4 @@ export * from "./appointments.model";
 export * from "./support.model";
 export * from "./admin.model";
 export * from "./dashboard.model";
+export * from "./availability.model";

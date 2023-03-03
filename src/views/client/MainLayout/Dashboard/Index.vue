@@ -1,12 +1,12 @@
 <template>
   <v-container>
-    <v-system-bar height="40" v-if="questionStatus" class="mx-10 systemBar">
+    <v-system-bar v-if="systemBar" class="mx-10 systemBar">
       <v-icon class="primary--text">priority_high</v-icon>
       <span v-if="questionStatus == 'Pending'" class="primary--text">
         Few questions are incomplete in Questionnaire. Would you like to
         complete it now?
       </span>
-      <span v-if="questionStatus == 'Completed'">
+      <span v-if="questionStatus == 'Completed'" class="primary--text">
         We are Happy to help you as per your need.
       </span>
       <span v-if="questionStatus == 'Not Started'" class="primary--text">
@@ -14,7 +14,16 @@
       </span>
 
       <v-spacer></v-spacer>
-      <router-link to="questionnaire" class="text-decoration-none">
+      <router-link
+        v-if="questionStatus != 'Completed'"
+        :to="{
+          name: 'Questionnaire',
+          params: {
+            status: questionStatus.replace(/\s+/g, ''),
+          },
+        }"
+        class="text-decoration-none"
+      >
         <v-btn text class="text-capitalize blue--text"> click here </v-btn>
       </router-link>
     </v-system-bar>
@@ -69,7 +78,13 @@
       </div>
     </v-container>
     <div>
-      <new-user v-if="dialog" @close="closeDialog" />
+      <app-alert
+        v-if="dialog"
+        :type="questionnaire"
+        @No="closeDialog"
+        @Yes="continueQuestionnaire"
+        message="Questionnaire is not yet started. Would you like to do it now?"
+      />
     </div>
   </v-container>
 </template>
@@ -82,11 +97,11 @@ import { IDashboardService, IQuestionnaireService } from "@/service";
 
 import { DashboardResponseModel, QuestionnaireStatusModel } from "@/model";
 
-import NewUser from "./components/NewUser.vue";
+import AppAlert from "@/components/layout/AppAlert.vue";
 
 @Component({
   components: {
-    NewUser,
+    AppAlert,
   },
 })
 export default class DashboardLayout extends BaseComponent {
@@ -96,6 +111,7 @@ export default class DashboardLayout extends BaseComponent {
   public response: Array<DashboardResponseModel> = [];
   public questionStatus = new QuestionnaireStatusModel();
 
+  public systemBar: boolean = false;
   public dialog: boolean = false;
 
   created() {
@@ -108,20 +124,33 @@ export default class DashboardLayout extends BaseComponent {
     this.getCounsellingProgram();
   }
 
+  public continueQuestionnaire() {
+    this.$router.push({
+      name: "Questionnaire",
+      params: { status: `${this.questionStatus}` },
+    });
+  }
+
   public isFirstTimeUser() {
+    this.loadingSpinner("show");
     this.dashboardService.IsUserFirstTimeLogin().then((response: any) => {
       if (response) {
+        this.loadingSpinner("hide");
         this.dialog = true;
       } else {
+        this.loadingSpinner("hide");
         this.questionnaireStatus();
         this.getCounsellingProgram();
       }
     });
   }
   public questionnaireStatus() {
-    this.questionnaireService.isQuestionsPresent().then((response: QuestionnaireStatusModel) => {
-      this.questionStatus = response;
-    });
+    this.questionnaireService
+      .isQuestionsPresent()
+      .then((response: QuestionnaireStatusModel) => {
+        this.questionStatus = response;
+        this.systemBar = true;
+      });
   }
 
   public getCounsellingProgram() {
@@ -144,10 +173,3 @@ export default class DashboardLayout extends BaseComponent {
   }
 }
 </script>
-
-<style scoped>
-.systemBar {
-  background-color: #ffffff !important;
-  border-left: 5px solid orange !important;
-}
-</style>
