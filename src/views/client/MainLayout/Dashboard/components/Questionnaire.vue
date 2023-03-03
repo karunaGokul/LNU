@@ -193,7 +193,7 @@ export default class Question extends BaseComponent {
         obj.label = item.label;
 
         if (item.type == "checkbox") {
-          obj.value = item.selected;
+          obj.value = [...item.selected];
           obj.isSkipped = obj.value.length > 0 ? false : true;
           console.log(obj);
         } else {
