@@ -168,7 +168,7 @@ export default class Question extends BaseComponent {
       });
   }
 
-  public updateQuestionnaire(request: QuestionnaireResponseModel) {
+  public updateQuestionnaire(request: QuestionnaireRequestModel) {
     this.questionnaireService
       .updateQuestionnaire(request, this.userId)
       .then((response: any) => {
@@ -188,8 +188,8 @@ export default class Question extends BaseComponent {
         obj.label = item.label;
 
         if (item.type == "checkbox") {
-          obj.value = item.selected;
-          obj.isSkipped = obj.value.length > 0 ? false : true;
+          obj.value = [item.selected];
+          obj.isSkipped = obj.value.length != 0 ? false : true;
           console.log(obj);
         } else {
           obj.value.push(item.selected);
