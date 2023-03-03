@@ -111,6 +111,12 @@
         </v-list>
       </v-menu>
     </v-sheet>
+    <SnackBar
+      v-if="snackbar"
+      :snackbarText="snackbarText"
+      :snackBarStatus="snackBarStatus"
+      @close="snackbar = false"
+    ></SnackBar>
   </div>
 </template>
 
@@ -120,13 +126,21 @@ import { Component, Vue, Inject } from "vue-property-decorator";
 import { AvailablityRequestModel, AvailablityResponseModel } from "@/model";
 import { IAppointmentService } from "@/service";
 
+import SnackBar from "@/components/layout/SnackBar.vue";
+
 @Component({
-  components: {},
+  components: {
+    SnackBar,
+  },
 })
 export default class Availability extends Vue {
   @Inject("appointmentService") availablitySerive: IAppointmentService;
   public request: AvailablityRequestModel = new AvailablityRequestModel();
   public response: AvailablityResponseModel = new AvailablityResponseModel();
+
+  public snackbar: boolean = false;
+  public snackbarText: string = "";
+  public snackBarStatus: string = "";
 
   public value = "";
   public selectedOpen: boolean = false;
@@ -174,7 +188,7 @@ export default class Availability extends Vue {
     let isStartTimeAvailable = false;
     let isEndTimeAvailable = false;
 
-    const value = this.events.filter((event) => {
+    this.events.filter((event) => {
       const [startDate, startTime] = event.start.split(" ");
       const [endDate, endTime] = event.end.split(" ");
 
@@ -194,9 +208,30 @@ export default class Availability extends Vue {
           endTime,
           this.mettingEndTime
         );
-        console.log(finedStartTime, startTime);
+
         isStartTimeAvailable = finedStartTime;
         isEndTimeAvailable = finedEndTime;
+        this.selectedOpen = false;
+        this.snackbar = true;
+        this.snackbarText = `Selected time are already existing please choose different time`;
+      } else if (
+        startDate === this.currentDate &&
+        this.isTimeAvailable(startTime, endTime, this.mettingStartTime)
+      ) {
+        isStartTimeAvailable = true;
+        isEndTimeAvailable = true;
+        this.selectedOpen = false;
+        this.snackbar = true;
+        this.snackbarText = `Selected time are already existing please choose different time`;
+      } else if (
+        startDate === this.currentDate &&
+        this.isTimeAvailable(startTime, endTime, this.mettingEndTime)
+      ) {
+        isStartTimeAvailable = true;
+        isEndTimeAvailable = true;
+        this.selectedOpen = false;
+        this.snackbar = true;
+        this.snackbarText = `Selected time are already existing please choose different time`;
       }
     });
 
