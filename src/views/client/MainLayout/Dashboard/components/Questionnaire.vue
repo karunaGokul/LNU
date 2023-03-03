@@ -172,7 +172,7 @@ export default class Question extends BaseComponent {
     skippedQues?: Array<number>
   ) {
     if (skippedQues) {
-      let question: Array<QuestionnaireResponseModel> = [];
+      let question: QuestionnaireResponseModel = new QuestionnaireResponseModel();
       for (let item in skippedQues) {
         let id = skippedQues[item];
         question = response.find((element) => element.id == id);

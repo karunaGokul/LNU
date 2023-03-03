@@ -67,7 +67,7 @@ export class QuestionnaireResponseModel {
   type: string;
   options: Array<string | number | OptionsModel>;
   label: string;
-  selected: string | Array<string>;
+  selected: any;
 }
 export class OptionsModel {
   value: string;
