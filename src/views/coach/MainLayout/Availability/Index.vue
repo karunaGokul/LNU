@@ -24,7 +24,6 @@
         type="week"
         @click:date="viewDay"
         @click:time="viewTime"
-        @click:event="event"
       ></v-calendar>
       <v-menu
         v-model="selectedOpen"
@@ -59,6 +58,7 @@
                 </v-text-field>
               </template>
               <v-time-picker
+                ampm-in-title
                 v-model="mettingStartTime"
                 v-if="menu1"
                 full-width
@@ -89,6 +89,7 @@
                 </v-text-field>
               </template>
               <v-time-picker
+                ampm-in-title
                 v-model="mettingEndTime"
                 v-if="menu2"
                 full-width
@@ -147,8 +148,6 @@ export default class Availability extends Vue {
     },
   ];
 
-  public duplicateEvent = "";
-
   mounted() {
     let calendar: any = this.$refs.calendar;
     // calendar.checkChange();
@@ -159,7 +158,6 @@ export default class Availability extends Vue {
   }
 
   public viewDay(e: any) {
-    console.log(e);
     if (e.future || e.present) {
       this.currentDate = e.date;
       this.mettingStartTime = e.time;
@@ -172,13 +170,42 @@ export default class Availability extends Vue {
     }
   }
 
-  public event(e: any) {
-    console.log(e.event.start);
-    this.duplicateEvent = e.event.start;
-  }
-
   public ScheduleTime() {
-    if (this.mettingEndTime && this.mettingStartTime) {
+    let isStartTimeAvailable = false;
+    let isEndTimeAvailable = false;
+
+    const value = this.events.filter((event) => {
+      const [startDate, startTime] = event.start.split(" ");
+      const [endDate, endTime] = event.end.split(" ");
+
+      if (
+        startDate === this.currentDate &&
+        this.isTimeAvailable(startTime, endTime, this.mettingStartTime) &&
+        this.isTimeAvailable(startTime, endTime, this.mettingEndTime)
+      ) {
+        const finedStartTime = this.isTimeAvailable(
+          startTime,
+          endTime,
+          this.mettingStartTime
+        );
+
+        const finedEndTime = this.isTimeAvailable(
+          startTime,
+          endTime,
+          this.mettingEndTime
+        );
+        console.log(finedStartTime, startTime);
+        isStartTimeAvailable = finedStartTime;
+        isEndTimeAvailable = finedEndTime;
+      }
+    });
+
+    if (
+      this.mettingEndTime &&
+      this.mettingStartTime &&
+      !isStartTimeAvailable &&
+      !isEndTimeAvailable
+    ) {
       const updateEvent = {
         name: "Available Time",
         start: this.currentDate + " " + this.mettingStartTime,
@@ -198,6 +225,23 @@ export default class Availability extends Vue {
     }
   }
 
+  public isTimeAvailable(startTime: any, endTime: any, selectedTime: any) {
+    const startMinutes = this.timeToMinutes(startTime);
+    const endMinutes = this.timeToMinutes(endTime);
+    const selectedMinutes = this.timeToMinutes(selectedTime);
+
+    if (startMinutes < endMinutes) {
+      return selectedMinutes >= startMinutes && selectedMinutes <= endMinutes;
+    } else {
+      return selectedMinutes >= startMinutes || selectedMinutes <= endMinutes;
+    }
+  }
+
+  public timeToMinutes(time: any) {
+    const [hours, minutes] = time.split(":");
+    return parseInt(hours) * 60 + parseInt(minutes);
+  }
+
   public viewTime(e: any) {
     if (e.future) {
       this.currentDate = e.date;
@@ -209,6 +253,30 @@ export default class Availability extends Vue {
         requestAnimationFrame(() => (this.selectedOpen = true))
       );
     }
+
+    this.events.find((event) => {
+      const [startDate, startTime] = event.start.split(" ");
+      const [endDate, endTime] = event.end.split(" ");
+
+      if (startDate === this.currentDate) {
+        const finedStartTime = this.isTimeAvailable(
+          startTime,
+          endTime,
+          this.mettingStartTime
+        );
+
+        const finedEndTime = this.isTimeAvailable(
+          startTime,
+          endTime,
+          this.mettingEndTime
+        );
+
+        if (finedStartTime) {
+          this.mettingStartTime = startTime;
+          this.mettingEndTime = endTime;
+        }
+      }
+    });
   }
 
   public setWeekDate(date: string, type: string) {
