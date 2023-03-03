@@ -170,7 +170,7 @@ const clientRoutes: Array<RouteConfig> = [
               ),
           },
           {
-            path: "/client/home/questionnaire/:status",
+            path: "/client/home/questionnaire",
             name: "Questionnaire",
             component: () =>
               import("@/views/client/MainLayout/Dashboard/components/Questionnaire.vue"),
