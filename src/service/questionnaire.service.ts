@@ -48,7 +48,7 @@ export class QuestionnaireService
     });
   }
 
-  public skippedQuestions(): Promise<Array<any>> {
+  public skippedQuestions(): Promise<Array<number>> {
     return this.httpGet("profile/SkippedQuestions", null).then((response) => {
       return response.data;
     });

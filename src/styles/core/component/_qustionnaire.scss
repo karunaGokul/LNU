@@ -4,9 +4,6 @@
     margin-bottom: 40px;
     box-shadow: -1px 0 20px rgb(37 38 37 / 5%), 0 1px 5px rgb(37 38 37 / 10%);
   }
-  .dash {
-    background-color: #fcb258 !important;
-  }
 }
 
 .header {
@@ -67,4 +64,14 @@
   &__item--checkbox[type="checkbox"]:checked::after {
     display: block;
   }
+}
+.progress-bar {
+  width: 60px;
+  height: 8px;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+.text-muted {
+  color: #7e7e7e;
 }
