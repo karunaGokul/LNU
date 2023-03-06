@@ -25,8 +25,8 @@ export interface IAppointmentService
   updatePayment(request: UpdatePaymentRequestModel): Promise<any>;
   AppoinmentInviteLink(request: InviteLinkModel): Promise<any>;
   CompleteAppoinment(request: CompleteAppoinmentModel): Promise<any>;
-  getAvailablity(request: AvailablityResponseModel): Promise<any>;
-  updateAvailablity(request: AvailablityRequestModel): any;
+  getAvailablity(): Promise<AvailablityResponseModel>;
+  addAvailablity(request: AvailablityRequestModel): Promise<any>;
 }
 
 export class AppointmentService
@@ -90,14 +90,20 @@ export class AppointmentService
     });
   }
 
-  getAvailablity(request: AvailablityResponseModel): Promise<any> {
-    return new Promise((resolve, reject) => {
-      console.log(request);
-    });
+  getAvailablity(): Promise<any> {
+    return this.httpGet("profile/GetCoachAvailability", null).then(
+      (response) => {
+        return response.data;
+      }
+    );
   }
 
-  updateAvailablity(request: AvailablityRequestModel): any {
-    console.log(request);
+  addAvailablity(request: AvailablityRequestModel): Promise<any> {
+    return this.httpPost("profile/AddCoachAvailability", request).then(
+      (response) => {
+        return response.data;
+      }
+    );
   }
 
   public rescheduleAppointments(

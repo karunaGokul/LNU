@@ -250,10 +250,15 @@ export default class Availability extends Vue {
       const updateEventApi = {
         date: this.currentDate,
         coachId: +new Date(),
-        times: [this.mettingStartTime, this.mettingEndTime],
+        times: [
+          {
+            startTime: this.mettingStartTime,
+            endTime: this.mettingEndTime,
+          },
+        ],
       };
 
-      this.availablitySerive.updateAvailablity(updateEventApi);
+      this.availablitySerive.addAvailablity(updateEventApi);
       this.events.push(updateEvent);
 
       this.selectedOpen = false;
