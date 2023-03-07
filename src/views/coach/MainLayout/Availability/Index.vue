@@ -142,7 +142,7 @@ export default class Availability extends BaseComponent {
   public snackbarText: string = "";
   public snackBarStatus: string = "";
 
-  public value = "";
+  public value: string = "";
   public selectedOpen: boolean = false;
   public selectedElement: any = null;
   public menu1: boolean = false;
