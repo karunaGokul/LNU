@@ -122,7 +122,7 @@
 
 <script lang="ts">
 import { Component, Vue, Inject } from "vue-property-decorator";
-
+import BaseComponent from "@/components/base/BaseComponent";
 import { AvailablityRequestModel, AvailablityResponseModel } from "@/model";
 import { IAppointmentService } from "@/service";
 
@@ -133,8 +133,8 @@ import SnackBar from "@/components/layout/SnackBar.vue";
     SnackBar,
   },
 })
-export default class Availability extends Vue {
-  @Inject("appointmentService") availablitySerive: IAppointmentService;
+export default class Availability extends BaseComponent {
+  @Inject("appointmentService") availabilitySerive: IAppointmentService;
   public request: AvailablityRequestModel = new AvailablityRequestModel();
   public response: AvailablityResponseModel = new AvailablityResponseModel();
 
@@ -148,13 +148,14 @@ export default class Availability extends Vue {
   public menu1: boolean = false;
   public menu2: boolean = false;
   public time: number = null;
-  public mettingStartTime = "";
-  public mettingEndTime = "";
-  public currentDate = "";
-  public currentWeek = "";
-  public startDate = "";
-  public endDate = "";
-  public events = [
+  public mettingStartTime: string = "";
+  public mettingEndTime: string = "";
+  public currentDate: string = "";
+  public currentWeek: string = "";
+  public startDate: string = "";
+  public endDate: string = "";
+  public coachId: string = "";
+  public events: any = [
     {
       name: "Available Time",
       start: "2023-02-23 1:00",
@@ -164,11 +165,58 @@ export default class Availability extends Vue {
 
   mounted() {
     let calendar: any = this.$refs.calendar;
-    // calendar.checkChange();
 
     this.setWeekDate(calendar.$data.lastStart.date, "start");
     this.setWeekDate(calendar.$data.lastEnd.date, "end");
     this.currentWeek = `${this.startDate} to ${this.endDate} `;
+
+    this.coachId = this.$store.getters.userInfo.Id;
+    this.GetAvailability();
+  }
+
+  public GetAvailability() {
+    this.$forceUpdate();
+    this.loadingSpinner("show");
+    this.availabilitySerive
+      .getAvailablity()
+      .then((response) => {
+        this.loadingSpinner("hide");
+        let responseData: Array<AvailablityResponseModel> = [];
+
+        this.events.splice(0, this.events.length);
+
+        for (let availableTime in response) {
+          const updateEvent = {
+            name: "Available Time",
+            start:
+              response[availableTime].date +
+              " " +
+              response[availableTime].times[0].startTime,
+            end:
+              response[availableTime].date +
+              " " +
+              response[availableTime].times[0].endTime,
+          };
+
+          this.events.push(updateEvent);
+        }
+      })
+      .catch((err) => {
+        this.loadingSpinner("hide");
+        console.log(err);
+      });
+  }
+
+  public AddAvailability(updateEvent: AvailablityRequestModel) {
+    this.availabilitySerive
+      .addAvailablity(updateEvent)
+      .then((response) => {
+        console.log(response);
+        this.GetAvailability();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   public viewDay(e: any) {
@@ -188,7 +236,7 @@ export default class Availability extends Vue {
     let isStartTimeAvailable = false;
     let isEndTimeAvailable = false;
 
-    this.events.filter((event) => {
+    this.events.filter((event: any) => {
       const [startDate, startTime] = event.start.split(" ");
       const [endDate, endTime] = event.end.split(" ");
 
@@ -242,14 +290,8 @@ export default class Availability extends Vue {
       !isEndTimeAvailable
     ) {
       const updateEvent = {
-        name: "Available Time",
-        start: this.currentDate + " " + this.mettingStartTime,
-        end: this.currentDate + " " + this.mettingEndTime,
-      };
-
-      const updateEventApi = {
         date: this.currentDate,
-        coachId: +new Date(),
+        coachId: this.coachId,
         times: [
           {
             startTime: this.mettingStartTime,
@@ -258,9 +300,7 @@ export default class Availability extends Vue {
         ],
       };
 
-      this.availablitySerive.addAvailablity(updateEventApi);
-      this.events.push(updateEvent);
-
+      this.AddAvailability(updateEvent);
       this.selectedOpen = false;
     }
   }
@@ -294,7 +334,7 @@ export default class Availability extends Vue {
       );
     }
 
-    this.events.find((event) => {
+    this.events.find((event: any) => {
       const [startDate, startTime] = event.start.split(" ");
       const [endDate, endTime] = event.end.split(" ");
 

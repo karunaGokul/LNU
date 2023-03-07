@@ -36,6 +36,7 @@ export class ProfileService
 
   getProfileCoach(request: ClientRequestModel): Promise<CoachResponseModel> {
     return this.httpGet("profile/loadprofile", request).then((response) => {
+      console.log(response.data);
       return response.data;
     });
   }

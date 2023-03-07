@@ -122,13 +122,13 @@ export class PaymentModel {
 }
 
 export class AvailablityRequestModel {
-  coachId: number;
+  coachId: string;
   date: string;
   times: Array<addAvailablityTime>;
 }
 
 export class AvailablityResponseModel {
-  coachId: number;
+  coachId: string;
   date: string;
   times: Array<addAvailablityTime>;
 }
