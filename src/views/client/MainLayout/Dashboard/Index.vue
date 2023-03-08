@@ -24,7 +24,7 @@
         }"
         class="text-decoration-none"
       >
-        <v-btn text class="text-capitalize blue--text"> click here </v-btn>
+        <v-btn text class="text-capitalize green--text"> click here </v-btn>
       </router-link>
     </v-system-bar>
 
